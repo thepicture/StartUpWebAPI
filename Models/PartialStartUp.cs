@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Linq;
 
 namespace StartUpWebAPI.Entities
@@ -18,6 +19,12 @@ namespace StartUpWebAPI.Entities
                 if (imagePreview != null)
                 {
                     result += Convert.ToBase64String(imagePreview.Image);
+                }
+                else
+                {
+                    ImageConverter converter = new ImageConverter();
+                    Bitmap noPicture = Properties.Resources.noPicture;
+                    result += Convert.ToBase64String((byte[])converter.ConvertTo(noPicture, typeof(byte[])));
                 }
 
                 return result;
