@@ -3,6 +3,9 @@ using System.Linq;
 
 namespace StartUpWebAPI.Entities
 {
+    /// <summary>
+    /// Public partial class for the StartUp entity.
+    /// </summary>
     public partial class StartUp
     {
         public string ImagePreview
