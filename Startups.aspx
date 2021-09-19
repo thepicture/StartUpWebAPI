@@ -6,9 +6,7 @@
         <ItemTemplate>
             <div class="startup-list">
                 <div>
-                    <asp:Label runat="server" Font-Bold="true" Font-Size="Large">
-                        <%# Eval("Name") %>
-                    </asp:Label>
+                    <asp:Label runat="server" Font-Bold="true" Font-Size="Large" Text='<%# Eval("Name") %>'></asp:Label>
                 </div>
                 <div>
                     <asp:Image Width="100" Height="100" runat='server' CssClass="startup-image-radius" ImageUrl='<%# Eval("ImagePreview") %>' />
