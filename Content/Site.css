@@ -16,6 +16,10 @@ body {
     border-radius: 3px;
 }
 
+.marginaled {
+    margin: 5px;
+}
+
 /* Startup ListView element */
 .startup-list {
     width: 200px;

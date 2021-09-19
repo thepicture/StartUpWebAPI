@@ -30,5 +30,14 @@ namespace StartUpWebAPI.Entities
                 return result;
             }
         }
+        public string FirstCreator
+        {
+            get
+            {
+                string userName = "Главный организатор: " + StartUpOfUser.FirstOrDefault()?.User.Name;
+
+                return userName ?? "Неизвестен";
+            }
+        }
     }
 }
