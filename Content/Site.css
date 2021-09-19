@@ -25,12 +25,12 @@ body {
     margin: 10px;
     background: rgb(255,0,0);
     background: linear-gradient(90deg, rgba(255,0,0,1) 4%, rgba(76,0,255,1) 100%);
-    transition: background-color ease-in-out 300ms;
+    transition: transform ease-in-out 300ms;
 }
 
     .startup-panel:hover {
         cursor: pointer;
-        background-color: cornflowerblue;
+        transform: scale(1.2);
     }
 
 /* Startup Image radius */
