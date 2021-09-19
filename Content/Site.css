@@ -23,9 +23,12 @@ body {
 /* Styles for panel in Startups. */
 .startup-panel {
     margin: 10px;
+    transition: transform ease-in-out 300ms;
+}
+
+.gradientable {
     background: rgb(255,0,0);
     background: linear-gradient(90deg, rgba(255,0,0,1) 4%, rgba(76,0,255,1) 100%);
-    transition: transform ease-in-out 300ms;
 }
 
     .startup-panel:hover {
