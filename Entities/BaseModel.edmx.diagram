@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5f28dd124386419092864d8efaf32e95" Name="Diagram1">
+        <EntityTypeShape EntityType="StartUpBaseModel.Category" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartUpBaseModel.RoleType" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartUpBaseModel.StartUp" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartUpBaseModel.StartUpComment" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartUpBaseModel.StartUpImage" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartUpBaseModel.StartUpOfTeam" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartUpBaseModel.StartUpOfUser" Width="1.5" PointX="8.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartUpBaseModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartUpBaseModel.Team" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartUpBaseModel.TeamComment" Width="1.5" PointX="5.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StartUpBaseModel.User" Width="1.5" PointX="3" PointY="14.5" IsExpanded="true" />
+        <AssociationConnector Association="StartUpBaseModel.FK_StartUp_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfTeam_RoleType" ManuallyRouted="false" />
+        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfUser_RoleType" ManuallyRouted="false" />
+        <AssociationConnector Association="StartUpBaseModel.FK_Comment_StartUp" ManuallyRouted="false" />
+        <AssociationConnector Association="StartUpBaseModel.FK_StartUpImage_StartUp" ManuallyRouted="false" />
+        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfTeam_StartUp" ManuallyRouted="false" />
+        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfUser_StartUp" ManuallyRouted="false" />
+        <AssociationConnector Association="StartUpBaseModel.FK_Comment_User" ManuallyRouted="false" />
+        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfTeam_Team" ManuallyRouted="false" />
+        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfUser_User" ManuallyRouted="false" />
+        <AssociationConnector Association="StartUpBaseModel.FK_TeamComment_Team" ManuallyRouted="false" />
+        <AssociationConnector Association="StartUpBaseModel.FK_TeamComment_User" ManuallyRouted="false" />
+        <AssociationConnector Association="StartUpBaseModel.TeamOfUser" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
