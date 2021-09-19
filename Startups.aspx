@@ -4,14 +4,14 @@
     <%--ListView for startup presentation.--%>
     <asp:ListView ID="StartupsView" runat='server'>
         <ItemTemplate>
-            <div class="startup-list">
+            <asp:Panel runat="server" HorizontalAlign="Center" Width="200" Height="200">
                 <div>
-                    <asp:Label runat="server" Font-Bold="true" Font-Size="Large" Text='<%# Eval("Name") %>'></asp:Label>
+                    <asp:Label CssClass="startup-name" runat="server" Font-Bold="true" Font-Size="Large" Text='<%# Eval("Name") %>'></asp:Label>
                 </div>
                 <div>
                     <asp:Image Width="100" Height="100" runat='server' CssClass="startup-image-radius" ImageUrl='<%# Eval("ImagePreview") %>' />
                 </div>
-            </div>
+            </asp:Panel>
         </ItemTemplate>
     </asp:ListView>
 </asp:Content>
