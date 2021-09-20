@@ -2,7 +2,6 @@
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
-using System.Windows.Forms;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Owin;
@@ -51,13 +50,6 @@ namespace StartUpWebAPI.Account
         private void RedirectToMainPage(string login)
         {
             bool isRemember = RememberMe.Checked;
-            HttpCookie userNameCookie = new HttpCookie("username", login)
-            {
-                Expires = DateTime.Now + TimeSpan.FromDays(1),
-                SameSite = SameSiteMode.Lax
-            };
-
-            Response.Cookies.Add(userNameCookie);
 
             FormsAuthentication.RedirectFromLoginPage(login, isRemember);
         }

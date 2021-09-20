@@ -16,6 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="false">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@100;500&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <form runat="server">
@@ -57,22 +58,22 @@
                         <li><a runat="server" href="~/Startups">Стартапы</a></li>
                         <li><a runat="server" href="~/Teams">Команды</a></li>
                     </ul>
-                    <div>
-                        <asp:Panel runat="server" id="AnonContent">
+                    <asp:LoginView runat="server" ViewStateMode="Disabled">
+                        <AnonymousTemplate>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a runat="server" href="~/Account/Register">Регистрация</a></li>
                                 <li><a runat="server" href="~/Account/Login">Авторизация</a></li>
                             </ul>
-                        </asp:Panel>
-                        <asp:Panel runat="server" id="LoggedInContent">
+                        </AnonymousTemplate>
+                        <LoggedInTemplate>
                             <ul class="nav navbar-nav navbar-right">
-                                <li>Здравствуйте, <%: Request.Cookies["username"]?.Value  %> !</li>
+                                <li><a runat="server" href="~/Account/Manage" title="Manage your account">Здравствуйте, <%: Context.User.Identity.GetUserName()  %> !</a></li>
                                 <li>
-                                    <asp:Button Text="Выйти" runat="server" LogoutAction="Redirect" LogoutText="Выйти" LogoutPageUrl="~/" ID="BtnLogOut" OnClick="BtnLogOut_Click" />
+                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
                                 </li>
                             </ul>
-                        </asp:Panel>
-                    </div>
+                        </LoggedInTemplate>
+                    </asp:LoginView>
                 </div>
             </div>
         </div>
