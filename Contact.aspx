@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Контактные данные" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Contact.aspx.cs" Inherits="StartUpWebAPI.Contact" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <h2><%: Title %>.</h2>
+    <h2><%: Title %></h2>
     <article>
         Проект создан студентами.<br />
     </article>
