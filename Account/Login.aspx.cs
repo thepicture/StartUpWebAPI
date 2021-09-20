@@ -12,7 +12,10 @@ namespace StartUpWebAPI.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (Request.QueryString["isregistered"] != null)
+            {
+                RegSuccessMessage.Visible = true;
+            }
         }
 
         protected void LogIn(object sender, EventArgs e)

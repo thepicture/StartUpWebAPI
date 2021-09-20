@@ -6,6 +6,11 @@
     <div class="row">
         <div class="col-md-8">
             <section id="loginForm">
+                <asp:PlaceHolder runat="server" Visible="false" ID="RegSuccessMessage">
+                    <div class="text-success">
+                        Вы успешно зарегистрированы. Теперь вы можете войти в систему.
+                    </div>
+                </asp:PlaceHolder>
                 <div class="form-horizontal">
                     <h4>Использовать существующий аккаунт для авторизации</h4>
                     <hr />

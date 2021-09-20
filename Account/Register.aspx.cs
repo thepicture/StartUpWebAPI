@@ -1,5 +1,6 @@
 ﻿using StartUpWebAPI.Models;
 using System;
+using System.Web.Security;
 using System.Web.UI;
 
 namespace StartUpWebAPI.Account
@@ -17,6 +18,8 @@ namespace StartUpWebAPI.Account
                     .WithLogin(LoginBox.Text)
                     .WithPassword(PasswordBox.Text)
                     .Save();
+
+                Response.Redirect("~/Account/Login.aspx?isregistered=true");
             }
         }
     }
