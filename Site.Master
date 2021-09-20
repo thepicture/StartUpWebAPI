@@ -14,7 +14,7 @@
     <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="false">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@100;500&display=swap" rel="stylesheet">
 
 </head>
@@ -54,15 +54,15 @@
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/">Главная</a></li>
                         <li><a runat="server" href="~/About">О проекте</a></li>
-                        <li><a runat="server" href="~/Contact">Контактные данные</a></li>
+                        <li><a runat="server" href="~/Contact">Контакты</a></li>
                         <li><a runat="server" href="~/Startups">Стартапы</a></li>
                         <li><a runat="server" href="~/Teams">Команды</a></li>
                     </ul>
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
                         <AnonymousTemplate>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" href="~/Account/Register">Зарегистрироваться</a></li>
-                                <li><a runat="server" href="~/Account/Login">Войти в систему</a></li>
+                                <li><a runat="server" href="~/Account/Register">Регистрация</a></li>
+                                <li><a runat="server" href="~/Account/Login">Авторизация</a></li>
                             </ul>
                         </AnonymousTemplate>
                         <LoggedInTemplate>
