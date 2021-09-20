@@ -236,6 +236,7 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
     <Content Include="Startups.aspx" />
+    <Content Include="Teams.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
@@ -453,6 +454,13 @@
     </Compile>
     <Compile Include="Startups.aspx.designer.cs">
       <DependentUpon>Startups.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Teams.aspx.cs">
+      <DependentUpon>Teams.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Teams.aspx.designer.cs">
+      <DependentUpon>Teams.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
