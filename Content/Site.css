@@ -37,10 +37,18 @@ body {
     background: linear-gradient(90deg, rgba(255,0,0,1) 4%, rgba(76,0,255,1) 100%);
 }
 
-    .startup-panel:hover {
-        cursor: pointer;
-        transform: scale(1.02);
-    }
+.startup-panel:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+}
+
+div ul li a {
+    color: black !important;
+}
+
+.request-black-font {
+    color: black !important;
+}
 
 /* Startup Image radius */
 .startup-image-radius {
