@@ -1,11 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Web;
+﻿using StartUpWebAPI.Models;
+using System;
 using System.Web.UI;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Owin;
-using StartUpWebAPI.Models;
 
 namespace StartUpWebAPI.Account
 {
@@ -13,9 +8,15 @@ namespace StartUpWebAPI.Account
     {
         protected void CreateUser_Click(object sender, EventArgs e)
         {
-           if (IsValid)
+            if (IsValid)
             {
-                FullNameBox.Text = "Success";
+                UserBuilder uBuilder = new UserBuilder();
+                uBuilder
+                    .NewInstance()
+                    .WithFullName(FullNameBox.Text)
+                    .WithLogin(LoginBox.Text)
+                    .WithPassword(PasswordBox.Text)
+                    .Save();
             }
         }
     }

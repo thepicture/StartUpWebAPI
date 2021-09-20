@@ -19,7 +19,6 @@ namespace StartUpWebAPI.Account
         {
             if (IsValid)
             {
-
             }
         }
     }
