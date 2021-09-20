@@ -37,10 +37,26 @@ body {
     background: linear-gradient(90deg, rgba(255,0,0,1) 4%, rgba(76,0,255,1) 100%);
 }
 
-    .startup-panel:hover {
-        cursor: pointer;
-        transform: scale(1.2);
+.startup-panel:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+}
+
+div ul li a {
+    color: black !important;
+    font-family: 'IBM Plex Serif', serif;
+    font-size: 20px;
+}
+
+    div ul li a:hover {
+        color: mediumpurple !important;
+        font-family: 'IBM Plex Serif', serif;
+        font-size: 23px;
     }
+
+.request-black-font {
+    color: black !important;
+}
 
 /* Startup Image radius */
 .startup-image-radius {
@@ -79,4 +95,11 @@ input[type="select"] {
     .body-content {
         padding: 0;
     }
+
+
+
+
+
+
+
 }

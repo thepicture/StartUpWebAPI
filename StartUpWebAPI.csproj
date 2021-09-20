@@ -204,6 +204,9 @@
     <Content Include="Entities\BaseModel.edmx.diagram">
       <DependentUpon>BaseModel.edmx</DependentUpon>
     </Content>
+    <Content Include="fonts\Manrope-Bold.woff" />
+    <Content Include="fonts\Manrope-Medium.woff" />
+    <Content Include="fonts\Manrope-Regular.woff" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Resource Include="Resources\noPicture.png" />
     <Content Include="Scripts\bootstrap.js" />
