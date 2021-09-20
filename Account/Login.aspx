@@ -11,6 +11,13 @@
                         Вы успешно зарегистрированы. Теперь вы можете войти в систему.
                     </div>
                 </asp:PlaceHolder>
+                <asp:PlaceHolder runat="server" Visible="false" ID="LogFailedMessage">
+                    <div class="text-danger">
+                        Не удалось войти в систему: 
+                        неверное имя пользователя и/или пароль.
+                        Пожалуйста, проверьте корректность введённых данных.
+                    </div>
+                </asp:PlaceHolder>
                 <div class="form-horizontal">
                     <h4>Использовать существующий аккаунт для авторизации</h4>
                     <hr />
