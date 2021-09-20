@@ -22,6 +22,7 @@ body {
     border: 0px !important;
 }
 
+/* Adds margin to elements with it. */
 .marginaled {
     margin: 5px;
 }
@@ -32,22 +33,27 @@ body {
     transition: transform ease-in-out 300ms;
 }
 
+/* Adds gradient to the element with this class. */
 .gradientable {
     background: rgb(255,0,0);
     background: linear-gradient(90deg, rgba(255,0,0,1) 4%, rgba(76,0,255,1) 100%);
 }
 
+/* Resize the startup block when the mouse is over it. */
 .startup-panel:hover {
     cursor: pointer;
     transform: scale(1.02);
 }
 
+/* Styles for content elements. */
 div ul li a {
     color: black !important;
     font-family: 'IBM Plex Serif', serif;
+    transition: all ease-in-out 100ms;
     font-size: 20px;
 }
 
+    /* Change the color when the mouse is over a buttons. */
     div ul li a:hover {
         color: royalblue !important;
         font-family: 'IBM Plex Serif', serif;
@@ -86,7 +92,7 @@ input[type="select"] {
     max-width: 280px;
 }
 
-.startupnavbar{
+.startupnavbar {
     color: black !important;
 }
 

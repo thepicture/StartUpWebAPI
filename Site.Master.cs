@@ -71,6 +71,7 @@ namespace StartUpWebAPI
         protected void Page_Load(object sender, EventArgs e)
         {
             string cookie = Request.Cookies[".ASPXAUTH"]?.Value;
+
             if (cookie != null)
             {
                 AnonContent.Visible = false;
