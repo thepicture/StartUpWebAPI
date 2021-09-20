@@ -11,18 +11,18 @@
         <hr />
         <asp:ValidationSummary runat="server" CssClass="text-danger" />
         <div class="form-group">
-            <asp:Label runat="server" AssociatedControlID="Login" CssClass="col-md-2 control-label">Логин</asp:Label>
+            <asp:Label runat="server" AssociatedControlID="LoginBox" CssClass="col-md-2 control-label">Логин</asp:Label>
             <div class="col-md-10">
-                <asp:TextBox runat="server" ID="Login" CssClass="form-control" TextMode="SingleLine" />
-                <asp:RequiredFieldValidator runat="server" ControlToValidate="Login"
+                <asp:TextBox runat="server" ID="LoginBox" CssClass="form-control" TextMode="SingleLine" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="LoginBox"
                     CssClass="text-danger" ErrorMessage="Логин обязателен для заполнения." />
             </div>
         </div>
          <div class="form-group">
-            <asp:Label runat="server" AssociatedControlID="FullName" CssClass="col-md-2 control-label">ФИО</asp:Label>
+            <asp:Label runat="server" AssociatedControlID="FullNameBox" CssClass="col-md-2 control-label">ФИО</asp:Label>
             <div class="col-md-10">
-                <asp:TextBox runat="server" ID="FullName" CssClass="form-control" TextMode="SingleLine" />
-                <asp:RequiredFieldValidator runat="server" ControlToValidate="FullName"
+                <asp:TextBox runat="server" ID="FullNameBox" CssClass="form-control" TextMode="SingleLine" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="FullNameBox"
                     CssClass="text-danger" ErrorMessage="ФИО обязательно для заполнения." />
             </div>
         </div>
