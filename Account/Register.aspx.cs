@@ -13,7 +13,10 @@ namespace StartUpWebAPI.Account
     {
         protected void CreateUser_Click(object sender, EventArgs e)
         {
-           
+           if (IsValid)
+            {
+                FullNameBox.Text = "Success";
+            }
         }
     }
 }
