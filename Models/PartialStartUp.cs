@@ -34,9 +34,17 @@ namespace StartUpWebAPI.Entities
         {
             get
             {
-                string userName = "Главный организатор: " + StartUpOfUser.FirstOrDefault()?.User.Name;
+                string template = "Главный организатор: ";
+                string userName = StartUpOfUser.FirstOrDefault()?.User.Name;
 
-                return userName ?? "Неизвестен";
+                if (userName == null)
+                {
+                    return template + "Неизвестен";
+                }
+                else
+                {
+                    return template + userName;
+                }
             }
         }
     }
