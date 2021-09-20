@@ -186,8 +186,6 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Account\Web.config" />
-    </Content>
-    </Content>
     <Content Include="fonts\Manrope-Bold.woff" />
     <Content Include="fonts\Manrope-Medium.woff" />
     <Content Include="fonts\Manrope-Regular.woff" />
@@ -324,13 +322,6 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Manage.aspx.cs">
-      <DependentUpon>Manage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Manage.aspx.designer.cs">
-      <DependentUpon>Manage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\PartialStartUp.cs" />
