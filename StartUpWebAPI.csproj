@@ -185,17 +185,9 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-<<<<<<< HEAD
-    <EntityDeploy Include="Entities\BaseModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BaseModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Entities\BaseModel.edmx.diagram">
-      <DependentUpon>BaseModel.edmx</DependentUpon>
-    </Content>
-=======
     <Content Include="Account\Web.config" />
->>>>>>> 2bbc22925bfcc77dd178cc3fb53812b746e4e432
+    </Content>
+    </Content>
     <Content Include="fonts\Manrope-Bold.woff" />
     <Content Include="fonts\Manrope-Medium.woff" />
     <Content Include="fonts\Manrope-Regular.woff" />
@@ -208,12 +200,6 @@
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Resource Include="Resources\noPicture.png" />
-<<<<<<< HEAD
-    <Content Include="Manage.aspx" />
-=======
-    <Resource Include="Resources\AeOf3UMV9WA-removebg-preview.png" />
-    <Resource Include="Resources\Logo.png" />
->>>>>>> 2bbc22925bfcc77dd178cc3fb53812b746e4e432
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

@@ -15,7 +15,6 @@ namespace StartUpWebAPI
     {
 
         /// <summary>
-<<<<<<< HEAD
         /// AnonContent control.
         /// </summary>
         /// <remarks>
@@ -44,9 +43,6 @@ namespace StartUpWebAPI
 
         /// <summary>
         /// MainContent control.
-=======
-        /// MainContent элемент управления.
->>>>>>> 2bbc22925bfcc77dd178cc3fb53812b746e4e432
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
