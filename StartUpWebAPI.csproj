@@ -164,15 +164,15 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
-    <Content Include="Entities\BaseModel.Context.tt">
+    <Content Include="Entities\StartUpModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BaseModel.edmx</DependentUpon>
-      <LastGenOutput>BaseModel.Context.cs</LastGenOutput>
+      <LastGenOutput>StartUpModel.Context.cs</LastGenOutput>
+      <DependentUpon>StartUpModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Entities\BaseModel.tt">
+    <Content Include="Entities\StartUpModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BaseModel.edmx</DependentUpon>
-      <LastGenOutput>BaseModel.cs</LastGenOutput>
+      <DependentUpon>StartUpModel.edmx</DependentUpon>
+      <LastGenOutput>StartUpModel.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -185,6 +185,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+<<<<<<< HEAD
     <EntityDeploy Include="Entities\BaseModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BaseModel.Designer.cs</LastGenOutput>
@@ -192,12 +193,27 @@
     <Content Include="Entities\BaseModel.edmx.diagram">
       <DependentUpon>BaseModel.edmx</DependentUpon>
     </Content>
+=======
+    <Content Include="Account\Web.config" />
+>>>>>>> 2bbc22925bfcc77dd178cc3fb53812b746e4e432
     <Content Include="fonts\Manrope-Bold.woff" />
     <Content Include="fonts\Manrope-Medium.woff" />
     <Content Include="fonts\Manrope-Regular.woff" />
+    <EntityDeploy Include="Entities\StartUpModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>StartUpModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Entities\StartUpModel.edmx.diagram">
+      <DependentUpon>StartUpModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Resource Include="Resources\noPicture.png" />
+<<<<<<< HEAD
     <Content Include="Manage.aspx" />
+=======
+    <Resource Include="Resources\AeOf3UMV9WA-removebg-preview.png" />
+    <Resource Include="Resources\Logo.png" />
+>>>>>>> 2bbc22925bfcc77dd178cc3fb53812b746e4e432
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -275,53 +291,50 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Data\AppData.cs" />
-    <Compile Include="Entities\BaseModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BaseModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\BaseModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\BaseModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BaseModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Entities\Category.cs">
-      <DependentUpon>BaseModel.tt</DependentUpon>
+      <DependentUpon>StartUpModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\RoleType.cs">
-      <DependentUpon>BaseModel.tt</DependentUpon>
+      <DependentUpon>StartUpModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\StartUp.cs">
-      <DependentUpon>BaseModel.tt</DependentUpon>
+      <DependentUpon>StartUpModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\StartUpComment.cs">
-      <DependentUpon>BaseModel.tt</DependentUpon>
+      <DependentUpon>StartUpModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\StartUpImage.cs">
-      <DependentUpon>BaseModel.tt</DependentUpon>
+      <DependentUpon>StartUpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\StartUpModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StartUpModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\StartUpModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StartUpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\StartUpModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StartUpModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Entities\StartUpOfTeam.cs">
-      <DependentUpon>BaseModel.tt</DependentUpon>
+      <DependentUpon>StartUpModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\StartUpOfUser.cs">
-      <DependentUpon>BaseModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\sysdiagrams.cs">
-      <DependentUpon>BaseModel.tt</DependentUpon>
+      <DependentUpon>StartUpModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\Team.cs">
-      <DependentUpon>BaseModel.tt</DependentUpon>
+      <DependentUpon>StartUpModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\TeamComment.cs">
-      <DependentUpon>BaseModel.tt</DependentUpon>
+      <DependentUpon>StartUpModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\User.cs">
-      <DependentUpon>BaseModel.tt</DependentUpon>
+      <DependentUpon>StartUpModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

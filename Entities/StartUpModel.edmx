@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="StartUpBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище StartUpBaseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="Id" />
@@ -68,16 +68,6 @@
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="StartUpId" Type="int" Nullable="false" />
           <Property Name="RoleTypeId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Team">
           <Key>
@@ -284,7 +274,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="StartUpBaseModelStoreContainer">
+        <EntityContainer Name="Хранилище StartUpBaseModelContainer">
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoleType" EntityType="Self.RoleType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StartUp" EntityType="Self.StartUp" Schema="dbo" store:Type="Tables" />
@@ -292,7 +282,6 @@
           <EntitySet Name="StartUpImage" EntityType="Self.StartUpImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StartUpOfTeam" EntityType="Self.StartUpOfTeam" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StartUpOfUser" EntityType="Self.StartUpOfUser" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeamComment" EntityType="Self.TeamComment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeamOfUser" EntityType="Self.TeamOfUser" Schema="dbo" store:Type="Tables" />
@@ -439,16 +428,6 @@
           <NavigationProperty Name="RoleType" Relationship="Self.FK_StartUpOfUser_RoleType" FromRole="StartUpOfUser" ToRole="RoleType" />
           <NavigationProperty Name="StartUp" Relationship="Self.FK_StartUpOfUser_StartUp" FromRole="StartUpOfUser" ToRole="StartUp" />
           <NavigationProperty Name="User" Relationship="Self.FK_StartUpOfUser_User" FromRole="StartUpOfUser" ToRole="User" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Team">
           <Key>
@@ -644,7 +623,6 @@
           <EntitySet Name="StartUpImage" EntityType="Self.StartUpImage" />
           <EntitySet Name="StartUpOfTeam" EntityType="Self.StartUpOfTeam" />
           <EntitySet Name="StartUpOfUser" EntityType="Self.StartUpOfUser" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Team" EntityType="Self.Team" />
           <EntitySet Name="TeamComment" EntityType="Self.TeamComment" />
           <EntitySet Name="User" EntityType="Self.User" />
@@ -706,7 +684,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="StartUpBaseModelStoreContainer" CdmEntityContainer="StartUpBaseEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище StartUpBaseModelContainer" CdmEntityContainer="StartUpBaseEntities">
           <EntitySetMapping Name="Category">
             <EntityTypeMapping TypeName="StartUpBaseModel.Category">
               <MappingFragment StoreEntitySet="Category">
@@ -774,17 +752,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="StartUpBaseModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Team">
             <EntityTypeMapping TypeName="StartUpBaseModel.Team">
               <MappingFragment StoreEntitySet="Team">
@@ -842,7 +809,7 @@
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

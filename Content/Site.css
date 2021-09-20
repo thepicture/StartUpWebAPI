@@ -41,6 +41,31 @@ body {
     cursor: pointer;
     transform: scale(1.02);
 }
+.titlePagesMargin{
+    margin-top:10%;
+    font-size:58px;
+}
+.textMarginAndSize{
+    text-align:center;
+    margin-top:10px;
+}
+
+/*.textblock-design {
+    margin-left: auto;
+    margin-right: auto;
+} */
+
+
+.blockcenter{
+margin-left: auto;
+margin-right: auto;
+}
+
+
+
+.textblock-design:focus {
+    box-shadow: 1px 2px 20px #66afe9;
+}
 
 div ul li a {
     color: black !important;
@@ -49,9 +74,9 @@ div ul li a {
 }
 
     div ul li a:hover {
-        color: mediumpurple !important;
+        color: royalblue !important;
         font-family: 'IBM Plex Serif', serif;
-        font-size: 23px;
+        transform: scale(1.1);
     }
 
 .request-black-font {
@@ -84,6 +109,17 @@ input[type="email"],
 input[type="tel"],
 input[type="select"] {
     max-width: 280px;
+}
+
+.startupnavbar{
+    color: black !important;
+}
+
+.ImageSetting {
+    float: right;
+    flex: auto;
+    height: 138px;
+    width: 235px;
 }
 
 /* Responsive: Portrait tablets and up */
