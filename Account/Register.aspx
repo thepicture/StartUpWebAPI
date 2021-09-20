@@ -9,7 +9,7 @@
 
     <div class="form-horizontal">
         <h4 class ="textMarginAndSize">Создать новый аккаунт</h4>
-        <hr  width="600px;" />
+        <hr   />
         <asp:ValidationSummary runat="server" CssClass="text-danger" />
 
         <div class="form-group">

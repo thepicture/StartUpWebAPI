@@ -199,6 +199,8 @@
     <Resource Include="Resources\noPicture.png" />
     <Resource Include="Resources\AeOf3UMV9WA-removebg-preview.png" />
     <Resource Include="Resources\Logo.png" />
+    <Resource Include="Resources\Исландия.mp4" />
+    <Resource Include="Resources\StarTup.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

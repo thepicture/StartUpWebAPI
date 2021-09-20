@@ -23,7 +23,7 @@
 
                 <div class="form-horizontal">
                     <h4 class ="textMarginAndSize">Использовать существующий аккаунт для авторизации</h4>
-                    <hr width="600px;" />
+                    <hr  />
 
                     <asp:PlaceHolder runat="server" ID="ErrorMessage" Visible="false">
                         <p class="text-danger">

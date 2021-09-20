@@ -3,9 +3,8 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="jumbotron gradientable">
-        <h1>StartUp <img class="ImageSetting" src ="Resources/AeOf3UMV9WA-removebg-preview.png" alt ="STARTUP" /></h1>
-        
-      
+       <img class="ImageSetting" src ="Resources/StarTup.png" alt ="STARTUP" />
+        <h1>StartUp </h1>
         <p class="lead">Компания, помогающая стартаперам выполнить цели.</p>
         &nbsp;</div>
 
