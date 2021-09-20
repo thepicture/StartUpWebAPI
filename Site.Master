@@ -9,7 +9,7 @@
     <title><%: Page.Title %> - StartUp</title>
 
     <asp:PlaceHolder runat="server">
-        <%: Scripts.Render("~/bundles/modernizr") %>
+        <%:Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
     <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
@@ -48,7 +48,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" runat="server" href="~/">StartUp</a>
+                    <a class="navbar-brand startupnavbar" runat="server" href="~/">StartUp</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
