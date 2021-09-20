@@ -44,7 +44,7 @@
                     </div>
                 </div>
                 <p>
-                    <asp:HyperLink runat="server" ID="RegisterHyperLink" ViewStateMode="Disabled">Ещё нет в системе?</asp:HyperLink>
+                    <asp:HyperLink runat="server" ID="RegisterHyperLink" NavigateUrl="~/Account/Register.aspx" ViewStateMode="Disabled">Ещё нет в системе?</asp:HyperLink>
                 </p>
             </section>
         </div>
