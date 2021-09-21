@@ -22,8 +22,28 @@ body {
     height: 30px;
     font-family: 'IBM Plex Serif', serif;
     padding: 10px;
-    text-align: center;
     background: white;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+    .round-div-block:hover {
+        animation-name: blick;
+        animation-iteration-count: infinite;
+        animation-duration: 1s;
+        animation-timing-function: ease-in-out;
+        animation-direction: alternate;
+    }
+
+@keyframes blick {
+    from {
+        transform: scale(0.99);
+    }
+
+    to {
+        transform: scale(1.01);
+    }
 }
 
 /* Div for divs to be on one line. */
