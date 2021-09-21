@@ -16,8 +16,13 @@ body {
     border-radius: 20px;
 }
 
-#ctl01 {
-    align-content: center;
+.prevent-selection {
+    border: none;
+    outline: none;
+}
+
+.green-button {
+    background-color: green !important;
 }
 
 /* Smooth div cloud-like block. */

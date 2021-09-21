@@ -49,7 +49,7 @@
                     </ItemTemplate>
                 </asp:ListView>
                 <asp:Panel runat="server" ID="EmptyStartupsPanel" Visible="false">
-                    <p class="lead">Команд пока нет. :(</p>
+                    <p class="lead">Стартапов пока нет. :(</p>
                     <asp:Button runat="server" Text="Создать новую команду"></asp:Button>
                 </asp:Panel>
                 &nbsp;
