@@ -52,31 +52,6 @@ body {
     cursor: pointer;
     transform: scale(1.02);
 }
-.titlePagesMargin{
-    margin-top:10%;
-    font-size:58px;
-}
-.textMarginAndSize{
-    text-align:center;
-    margin-top:10px;
-}
-
-/*.textblock-design {
-    margin-left: auto;
-    margin-right: auto;
-} */
-
-
-.blockcenter{
-margin-left: auto;
-margin-right: auto;
-}
-
-
-
-.textblock-design:focus {
-    box-shadow: 1px 2px 20px #66afe9;
-}
 
 div ul li a {
     color: black !important;

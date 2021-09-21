@@ -15,7 +15,7 @@ namespace StartUpWebAPI
     {
 
         /// <summary>
-        /// MainContent элемент управления.
+        /// MainContent control.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
