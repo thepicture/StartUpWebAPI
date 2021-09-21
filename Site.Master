@@ -57,28 +57,28 @@
                         <li><a runat="server" href="~/Teams">Команды</a></li>
                         <li><a runat="server" href="~/Startups">Стартапы</a></li>
                     </ul>
-                        <asp:Panel runat="server" ID="AnonContent">
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" href="~/Account/Register">Регистрация</a></li>
-                                <li><a runat="server" href="~/Account/Login">Авторизация</a></li>
-                            </ul>
-                        </asp:Panel>
-                        <asp:Panel runat="server" ID="LoggedInContent">
-                            <ul class="nav navbar-nav navbar-right">
-                                <li>Здравствуйте, <%: Request.Cookies["username"]?.Value  %> !</li>
-                                <li>
-                                    <asp:Button Text="Выйти" runat="server" LogoutAction="Redirect" LogoutText="Выйти" LogoutPageUrl="~/" ID="BtnLogOut" OnClick="BtnLogOut_Click" />
-                                </li>
-                            </ul>
-                        </asp:Panel>
-                    </div>
+                    <asp:Panel runat="server" ID="AnonContent">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a runat="server" href="~/Account/Register">Регистрация</a></li>
+                            <li><a runat="server" href="~/Account/Login">Авторизация</a></li>
+                        </ul>
+                    </asp:Panel>
+                    <asp:Panel runat="server" ID="LoggedInContent">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>Здравствуйте, <%: Request.Cookies["username"]?.Value  %> !</li>
+                            <li>
+                                <asp:Button Text="Выйти" runat="server" LogoutAction="Redirect" LogoutText="Выйти" LogoutPageUrl="~/" ID="BtnLogOut" OnClick="BtnLogOut_Click" />
+                            </li>
+                        </ul>
+                    </asp:Panel>
                 </div>
             </div>
         </div>
         <div class="container body-content">
+            <div></div>
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
-            <hr  />
+            <hr />
             <footer>
                 <p align="center">&copy; <%: DateTime.Now.Year %> - StartUp</p>
             </footer>

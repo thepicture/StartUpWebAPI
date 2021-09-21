@@ -43,7 +43,7 @@
                 <h1>Организованные мной стартапы</h1>
                 <asp:ListView runat="server" ID="LViewMyStartups">
                     <ItemTemplate>
-                        <div class="round-div-block startup-panel">
+                        <div class="round-div-block">
                             <asp:LinkButton runat="server" Text='<%# Eval("Name") %>' ForeColor="Black" ID="BtnStartUpInfo" OnClick="BtnStartUpInfo_Click"></asp:LinkButton>
                         </div>
                     </ItemTemplate>
@@ -58,7 +58,7 @@
                 <h1>Организованные мной команды</h1>
                 <asp:ListView runat="server" ID="LViewMyTeams">
                     <ItemTemplate>
-                        <div class="round-div-block startup-panel">
+                        <div class="round-div-block">
                             <asp:LinkButton runat="server" Text='<%# Eval("Name") %>' ForeColor="Black" ID="BtnTeamInfo" OnClick="BtnTeamInfo_Click"></asp:LinkButton>
                         </div>
                     </ItemTemplate>

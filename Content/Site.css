@@ -26,6 +26,7 @@ body {
     align-items: center;
     display: flex;
     justify-content: center;
+    margin: 10px;
 }
 
     .round-div-block:hover {
@@ -51,7 +52,7 @@ body {
     display: flex;
 }
 
-/*A class form black bg replacing*/
+/* A class form black bg replacing */
 .request-white-bg {
     background-color: white !important;
     border: 0px !important;
@@ -62,22 +63,34 @@ body {
     margin: 5px;
 }
 
+hr {
+    clear: both;
+}
+
+footer {
+    clear: both;
+}
+
 /* Styles for panel in Startups. */
 .startup-panel {
     margin: 10px;
     transition: transform ease-in-out 300ms;
+    float:left;
+    width:300px;
+    height:200px;
 }
+
+    /* Resize the startup block when the mouse is over it. */
+    .startup-panel:hover {
+        cursor: pointer;
+        transform: scale(1.02);
+    }
+
 
 .gradientable {
     background: rgb(255,0,0);
     background: -webkit-linear-gradient(90deg, #5ee0d3,#a686f7,#6a47c7); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(90deg, #5ee0d3,#a686f7,#6a47c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-
-/* Resize the startup block when the mouse is over it. */
-.startup-panel:hover {
-    cursor: pointer;
-    transform: scale(1.02);
 }
 
 /* Styles for content elements. */
