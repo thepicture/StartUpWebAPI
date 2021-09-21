@@ -6,6 +6,11 @@
         <asp:Literal runat="server" ID="ErrorMessage" />
     </p>
 
+     <asp:PlaceHolder runat="server" Visible="false" ID="SameUsernamesMessage">
+                    <div class="text-success">
+                        Введённое имя пользователя уже существует в системе. Пожалуйста, укажите другое имя пользователя.
+                    </div>
+                </asp:PlaceHolder>
     <div class="form-horizontal">
         <h4>Создать новый аккаунт</h4>
         <hr />

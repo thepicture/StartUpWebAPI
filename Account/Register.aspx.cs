@@ -1,5 +1,7 @@
-﻿using StartUpWebAPI.Models;
+﻿using StartUpWebAPI.Entities;
+using StartUpWebAPI.Models;
 using System;
+using System.Linq;
 using System.Web.Security;
 using System.Web.UI;
 
@@ -9,7 +11,7 @@ namespace StartUpWebAPI.Account
     {
         protected void CreateUser_Click(object sender, EventArgs e)
         {
-            if (IsValid)
+            if (IsValid && IsNoSimilarUsernames())
             {
                 UserBuilder uBuilder = new UserBuilder();
                 uBuilder
@@ -21,6 +23,17 @@ namespace StartUpWebAPI.Account
 
                 Response.Redirect("~/Account/Login.aspx?isregistered=true");
             }
+            else
+            {
+                SameUsernamesMessage.Visible = true;
+            }
+        }
+
+        private bool IsNoSimilarUsernames()
+        {
+            string username = LoginBox.Text;
+
+            return !AppData.Context.User.Any(u => u.Login.Equals(username));
         }
     }
 }

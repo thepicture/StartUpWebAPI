@@ -15,7 +15,9 @@ namespace StartUpWebAPI.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["isregistered"] != null)
+            bool isRegisteredQuery = Convert.ToBoolean(Request.QueryString["isregistered"]);
+
+            if (isRegisteredQuery == true)
             {
                 RegSuccessMessage.Visible = true;
             }
