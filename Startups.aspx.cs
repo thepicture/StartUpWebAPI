@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Security;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
 using System.Windows.Threading;
@@ -13,10 +14,14 @@ namespace StartUpWebAPI
         private List<StartUp> startups;
         protected void Page_Load(object sender, EventArgs e)
         {
-            StartupsView.DataSource = AppData.Context.StartUp.ToList();
-            StartupsView.DataBind();
-
-            // TODO: SmoothlyAddStartups();
+            if (!User.Identity.IsAuthenticated)
+            {
+                FormsAuthentication.RedirectToLoginPage();
+            }
+            else
+            {
+                SmoothlyAddStartups();
+            }
         }
 
         private void SmoothlyAddStartups()
