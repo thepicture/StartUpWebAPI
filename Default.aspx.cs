@@ -34,13 +34,38 @@ namespace StartUpWebAPI
 
         private void LoadStartups()
         {
-            LViewMyStartups.DataSource = AppData.Context.User.First(u => u.Login.Equals(username)).StartUpOfUser.Select(s => s.StartUp).ToList();
+            List<StartUp> startUps = AppData.Context.User.First(u => u.Login.Equals(username)).StartUpOfUser.Select(s => s.StartUp).ToList();
+            LViewMyStartups.DataSource = startUps;
+
+            if (startUps.Count == 0)
+            {
+                EmptyStartupsPanel.Visible = true;
+            }
+
             LViewMyStartups.DataBind();
         }
 
         private void LoadTeams()
         {
-            
+            List<Team> teams = AppData.Context.User.First(u => u.Login.Equals(username)).Team.ToList();
+            LViewMyTeams.DataSource = teams;
+
+            if (teams.Count == 0)
+            {
+                EmptyTeamsPanel.Visible = true;
+            }
+
+            LViewMyTeams.DataBind();
+        }
+
+        protected void BtnStartUpInfo_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/StartUpInfo.aspx?id=" + (sender as StartUp).Id);
+        }
+
+        protected void BtnTeamInfo_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/TeamInfo.aspx?id=" + (sender as StartUp).Id);
         }
     }
 }

@@ -41,18 +41,32 @@
 
             <div class="jumbotron gradientable marginaled">
                 <h1>Организованные мной стартапы</h1>
-                    <asp:ListView runat="server" ID="LViewMyStartups">
-                        <ItemTemplate>
-                            <div class="round-div-block startup-panel">
-                                <asp:Label runat="server" Text='<%# Eval("Name") %>'></asp:Label>
-                            </div>
-                        </ItemTemplate>
-                    </asp:ListView>
+                <asp:ListView runat="server" ID="LViewMyStartups">
+                    <ItemTemplate>
+                        <div class="round-div-block startup-panel">
+                            <asp:LinkButton runat="server" Text='<%# Eval("Name") %>' ForeColor="Black" ID="BtnStartUpInfo" OnClick="BtnStartUpInfo_Click"></asp:LinkButton>
+                        </div>
+                    </ItemTemplate>
+                </asp:ListView>
+                <asp:Panel runat="server" ID="EmptyStartupsPanel" Visible="false">
+                    <p class="lead">Команд пока нет. :(</p>
+                    <asp:Button runat="server" Text="Создать новую команду"></asp:Button>
+                </asp:Panel>
                 &nbsp;
             </div>
             <div class="jumbotron gradientable">
                 <h1>Организованные мной команды</h1>
-                <p class="lead"></p>
+                <asp:ListView runat="server" ID="LViewMyTeams">
+                    <ItemTemplate>
+                        <div class="round-div-block startup-panel">
+                            <asp:LinkButton runat="server" Text='<%# Eval("Name") %>' ForeColor="Black" ID="BtnTeamInfo" OnClick="BtnTeamInfo_Click"></asp:LinkButton>
+                        </div>
+                    </ItemTemplate>
+                </asp:ListView>
+                <asp:Panel runat="server" ID="EmptyTeamsPanel" Visible="false">
+                    <p class="lead">Команд пока нет. :(</p>
+                    <asp:Button runat="server" Text="Создать новую команду"></asp:Button>
+                </asp:Panel>
                 &nbsp;
             </div>
         </div>
