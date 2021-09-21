@@ -232,7 +232,9 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
+    <Content Include="StartUpInfo.aspx" />
     <Content Include="Startups.aspx" />
+    <Content Include="TeamInfo.aspx" />
     <Content Include="Teams.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -355,12 +357,26 @@
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="StartUpInfo.aspx.cs">
+      <DependentUpon>StartUpInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StartUpInfo.aspx.designer.cs">
+      <DependentUpon>StartUpInfo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Startups.aspx.cs">
       <DependentUpon>Startups.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Startups.aspx.designer.cs">
       <DependentUpon>Startups.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TeamInfo.aspx.cs">
+      <DependentUpon>TeamInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TeamInfo.aspx.designer.cs">
+      <DependentUpon>TeamInfo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Teams.aspx.cs">
       <DependentUpon>Teams.aspx</DependentUpon>
