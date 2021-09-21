@@ -16,6 +16,11 @@ body {
     border-radius: 20px;
 }
 
+/* Div for divs to be on one line. */
+.inline-div{
+    display: flex;
+}
+
 /*A class form black bg replacing*/
 .request-white-bg {
     background-color: white !important;

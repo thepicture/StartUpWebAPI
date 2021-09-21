@@ -72,7 +72,7 @@ namespace StartUpWebAPI
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            BtnLogOut.Text = Context.User.Identity.IsAuthenticated.ToString();
+            BtnLogOut.Text = "Выйти из системы";
             string cookie = Request.Cookies[".ASPXAUTH"]?.Value;
 
             if (cookie != null)

@@ -11,7 +11,18 @@ namespace StartUpWebAPI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            string cookie = Request.Cookies[".ASPXAUTH"]?.Value;
 
+            if (cookie != null)
+            {
+                AnonContent.Visible = false;
+                LoggedInContent.Visible = true;
+            }
+            else
+            {
+                AnonContent.Visible = true;
+                LoggedInContent.Visible = false;
+            }
         }
     }
 }

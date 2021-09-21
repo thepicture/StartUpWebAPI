@@ -89,5 +89,14 @@ namespace StartUpWebAPI.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 200.
+        /// </summary>
+        internal static string SmoothAddInterval {
+            get {
+                return ResourceManager.GetString("SmoothAddInterval", resourceCulture);
+            }
+        }
     }
 }

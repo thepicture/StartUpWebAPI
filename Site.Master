@@ -57,8 +57,7 @@
                         <li><a runat="server" href="~/Teams">Команды</a></li>
                         <li><a runat="server" href="~/Startups">Стартапы</a></li>
                     </ul>
-                    <asp:LoginView runat="server" ViewStateMode="Disabled">
-                        <AnonymousTemplate>
+                        <asp:Panel runat="server" ID="AnonContent">
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a runat="server" href="~/Account/Register">Регистрация</a></li>
                                 <li><a runat="server" href="~/Account/Login">Авторизация</a></li>
