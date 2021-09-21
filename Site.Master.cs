@@ -73,10 +73,12 @@ namespace StartUpWebAPI
         protected void Page_Load(object sender, EventArgs e)
         {
             string probablyUsername = Request.Cookies.Get("username")?.Value;
+
             if (probablyUsername != null)
             {
                 FormsAuthentication.SetAuthCookie(probablyUsername, true);
             }
+
             BtnLogOut.Text = "Выйти из системы";
             string cookie = Request.Cookies[".ASPXAUTH"]?.Value;
 

@@ -16,8 +16,18 @@ body {
     border-radius: 20px;
 }
 
+/* Smooth div cloud-like block. */
+.round-div-block {
+    border-radius: 30px;
+    height: 30px;
+    font-family: 'IBM Plex Serif', serif;
+    padding: 10px;
+    text-align: center;
+    background: white;
+}
+
 /* Div for divs to be on one line. */
-.inline-div{
+.inline-div {
     display: flex;
 }
 
@@ -97,7 +107,7 @@ input[type="select"] {
     max-width: 280px;
 }
 
-.startupnavbar{
+.startupnavbar {
     color: black !important;
 }
 

@@ -2,9 +2,9 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <asp:Panel runat="server" ID="AnonContent">
-        <%-- <div class="jumbotron gradientable">
+        <div class="jumbotron gradientable">
             <img class="ImageSetting" src="Resources/StarTup.png" alt="STARTUP" />
-            <h1>StartUp </h1>
+            <h1>StartUp</h1>
             <p class="lead">Компания, помогающая стартаперам выполнить цели.</p>
             &nbsp;
         </div>
@@ -33,19 +33,25 @@
                     <a class="btn btn-default" href="Account/Register.aspx">Тогда нажмите cюда! &raquo;</a>
                 </p>
             </div>
-        </div>--%>
+        </div>
     </asp:Panel>
     <asp:Panel runat="server" ID="LoggedInContent">
         <h1>Привет, <%: Request.Cookies.Get("username").Value %>. </h1>
         <div class="inline-div">
 
-            <div class="jumbotron gradientable">
-                <h1>Мои стартапы</h1>
-                <p class="lead">Мои стартапы</p>
+            <div class="jumbotron gradientable marginaled">
+                <h1>Организованные мной стартапы</h1>
+                    <asp:ListView runat="server" ID="LViewMyStartups">
+                        <ItemTemplate>
+                            <div class="round-div-block startup-panel">
+                                <asp:Label runat="server" Text='<%# Eval("Name") %>'></asp:Label>
+                            </div>
+                        </ItemTemplate>
+                    </asp:ListView>
                 &nbsp;
             </div>
             <div class="jumbotron gradientable">
-                <h1>Мои команды</h1>
+                <h1>Организованные мной команды</h1>
                 <p class="lead"></p>
                 &nbsp;
             </div>

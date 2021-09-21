@@ -5,7 +5,7 @@
     <asp:Panel HorizontalAlign="Center" runat="server">
         <asp:ListView ID="StartupsView" runat='server'>
             <ItemTemplate>
-                <asp:Panel runat="server">
+                <asp:Panel runat="server" Height="20">
                     <div class="startup-panel radius-like gradientable">
                         <div>
                             <asp:Label CssClass="startup-name" runat="server" Font-Bold="true" Font-Size="Large" Text='<%# Eval("Name") %>'></asp:Label>
