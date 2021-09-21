@@ -1,4 +1,5 @@
 ﻿using StartUpWebAPI.Entities;
+using StartUpWebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +15,15 @@ namespace StartUpWebAPI
         private List<StartUp> startups;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!User.Identity.IsAuthenticated)
+            if (!UserAuthorizeObserver.IsAuthorized(Request))
             {
                 FormsAuthentication.RedirectToLoginPage();
             }
             else
             {
-                SmoothlyAddStartups();
+                StartupsView.DataSource = AppData.Context.StartUp.ToList();
+                StartupsView.DataBind();
+                //SmoothlyAddStartups();
             }
         }
 

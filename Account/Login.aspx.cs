@@ -56,12 +56,12 @@ namespace StartUpWebAPI.Account
             HttpCookie userNameCookie = new HttpCookie("username", login)
             {
                 Expires = DateTime.Now + TimeSpan.FromDays(1),
-                SameSite = SameSiteMode.Lax
+                SameSite = SameSiteMode.Lax,
             };
-
             Response.Cookies.Add(userNameCookie);
 
-            FormsAuthentication.RedirectFromLoginPage(login, isRemember);
+            FormsAuthentication.SetAuthCookie(login, isRemember);
+            Response.Redirect("~/Default.aspx");
         }
     }
 }

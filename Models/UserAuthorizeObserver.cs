@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 
 namespace StartUpWebAPI.Models
 {
@@ -9,7 +10,7 @@ namespace StartUpWebAPI.Models
     {
         public static bool IsAuthorized(HttpRequest request)
         {
-            return request.Cookies.Get("username") != null;
+            return request.Cookies[".ASPXAUTH"]?.Value != null;
         }
     }
 }

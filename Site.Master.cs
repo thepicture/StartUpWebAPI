@@ -8,6 +8,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
 using Microsoft.AspNet.Identity;
+using StartUpWebAPI.Entities;
 using StartUpWebAPI.Models;
 
 namespace StartUpWebAPI
@@ -71,6 +72,7 @@ namespace StartUpWebAPI
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            BtnLogOut.Text = Context.User.Identity.IsAuthenticated.ToString();
             string cookie = Request.Cookies[".ASPXAUTH"]?.Value;
 
             if (cookie != null)
