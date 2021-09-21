@@ -186,7 +186,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Account\Web.config" />
     <Content Include="fonts\Manrope-Bold.woff" />
     <Content Include="fonts\Manrope-Medium.woff" />
     <Content Include="fonts\Manrope-Regular.woff" />

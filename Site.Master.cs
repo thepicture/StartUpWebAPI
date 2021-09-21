@@ -8,6 +8,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
 using Microsoft.AspNet.Identity;
+using StartUpWebAPI.Models;
 
 namespace StartUpWebAPI
 {
@@ -86,7 +87,7 @@ namespace StartUpWebAPI
 
         protected void BtnLogOut_Click(object sender, EventArgs e)
         {
-            if (Request.Cookies["username"]?.Value != null)
+            if (UserAuthorizeObserver.IsAuthorized(Request))
             {
                 Response.Cookies.Get("username").Expires = DateTime.Now.AddDays(-1);
             }
