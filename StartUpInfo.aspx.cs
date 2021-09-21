@@ -26,7 +26,7 @@ namespace StartUpWebAPI
 
         private void InsertComments()
         {
-            LViewStartUpComments.DataSource = startUp.StartUpComment.ToList();
+            LViewStartUpComments.DataSource = startUp.StartUpComment.OrderByDescending(c => c.DateTime).ToList();
             LViewStartUpComments.DataBind();
         }
 
@@ -44,11 +44,33 @@ namespace StartUpWebAPI
             Category.Text = startUp.Category.Name;
             Description.Text = startUp.Description == null ? "Организатор не предоставил описание. Можете подать ему идею!" : startUp.Description;
             CommentsCount.Text = "Комментарии (" + startUp.StartUpComment.Count + "):";
+            MainImage.ImageUrl = startUp.ImagePreview;
         }
 
         protected void BtnSendComment_Click(object sender, EventArgs e)
         {
+            string username = Request.Cookies.Get("username").Value;
+            User currentUser = AppData.Context.User.First(u => u.Login.Equals(username));
 
+            StartUpComment comment = new StartUpComment
+            {
+                CommentText = CommentBox.Text,
+                DateTime = DateTime.Now,
+                User = currentUser,
+                StartUp = startUp,
+            };
+
+            startUp.StartUpComment.Add(comment);
+
+            try
+            {
+                AppData.Context.SaveChanges();
+                InsertComments();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

@@ -6,6 +6,7 @@
             <p class="lead">
                 <asp:Label runat="server" ID="MainName"></asp:Label>
             </p>
+            <asp:Image Width="200" Height="200" runat="server" ID="MainImage" />
             <asp:Panel runat="server" ID="PanelMyTeams">
                 <div class="round-div-block">
                     <asp:Label runat="server" ID="Name" ForeColor="Black"></asp:Label>
@@ -51,9 +52,10 @@
             <asp:ListView runat="server" ID="LViewStartUpComments">
                 <ItemTemplate>
                     <div class="unbordered-block">
-                        <asp:Image runat="server" CssClass="startup-image-radius radius-like marginaled" ImageUrl="<%# Eval("GetCommentImage") %>"></asp:Image>
-                        <asp:Label runat="server" Text="<%# Eval("CommentText") %>"></asp:Label>
-                        <asp:Label runat="server" Text="<%# Eval("DateTime") %>"></asp:Label>
+                        <asp:Image Width="100" Height="100" runat="server" CssClass="startup-image-radius radius-like marginaled" ImageUrl='<%# Eval("GetCommentImage") %>'></asp:Image>
+                        <asp:Label Font-Bold="true" runat="server" Text='<%# Eval("User.Name") %>'></asp:Label>
+                        <asp:Label runat="server" Text='<%# Eval("DateTime") %>'></asp:Label>
+                        <asp:Label runat="server" Text='<%# Eval("CommentText") %>'></asp:Label>
                     </div>
                 </ItemTemplate>
             </asp:ListView>
