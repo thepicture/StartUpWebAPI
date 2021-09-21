@@ -2,6 +2,7 @@
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
+using System.Windows.Forms;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Owin;
@@ -14,7 +15,9 @@ namespace StartUpWebAPI.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString["isregistered"] != null)
+            bool isRegisteredQuery = Convert.ToBoolean(Request.QueryString["isregistered"]);
+
+            if (isRegisteredQuery == true)
             {
                 RegSuccessMessage.Visible = true;
             }
@@ -50,8 +53,15 @@ namespace StartUpWebAPI.Account
         private void RedirectToMainPage(string login)
         {
             bool isRemember = RememberMe.Checked;
+            HttpCookie userNameCookie = new HttpCookie("username", login)
+            {
+                Expires = DateTime.Now + TimeSpan.FromDays(1),
+                SameSite = SameSiteMode.Lax,
+            };
+            Response.Cookies.Add(userNameCookie);
 
-            FormsAuthentication.RedirectFromLoginPage(login, isRemember);
+            FormsAuthentication.SetAuthCookie(login, isRemember);
+            Response.Redirect("~/Default.aspx");
         }
     }
 }

@@ -22,6 +22,7 @@ body {
     border: 0px !important;
 }
 
+/* Adds margin to elements with it. */
 .marginaled {
     margin: 5px;
 }
@@ -32,33 +33,27 @@ body {
     transition: transform ease-in-out 300ms;
 }
 
-.videoAlign {
-    margin-left: auto;
-    margin-right: auto;
-    display: block
-}
-.title-page-margin{
-    margin-top:5%;
-    font-size:58px;
-}
-
 .gradientable {
     background: rgb(255,0,0);
     background: -webkit-linear-gradient(90deg, #5ee0d3,#a686f7,#6a47c7); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(90deg, #5ee0d3,#a686f7,#6a47c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+/* Resize the startup block when the mouse is over it. */
 .startup-panel:hover {
     cursor: pointer;
     transform: scale(1.02);
 }
 
+/* Styles for content elements. */
 div ul li a {
     color: black !important;
     font-family: 'IBM Plex Serif', serif;
+    transition: all ease-in-out 100ms;
     font-size: 20px;
 }
 
+    /* Change the color when the mouse is over a buttons. */
     div ul li a:hover {
         color: royalblue !important;
         font-family: 'IBM Plex Serif', serif;
@@ -98,7 +93,6 @@ input[type="select"] {
 }
 
 .startupnavbar{
-    font-size:25px;
     color: black !important;
 }
 
