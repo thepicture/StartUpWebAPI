@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 
 namespace StartUpWebAPI.Entities
 {
@@ -23,6 +24,24 @@ namespace StartUpWebAPI.Entities
                 }
 
                 return result;
+            }
+        }
+
+        public string FirstCreator
+        {
+            get
+            {
+                string template = "Главный организатор: ";
+                string userName = User.FirstOrDefault()?.Name;
+
+                if (userName == null)
+                {
+                    return template + "Неизвестен";
+                }
+                else
+                {
+                    return template + userName;
+                }
             }
         }
     }

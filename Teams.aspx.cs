@@ -20,7 +20,8 @@ namespace StartUpWebAPI
             }
             else
             {
-                //SmoothlyAddStartups();
+                TeamsView.DataSource = AppData.Context.Team.ToList();
+                TeamsView.DataBind();
             }
         }
     }

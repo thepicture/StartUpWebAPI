@@ -17,7 +17,7 @@ body {
 }
 
 #ctl01 {
-align-content: center;
+    align-content: center;
 }
 
 /* Smooth div cloud-like block. */
@@ -81,13 +81,27 @@ footer {
 .startup-panel {
     margin: 10px;
     transition: transform ease-in-out 300ms;
-    float:left;
-    width:300px;
-    height:200px;
+    float: left;
+    width: 300px;
+    height: 200px;
 }
 
     /* Resize the startup block when the mouse is over it. */
     .startup-panel:hover {
+        cursor: pointer;
+        transform: scale(1.02);
+    }
+
+.team-panel {
+    margin: 10px;
+    transition: transform ease-in-out 300ms;
+    float: left;
+    width: 300px;
+    height: 200px;
+}
+
+    /* Resize the team block when the mouse is over it. */
+    .team-panel:hover {
         cursor: pointer;
         transform: scale(1.02);
     }
@@ -97,6 +111,11 @@ footer {
     background: rgb(255,0,0);
     background: -webkit-linear-gradient(90deg, #5ee0d3,#a686f7,#6a47c7); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(90deg, #5ee0d3,#a686f7,#6a47c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.gradientable-purple {
+    background: rgb(249,26,233);
+    background: linear-gradient(90deg, rgba(249,26,233,1) 14%, rgba(255,124,0,1) 100%);
 }
 
 /* Styles for content elements. */
