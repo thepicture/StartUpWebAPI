@@ -60,12 +60,18 @@ namespace StartUpWebAPI
 
         protected void BtnStartUpInfo_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/StartUpInfo.aspx?id=" + (sender as StartUp).Id);
+            string text = (sender as LinkButton).Text;
+            int id = AppData.Context.StartUp.First(s => s.Name.Equals(text)).Id;
+
+            Response.Redirect("~/StartUpInfo.aspx?id=" + id);
         }
 
         protected void BtnTeamInfo_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/TeamInfo.aspx?id=" + (sender as StartUp).Id);
+            string text = (sender as LinkButton).Text;
+            int id = AppData.Context.Team.First(s => s.Name.Equals(text)).Id;
+
+            Response.Redirect("~/TeamInfo.aspx?id=" + id);
         }
     }
 }

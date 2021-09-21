@@ -16,6 +16,10 @@ body {
     border-radius: 20px;
 }
 
+#ctl01 {
+align-content: center;
+}
+
 /* Smooth div cloud-like block. */
 .round-div-block {
     border-radius: 30px;
@@ -63,10 +67,12 @@ body {
     margin: 5px;
 }
 
+/* Properties for hr to be at bottom. */
 hr {
     clear: both;
 }
 
+/* Properties for footer to be at bottom. */
 footer {
     clear: both;
 }
