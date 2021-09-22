@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StartUpWebAPI.Models;
+using System;
 using System.Drawing;
 using System.Linq;
 
@@ -22,9 +23,7 @@ namespace StartUpWebAPI.Entities
                 }
                 else
                 {
-                    ImageConverter converter = new ImageConverter();
-                    Bitmap noPicture = Properties.Resources.noPicture;
-                    result += Convert.ToBase64String((byte[])converter.ConvertTo(noPicture, typeof(byte[])));
+                    result = NativeImageUtils.ConvertFromBytes(Properties.Resources.noPicture);
                 }
 
                 return result;
