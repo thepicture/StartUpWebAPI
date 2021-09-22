@@ -51,15 +51,6 @@ namespace StartUpWebAPI.Account
         protected global::System.Web.UI.WebControls.Literal FailureText;
 
         /// <summary>
-        /// RememberMe control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox RememberMe;
-
-        /// <summary>
         /// LoginBox control.
         /// </summary>
         /// <remarks>
@@ -78,13 +69,13 @@ namespace StartUpWebAPI.Account
         protected global::System.Web.UI.WebControls.TextBox PasswordBox;
 
         /// <summary>
-        /// CheckBox1 control.
+        /// RememberMe control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBox1;
+        protected global::System.Web.UI.WebControls.CheckBox RememberMe;
 
         /// <summary>
         /// BtnLogIn control.

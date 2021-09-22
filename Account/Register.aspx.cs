@@ -9,6 +9,23 @@ namespace StartUpWebAPI.Account
 {
     public partial class Register : Page
     {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            LoadBgImage();
+            RemoveFooter();
+        }
+
+        private void RemoveFooter()
+        {
+            Control footer = Master.FindControl("FooterIdentity");
+            footer.Visible = false;
+        }
+
+        private void LoadBgImage()
+        {
+            BgImage.ImageUrl = NativeImageUtils.ConvertFromBytes(Properties.Resources.commonRegisterBg);
+        }
+
         protected void CreateUser_Click(object sender, EventArgs e)
         {
             if (IsValid && IsNoSimilarUsernames())

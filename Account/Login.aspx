@@ -47,8 +47,8 @@
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
                                 <div class="checkbox">
-                                    <asp:CheckBox runat="server" ID="RememberMe" />
-                                    <asp:Label runat="server" AssociatedControlID="RememberMe">Запомнить меня?</asp:Label>
+                                    <%--   <asp:CheckBox runat="server" ID="RememberMe" />
+                                    <asp:Label runat="server" AssociatedControlID="RememberMe">Запомнить меня?</asp:Label>--%>
                                 </div>
                             </div>
                         </div>
@@ -87,7 +87,7 @@
             </div>
             <br />
             <div style="display: flex; justify-content: center;">
-                <asp:CheckBox Text="Запомнить меня" runat="server" ID="CheckBox1" />
+                <asp:CheckBox Text="Запомнить меня" runat="server" ID="RememberMe"/>
             </div>
             <br />
             <div style="display: flex; justify-content: center;">
