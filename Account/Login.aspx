@@ -62,7 +62,7 @@
             </section>
         </div>
     </div>
-    <asp:Image runat="server" ID="BgImage8" CssClass="bg-image"></asp:Image>
+    <asp:Image runat="server" ID="BgImage" CssClass="bg-image"></asp:Image>
     <div class=".round-div-block">
         test
     </div>

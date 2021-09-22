@@ -35,9 +35,10 @@ body {
     transition: all linear 1000s;
     animation-name: blick;
     animation-iteration-count: infinite;
-    animation-duration: 1s;
+    animation-duration: 10s;
     animation-timing-function: ease-in-out;
     animation-direction: alternate;
+    filter: blur(10px);
 }
 
 

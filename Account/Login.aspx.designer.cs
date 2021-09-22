@@ -87,12 +87,12 @@ namespace StartUpWebAPI.Account
         protected global::System.Web.UI.WebControls.HyperLink RegisterHyperLink;
 
         /// <summary>
-        /// BgImage8 control.
+        /// BgImage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image BgImage8;
+        protected global::System.Web.UI.WebControls.Image BgImage;
     }
 }
