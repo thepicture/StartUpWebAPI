@@ -58,5 +58,10 @@ namespace StartUpWebAPI
                 });
             }
         }
+
+        protected void BtnRedirect_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

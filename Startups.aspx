@@ -15,6 +15,9 @@
                         <asp:Label CssClass="startup-name" runat="server" Text='<%# Eval("FirstCreator") %>'></asp:Label>
                         <br />
                         <asp:Label CssClass="startup-name" runat="server" Font-Bold="true" Text='<%# "Категория: " + Eval("Category.Name") %>'></asp:Label>
+                        <br />
+                        <asp:Button Text="Подробнее" CssClass="round-div-block simple-cloud-button" ID="BtnRedirect"
+                            runat="server" OnClick="BtnRedirect_Click" />
                 </asp:Panel>
             </ItemTemplate>
         </asp:ListView>
