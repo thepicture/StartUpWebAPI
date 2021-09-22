@@ -23,6 +23,10 @@ namespace StartUpWebAPI.Account
             }
 
             LoadBgImage();
+
+            System.Web.UI.Control footer = Master.FindControl("FooterIdentity");
+            footer.Visible = false;
+
         }
 
         private void LoadBgImage()
