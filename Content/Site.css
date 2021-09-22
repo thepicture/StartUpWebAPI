@@ -56,7 +56,6 @@ body {
         animation-direction: alternate;
     }
 
-
 .simple-cloud-button {
     background-color: deeppink;
     color: white !important;
@@ -66,9 +65,9 @@ body {
     padding-right: 5px;
 }
 
-.simple-cloud-button:hover {
-    background-color: lightpink !important;
-}
+    .simple-cloud-button:hover {
+        background-color: lightpink !important;
+    }
 
 @keyframes blick {
     from {
@@ -233,6 +232,8 @@ input[type="select"] {
     margin-left: auto;
     text-align: center !important;
     margin-right: auto;
+    display: flex;
+    justify-content: center;
 }
 
 .swimming-content {
