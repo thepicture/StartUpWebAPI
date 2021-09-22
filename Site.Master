@@ -40,6 +40,7 @@
         </asp:ScriptManager>
 
         <div class="navbar navbar-inverse navbar-fixed-top request-white-bg">
+              
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -50,6 +51,7 @@
                     <a class="navbar-brand startupnavbar" runat="server" href="~/">StartUp</a>
                 </div>
                 <div class="navbar-collapse collapse">
+
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/">Главная</a></li>
                         <li><a runat="server" href="~/About">О проекте</a></li>
@@ -71,6 +73,7 @@
                             </li>
                         </ul>
                     </asp:Panel>
+                  
                 </div>
             </div>
         </div>

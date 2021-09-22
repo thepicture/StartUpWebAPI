@@ -38,6 +38,7 @@ body {
     margin: 10px;
 }
 
+
     .round-div-block:hover {
         animation-name: blick;
         animation-iteration-count: infinite;
@@ -191,3 +192,34 @@ input[type="select"] {
         padding: 0;
     }
 }
+
+.request-center {
+    align-items: center !important;
+    align-content: center;
+    padding-left: 50% !important;
+    margin-left: -250px !important;
+}
+
+.title-setting {
+    text-align: center;
+    margin-top: 10%;
+    font-size: 54px;
+}
+.textMarginAndSize{
+    margin-left:150px;
+    margin-top:15px;
+    margin-bottom:20px;
+}
+
+.btn-setting {
+    position: relative;
+    left: 48%;
+    transform: translate(-50%, 0);
+}
+.txt-shadow:focus {
+    -webkit-box-shadow: 0px 0px 20px 7px rgba(0, 120, 232, 0.27);
+    -moz-box-shadow: 0px 0px 20px 7px rgba(0, 120, 232, 0.27);
+    box-shadow: 0px 0px 20px 7px rgba(0, 120, 232, 0.27);
+}
+
+
