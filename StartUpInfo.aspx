@@ -3,37 +3,41 @@
 <asp:Content runat="server" ContentPlaceHolderID="MainContent">
     <asp:Panel runat="server">
         <div class="jumbotron gradientable">
+            <h1>
+                <asp:Label runat="server" ID="MainName" CssClass="centerized-text"></asp:Label></h1>
             <p class="lead">
-                <asp:Label runat="server" ID="MainName"></asp:Label>
             </p>
-            <asp:Image Width="200" Height="200" runat="server" ID="MainImage" />
-            <asp:Panel runat="server" ID="PanelMyTeams">
+
+            <asp:Image ID="MainImage" runat="server" CssClass="radius-like swimming-content" Height="200" Width="200" />
+            <asp:Panel ID="PanelMyTeams" runat="server">
                 <div class="round-div-block">
-                    <asp:Label runat="server" ID="Name" ForeColor="Black"></asp:Label>
+                    <asp:Label ID="Name" runat="server" ForeColor="Black"></asp:Label>
                 </div>
                 <div class="round-div-block">
-                    <asp:Label runat="server" ID="CountOfMembers" ForeColor="Black"></asp:Label>
+                    <asp:Label ID="CountOfMembers" runat="server" ForeColor="Black"></asp:Label>
                 </div>
                 <div class="round-div-block">
-                    <asp:Label runat="server" ID="CountOfTeams" ForeColor="Black"></asp:Label>
+                    <asp:Label ID="CountOfTeams" runat="server" ForeColor="Black"></asp:Label>
                 </div>
                 <div class="round-div-block">
-                    <asp:Label runat="server" ID="Creator" ForeColor="Black"></asp:Label>
+                    <asp:Label ID="Creator" runat="server" ForeColor="Black"></asp:Label>
                 </div>
                 <div class="round-div-block">
-                    <asp:Label runat="server" ID="DateOfCreation" ForeColor="Black"></asp:Label>
+                    <asp:Label ID="DateOfCreation" runat="server" ForeColor="Black"></asp:Label>
                 </div>
                 <div class="round-div-block">
-                    <asp:Label runat="server" ID="Description" ForeColor="Black"></asp:Label>
+                    <asp:Label ID="Description" runat="server" ForeColor="Black"></asp:Label>
                 </div>
                 <div class="round-div-block">
-                    <asp:Label runat="server" ID="Category" ForeColor="Black"></asp:Label>
+                    <asp:Label ID="Category" runat="server" ForeColor="Black"></asp:Label>
                 </div>
                 <div class="round-div-block">
-                    <asp:Label runat="server" ID="IsActual" ForeColor="Black"></asp:Label>
+                    <asp:Label ID="IsActual" runat="server" ForeColor="Black"></asp:Label>
                 </div>
             </asp:Panel>
             &nbsp;
+                <p>
+                </p>
         </div>
         <div class="jumbotron gradientable">
             <p class="lead">

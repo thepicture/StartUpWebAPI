@@ -40,7 +40,7 @@
         </asp:ScriptManager>
 
         <div class="navbar navbar-inverse navbar-fixed-top request-white-bg">
-              
+
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -73,7 +73,7 @@
                             </li>
                         </ul>
                     </asp:Panel>
-                  
+
                 </div>
             </div>
         </div>
@@ -81,9 +81,11 @@
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
-            <footer>
-                <p align="center">&copy; <%: DateTime.Now.Year %> - StartUp</p>
-            </footer>
+            <asp:Panel runat="server" ID="FooterIdentity">
+                <footer>
+                    <p align="center">&copy; <%: DateTime.Now.Year %> - StartUp</p>
+                </footer>
+            </asp:Panel>
         </div>
     </form>
 </body>

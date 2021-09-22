@@ -16,6 +16,16 @@ body {
     border-radius: 20px;
 }
 
+#video-preview {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index:-1;
+}
+
+
 .prevent-selection {
     border: none;
     outline: none;
@@ -205,10 +215,22 @@ input[type="select"] {
     margin-top: 10%;
     font-size: 54px;
 }
-.textMarginAndSize{
-    margin-left:150px;
-    margin-top:15px;
-    margin-bottom:20px;
+
+.centerized-text {
+    margin-left: auto;
+    text-align: center !important;
+    margin-right: auto;
+}
+
+.swimming-content {
+    float: left;
+    margin: 20px;
+}
+
+.textMarginAndSize {
+    margin-left: 150px;
+    margin-top: 15px;
+    margin-bottom: 20px;
 }
 
 .btn-setting {
@@ -216,10 +238,9 @@ input[type="select"] {
     left: 48%;
     transform: translate(-50%, 0);
 }
+
 .txt-shadow:focus {
     -webkit-box-shadow: 0px 0px 20px 7px rgba(0, 120, 232, 0.27);
     -moz-box-shadow: 0px 0px 20px 7px rgba(0, 120, 232, 0.27);
     box-shadow: 0px 0px 20px 7px rgba(0, 120, 232, 0.27);
 }
-
-

@@ -36,7 +36,7 @@ namespace StartUpWebAPI
             CountOfMembers.Text = "Участников: " + startUp.StartUpOfUser.Count.ToString();
             CountOfTeams.Text = "Команд: " + startUp.StartUpOfTeam.Count.ToString();
 
-            string creator = startUp.StartUpOfUser.FirstOrDefault(u => u.RoleType.Name == "Организатор").User.Name;
+            string creator = startUp.StartUpOfUser.FirstOrDefault(u => u.RoleType.Name == "Организатор")?.User.Name;
 
             Creator.Text = creator ?? "Неизвестен";
             IsActual.Text = startUp.IsDone ? "Завершён" : "Актуален";
