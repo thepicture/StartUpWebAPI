@@ -34,7 +34,13 @@ namespace StartUpWebAPI
 
         private void LoadStartups()
         {
-            List<StartUp> startUps = AppData.Context.User.First(u => u.Login.Equals(username)).StartUpOfUser.Select(s => s.StartUp).ToList();
+            List<StartUp> startUps = AppData.Context.User.FirstOrDefault(u => u.Login.Equals(username)).StartUpOfUser.Select(s => s.StartUp).ToList();
+
+            if (startUps == null)
+            {
+                return;
+            }
+
             LViewMyStartups.DataSource = startUps;
 
             if (startUps.Count == 0)
@@ -58,20 +64,20 @@ namespace StartUpWebAPI
             LViewMyTeams.DataBind();
         }
 
-        protected void BtnStartUpInfo_Click(object sender, EventArgs e)
+        protected void LViewMyStartups_ItemCommand(object sender, ListViewCommandEventArgs e)
         {
-            string text = (sender as LinkButton).Text;
-            int id = AppData.Context.StartUp.First(s => s.Name.Equals(text)).Id;
-
-            Response.Redirect("~/StartUpInfo.aspx?id=" + id);
+            if (e.CommandName.Equals("StartUpClicked"))
+            {
+                Response.Redirect("~/StartUpInfo.aspx?id=" + e.CommandArgument);
+            }
         }
 
-        protected void BtnTeamInfo_Click(object sender, EventArgs e)
+        protected void LViewMyTeams_ItemCommand(object sender, ListViewCommandEventArgs e)
         {
-            string text = (sender as LinkButton).Text;
-            int id = AppData.Context.Team.First(s => s.Name.Equals(text)).Id;
-
-            Response.Redirect("~/TeamInfo.aspx?id=" + id);
+            if (e.CommandName.Equals("TeamClicked"))
+            {
+                Response.Redirect("~/TeamInfo.aspx?id=" + e.CommandArgument);
+            }
         }
     }
 }

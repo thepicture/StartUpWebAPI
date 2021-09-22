@@ -41,10 +41,10 @@
 
             <div class="jumbotron gradientable marginaled">
                 <h1>Организованные мной стартапы</h1>
-                <asp:ListView runat="server" ID="LViewMyStartups">
+                <asp:ListView runat="server" ID="LViewMyStartups" OnItemCommand="LViewMyStartups_ItemCommand">
                     <ItemTemplate>
                         <div class="round-div-block">
-                            <asp:LinkButton runat="server" Text='<%# Eval("Name") %>' ForeColor="Black" ID="BtnStartUpInfo" OnClick="BtnStartUpInfo_Click"></asp:LinkButton>
+                            <asp:LinkButton runat="server" Text='<%# Eval("Name") %>' ForeColor="Black" ID="BtnStartUpInfo" CommandName="StartUpClicked" CommandArgument='<%# Eval("Id") %>'></asp:LinkButton>
                         </div>
                     </ItemTemplate>
                 </asp:ListView>
@@ -56,10 +56,10 @@
             </div>
             <div class="jumbotron gradientable">
                 <h1>Организованные мной команды</h1>
-                <asp:ListView runat="server" ID="LViewMyTeams">
+                <asp:ListView runat="server" ID="LViewMyTeams" OnItemCommand="LViewMyTeams_ItemCommand">
                     <ItemTemplate>
                         <div class="round-div-block">
-                            <asp:LinkButton runat="server" Text='<%# Eval("Name") %>' ForeColor="Black" ID="BtnTeamInfo" OnClick="BtnTeamInfo_Click"></asp:LinkButton>
+                            <asp:LinkButton runat="server" Text='<%# Eval("Team.Name") %>' ForeColor="Black" ID="BtnTeamInfo" CommandName="TeamClicked" CommandArgument='<%# Eval("Team.Id") %>'></asp:LinkButton>
                         </div>
                     </ItemTemplate>
                 </asp:ListView>

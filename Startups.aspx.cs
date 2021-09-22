@@ -40,6 +40,13 @@ namespace StartUpWebAPI
             timer.Start();
         }
 
+        public object RedirectToPage(object sender, EventArgs e, string id)
+        {
+            Response.Redirect("~/StartUpInfo.aspx?id=" + Convert.ToInt32(id));
+
+            return new object();
+        }
+
         private void AddNewItem(object sender, EventArgs e)
         {
             MessageBox.Show(startups.Count().ToString());
@@ -59,9 +66,12 @@ namespace StartUpWebAPI
             }
         }
 
-        protected void BtnRedirect_Click(object sender, EventArgs e)
+        protected void StartupsView_ItemCommand(object sender, ListViewCommandEventArgs e)
         {
-
+            if (e.CommandName.Equals("StartUpClicked"))
+            {
+                Response.Redirect("~/StartUpInfo.aspx?id=" + e.CommandArgument);
+            }
         }
     }
 }

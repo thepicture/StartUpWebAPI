@@ -1,9 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="Startups.aspx.cs" Inherits="StartUpWebAPI.Startups" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="Startups.aspx.cs" Inherits="StartUpWebAPI.Startups" EnableEventValidation="false" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <%--ListView for startups presentation.--%>
     <asp:Panel HorizontalAlign="Center" runat="server">
-        <asp:ListView ID="StartupsView" runat='server'>
+        <asp:ListView ID="StartupsView" runat='server' OnItemCommand="StartupsView_ItemCommand">
             <ItemTemplate>
                 <asp:Panel runat="server" Height="20">
                     <div class="startup-panel radius-like gradientable">
@@ -16,8 +16,8 @@
                         <br />
                         <asp:Label CssClass="startup-name" runat="server" Font-Bold="true" Text='<%# "Категория: " + Eval("Category.Name") %>'></asp:Label>
                         <br />
-                        <asp:Button Text="Подробнее" CssClass="round-div-block simple-cloud-button" ID="BtnRedirect"
-                            runat="server" OnClick="BtnRedirect_Click" />
+                        <asp:LinkButton Text="Подробнее" CssClass="round-div-block simple-cloud-button" ID="BtnRedirect"
+                            runat="server" CommandName="StartUpClicked" CommandArgument='<%# Eval("Id") %>' />
                 </asp:Panel>
             </ItemTemplate>
         </asp:ListView>
