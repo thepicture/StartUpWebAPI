@@ -67,9 +67,13 @@
                     </asp:Panel>
                     <asp:Panel runat="server" ID="LoggedInContent">
                         <ul class="nav navbar-nav navbar-right">
-                            <li>Здравствуйте, <%: Request.Cookies["username"]?.Value  %> !</li>
                             <li>
-                                <asp:Button Text="Выйти" runat="server" LogoutAction="Redirect" LogoutText="Выйти" LogoutPageUrl="~/" ID="BtnLogOut" OnClick="BtnLogOut_Click" />
+                                <a runat="server">Здравствуйте, <%: Request.Cookies["username"]?.Value %> ! </a>
+                            </li>
+                            <li>
+                                <asp:Button Text="Выйти" CssClass="round-div-block simple-cloud-button"
+                                    runat="server" LogoutAction="Redirect" LogoutText="Выйти"
+                                    LogoutPageUrl="~/" ID="BtnLogOut" OnClick="BtnLogOut_Click" />
                             </li>
                         </ul>
                     </asp:Panel>
@@ -83,7 +87,10 @@
             <hr />
             <asp:Panel runat="server" ID="FooterIdentity">
                 <footer>
-                    <p align="center">&copy; <%: DateTime.Now.Year %> - StartUp</p>
+                    <p align="center">
+                        &copy; <%: DateTime.Now.Year %>
+        - StartUp
+                    </p>
                 </footer>
             </asp:Panel>
         </div>
