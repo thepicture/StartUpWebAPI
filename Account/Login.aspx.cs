@@ -21,6 +21,13 @@ namespace StartUpWebAPI.Account
             {
                 RegSuccessMessage.Visible = true;
             }
+
+            LoadBgImage();
+        }
+
+        private void LoadBgImage()
+        {
+            BgImage.ImageUrl = NativeImageUtils.ConvertFromBytes(Properties.Resources.commonLoginBg);
         }
 
         protected void LogIn(object sender, EventArgs e)

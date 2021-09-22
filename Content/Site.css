@@ -25,6 +25,21 @@ body {
     z-index: -1;
 }
 
+.bg-image {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    transition: all linear 1000s;
+    animation-name: blick;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-direction: alternate;
+}
+
 
 .prevent-selection {
     border: none;

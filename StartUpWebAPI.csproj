@@ -197,6 +197,7 @@
       <DependentUpon>StartUpModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <None Include="Resources\commonLoginBg.jpg" />
     <Resource Include="Resources\noPicture.png" />
     <Resource Include="Resources\AeOf3UMV9WA-removebg-preview.png" />
     <Resource Include="Resources\Logo.png" />
@@ -340,6 +341,7 @@
     </Compile>
     <Compile Include="Models\CookieUtils.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\NativeImageUtils.cs" />
     <Compile Include="Models\PartialStartUp.cs" />
     <Compile Include="Models\PartialStartUpComment.cs" />
     <Compile Include="Models\PartialTeam.cs" />

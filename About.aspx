@@ -13,6 +13,6 @@
         </div>
     </asp:Panel>
     <video id="video-preview" autoplay muted loop>
-        <source src="/Resources/Исландия.mp4">
+        <source src="Resources/Исландия.mp4">
     </video>
 </asp:Content>

@@ -19,7 +19,7 @@
                     </div>
                 </asp:PlaceHolder>
                 <div class="form-horizontal">
-                    <h4 class ="textMarginAndSize">Использовать существующий аккаунт для авторизации</h4>
+                    <h4 class="textMarginAndSize">Использовать существующий аккаунт для авторизации</h4>
                     <hr width="600px;" />
 
                     <asp:PlaceHolder runat="server" ID="ErrorMessage" Visible="false">
@@ -30,7 +30,7 @@
                     <div class="form-group">
                         <asp:Label runat="server" AssociatedControlID="LoginBox" CssClass="col-md-2 control-label">Логин</asp:Label>
                         <div class="col-md-10">
-                            <asp:TextBox runat="server" ID="LoginBox" CssClass="form-control textblock-design"  TextMode="SingleLine" />
+                            <asp:TextBox runat="server" ID="LoginBox" CssClass="form-control textblock-design" TextMode="SingleLine" />
                             <asp:RequiredFieldValidator runat="server" ControlToValidate="LoginBox"
                                 CssClass="text-danger" ErrorMessage="Поле логина обязательно для заполнения." />
                         </div>
@@ -61,5 +61,9 @@
                 </p>
             </section>
         </div>
+    </div>
+    <asp:Image runat="server" ID="BgImage" CssClass="bg-image"></asp:Image>
+    <div class=".round-div-block">
+        test
     </div>
 </asp:Content>
