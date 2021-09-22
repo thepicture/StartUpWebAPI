@@ -16,6 +16,44 @@ body {
     border-radius: 20px;
 }
 
+/* Animation effect for objects with rotate when the page loaded. */
+.jumpable {
+    animation: easing-boing-anim 2s ease-in-out 1 normal;
+}
+
+/* Animation effect for objects without rotation when the page loaded. */
+.pushable {
+    animation: easing-boing-anim 2s ease-in-out 1 normal;
+}
+
+@keyframes easing-boing-anim {
+    from {
+        transform: scale(0.0) rotate(45deg);
+    }
+
+    75% {
+        transform: scale(1.01);
+    }
+
+    to {
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+@keyframes easing-boing-anim {
+    from {
+        transform: scale(0.0);
+    }
+
+    75% {
+        transform: scale(1.01);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
 .nice-text-box {
     border-bottom: 2px solid deeppink !important;
 }

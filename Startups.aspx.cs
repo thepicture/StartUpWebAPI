@@ -73,5 +73,17 @@ namespace StartUpWebAPI
                 Response.Redirect("~/StartUpInfo.aspx?id=" + e.CommandArgument);
             }
         }
+
+        public void UpdateLView()
+        {
+
+        }
+
+        protected void NameBox_TextChanged(object sender, EventArgs e)
+        {
+            StartupsView.DataSource = AppData.Context.StartUp.ToList().Where(s => s.Name.Contains(NameBox.Text)).ToList();
+            StartupsView.DataBind();
+           
+        }
     }
 }

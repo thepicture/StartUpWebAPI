@@ -45,7 +45,7 @@
             </p>
             <div class="round-div-block">
                 <div class="unbordered-block">
-                    <asp:TextBox TextMode="SingleLine" CssClass="prevent-selection" ToolTip="Введите комментарий для отправки" runat="server" ID="CommentBox" ForeColor="Black" Height="60" BorderStyle="None" BackColor="Transparent"></asp:TextBox>
+                    <asp:TextBox TextMode="SingleLine" CssClass="prevent-selection" placeholder="Введите комментарий для отправки" runat="server" ID="CommentBox" ForeColor="Black" Height="60" BorderStyle="None" BackColor="Transparent"></asp:TextBox>
                 </div>
             </div>
             <div class="round-div-block">
