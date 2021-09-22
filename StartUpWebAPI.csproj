@@ -167,8 +167,8 @@
     <Content Include="Default.aspx" />
     <Content Include="Entities\StartUpModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>StartUpModel.Context.cs</LastGenOutput>
       <DependentUpon>StartUpModel.edmx</DependentUpon>
+      <LastGenOutput>StartUpModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Entities\StartUpModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -186,7 +186,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Account\Web.config" />
     <Content Include="fonts\Manrope-Bold.woff" />
     <Content Include="fonts\Manrope-Medium.woff" />
     <Content Include="fonts\Manrope-Regular.woff" />
@@ -318,10 +317,19 @@
     <Compile Include="Entities\StartUpOfUser.cs">
       <DependentUpon>StartUpModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\sysdiagrams.cs">
+      <DependentUpon>StartUpModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Team.cs">
       <DependentUpon>StartUpModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\TeamComment.cs">
+      <DependentUpon>StartUpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TeamOfUser.cs">
+      <DependentUpon>StartUpModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TypeOfUser.cs">
       <DependentUpon>StartUpModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\User.cs">

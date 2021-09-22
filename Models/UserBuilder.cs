@@ -1,5 +1,6 @@
 ﻿using StartUpWebAPI.Entities;
 using System;
+using System.Linq;
 
 namespace StartUpWebAPI.Models
 {
@@ -37,6 +38,8 @@ namespace StartUpWebAPI.Models
 
         public void Save()
         {
+            user.TypeOfUser = AppData.Context.TypeOfUser.First(t => t.Name.Equals("Пользователь"));
+
             AppData.Context.User.Add(user);
 
             try

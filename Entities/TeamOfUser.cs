@@ -12,14 +12,13 @@ namespace StartUpWebAPI.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class TeamComment
+    public partial class TeamOfUser
     {
         public int UserId { get; set; }
         public int TeamId { get; set; }
-        public string CommentText { get; set; }
-        public System.DateTime CreationDate { get; set; }
-        public int Id { get; set; }
+        public int RoleTypeId { get; set; }
     
+        public virtual RoleType RoleType { get; set; }
         public virtual Team Team { get; set; }
         public virtual User User { get; set; }
     }

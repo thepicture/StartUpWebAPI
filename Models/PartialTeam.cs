@@ -32,7 +32,7 @@ namespace StartUpWebAPI.Entities
             get
             {
                 string template = "Главный организатор: ";
-                string userName = User.FirstOrDefault()?.Name;
+                string userName = TeamOfUser.FirstOrDefault()?.User.Name;
 
                 if (userName == null)
                 {

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище StartUpBaseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="StartUpBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="Id" />
@@ -29,6 +29,7 @@
           <Property Name="CategoryId" Type="int" Nullable="false" />
           <Property Name="CreationDate" Type="datetime" Nullable="false" />
           <Property Name="IsDone" Type="bit" Nullable="false" />
+          <Property Name="MaxMembersCount" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="StartUpComment">
           <Key>
@@ -69,6 +70,16 @@
           <Property Name="StartUpId" Type="int" Nullable="false" />
           <Property Name="RoleTypeId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="Team">
           <Key>
             <PropertyRef Name="Id" />
@@ -77,6 +88,7 @@
           <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Image" Type="varbinary(max)" />
           <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="MaxMembersCount" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TeamComment">
           <Key>
@@ -92,9 +104,18 @@
           <Key>
             <PropertyRef Name="UserId" />
             <PropertyRef Name="TeamId" />
+            <PropertyRef Name="RoleTypeId" />
           </Key>
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="TeamId" Type="int" Nullable="false" />
+          <Property Name="RoleTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeOfUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -105,6 +126,7 @@
           <Property Name="Login" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="UserImage" Type="varbinary(max)" />
+          <Property Name="TypeOfUserId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Comment_StartUp">
           <End Role="StartUp" Type="Self.StartUp" Multiplicity="1" />
@@ -250,6 +272,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TeamOfUser_RoleType">
+          <End Role="RoleType" Type="Self.RoleType" Multiplicity="1" />
+          <End Role="TeamOfUser" Type="Self.TeamOfUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeamOfUser">
+              <PropertyRef Name="RoleTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TeamOfUser_Team">
           <End Role="Team" Type="Self.Team" Multiplicity="1" />
           <End Role="TeamOfUser" Type="Self.TeamOfUser" Multiplicity="*" />
@@ -274,7 +308,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Хранилище StartUpBaseModelContainer">
+        <Association Name="FK_User_TypeOfUser">
+          <End Role="TypeOfUser" Type="Self.TypeOfUser" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="TypeOfUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StartUpBaseModelStoreContainer">
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoleType" EntityType="Self.RoleType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StartUp" EntityType="Self.StartUp" Schema="dbo" store:Type="Tables" />
@@ -282,9 +328,11 @@
           <EntitySet Name="StartUpImage" EntityType="Self.StartUpImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StartUpOfTeam" EntityType="Self.StartUpOfTeam" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StartUpOfUser" EntityType="Self.StartUpOfUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeamComment" EntityType="Self.TeamComment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeamOfUser" EntityType="Self.TeamOfUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeOfUser" EntityType="Self.TypeOfUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Comment_StartUp" Association="Self.FK_Comment_StartUp">
             <End Role="StartUp" EntitySet="StartUp" />
@@ -334,6 +382,10 @@
             <End Role="User" EntitySet="User" />
             <End Role="TeamComment" EntitySet="TeamComment" />
           </AssociationSet>
+          <AssociationSet Name="FK_TeamOfUser_RoleType" Association="Self.FK_TeamOfUser_RoleType">
+            <End Role="RoleType" EntitySet="RoleType" />
+            <End Role="TeamOfUser" EntitySet="TeamOfUser" />
+          </AssociationSet>
           <AssociationSet Name="FK_TeamOfUser_Team" Association="Self.FK_TeamOfUser_Team">
             <End Role="Team" EntitySet="Team" />
             <End Role="TeamOfUser" EntitySet="TeamOfUser" />
@@ -341,6 +393,10 @@
           <AssociationSet Name="FK_TeamOfUser_User" Association="Self.FK_TeamOfUser_User">
             <End Role="User" EntitySet="User" />
             <End Role="TeamOfUser" EntitySet="TeamOfUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_TypeOfUser" Association="Self.FK_User_TypeOfUser">
+            <End Role="TypeOfUser" EntitySet="TypeOfUser" />
+            <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -364,6 +420,7 @@
           <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="StartUpOfTeam" Relationship="Self.FK_StartUpOfTeam_RoleType" FromRole="RoleType" ToRole="StartUpOfTeam" />
           <NavigationProperty Name="StartUpOfUser" Relationship="Self.FK_StartUpOfUser_RoleType" FromRole="RoleType" ToRole="StartUpOfUser" />
+          <NavigationProperty Name="TeamOfUser" Relationship="Self.FK_TeamOfUser_RoleType" FromRole="RoleType" ToRole="TeamOfUser" />
         </EntityType>
         <EntityType Name="StartUp">
           <Key>
@@ -375,6 +432,7 @@
           <Property Name="CategoryId" Type="Int32" Nullable="false" />
           <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsDone" Type="Boolean" Nullable="false" />
+          <Property Name="MaxMembersCount" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="Self.FK_StartUp_Category" FromRole="StartUp" ToRole="Category" />
           <NavigationProperty Name="StartUpComment" Relationship="Self.FK_Comment_StartUp" FromRole="StartUp" ToRole="StartUpComment" />
           <NavigationProperty Name="StartUpImage" Relationship="Self.FK_StartUpImage_StartUp" FromRole="StartUp" ToRole="StartUpImage" />
@@ -429,6 +487,16 @@
           <NavigationProperty Name="StartUp" Relationship="Self.FK_StartUpOfUser_StartUp" FromRole="StartUpOfUser" ToRole="StartUp" />
           <NavigationProperty Name="User" Relationship="Self.FK_StartUpOfUser_User" FromRole="StartUpOfUser" ToRole="User" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="Team">
           <Key>
             <PropertyRef Name="Id" />
@@ -437,9 +505,10 @@
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MaxMembersCount" Type="Int32" Nullable="false" />
           <NavigationProperty Name="StartUpOfTeam" Relationship="Self.FK_StartUpOfTeam_Team" FromRole="Team" ToRole="StartUpOfTeam" />
           <NavigationProperty Name="TeamComment" Relationship="Self.FK_TeamComment_Team" FromRole="Team" ToRole="TeamComment" />
-          <NavigationProperty Name="User" Relationship="Self.TeamOfUser" FromRole="Team" ToRole="User" />
+          <NavigationProperty Name="TeamOfUser" Relationship="Self.FK_TeamOfUser_Team" FromRole="Team" ToRole="TeamOfUser" />
         </EntityType>
         <EntityType Name="TeamComment">
           <Key>
@@ -453,6 +522,27 @@
           <NavigationProperty Name="Team" Relationship="Self.FK_TeamComment_Team" FromRole="TeamComment" ToRole="Team" />
           <NavigationProperty Name="User" Relationship="Self.FK_TeamComment_User" FromRole="TeamComment" ToRole="User" />
         </EntityType>
+        <EntityType Name="TeamOfUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="TeamId" />
+            <PropertyRef Name="RoleTypeId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="TeamId" Type="Int32" Nullable="false" />
+          <Property Name="RoleTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RoleType" Relationship="Self.FK_TeamOfUser_RoleType" FromRole="TeamOfUser" ToRole="RoleType" />
+          <NavigationProperty Name="Team" Relationship="Self.FK_TeamOfUser_Team" FromRole="TeamOfUser" ToRole="Team" />
+          <NavigationProperty Name="User" Relationship="Self.FK_TeamOfUser_User" FromRole="TeamOfUser" ToRole="User" />
+        </EntityType>
+        <EntityType Name="TypeOfUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_TypeOfUser" FromRole="TypeOfUser" ToRole="User" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
@@ -462,10 +552,12 @@
           <Property Name="Login" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UserImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="TypeOfUserId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="StartUpComment" Relationship="Self.FK_Comment_User" FromRole="User" ToRole="StartUpComment" />
           <NavigationProperty Name="StartUpOfUser" Relationship="Self.FK_StartUpOfUser_User" FromRole="User" ToRole="StartUpOfUser" />
           <NavigationProperty Name="TeamComment" Relationship="Self.FK_TeamComment_User" FromRole="User" ToRole="TeamComment" />
-          <NavigationProperty Name="Team" Relationship="Self.TeamOfUser" FromRole="User" ToRole="Team" />
+          <NavigationProperty Name="TeamOfUser" Relationship="Self.FK_TeamOfUser_User" FromRole="User" ToRole="TeamOfUser" />
+          <NavigationProperty Name="TypeOfUser" Relationship="Self.FK_User_TypeOfUser" FromRole="User" ToRole="TypeOfUser" />
         </EntityType>
         <Association Name="FK_StartUp_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
@@ -499,6 +591,18 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="StartUpOfUser">
+              <PropertyRef Name="RoleTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeamOfUser_RoleType">
+          <End Role="RoleType" Type="Self.RoleType" Multiplicity="1" />
+          <End Role="TeamOfUser" Type="Self.TeamOfUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeamOfUser">
               <PropertyRef Name="RoleTypeId" />
             </Dependent>
           </ReferentialConstraint>
@@ -599,6 +703,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TeamOfUser_Team">
+          <End Role="Team" Type="Self.Team" Multiplicity="1" />
+          <End Role="TeamOfUser" Type="Self.TeamOfUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeamOfUser">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TeamComment_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="TeamComment" Type="Self.TeamComment" Multiplicity="*" />
@@ -611,9 +727,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="TeamOfUser">
-          <End Role="Team" Type="Self.Team" Multiplicity="*" />
+        <Association Name="FK_TeamOfUser_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TeamOfUser" Type="Self.TeamOfUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TeamOfUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_TypeOfUser">
+          <End Role="TypeOfUser" Type="Self.TypeOfUser" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="TypeOfUserId" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <EntityContainer Name="StartUpBaseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Category" EntityType="Self.Category" />
@@ -623,8 +759,11 @@
           <EntitySet Name="StartUpImage" EntityType="Self.StartUpImage" />
           <EntitySet Name="StartUpOfTeam" EntityType="Self.StartUpOfTeam" />
           <EntitySet Name="StartUpOfUser" EntityType="Self.StartUpOfUser" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Team" EntityType="Self.Team" />
           <EntitySet Name="TeamComment" EntityType="Self.TeamComment" />
+          <EntitySet Name="TeamOfUser" EntityType="Self.TeamOfUser" />
+          <EntitySet Name="TypeOfUser" EntityType="Self.TypeOfUser" />
           <EntitySet Name="User" EntityType="Self.User" />
           <AssociationSet Name="FK_StartUp_Category" Association="Self.FK_StartUp_Category">
             <End Role="Category" EntitySet="Category" />
@@ -637,6 +776,10 @@
           <AssociationSet Name="FK_StartUpOfUser_RoleType" Association="Self.FK_StartUpOfUser_RoleType">
             <End Role="RoleType" EntitySet="RoleType" />
             <End Role="StartUpOfUser" EntitySet="StartUpOfUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeamOfUser_RoleType" Association="Self.FK_TeamOfUser_RoleType">
+            <End Role="RoleType" EntitySet="RoleType" />
+            <End Role="TeamOfUser" EntitySet="TeamOfUser" />
           </AssociationSet>
           <AssociationSet Name="FK_Comment_StartUp" Association="Self.FK_Comment_StartUp">
             <End Role="StartUp" EntitySet="StartUp" />
@@ -670,12 +813,20 @@
             <End Role="Team" EntitySet="Team" />
             <End Role="TeamComment" EntitySet="TeamComment" />
           </AssociationSet>
+          <AssociationSet Name="FK_TeamOfUser_Team" Association="Self.FK_TeamOfUser_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="TeamOfUser" EntitySet="TeamOfUser" />
+          </AssociationSet>
           <AssociationSet Name="FK_TeamComment_User" Association="Self.FK_TeamComment_User">
             <End Role="User" EntitySet="User" />
             <End Role="TeamComment" EntitySet="TeamComment" />
           </AssociationSet>
-          <AssociationSet Name="TeamOfUser" Association="Self.TeamOfUser">
-            <End Role="Team" EntitySet="Team" />
+          <AssociationSet Name="FK_TeamOfUser_User" Association="Self.FK_TeamOfUser_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="TeamOfUser" EntitySet="TeamOfUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_TypeOfUser" Association="Self.FK_User_TypeOfUser">
+            <End Role="TypeOfUser" EntitySet="TypeOfUser" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
@@ -684,7 +835,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище StartUpBaseModelContainer" CdmEntityContainer="StartUpBaseEntities">
+        <EntityContainerMapping StorageEntityContainer="StartUpBaseModelStoreContainer" CdmEntityContainer="StartUpBaseEntities">
           <EntitySetMapping Name="Category">
             <EntityTypeMapping TypeName="StartUpBaseModel.Category">
               <MappingFragment StoreEntitySet="Category">
@@ -710,6 +861,7 @@
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
                 <ScalarProperty Name="IsDone" ColumnName="IsDone" />
+                <ScalarProperty Name="MaxMembersCount" ColumnName="MaxMembersCount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -752,6 +904,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="StartUpBaseModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Team">
             <EntityTypeMapping TypeName="StartUpBaseModel.Team">
               <MappingFragment StoreEntitySet="Team">
@@ -759,6 +922,7 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="MaxMembersCount" ColumnName="MaxMembersCount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -773,6 +937,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TeamOfUser">
+            <EntityTypeMapping TypeName="StartUpBaseModel.TeamOfUser">
+              <MappingFragment StoreEntitySet="TeamOfUser">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+                <ScalarProperty Name="RoleTypeId" ColumnName="RoleTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeOfUser">
+            <EntityTypeMapping TypeName="StartUpBaseModel.TypeOfUser">
+              <MappingFragment StoreEntitySet="TypeOfUser">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="StartUpBaseModel.User">
               <MappingFragment StoreEntitySet="User">
@@ -781,17 +962,10 @@
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="UserImage" ColumnName="UserImage" />
+                <ScalarProperty Name="TypeOfUserId" ColumnName="TypeOfUserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="TeamOfUser" TypeName="StartUpBaseModel.TeamOfUser" StoreEntitySet="TeamOfUser">
-            <EndProperty Name="Team">
-              <ScalarProperty Name="Id" ColumnName="TeamId" />
-            </EndProperty>
-            <EndProperty Name="User">
-              <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -809,7 +983,7 @@
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

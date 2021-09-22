@@ -65,7 +65,7 @@
                 </asp:ListView>
                 <asp:Panel runat="server" ID="EmptyTeamsPanel" Visible="false">
                     <p class="lead">Команд пока нет. :(</p>
-                    <asp:Button runat="server" Text="Создать новую команду"></asp:Button>
+                    <asp:Button CssClass="round-div-block simple-cloud-button" runat="server" Text="Создать новую команду"></asp:Button>
                 </asp:Panel>
                 &nbsp;
             </div>
