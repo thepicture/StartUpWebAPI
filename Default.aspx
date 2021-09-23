@@ -3,15 +3,15 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <asp:LoginView runat="server">
         <AnonymousTemplate>
-            <div class="jumbotron gradientable pushable">
+            <div class="jumbotron gradientable">
                 <img class="ImageSetting" src="Resources/StarTup.png" alt="STARTUP" />
-                <h1>StartUp</h1>
-                <p class="lead">Компания, помогающая стартаперам выполнить цели.</p>
+                <h1 class="font-family-title fade-in" style="font-size: 80px;">StartUp</h1>
+                <p style="font-size: 25px;" class="lead font-family-title fade-in">Компания, объединяющая людей для реализации уникальных проектов</p>
                 &nbsp;
             </div>
 
             <div class="row">
-                <div class="col-md-4 pushable">
+                <div class="col-md-4 fade-in">
                     <h2>Что это?</h2>
                     <p>
                         Это платформа для людей и объединений людей, позволяющая найти круги по интересам в короткий промежуток времени.
@@ -19,13 +19,13 @@
                 Присоединяйтесь!
                     </p>
                 </div>
-                <div class="col-md-4 pushable">
+                <div class="col-md-4 fade-in">
                     <h2>Что здесь есть?</h2>
                     <p>
                         Категории групп, возможность пообщаться с другими в реальном времени, в том числе в командах.
                     </p>
                 </div>
-                <div class="col-md-4 pushable">
+                <div class="col-md-4 fade-in">
                     <h2>Хочу зарегистрироваться!</h2>
                     <p>
                         Отличное решение!

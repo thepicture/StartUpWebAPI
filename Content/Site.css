@@ -23,7 +23,7 @@ body {
 
 /* Animation effect for objects without rotation when the page loaded. */
 .pushable {
-    animation: easing-boing-anim 2s ease-in-out 1 normal;
+    animation: easing-boing-anim 1s ease-in-out 1 normal;
 }
 
 @keyframes easing-boing-anim {
@@ -212,7 +212,7 @@ footer {
 /* Styles for content elements. */
 div ul li a {
     color: black !important;
-    font-family: 'IBM Plex Serif', serif;
+    font-family: 'Cormorant', serif;
     transition: all ease-in-out 100ms;
     font-size: 20px;
 }
@@ -220,7 +220,6 @@ div ul li a {
     /* Change the color when the mouse is over a buttons. */
     div ul li a:hover {
         color: royalblue !important;
-        font-family: 'IBM Plex Serif', serif;
         transform: scale(1.1);
     }
 
@@ -320,4 +319,96 @@ input[type="select"] {
     -webkit-box-shadow: 0px 0px 20px 7px rgba(0, 120, 232, 0.27);
     -moz-box-shadow: 0px 0px 20px 7px rgba(0, 120, 232, 0.27);
     box-shadow: 0px 0px 20px 7px rgba(0, 120, 232, 0.27);
+}
+
+/* New about styles. */
+.fade-in {
+    -webkit-animation-name: fade-in;
+    animation-name: fade-in;
+    -webkit-animation-duration: 1.5s;
+    animation-duration: 1.5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.fade-in {
+    -webkit-animation-name: fade-in;
+    animation-name: fade-in;
+    -webkit-animation-duration: 1.5s;
+    animation-duration: 1.5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.delayed-fade-in {
+    animation-delay: 2s;
+    -webkit-animation-duration: 2s;
+}
+
+.align-h1 {
+    text-align: center;
+    font-family: 'Cormorant', serif;
+}
+
+.round-div-block-specified-about {
+    border-radius: 10px;
+    height: 50px !important;
+    font-family: 'Cormorant', serif;
+    padding: 10px;
+    background: white;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0px 30px 0px;
+}
+
+    .round-div-block-specified-about:focus {
+        animation-name: blick;
+        animation-iteration-count: infinite;
+        animation-duration: 1s;
+    }
+
+.about-like-cloud-button {
+    color: #181219 !important;
+    border: 0px;
+    padding: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+    width: 210px;
+    font-size: 30px !important;
+}
+
+    .about-like-cloud-button:hover {
+        background-color: lightpink !important;
+        background-color: #181219 !important;
+        color: white !important;
+    }
+
+.font-family-title {
+    font-family: 'Cormorant', serif;
+}
+
+.title-page-margin {
+    font-family: 'Cormorant', serif;
+}
+
+@-webkit-keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
