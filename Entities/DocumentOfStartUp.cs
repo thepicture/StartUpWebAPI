@@ -12,18 +12,15 @@ namespace StartUpWebAPI.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class TypeOfUser
+    public partial class DocumentOfStartUp
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TypeOfUser()
-        {
-            this.User = new HashSet<User>();
-        }
-    
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string FileName { get; set; }
+        public System.DateTime CreationDate { get; set; }
+        public byte[] Blob { get; set; }
+        public int StartUpId { get; set; }
+        public bool IsPublic { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> User { get; set; }
+        public virtual StartUp StartUp { get; set; }
     }
 }

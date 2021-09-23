@@ -300,6 +300,9 @@
     <Compile Include="Entities\Category.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\DocumentOfStartUp.cs">
+      <DependentUpon>BaseModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\RoleType.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
