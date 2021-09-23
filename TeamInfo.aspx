@@ -49,7 +49,7 @@
                     <div class="unbordered-block">
                         <asp:Image Width="100" Height="100" runat="server" CssClass="startup-image-radius radius-like marginaled" ImageUrl='<%# Eval("GetCommentImage") %>'></asp:Image>
                         <asp:Label Font-Bold="true" runat="server" Text='<%# Eval("User.Name") %>'></asp:Label>
-                        <asp:Label runat="server" Text='<%# Eval("DateTime") %>'></asp:Label>
+                        <asp:Label runat="server" Text='<%# Eval("CreationDate") %>'></asp:Label>
                         <asp:Label runat="server" Text='<%# Eval("CommentText") %>'></asp:Label>
                     </div>
                 </ItemTemplate>
