@@ -168,21 +168,6 @@ footer {
     clear: both;
 }
 
-/* Styles for panel in Startups. */
-.startup-panel {
-    margin: 10px;
-    transition: transform ease-in-out 300ms;
-    float: left;
-    width: 500px;
-    height: 200px;
-}
-
-    /* Resize the startup block when the mouse is over it. */
-    .startup-panel:hover {
-        cursor: pointer;
-        transform: scale(1.02);
-    }
-
 .team-panel {
     margin: 10px;
     transition: transform ease-in-out 300ms;
@@ -412,3 +397,91 @@ input[type="select"] {
         opacity: 1;
     }
 }
+
+/* Styles for startups page. */
+.slideshow-wrapper {
+    position: relative;
+    display: block;
+    float: left;
+    width: 200px;
+    height: 200px;
+}
+
+    .slideshow-wrapper::before {
+        display: block;
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+.slideshow-member {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.transparentable {
+    opacity: .3;
+}
+
+.blurred {
+    filter: blur(2px);
+}
+
+.shadow-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    opacity: 1;
+    box-shadow: none;
+    background-size: 100% auto;
+}
+
+.grid-like {
+    display: grid;
+}
+
+.container-item {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    display: inline-block;
+    background-color: black;
+}
+
+.tag-item {
+    float: left;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    height: 100%;
+    color: white;
+    z-index: 1999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Cormorant', serif;
+}
+
+.startup-image {
+    width: 100%;
+    height: 100%;
+    opacity: .6;
+    filter: brightness(40%)
+}
+
+/* Styles for panel in Startups. */
+.startup-panel {
+    margin: 10px;
+    width:300px;
+    height:300px;
+    transition: transform ease-in-out 300ms;
+}
+
+    /* Resize the startup block when the mouse is over it. */
+    .startup-panel:hover {
+        cursor: pointer;
+        transform: scale(1.02);
+    }

@@ -10,7 +10,7 @@ namespace StartUpWebAPI.Models
     {
         public static string ConvertFromBytes(Bitmap image)
         {
-            string result = "data:image/jpg;base64,";
+            string result = "data:image/jpg;charset=utf-8;base64,";
 
             ImageConverter converter = new ImageConverter();
             result += Convert.ToBase64String((byte[])converter.ConvertTo(image, typeof(byte[])));

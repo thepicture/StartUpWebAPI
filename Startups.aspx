@@ -28,7 +28,7 @@
     <asp:Panel HorizontalAlign="Center" runat="server">
         <asp:ListView ID="StartupsView" runat='server' OnItemCommand="StartupsView_ItemCommand">
             <ItemTemplate>
-                <asp:Panel runat="server" Height="20">
+                <%--   <asp:Panel runat="server" Height="20">
                     <div class="startup-panel radius-like gradientable jumpable">
                         <div>
                             <asp:Label CssClass="startup-name" runat="server" Font-Bold="true" Font-Size="Large" Text='<%# Eval("Name") %>'></asp:Label>
@@ -41,7 +41,13 @@
                         <br />
                         <asp:LinkButton Text="Подробнее" CssClass="round-div-block simple-cloud-button" ID="BtnRedirect"
                             runat="server" CommandName="StartUpClicked" CommandArgument='<%# Eval("Id") %>' style="width: fit-content;" />
-                </asp:Panel>
+                </asp:Panel>--%>
+                <asp:LinkButton runat="server" CommandName="StartUpClicked" CommandArgument='<%# Eval("Id") %>'>
+                    <div class="container-item startup-panel radius-like">
+                            <img class="startup-image radius-like" src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
+                        <h1 class="tag-item"><%# Eval("Name") %></h1>
+                    </div>
+                </asp:LinkButton>
             </ItemTemplate>
         </asp:ListView>
     </asp:Panel>
