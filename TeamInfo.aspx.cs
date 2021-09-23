@@ -49,5 +49,10 @@ namespace StartUpWebAPI
             CommentsCount.Text = "Комментарии (" + team.TeamComment.Count + "):";
             MainImage.ImageUrl = team.ImagePreview;
         }
+
+        protected void BtnSendComment_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
