@@ -15,13 +15,13 @@ namespace StartUpWebAPI
     {
 
         /// <summary>
-        /// FiltrationPanel control.
+        /// FiltrationStartupsPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel FiltrationPanel;
+        protected global::System.Web.UI.WebControls.Panel FiltrationStartupsPanel;
 
         /// <summary>
         /// NameBox control.
@@ -31,6 +31,33 @@ namespace StartUpWebAPI
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox NameBox;
+
+        /// <summary>
+        /// UpdateFiltration control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdateFiltration;
+
+        /// <summary>
+        /// ComboCategories control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ComboCategories;
+
+        /// <summary>
+        /// BtnSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnSearch;
 
         /// <summary>
         /// StartupsView control.

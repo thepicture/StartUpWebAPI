@@ -69,7 +69,6 @@
         <div class="round-div-block" style="width: 600px; height: fit-content; animation: none !important; display: inline-block;">
             <div style="display: flex; justify-content: center;">
                 <asp:TextBox ID="LoginBox" runat="server" BorderStyle="None" CssClass="nice-text-box prevent-selection" placeholder="Логин"></asp:TextBox>
-
             </div>
             <br />
             <div style="display: flex; justify-content: center;">
@@ -87,7 +86,7 @@
             </div>
             <br />
             <div style="display: flex; justify-content: center;">
-                <asp:CheckBox Text="Запомнить меня" runat="server" ID="RememberMe"/>
+                <asp:CheckBox Text="Запомнить меня" runat="server" ID="RememberMe" />
             </div>
             <br />
             <div style="display: flex; justify-content: center;">

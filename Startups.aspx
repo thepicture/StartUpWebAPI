@@ -1,18 +1,31 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="Startups.aspx.cs" Inherits="StartUpWebAPI.Startups" EnableEventValidation="false" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:Panel runat="server" ID="FiltrationStartupsPanel" Style="width: 100%;">
+        <div class="unbordered-block" style="display: flex; justify-content: space-between; position: fixed; top: inherit; background-color: white;">
+            <asp:TextBox ID="NameBox"
+                Style="height: 30px; vertical-align: middle;"
+                TextMode="SingleLine" CssClass="nice-text-box prevent-selection" runat="server"
+                ForeColor="Black" Height="60" BorderStyle="None"
+                BackColor="Transparent"></asp:TextBox>
+            <asp:UpdatePanel runat="server" ID="UpdateFiltration" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <asp:DropDownList ID="ComboCategories"
+                        Style="height: 30px; vertical-align: middle;" runat="server"
+                        ForeColor="Black" Height="60" BorderStyle="None"
+                        BackColor="Transparent">
+                    </asp:DropDownList>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+            <asp:Button Text="Искать" CssClass="round-div-block simple-cloud-button"
+                runat="server" ID="BtnSearch" OnClick="BtnSearch_Click" />
+            <br />
+
+        </div>
+    </asp:Panel>
+    <br />
     <%--ListView for startups presentation.--%>
     <asp:Panel HorizontalAlign="Center" runat="server">
-        <asp:Panel runat="server" ID="FiltrationPanel">
-            <div class="unbordered-block">
-                <asp:TextBox ID="NameBox" OnTextChanged="NameBox_TextChanged"
-                    Style="background-color: deeppink; color: white;"
-                    TextMode="SingleLine" CssClass="prevent-selection" runat="server"
-                    ForeColor="Black" Height="60" BorderStyle="None"
-                    BackColor="Transparent"
-                    AutoPostBack="true"></asp:TextBox>
-            </div>
-        </asp:Panel>
         <asp:ListView ID="StartupsView" runat='server' OnItemCommand="StartupsView_ItemCommand">
             <ItemTemplate>
                 <asp:Panel runat="server" Height="20">

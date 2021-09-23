@@ -12,7 +12,6 @@ namespace StartUpWebAPI
 {
     public partial class Startups : System.Web.UI.Page
     {
-        private List<StartUp> startups;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!UserAuthorizeObserver.IsAuthorized(Request))
@@ -21,51 +20,30 @@ namespace StartUpWebAPI
             }
             else
             {
-                StartupsView.DataSource = AppData.Context.StartUp.ToList();
-                StartupsView.DataBind();
-                //SmoothlyAddStartups();
-            }
-        }
-
-        private void SmoothlyAddStartups()
-        {
-            startups = AppData.Context.StartUp.ToList();
-
-            Timer timer = new Timer
-            {
-                Interval = Convert.ToInt32(Properties.Resources.SmoothAddInterval)
-            };
-            timer.Tick += AddNewItem;
-
-            timer.Start();
-        }
-
-        public object RedirectToPage(object sender, EventArgs e, string id)
-        {
-            Response.Redirect("~/StartUpInfo.aspx?id=" + Convert.ToInt32(id));
-
-            return new object();
-        }
-
-        private void AddNewItem(object sender, EventArgs e)
-        {
-            MessageBox.Show(startups.Count().ToString());
-            if (startups.Count() == 0)
-            {
-                (sender as DispatcherTimer).Stop();
-                return;
-            }
-            else
-            {
-                Dispatcher.CurrentDispatcher.Invoke(() =>
+                UpdateLView();
+                if (!IsPostBack)
                 {
-                    StartupsView.DataSource = startups.Take(1);
-                    StartupsView.DataBind();
-                    startups = startups.Skip(1).ToList();
-                });
+                    InsertCategoriesBox();
+                }
+
             }
         }
 
+        /// <summary>
+        /// Inserts categories into DropDownList.
+        /// </summary>
+        private void InsertCategoriesBox()
+        {
+            var categories = AppData.Context.Category.Select(c => c.Name).ToList();
+            categories.Insert(0, "Все категории");
+            ComboCategories.DataSource = categories;
+            ComboCategories.DataBind();
+            ComboCategories.SelectedIndex = 0;
+        }
+
+        /// <summary>
+        /// Redirect to the selected startup.
+        /// </summary>
         protected void StartupsView_ItemCommand(object sender, ListViewCommandEventArgs e)
         {
             if (e.CommandName.Equals("StartUpClicked"))
@@ -74,16 +52,35 @@ namespace StartUpWebAPI
             }
         }
 
+        /// <summary>
+        /// Inserts startups into ListView.
+        /// </summary>
         public void UpdateLView()
         {
-
+            StartupsView.DataSource = AppData.Context.StartUp.ToList();
+            StartupsView.DataBind();
         }
 
-        protected void NameBox_TextChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Startups filtration by categories and names.
+        /// </summary>
+        protected void BtnSearch_Click(object sender, EventArgs e)
         {
-            StartupsView.DataSource = AppData.Context.StartUp.ToList().Where(s => s.Name.Contains(NameBox.Text)).ToList();
+            var currentStartups = AppData.Context.StartUp.ToList();
+
+            UpdateFiltration.Update();
+
+            if (ComboCategories.SelectedIndex != 0)
+            {
+                currentStartups = currentStartups.Where(s => s.Category.Name.Equals(ComboCategories.SelectedValue)).ToList();
+            }
+            if (!string.IsNullOrWhiteSpace(NameBox.Text))
+            {
+                currentStartups = currentStartups.Where(s => s.Name.ToLower().Contains(NameBox.Text.ToLower())).ToList();
+            }
+
+            StartupsView.DataSource = currentStartups;
             StartupsView.DataBind();
-           
         }
     }
 }
