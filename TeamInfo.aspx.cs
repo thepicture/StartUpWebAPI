@@ -38,19 +38,16 @@ namespace StartUpWebAPI
 
         private void InsertTeams()
         {
-            Name.Text = MainName.Text = startUp.Name;
-            CountOfMembers.Text = "Участников: " + startUp.StartUpOfUser.Count.ToString();
-            CountOfTeams.Text = "Команд: " + startUp.StartUpOfTeam.Count.ToString();
+            Name.Text = MainName.Text = team.Name;
+            CountOfMembers.Text = "Участников: " + team.StartUpOfTeam.Count.ToString();
+            CountOfTeams.Text = "Команд: " + team.StartUpOfTeam.Count.ToString();
 
-            string creator = startUp.StartUpOfUser.FirstOrDefault(u => u.RoleType.Name == "Организатор")?.User.Name;
+            string creator = team.StartUpOfTeam.FirstOrDefault(u => u.RoleType.Name == "Организатор")?.User.Name;
 
             Creator.Text = creator ?? "Неизвестен";
-            IsActual.Text = startUp.IsDone ? "Завершён" : "Актуален";
-            DateOfCreation.Text = startUp.CreationDate.ToString();
-            Category.Text = startUp.Category.Name;
-            Description.Text = startUp.Description == null ? "Организатор не предоставил описание. Можете подать ему идею!" : startUp.Description;
-            CommentsCount.Text = "Комментарии (" + startUp.StartUpComment.Count + "):";
-            MainImage.ImageUrl = startUp.ImagePreview;
+            DateOfCreation.Text = team.CreationDate.ToString();
+            CommentsCount.Text = "Комментарии (" + team.TeamComment.Count + "):";
+            MainImage.ImageUrl = team.ImagePreview;
         }
     }
 }
