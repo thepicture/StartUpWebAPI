@@ -40,7 +40,7 @@
                         <asp:Label CssClass="startup-name" runat="server" Font-Bold="true" Text='<%# "Категория: " + Eval("Category.Name") %>'></asp:Label>
                         <br />
                         <asp:LinkButton Text="Подробнее" CssClass="round-div-block simple-cloud-button" ID="BtnRedirect"
-                            runat="server" CommandName="StartUpClicked" CommandArgument='<%# Eval("Id") %>' Style="width: fit-content;" />
+                            runat="server" CommandName="StartUpClicked" CommandArgument='<%# Eval("Id") %>' style="width: fit-content;" />
                 </asp:Panel>
             </ItemTemplate>
         </asp:ListView>

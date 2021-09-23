@@ -24,5 +24,13 @@ namespace StartUpWebAPI
                 TeamsView.DataBind();
             }
         }
+
+        protected void TeamsView_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+            if (e.CommandName == "TeamClicked")
+            {
+                Response.Redirect("~/TeamInfo.aspx?id=" + e.CommandArgument);
+            }
+        }
     }
 }
