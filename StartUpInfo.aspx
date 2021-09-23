@@ -9,7 +9,7 @@
             </p>
 
             <asp:Image ID="MainImage" runat="server" CssClass="radius-like swimming-content" Height="200" Width="200" />
-            <asp:Panel ID="PanelMyTeams" runat="server">
+            <asp:Panel ID="PanelMyStartups" runat="server">
                 <div class="round-div-block">
                     <asp:Label ID="Name" runat="server" ForeColor="Black"></asp:Label>
                 </div>
