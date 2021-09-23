@@ -11,57 +11,46 @@ namespace StartUpWebAPI
 {
     public partial class _Default : Page
     {
-        private string username;
         protected void Page_Load(object sender, EventArgs e)
         {
-            username = CookieUtils.GetUserNameOrNullOf(Context.Request);
-            string isAuthorized = Request.Cookies[".ASPXAUTH"]?.Value;
-
-            if (isAuthorized != null)
+            if (HttpContext.Current.User.Identity.IsAuthenticated)
             {
-                AnonContent.Visible = false;
-                LoggedInContent.Visible = true;
                 LoadStartups();
                 LoadTeams();
             }
-            else
-            {
-                AnonContent.Visible = true;
-                LoggedInContent.Visible = false;
-            }
-
         }
 
         private void LoadStartups()
         {
-            List<StartUp> startUps = AppData.Context.User.FirstOrDefault(u => u.Login.Equals(username)).StartUpOfUser.Select(s => s.StartUp).ToList();
+            List<StartUp> startUps = AppData.Context.User.FirstOrDefault(u => u.Login.Equals(HttpContext.Current.User.Identity.Name)).StartUpOfUser.Select(s => s.StartUp).ToList();
 
             if (startUps == null)
             {
                 return;
             }
-
-            LViewMyStartups.DataSource = startUps;
+            (RecursiveControlFinder.FindControlRecursive(this, "LViewMyStartups") as ListView).DataSource = startUps;
 
             if (startUps.Count == 0)
             {
-                EmptyStartupsPanel.Visible = true;
+                (RecursiveControlFinder.FindControlRecursive(this, "EmptyStartupsPanel") as Panel).Visible = true;
             }
 
-            LViewMyStartups.DataBind();
+             (RecursiveControlFinder.FindControlRecursive(this, "LViewMyStartups") as ListView).DataBind();
         }
+
+
 
         private void LoadTeams()
         {
-            List<TeamOfUser> teams = AppData.Context.User.First(u => u.Login.Equals(username)).TeamOfUser.ToList();
-            LViewMyTeams.DataSource = teams;
+            List<TeamOfUser> teams = AppData.Context.User.First(u => u.Login.Equals(HttpContext.Current.User.Identity.Name)).TeamOfUser.ToList();
+            (RecursiveControlFinder.FindControlRecursive(this, "LViewMyTeams") as ListView).DataSource = teams;
 
             if (teams.Count == 0)
             {
-                EmptyTeamsPanel.Visible = true;
+                (RecursiveControlFinder.FindControlRecursive(this, "EmptyTeamsPanel") as Panel).Visible = true;
             }
 
-            LViewMyTeams.DataBind();
+            (RecursiveControlFinder.FindControlRecursive(this, "LViewMyTeams") as ListView).DataBind();
         }
 
         protected void LViewMyStartups_ItemCommand(object sender, ListViewCommandEventArgs e)

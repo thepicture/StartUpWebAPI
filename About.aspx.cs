@@ -14,11 +14,6 @@ namespace StartUpWebAPI
         {
             Control footer = Master.FindControl("FooterIdentity");
             footer.Visible = false;
-
-            if (Request.Cookies.Get("username")?.Value != null)
-            {
-                AnonContent.Visible = false;
-            }
         }
 
         protected void BtnRegister_Click(object sender, EventArgs e)

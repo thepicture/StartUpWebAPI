@@ -15,33 +15,6 @@ namespace StartUpWebAPI
     {
 
         /// <summary>
-        /// AnonContent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel AnonContent;
-
-        /// <summary>
-        /// LoggedInContent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel LoggedInContent;
-
-        /// <summary>
-        /// BtnLogOut control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnLogOut;
-
-        /// <summary>
         /// MainContent control.
         /// </summary>
         /// <remarks>

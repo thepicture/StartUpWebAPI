@@ -13,23 +13,5 @@ namespace StartUpWebAPI
 
     public partial class About
     {
-
-        /// <summary>
-        /// AnonContent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel AnonContent;
-
-        /// <summary>
-        /// BtnRegister control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnRegister;
     }
 }

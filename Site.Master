@@ -61,25 +61,26 @@
                         <li><a runat="server" href="~/Teams">Команды</a></li>
                         <li><a runat="server" href="~/Startups">Стартапы</a></li>
                     </ul>
-                    <asp:Panel runat="server" ID="AnonContent">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a runat="server" href="~/Account/Register">Регистрация</a></li>
-                            <li><a runat="server" href="~/Account/Login">Авторизация</a></li>
-                        </ul>
-                    </asp:Panel>
-                    <asp:Panel runat="server" ID="LoggedInContent">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <a runat="server"><%: Request.Cookies["username"]?.Value %> </a>
-                            </li>
-                            <li>
-                                <asp:Button Text="Выйти" CssClass="round-div-block simple-cloud-button"
-                                    runat="server" LogoutAction="Redirect" LogoutText="Выйти"
-                                    LogoutPageUrl="~/" ID="BtnLogOut" OnClick="BtnLogOut_Click" />
-                            </li>
-                        </ul>
-                    </asp:Panel>
-
+                    <asp:LoginView runat="server">
+                        <AnonymousTemplate>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a runat="server" href="~/Account/Register">Регистрация</a></li>
+                                <li><a runat="server" href="~/Account/Login">Авторизация</a></li>
+                            </ul>
+                        </AnonymousTemplate>
+                        <LoggedInTemplate>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a runat="server"><%: HttpContext.Current.User.Identity.Name %> </a>
+                                </li>
+                                <li>
+                                    <asp:Button Text="Выйти из системы" CssClass="round-div-block simple-cloud-button"
+                                        runat="server" LogoutAction="Redirect" LogoutText="Выйти"
+                                        LogoutPageUrl="~/" ID="BtnLogOut" OnClick="BtnLogOut_Click" />
+                                </li>
+                            </ul>
+                        </LoggedInTemplate>
+                    </asp:LoginView>
                 </div>
             </div>
         </div>

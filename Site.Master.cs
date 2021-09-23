@@ -72,34 +72,10 @@ namespace StartUpWebAPI
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            string probablyUsername = Request.Cookies.Get("username")?.Value;
-
-            if (probablyUsername != null)
-            {
-                FormsAuthentication.SetAuthCookie(probablyUsername, true);
-            }
-
-            BtnLogOut.Text = "Выйти из системы";
-            string cookie = Request.Cookies[".ASPXAUTH"]?.Value;
-
-            if (cookie != null)
-            {
-                AnonContent.Visible = false;
-                LoggedInContent.Visible = true;
-            }
-            else
-            {
-                AnonContent.Visible = true;
-                LoggedInContent.Visible = false;
-            }
         }
 
         protected void BtnLogOut_Click(object sender, EventArgs e)
         {
-            if (UserAuthorizeObserver.IsAuthorized(Request))
-            {
-                Response.Cookies.Get("username").Expires = DateTime.Now.AddDays(-1);
-            }
             FormsAuthentication.SignOut();
             FormsAuthentication.RedirectToLoginPage();
         }

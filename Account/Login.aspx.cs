@@ -67,12 +67,6 @@ namespace StartUpWebAPI.Account
         private void RedirectToMainPage(string login)
         {
             bool isRemember = RememberMe.Checked;
-            HttpCookie userNameCookie = new HttpCookie("username", login)
-            {
-                Expires = DateTime.Now + TimeSpan.FromDays(1),
-                SameSite = SameSiteMode.Lax,
-            };
-            Response.Cookies.Add(userNameCookie);
 
             FormsAuthentication.SetAuthCookie(login, isRemember);
             Response.Redirect("~/Default.aspx");

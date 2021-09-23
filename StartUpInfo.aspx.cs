@@ -49,7 +49,7 @@ namespace StartUpWebAPI
 
         protected void BtnSendComment_Click(object sender, EventArgs e)
         {
-            string username = Request.Cookies.Get("username").Value;
+            string username = User.Identity.Name;
             User currentUser = AppData.Context.User.First(u => u.Login.Equals(username));
 
             StartUpComment comment = new StartUpComment
