@@ -1,6 +1,7 @@
 ﻿using StartUpWebAPI.Entities;
 using System;
 using System.Linq;
+using System.Web;
 
 namespace StartUpWebAPI
 {
@@ -16,7 +17,7 @@ namespace StartUpWebAPI
 
             if (!isStartUp)
             {
-                string reason = "%D0%A1%D1%82%D0%B0%D1%80%D1%82%D0%B0%D0%BF%20%D0%BD%D0%B5%20%D0%B1%D1%8B%D0%BB%20%D0%BD%D0%B0%D0%B9%D0%B4%D0%B5%D0%BD%20%D0%B8%D0%BB%D0%B8%20%D0%B1%D1%8B%D0%BB%20%D1%83%D0%B4%D0%B0%D0%BB%D1%91%D0%BD.%20%D0%9F%D0%BE%D0%B6%D0%B0%D0%BB%D1%83%D0%B9%D1%81%D1%82%D0%B0%2C%20%D0%BD%D0%B0%D0%B9%D0%B4%D0%B8%D1%82%D0%B5%20%D0%B4%D1%80%D1%83%D0%B3%D0%B8%D0%B5%20%D1%81%D1%82%D0%B0%D1%80%D1%82%D0%B0%D0%BF%D1%8B.";
+                string reason = HttpUtility.UrlEncode("Стартап не существует или был удалён. Пожалуйста, найдите другой стартап.");
                 Response.Redirect("~/Default.aspx?reason=" + reason);
             }
 
