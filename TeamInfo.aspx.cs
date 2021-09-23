@@ -32,17 +32,17 @@ namespace StartUpWebAPI
 
         private void InsertComments()
         {
-            LViewTeamComments.DataSource = team.TeamComment.OrderByDescending(c => c.DateTime).ToList();
+            LViewTeamComments.DataSource = team.TeamComment.OrderByDescending(c => c.CreationDate).ToList();
             LViewTeamComments.DataBind();
         }
 
         private void InsertTeams()
         {
             Name.Text = MainName.Text = team.Name;
-            CountOfMembers.Text = "Участников: " + team.StartUpOfTeam.Count.ToString();
-            CountOfTeams.Text = "Команд: " + team.StartUpOfTeam.Count.ToString();
+            CountOfMembers.Text = "Участников: " + team.TeamOfUser.Count.ToString();
+            CountOfStartUps.Text = "Команд: " + team.StartUpOfTeam.Count.ToString();
 
-            string creator = team.StartUpOfTeam.FirstOrDefault(u => u.RoleType.Name == "Организатор")?.User.Name;
+            string creator = team.TeamOfUser.FirstOrDefault(u => u.RoleType.Name == "Организатор")?.User.Name;
 
             Creator.Text = creator ?? "Неизвестен";
             DateOfCreation.Text = team.CreationDate.ToString();
