@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="100ae9b0807a4bba982bb88e41c4fd65" Name="Diagram1">
+      <Diagram DiagramId="c5a3687ad4734d94b62ee36e49b53a0f" Name="Diagram1">
         <EntityTypeShape EntityType="StartUpBaseModel.Category" Width="1.5" PointX="0.75" PointY="13.625" IsExpanded="true" />
         <EntityTypeShape EntityType="StartUpBaseModel.RoleType" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="StartUpBaseModel.StartUp" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
@@ -18,20 +18,20 @@
         <EntityTypeShape EntityType="StartUpBaseModel.TeamOfUser" Width="1.5" PointX="5.25" PointY="11" IsExpanded="true" />
         <EntityTypeShape EntityType="StartUpBaseModel.TypeOfUser" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="StartUpBaseModel.User" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
-        <AssociationConnector Association="StartUpBaseModel.FK_StartUp_Category" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfTeam_RoleType" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfUser_RoleType" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_TeamOfUser_RoleType" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_Comment_StartUp" ManuallyRouted="false" />
+        <AssociationConnector Association="StartUpBaseModel.FK_StartUp_Category1" ManuallyRouted="false" />
+        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfTeam_RoleType1" ManuallyRouted="false" />
+        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfUser_RoleType1" ManuallyRouted="false" />
+        <AssociationConnector Association="StartUpBaseModel.FK_TeamOfUser_RoleType1" ManuallyRouted="false" />
+        <AssociationConnector Association="StartUpBaseModel.FK_StartUpComment_StartUp" ManuallyRouted="false" />
         <AssociationConnector Association="StartUpBaseModel.FK_StartUpImage_StartUp" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfTeam_StartUp" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfUser_StartUp" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_Comment_User" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfTeam_Team" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfUser_User" ManuallyRouted="false" />
+        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfTeam_StartUp1" ManuallyRouted="false" />
+        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfUser_StartUp1" ManuallyRouted="false" />
+        <AssociationConnector Association="StartUpBaseModel.FK_StartUpComment_User" ManuallyRouted="false" />
+        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfTeam_Team1" ManuallyRouted="false" />
+        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfUser_User1" ManuallyRouted="false" />
         <AssociationConnector Association="StartUpBaseModel.FK_TeamComment_Team" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_TeamOfUser_Team" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_TeamComment_User" ManuallyRouted="false" />
+        <AssociationConnector Association="StartUpBaseModel.FK_TeamOfUser_Team1" ManuallyRouted="false" />
+        <AssociationConnector Association="StartUpBaseModel.FK_TeamComment_User1" ManuallyRouted="false" />
         <AssociationConnector Association="StartUpBaseModel.FK_TeamOfUser_User" ManuallyRouted="false" />
         <AssociationConnector Association="StartUpBaseModel.FK_User_TypeOfUser" ManuallyRouted="false" />
       </Diagram>

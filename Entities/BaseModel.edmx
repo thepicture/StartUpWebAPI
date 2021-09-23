@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="StartUpBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище StartUpBaseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="Id" />
@@ -128,7 +128,19 @@
           <Property Name="UserImage" Type="varbinary(max)" />
           <Property Name="TypeOfUserId" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Comment_StartUp">
+        <Association Name="FK_StartUp_Category1">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="StartUp" Type="Self.StartUp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StartUp">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StartUpComment_StartUp">
           <End Role="StartUp" Type="Self.StartUp" Multiplicity="1" />
           <End Role="StartUpComment" Type="Self.StartUpComment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -140,7 +152,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Comment_User">
+        <Association Name="FK_StartUpComment_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="StartUpComment" Type="Self.StartUpComment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -149,18 +161,6 @@
             </Principal>
             <Dependent Role="StartUpComment">
               <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_StartUp_Category">
-          <End Role="Category" Type="Self.Category" Multiplicity="1" />
-          <End Role="StartUp" Type="Self.StartUp" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Category">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StartUp">
-              <PropertyRef Name="CategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -176,7 +176,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StartUpOfTeam_RoleType">
+        <Association Name="FK_StartUpOfTeam_RoleType1">
           <End Role="RoleType" Type="Self.RoleType" Multiplicity="1" />
           <End Role="StartUpOfTeam" Type="Self.StartUpOfTeam" Multiplicity="*" />
           <ReferentialConstraint>
@@ -188,7 +188,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StartUpOfTeam_StartUp">
+        <Association Name="FK_StartUpOfTeam_StartUp1">
           <End Role="StartUp" Type="Self.StartUp" Multiplicity="1" />
           <End Role="StartUpOfTeam" Type="Self.StartUpOfTeam" Multiplicity="*" />
           <ReferentialConstraint>
@@ -200,7 +200,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StartUpOfTeam_Team">
+        <Association Name="FK_StartUpOfTeam_Team1">
           <End Role="Team" Type="Self.Team" Multiplicity="1" />
           <End Role="StartUpOfTeam" Type="Self.StartUpOfTeam" Multiplicity="*" />
           <ReferentialConstraint>
@@ -212,7 +212,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StartUpOfUser_RoleType">
+        <Association Name="FK_StartUpOfUser_RoleType1">
           <End Role="RoleType" Type="Self.RoleType" Multiplicity="1" />
           <End Role="StartUpOfUser" Type="Self.StartUpOfUser" Multiplicity="*" />
           <ReferentialConstraint>
@@ -224,7 +224,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StartUpOfUser_StartUp">
+        <Association Name="FK_StartUpOfUser_StartUp1">
           <End Role="StartUp" Type="Self.StartUp" Multiplicity="1" />
           <End Role="StartUpOfUser" Type="Self.StartUpOfUser" Multiplicity="*" />
           <ReferentialConstraint>
@@ -236,7 +236,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StartUpOfUser_User">
+        <Association Name="FK_StartUpOfUser_User1">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="StartUpOfUser" Type="Self.StartUpOfUser" Multiplicity="*" />
           <ReferentialConstraint>
@@ -260,7 +260,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TeamComment_User">
+        <Association Name="FK_TeamComment_User1">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="TeamComment" Type="Self.TeamComment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -272,7 +272,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TeamOfUser_RoleType">
+        <Association Name="FK_TeamOfUser_RoleType1">
           <End Role="RoleType" Type="Self.RoleType" Multiplicity="1" />
           <End Role="TeamOfUser" Type="Self.TeamOfUser" Multiplicity="*" />
           <ReferentialConstraint>
@@ -284,7 +284,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TeamOfUser_Team">
+        <Association Name="FK_TeamOfUser_Team1">
           <End Role="Team" Type="Self.Team" Multiplicity="1" />
           <End Role="TeamOfUser" Type="Self.TeamOfUser" Multiplicity="*" />
           <ReferentialConstraint>
@@ -320,7 +320,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="StartUpBaseModelStoreContainer">
+        <EntityContainer Name="Хранилище StartUpBaseModelContainer">
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoleType" EntityType="Self.RoleType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StartUp" EntityType="Self.StartUp" Schema="dbo" store:Type="Tables" />
@@ -334,43 +334,43 @@
           <EntitySet Name="TeamOfUser" EntityType="Self.TeamOfUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeOfUser" EntityType="Self.TypeOfUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Comment_StartUp" Association="Self.FK_Comment_StartUp">
-            <End Role="StartUp" EntitySet="StartUp" />
-            <End Role="StartUpComment" EntitySet="StartUpComment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Comment_User" Association="Self.FK_Comment_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="StartUpComment" EntitySet="StartUpComment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_StartUp_Category" Association="Self.FK_StartUp_Category">
+          <AssociationSet Name="FK_StartUp_Category1" Association="Self.FK_StartUp_Category1">
             <End Role="Category" EntitySet="Category" />
             <End Role="StartUp" EntitySet="StartUp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StartUpComment_StartUp" Association="Self.FK_StartUpComment_StartUp">
+            <End Role="StartUp" EntitySet="StartUp" />
+            <End Role="StartUpComment" EntitySet="StartUpComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StartUpComment_User" Association="Self.FK_StartUpComment_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="StartUpComment" EntitySet="StartUpComment" />
           </AssociationSet>
           <AssociationSet Name="FK_StartUpImage_StartUp" Association="Self.FK_StartUpImage_StartUp">
             <End Role="StartUp" EntitySet="StartUp" />
             <End Role="StartUpImage" EntitySet="StartUpImage" />
           </AssociationSet>
-          <AssociationSet Name="FK_StartUpOfTeam_RoleType" Association="Self.FK_StartUpOfTeam_RoleType">
+          <AssociationSet Name="FK_StartUpOfTeam_RoleType1" Association="Self.FK_StartUpOfTeam_RoleType1">
             <End Role="RoleType" EntitySet="RoleType" />
             <End Role="StartUpOfTeam" EntitySet="StartUpOfTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_StartUpOfTeam_StartUp" Association="Self.FK_StartUpOfTeam_StartUp">
+          <AssociationSet Name="FK_StartUpOfTeam_StartUp1" Association="Self.FK_StartUpOfTeam_StartUp1">
             <End Role="StartUp" EntitySet="StartUp" />
             <End Role="StartUpOfTeam" EntitySet="StartUpOfTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_StartUpOfTeam_Team" Association="Self.FK_StartUpOfTeam_Team">
+          <AssociationSet Name="FK_StartUpOfTeam_Team1" Association="Self.FK_StartUpOfTeam_Team1">
             <End Role="Team" EntitySet="Team" />
             <End Role="StartUpOfTeam" EntitySet="StartUpOfTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_StartUpOfUser_RoleType" Association="Self.FK_StartUpOfUser_RoleType">
+          <AssociationSet Name="FK_StartUpOfUser_RoleType1" Association="Self.FK_StartUpOfUser_RoleType1">
             <End Role="RoleType" EntitySet="RoleType" />
             <End Role="StartUpOfUser" EntitySet="StartUpOfUser" />
           </AssociationSet>
-          <AssociationSet Name="FK_StartUpOfUser_StartUp" Association="Self.FK_StartUpOfUser_StartUp">
+          <AssociationSet Name="FK_StartUpOfUser_StartUp1" Association="Self.FK_StartUpOfUser_StartUp1">
             <End Role="StartUp" EntitySet="StartUp" />
             <End Role="StartUpOfUser" EntitySet="StartUpOfUser" />
           </AssociationSet>
-          <AssociationSet Name="FK_StartUpOfUser_User" Association="Self.FK_StartUpOfUser_User">
+          <AssociationSet Name="FK_StartUpOfUser_User1" Association="Self.FK_StartUpOfUser_User1">
             <End Role="User" EntitySet="User" />
             <End Role="StartUpOfUser" EntitySet="StartUpOfUser" />
           </AssociationSet>
@@ -378,15 +378,15 @@
             <End Role="Team" EntitySet="Team" />
             <End Role="TeamComment" EntitySet="TeamComment" />
           </AssociationSet>
-          <AssociationSet Name="FK_TeamComment_User" Association="Self.FK_TeamComment_User">
+          <AssociationSet Name="FK_TeamComment_User1" Association="Self.FK_TeamComment_User1">
             <End Role="User" EntitySet="User" />
             <End Role="TeamComment" EntitySet="TeamComment" />
           </AssociationSet>
-          <AssociationSet Name="FK_TeamOfUser_RoleType" Association="Self.FK_TeamOfUser_RoleType">
+          <AssociationSet Name="FK_TeamOfUser_RoleType1" Association="Self.FK_TeamOfUser_RoleType1">
             <End Role="RoleType" EntitySet="RoleType" />
             <End Role="TeamOfUser" EntitySet="TeamOfUser" />
           </AssociationSet>
-          <AssociationSet Name="FK_TeamOfUser_Team" Association="Self.FK_TeamOfUser_Team">
+          <AssociationSet Name="FK_TeamOfUser_Team1" Association="Self.FK_TeamOfUser_Team1">
             <End Role="Team" EntitySet="Team" />
             <End Role="TeamOfUser" EntitySet="TeamOfUser" />
           </AssociationSet>
@@ -410,7 +410,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="StartUp" Relationship="Self.FK_StartUp_Category" FromRole="Category" ToRole="StartUp" />
+          <NavigationProperty Name="StartUp" Relationship="Self.FK_StartUp_Category1" FromRole="Category" ToRole="StartUp" />
         </EntityType>
         <EntityType Name="RoleType">
           <Key>
@@ -418,9 +418,9 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="StartUpOfTeam" Relationship="Self.FK_StartUpOfTeam_RoleType" FromRole="RoleType" ToRole="StartUpOfTeam" />
-          <NavigationProperty Name="StartUpOfUser" Relationship="Self.FK_StartUpOfUser_RoleType" FromRole="RoleType" ToRole="StartUpOfUser" />
-          <NavigationProperty Name="TeamOfUser" Relationship="Self.FK_TeamOfUser_RoleType" FromRole="RoleType" ToRole="TeamOfUser" />
+          <NavigationProperty Name="StartUpOfTeam" Relationship="Self.FK_StartUpOfTeam_RoleType1" FromRole="RoleType" ToRole="StartUpOfTeam" />
+          <NavigationProperty Name="StartUpOfUser" Relationship="Self.FK_StartUpOfUser_RoleType1" FromRole="RoleType" ToRole="StartUpOfUser" />
+          <NavigationProperty Name="TeamOfUser" Relationship="Self.FK_TeamOfUser_RoleType1" FromRole="RoleType" ToRole="TeamOfUser" />
         </EntityType>
         <EntityType Name="StartUp">
           <Key>
@@ -433,11 +433,11 @@
           <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsDone" Type="Boolean" Nullable="false" />
           <Property Name="MaxMembersCount" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Category" Relationship="Self.FK_StartUp_Category" FromRole="StartUp" ToRole="Category" />
-          <NavigationProperty Name="StartUpComment" Relationship="Self.FK_Comment_StartUp" FromRole="StartUp" ToRole="StartUpComment" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_StartUp_Category1" FromRole="StartUp" ToRole="Category" />
+          <NavigationProperty Name="StartUpComment" Relationship="Self.FK_StartUpComment_StartUp" FromRole="StartUp" ToRole="StartUpComment" />
           <NavigationProperty Name="StartUpImage" Relationship="Self.FK_StartUpImage_StartUp" FromRole="StartUp" ToRole="StartUpImage" />
-          <NavigationProperty Name="StartUpOfTeam" Relationship="Self.FK_StartUpOfTeam_StartUp" FromRole="StartUp" ToRole="StartUpOfTeam" />
-          <NavigationProperty Name="StartUpOfUser" Relationship="Self.FK_StartUpOfUser_StartUp" FromRole="StartUp" ToRole="StartUpOfUser" />
+          <NavigationProperty Name="StartUpOfTeam" Relationship="Self.FK_StartUpOfTeam_StartUp1" FromRole="StartUp" ToRole="StartUpOfTeam" />
+          <NavigationProperty Name="StartUpOfUser" Relationship="Self.FK_StartUpOfUser_StartUp1" FromRole="StartUp" ToRole="StartUpOfUser" />
         </EntityType>
         <EntityType Name="StartUpComment">
           <Key>
@@ -448,8 +448,8 @@
           <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="StartUpId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="StartUp" Relationship="Self.FK_Comment_StartUp" FromRole="StartUpComment" ToRole="StartUp" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Comment_User" FromRole="StartUpComment" ToRole="User" />
+          <NavigationProperty Name="StartUp" Relationship="Self.FK_StartUpComment_StartUp" FromRole="StartUpComment" ToRole="StartUp" />
+          <NavigationProperty Name="User" Relationship="Self.FK_StartUpComment_User" FromRole="StartUpComment" ToRole="User" />
         </EntityType>
         <EntityType Name="StartUpImage">
           <Key>
@@ -470,9 +470,9 @@
           <Property Name="TeamId" Type="Int32" Nullable="false" />
           <Property Name="RoleTypeId" Type="Int32" Nullable="false" />
           <Property Name="StartUpId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="RoleType" Relationship="Self.FK_StartUpOfTeam_RoleType" FromRole="StartUpOfTeam" ToRole="RoleType" />
-          <NavigationProperty Name="StartUp" Relationship="Self.FK_StartUpOfTeam_StartUp" FromRole="StartUpOfTeam" ToRole="StartUp" />
-          <NavigationProperty Name="Team" Relationship="Self.FK_StartUpOfTeam_Team" FromRole="StartUpOfTeam" ToRole="Team" />
+          <NavigationProperty Name="RoleType" Relationship="Self.FK_StartUpOfTeam_RoleType1" FromRole="StartUpOfTeam" ToRole="RoleType" />
+          <NavigationProperty Name="StartUp" Relationship="Self.FK_StartUpOfTeam_StartUp1" FromRole="StartUpOfTeam" ToRole="StartUp" />
+          <NavigationProperty Name="Team" Relationship="Self.FK_StartUpOfTeam_Team1" FromRole="StartUpOfTeam" ToRole="Team" />
         </EntityType>
         <EntityType Name="StartUpOfUser">
           <Key>
@@ -483,9 +483,9 @@
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="StartUpId" Type="Int32" Nullable="false" />
           <Property Name="RoleTypeId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="RoleType" Relationship="Self.FK_StartUpOfUser_RoleType" FromRole="StartUpOfUser" ToRole="RoleType" />
-          <NavigationProperty Name="StartUp" Relationship="Self.FK_StartUpOfUser_StartUp" FromRole="StartUpOfUser" ToRole="StartUp" />
-          <NavigationProperty Name="User" Relationship="Self.FK_StartUpOfUser_User" FromRole="StartUpOfUser" ToRole="User" />
+          <NavigationProperty Name="RoleType" Relationship="Self.FK_StartUpOfUser_RoleType1" FromRole="StartUpOfUser" ToRole="RoleType" />
+          <NavigationProperty Name="StartUp" Relationship="Self.FK_StartUpOfUser_StartUp1" FromRole="StartUpOfUser" ToRole="StartUp" />
+          <NavigationProperty Name="User" Relationship="Self.FK_StartUpOfUser_User1" FromRole="StartUpOfUser" ToRole="User" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -506,9 +506,9 @@
           <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="MaxMembersCount" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="StartUpOfTeam" Relationship="Self.FK_StartUpOfTeam_Team" FromRole="Team" ToRole="StartUpOfTeam" />
+          <NavigationProperty Name="StartUpOfTeam" Relationship="Self.FK_StartUpOfTeam_Team1" FromRole="Team" ToRole="StartUpOfTeam" />
           <NavigationProperty Name="TeamComment" Relationship="Self.FK_TeamComment_Team" FromRole="Team" ToRole="TeamComment" />
-          <NavigationProperty Name="TeamOfUser" Relationship="Self.FK_TeamOfUser_Team" FromRole="Team" ToRole="TeamOfUser" />
+          <NavigationProperty Name="TeamOfUser" Relationship="Self.FK_TeamOfUser_Team1" FromRole="Team" ToRole="TeamOfUser" />
         </EntityType>
         <EntityType Name="TeamComment">
           <Key>
@@ -520,7 +520,7 @@
           <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Team" Relationship="Self.FK_TeamComment_Team" FromRole="TeamComment" ToRole="Team" />
-          <NavigationProperty Name="User" Relationship="Self.FK_TeamComment_User" FromRole="TeamComment" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="Self.FK_TeamComment_User1" FromRole="TeamComment" ToRole="User" />
         </EntityType>
         <EntityType Name="TeamOfUser">
           <Key>
@@ -531,8 +531,8 @@
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="TeamId" Type="Int32" Nullable="false" />
           <Property Name="RoleTypeId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="RoleType" Relationship="Self.FK_TeamOfUser_RoleType" FromRole="TeamOfUser" ToRole="RoleType" />
-          <NavigationProperty Name="Team" Relationship="Self.FK_TeamOfUser_Team" FromRole="TeamOfUser" ToRole="Team" />
+          <NavigationProperty Name="RoleType" Relationship="Self.FK_TeamOfUser_RoleType1" FromRole="TeamOfUser" ToRole="RoleType" />
+          <NavigationProperty Name="Team" Relationship="Self.FK_TeamOfUser_Team1" FromRole="TeamOfUser" ToRole="Team" />
           <NavigationProperty Name="User" Relationship="Self.FK_TeamOfUser_User" FromRole="TeamOfUser" ToRole="User" />
         </EntityType>
         <EntityType Name="TypeOfUser">
@@ -553,13 +553,13 @@
           <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UserImage" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="TypeOfUserId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="StartUpComment" Relationship="Self.FK_Comment_User" FromRole="User" ToRole="StartUpComment" />
-          <NavigationProperty Name="StartUpOfUser" Relationship="Self.FK_StartUpOfUser_User" FromRole="User" ToRole="StartUpOfUser" />
-          <NavigationProperty Name="TeamComment" Relationship="Self.FK_TeamComment_User" FromRole="User" ToRole="TeamComment" />
+          <NavigationProperty Name="StartUpComment" Relationship="Self.FK_StartUpComment_User" FromRole="User" ToRole="StartUpComment" />
+          <NavigationProperty Name="StartUpOfUser" Relationship="Self.FK_StartUpOfUser_User1" FromRole="User" ToRole="StartUpOfUser" />
+          <NavigationProperty Name="TeamComment" Relationship="Self.FK_TeamComment_User1" FromRole="User" ToRole="TeamComment" />
           <NavigationProperty Name="TeamOfUser" Relationship="Self.FK_TeamOfUser_User" FromRole="User" ToRole="TeamOfUser" />
           <NavigationProperty Name="TypeOfUser" Relationship="Self.FK_User_TypeOfUser" FromRole="User" ToRole="TypeOfUser" />
         </EntityType>
-        <Association Name="FK_StartUp_Category">
+        <Association Name="FK_StartUp_Category1">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
           <End Role="StartUp" Type="Self.StartUp" Multiplicity="*" />
           <ReferentialConstraint>
@@ -571,7 +571,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StartUpOfTeam_RoleType">
+        <Association Name="FK_StartUpOfTeam_RoleType1">
           <End Role="RoleType" Type="Self.RoleType" Multiplicity="1" />
           <End Role="StartUpOfTeam" Type="Self.StartUpOfTeam" Multiplicity="*" />
           <ReferentialConstraint>
@@ -583,7 +583,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StartUpOfUser_RoleType">
+        <Association Name="FK_StartUpOfUser_RoleType1">
           <End Role="RoleType" Type="Self.RoleType" Multiplicity="1" />
           <End Role="StartUpOfUser" Type="Self.StartUpOfUser" Multiplicity="*" />
           <ReferentialConstraint>
@@ -595,7 +595,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TeamOfUser_RoleType">
+        <Association Name="FK_TeamOfUser_RoleType1">
           <End Role="RoleType" Type="Self.RoleType" Multiplicity="1" />
           <End Role="TeamOfUser" Type="Self.TeamOfUser" Multiplicity="*" />
           <ReferentialConstraint>
@@ -607,7 +607,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Comment_StartUp">
+        <Association Name="FK_StartUpComment_StartUp">
           <End Role="StartUp" Type="Self.StartUp" Multiplicity="1" />
           <End Role="StartUpComment" Type="Self.StartUpComment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -631,7 +631,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StartUpOfTeam_StartUp">
+        <Association Name="FK_StartUpOfTeam_StartUp1">
           <End Role="StartUp" Type="Self.StartUp" Multiplicity="1" />
           <End Role="StartUpOfTeam" Type="Self.StartUpOfTeam" Multiplicity="*" />
           <ReferentialConstraint>
@@ -643,7 +643,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StartUpOfUser_StartUp">
+        <Association Name="FK_StartUpOfUser_StartUp1">
           <End Role="StartUp" Type="Self.StartUp" Multiplicity="1" />
           <End Role="StartUpOfUser" Type="Self.StartUpOfUser" Multiplicity="*" />
           <ReferentialConstraint>
@@ -655,7 +655,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Comment_User">
+        <Association Name="FK_StartUpComment_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="StartUpComment" Type="Self.StartUpComment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -667,7 +667,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StartUpOfTeam_Team">
+        <Association Name="FK_StartUpOfTeam_Team1">
           <End Role="Team" Type="Self.Team" Multiplicity="1" />
           <End Role="StartUpOfTeam" Type="Self.StartUpOfTeam" Multiplicity="*" />
           <ReferentialConstraint>
@@ -679,7 +679,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_StartUpOfUser_User">
+        <Association Name="FK_StartUpOfUser_User1">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="StartUpOfUser" Type="Self.StartUpOfUser" Multiplicity="*" />
           <ReferentialConstraint>
@@ -703,7 +703,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TeamOfUser_Team">
+        <Association Name="FK_TeamOfUser_Team1">
           <End Role="Team" Type="Self.Team" Multiplicity="1" />
           <End Role="TeamOfUser" Type="Self.TeamOfUser" Multiplicity="*" />
           <ReferentialConstraint>
@@ -715,7 +715,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TeamComment_User">
+        <Association Name="FK_TeamComment_User1">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="TeamComment" Type="Self.TeamComment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -765,23 +765,23 @@
           <EntitySet Name="TeamOfUser" EntityType="Self.TeamOfUser" />
           <EntitySet Name="TypeOfUser" EntityType="Self.TypeOfUser" />
           <EntitySet Name="User" EntityType="Self.User" />
-          <AssociationSet Name="FK_StartUp_Category" Association="Self.FK_StartUp_Category">
+          <AssociationSet Name="FK_StartUp_Category1" Association="Self.FK_StartUp_Category1">
             <End Role="Category" EntitySet="Category" />
             <End Role="StartUp" EntitySet="StartUp" />
           </AssociationSet>
-          <AssociationSet Name="FK_StartUpOfTeam_RoleType" Association="Self.FK_StartUpOfTeam_RoleType">
+          <AssociationSet Name="FK_StartUpOfTeam_RoleType1" Association="Self.FK_StartUpOfTeam_RoleType1">
             <End Role="RoleType" EntitySet="RoleType" />
             <End Role="StartUpOfTeam" EntitySet="StartUpOfTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_StartUpOfUser_RoleType" Association="Self.FK_StartUpOfUser_RoleType">
+          <AssociationSet Name="FK_StartUpOfUser_RoleType1" Association="Self.FK_StartUpOfUser_RoleType1">
             <End Role="RoleType" EntitySet="RoleType" />
             <End Role="StartUpOfUser" EntitySet="StartUpOfUser" />
           </AssociationSet>
-          <AssociationSet Name="FK_TeamOfUser_RoleType" Association="Self.FK_TeamOfUser_RoleType">
+          <AssociationSet Name="FK_TeamOfUser_RoleType1" Association="Self.FK_TeamOfUser_RoleType1">
             <End Role="RoleType" EntitySet="RoleType" />
             <End Role="TeamOfUser" EntitySet="TeamOfUser" />
           </AssociationSet>
-          <AssociationSet Name="FK_Comment_StartUp" Association="Self.FK_Comment_StartUp">
+          <AssociationSet Name="FK_StartUpComment_StartUp" Association="Self.FK_StartUpComment_StartUp">
             <End Role="StartUp" EntitySet="StartUp" />
             <End Role="StartUpComment" EntitySet="StartUpComment" />
           </AssociationSet>
@@ -789,23 +789,23 @@
             <End Role="StartUp" EntitySet="StartUp" />
             <End Role="StartUpImage" EntitySet="StartUpImage" />
           </AssociationSet>
-          <AssociationSet Name="FK_StartUpOfTeam_StartUp" Association="Self.FK_StartUpOfTeam_StartUp">
+          <AssociationSet Name="FK_StartUpOfTeam_StartUp1" Association="Self.FK_StartUpOfTeam_StartUp1">
             <End Role="StartUp" EntitySet="StartUp" />
             <End Role="StartUpOfTeam" EntitySet="StartUpOfTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_StartUpOfUser_StartUp" Association="Self.FK_StartUpOfUser_StartUp">
+          <AssociationSet Name="FK_StartUpOfUser_StartUp1" Association="Self.FK_StartUpOfUser_StartUp1">
             <End Role="StartUp" EntitySet="StartUp" />
             <End Role="StartUpOfUser" EntitySet="StartUpOfUser" />
           </AssociationSet>
-          <AssociationSet Name="FK_Comment_User" Association="Self.FK_Comment_User">
+          <AssociationSet Name="FK_StartUpComment_User" Association="Self.FK_StartUpComment_User">
             <End Role="User" EntitySet="User" />
             <End Role="StartUpComment" EntitySet="StartUpComment" />
           </AssociationSet>
-          <AssociationSet Name="FK_StartUpOfTeam_Team" Association="Self.FK_StartUpOfTeam_Team">
+          <AssociationSet Name="FK_StartUpOfTeam_Team1" Association="Self.FK_StartUpOfTeam_Team1">
             <End Role="Team" EntitySet="Team" />
             <End Role="StartUpOfTeam" EntitySet="StartUpOfTeam" />
           </AssociationSet>
-          <AssociationSet Name="FK_StartUpOfUser_User" Association="Self.FK_StartUpOfUser_User">
+          <AssociationSet Name="FK_StartUpOfUser_User1" Association="Self.FK_StartUpOfUser_User1">
             <End Role="User" EntitySet="User" />
             <End Role="StartUpOfUser" EntitySet="StartUpOfUser" />
           </AssociationSet>
@@ -813,11 +813,11 @@
             <End Role="Team" EntitySet="Team" />
             <End Role="TeamComment" EntitySet="TeamComment" />
           </AssociationSet>
-          <AssociationSet Name="FK_TeamOfUser_Team" Association="Self.FK_TeamOfUser_Team">
+          <AssociationSet Name="FK_TeamOfUser_Team1" Association="Self.FK_TeamOfUser_Team1">
             <End Role="Team" EntitySet="Team" />
             <End Role="TeamOfUser" EntitySet="TeamOfUser" />
           </AssociationSet>
-          <AssociationSet Name="FK_TeamComment_User" Association="Self.FK_TeamComment_User">
+          <AssociationSet Name="FK_TeamComment_User1" Association="Self.FK_TeamComment_User1">
             <End Role="User" EntitySet="User" />
             <End Role="TeamComment" EntitySet="TeamComment" />
           </AssociationSet>
@@ -835,7 +835,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="StartUpBaseModelStoreContainer" CdmEntityContainer="StartUpBaseEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище StartUpBaseModelContainer" CdmEntityContainer="StartUpBaseEntities">
           <EntitySetMapping Name="Category">
             <EntityTypeMapping TypeName="StartUpBaseModel.Category">
               <MappingFragment StoreEntitySet="Category">
@@ -983,7 +983,7 @@
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

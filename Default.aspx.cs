@@ -22,7 +22,7 @@ namespace StartUpWebAPI
 
         private void LoadStartups()
         {
-            List<StartUp> startUps = AppData.Context.User.FirstOrDefault(u => u.Login.Equals(HttpContext.Current.User.Identity.Name)).StartUpOfUser.Select(s => s.StartUp).ToList();
+            List<StartUp> startUps = AppData.Context.User.FirstOrDefault(u => u.Login.Equals(HttpContext.Current.User.Identity.Name))?.StartUpOfUser.Select(s => s.StartUp).ToList();
 
             if (startUps == null)
             {
@@ -42,7 +42,7 @@ namespace StartUpWebAPI
 
         private void LoadTeams()
         {
-            List<TeamOfUser> teams = AppData.Context.User.First(u => u.Login.Equals(HttpContext.Current.User.Identity.Name)).TeamOfUser.ToList();
+            List<TeamOfUser> teams = AppData.Context.User.First(u => u.Login.Equals(HttpContext.Current.User.Identity.Name))?.TeamOfUser.ToList();
             (RecursiveControlFinder.FindControlRecursive(this, "LViewMyTeams") as ListView).DataSource = teams;
 
             if (teams.Count == 0)

@@ -14,18 +14,23 @@ namespace StartUpWebAPI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!UserAuthorizeObserver.IsAuthorized(Request))
+            if (!User.Identity.IsAuthenticated)
             {
                 FormsAuthentication.RedirectToLoginPage();
             }
             else
             {
                 UpdateLView();
-                if (!IsPostBack)
-                {
-                    InsertCategoriesBox();
-                }
 
+                CheckOrSetCategories();
+            }
+        }
+
+        private void CheckOrSetCategories()
+        {
+            if (!IsPostBack)
+            {
+                InsertCategoriesBox();
             }
         }
 
