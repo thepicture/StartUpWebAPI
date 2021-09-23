@@ -344,6 +344,7 @@
     <Compile Include="Models\PartialStartUp.cs" />
     <Compile Include="Models\PartialStartUpComment.cs" />
     <Compile Include="Models\PartialTeam.cs" />
+    <Compile Include="Models\PartialTeamComment.cs" />
     <Compile Include="Models\RecursiveControlFinder.cs" />
     <Compile Include="Models\UserAuthorizer.cs" />
     <Compile Include="Models\UserBuilder.cs" />
