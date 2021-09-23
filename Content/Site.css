@@ -23,7 +23,7 @@ body {
 
 /* Animation effect for objects without rotation when the page loaded. */
 .pushable {
-    animation: easing-boing-anim 2s ease-in-out 1 normal;
+    animation: easing-boing-anim 1s ease-in-out 1 normal;
 }
 
 @keyframes easing-boing-anim {
@@ -97,21 +97,23 @@ body {
 .green-button {
     background-color: green !important;
 }
-
+.font-family-title {
+    font-family: 'Cormorant', serif;
+}
 /* Smooth div cloud-like block. */
 .round-div-block {
-    border-radius: 30px;
-    height: 30px;
-    font-family: 'IBM Plex Serif', serif;
+    border-radius: 10px;
+    height: 50px !important;
+    font-family: 'Cormorant', serif;
     padding: 10px;
     background: white;
     align-items: center;
     display: flex;
     justify-content: center;
-    margin: 10px;
+    margin: 20px 0px 30px 0px;
 }
 
-    .round-div-block:hover {
+    .round-div-block:focus {
         animation-name: blick;
         animation-iteration-count: infinite;
         animation-duration: 1s;
@@ -120,16 +122,19 @@ body {
     }
 
 .simple-cloud-button {
-    background-color: deeppink;
-    color: white !important;
+    color: #181219 !important;
     border: 0px;
     padding: 0;
     padding-left: 5px;
     padding-right: 5px;
+    text-align: center;
+    width: 210px;
+    font-size: 30px !important;
 }
 
     .simple-cloud-button:hover {
-        background-color: lightpink !important;
+        background-color: #181219 !important;
+        color: white !important;
     }
 
 @keyframes blick {
@@ -212,7 +217,7 @@ footer {
 /* Styles for content elements. */
 div ul li a {
     color: black !important;
-    font-family: 'IBM Plex Serif', serif;
+    font-family: 'Cormorant', serif;
     transition: all ease-in-out 100ms;
     font-size: 20px;
 }
@@ -220,7 +225,7 @@ div ul li a {
     /* Change the color when the mouse is over a buttons. */
     div ul li a:hover {
         color: royalblue !important;
-        font-family: 'IBM Plex Serif', serif;
+        font-family: 'Cormorant', serif;
         transform: scale(1.1);
     }
 
@@ -321,3 +326,41 @@ input[type="select"] {
     -moz-box-shadow: 0px 0px 20px 7px rgba(0, 120, 232, 0.27);
     box-shadow: 0px 0px 20px 7px rgba(0, 120, 232, 0.27);
 }
+
+.alignh1 {
+    text-align: center;
+    font-family: 'Cormorant', serif;
+}
+.title-page-margin {
+    font-family: 'Cormorant', serif;
+}
+
+.fadeIn {
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+    -webkit-animation-duration: 1.5s;
+    animation-duration: 1.5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
