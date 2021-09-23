@@ -17,22 +17,13 @@
                     <asp:Label ID="CountOfMembers" runat="server" ForeColor="Black"></asp:Label>
                 </div>
                 <div class="round-div-block">
-                    <asp:Label ID="CountOfTeams" runat="server" ForeColor="Black"></asp:Label>
+                    <asp:Label ID="CountOfStartUps" runat="server" ForeColor="Black"></asp:Label>
                 </div>
                 <div class="round-div-block">
                     <asp:Label ID="Creator" runat="server" ForeColor="Black"></asp:Label>
                 </div>
                 <div class="round-div-block">
                     <asp:Label ID="DateOfCreation" runat="server" ForeColor="Black"></asp:Label>
-                </div>
-                <div class="round-div-block">
-                    <asp:Label ID="Description" runat="server" ForeColor="Black"></asp:Label>
-                </div>
-                <div class="round-div-block">
-                    <asp:Label ID="Category" runat="server" ForeColor="Black"></asp:Label>
-                </div>
-                <div class="round-div-block">
-                    <asp:Label ID="IsActual" runat="server" ForeColor="Black"></asp:Label>
                 </div>
             </asp:Panel>
             &nbsp;

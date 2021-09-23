@@ -60,13 +60,13 @@ namespace StartUpWebAPI
         protected global::System.Web.UI.WebControls.Label CountOfMembers;
 
         /// <summary>
-        /// CountOfTeams элемент управления.
+        /// CountOfStartUps элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label CountOfTeams;
+        protected global::System.Web.UI.WebControls.Label CountOfStartUps;
 
         /// <summary>
         /// Creator элемент управления.
@@ -85,33 +85,6 @@ namespace StartUpWebAPI
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label DateOfCreation;
-
-        /// <summary>
-        /// Description элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Description;
-
-        /// <summary>
-        /// Category элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Category;
-
-        /// <summary>
-        /// IsActual элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label IsActual;
 
         /// <summary>
         /// CommentsCount элемент управления.
