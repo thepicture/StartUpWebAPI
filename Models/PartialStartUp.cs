@@ -42,7 +42,10 @@ namespace StartUpWebAPI.Entities
                 }
                 else
                 {
-                    return template + userName;
+                    string[] credentials = userName.Split(' ');
+                    string lastName = credentials[0];
+                    string firstName = credentials[1].ToCharArray().ElementAt(0) + ".";
+                    return template + lastName + " " + firstName;
                 }
             }
         }
