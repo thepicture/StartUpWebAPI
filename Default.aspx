@@ -51,7 +51,7 @@
                     </asp:ListView>
                     <asp:Panel runat="server" ID="EmptyStartupsPanel" Visible="false">
                         <p class="lead">Стартапов пока нет. :(</p>
-                        <asp:Button runat="server" CssClass="round-div-block simple-cloud-button" Text="Создать новую команду"></asp:Button>
+                        <asp:Button ID="BtnCreateStartUp" OnClick="BtnCreateStartUp_Click" runat="server" CssClass="round-div-block simple-cloud-button" Text="Создать новую команду"></asp:Button>
                     </asp:Panel>
                     &nbsp;
                 </div>

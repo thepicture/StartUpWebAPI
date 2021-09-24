@@ -68,5 +68,10 @@ namespace StartUpWebAPI
                 Response.Redirect("~/TeamInfo.aspx?id=" + e.CommandArgument);
             }
         }
+
+        protected void BtnCreateStartUp_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/AddStartUp.aspx?id=0");
+        }
     }
 }
