@@ -10,6 +10,13 @@ namespace StartUpWebAPI.Entities
     /// </summary>
     public partial class StartUp
     {
+        public string SpacedTitle
+        {
+            get
+            {
+                return Name.Replace(" ", "<br>");
+            }
+        }
         public string ImagePreview
         {
             get
