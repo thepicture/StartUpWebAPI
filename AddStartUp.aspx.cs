@@ -8,37 +8,34 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Windows.Media.Imaging;
 
 namespace StartUpWebAPI
 {
-    public partial class AddStartUp : System.Web.UI.Page
+    public partial class AddStartUp : Page
     {
         public StartUp currentStartUp = new StartUp();
         public int id;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            string maybeId = Request.QueryString.Get("id");
+
+            if (maybeId != null)
+            {
+                CheckIfIdNotNull(maybeId);
+            }
+            else
+            {
+                id = 0;
+            }
 
             if (!Page.IsPostBack)
             {
-                string maybeId = Request.QueryString.Get("id");
-
-                if (maybeId != null)
-                {
-                    CheckIfIdNotNull(maybeId);
-                }
-                else
-                {
-                    id = 0;
-                }
-
 
                 InsertCategoriesBox();
                 TryToFindStartUp();
                 InsertCategory();
             }
-
         }
 
         private void CheckIfIdNotNull(string maybeId)
@@ -54,8 +51,12 @@ namespace StartUpWebAPI
             id = int.Parse(maybeId);
 
             currentStartUp = AppData.Context.StartUp.Find(id);
-
+            if (!IsPostBack)
+            {
             InsertImagesIntoStartUp();
+
+            }
+
         }
 
         private void InsertImagesIntoStartUp()
@@ -89,6 +90,7 @@ namespace StartUpWebAPI
 
             if (currentStartUp != null)
             {
+                CheckBoxDone.Visible = true;
                 TBoxName.Text = currentStartUp.Name;
                 TBoxDescription.Text = currentStartUp.Description;
                 TBoxMaxMembers.Text = currentStartUp.MaxMembersCount.ToString();
@@ -135,8 +137,10 @@ namespace StartUpWebAPI
             currentStartUp.Description = TBoxDescription.Text;
             currentStartUp.MaxMembersCount = int.Parse(TBoxMaxMembers.Text);
             currentStartUp.Category = AppData.Context.Category.First(c => c.Name.Equals(ComboCategories.SelectedValue));
+            currentStartUp.IsDone = CheckBoxDone.Checked;
 
             AppData.Context.StartUp.AddOrUpdate(currentStartUp);
+
             try
             {
                 AppData.Context.SaveChanges();
@@ -216,7 +220,8 @@ namespace StartUpWebAPI
                     .Context
                     .StartUpImage
                     .Find(int.Parse((string)e.CommandArgument)));
-                LViewImages.DataBind();
+
+                InsertImagesIntoStartUp();
             }
         }
 
@@ -236,26 +241,15 @@ namespace StartUpWebAPI
 
                 StartUpImage newImage = new StartUpImage
                 {
-                    Name = "abc",
+                    Name = p.FileName,
                     Image = NativeImageUtils.ConvertImageToBytes(image),
                     StartUp = currentStartUp
                 };
 
                 currentStartUp.StartUpImage.Add(newImage);
-
-                try
-                {
-                    AppData.Context.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    string reason = HttpUtility.UrlEncode("Изображение не было прикреплено");
-
-                    // TODO: Error handling
-                }
             });
 
-            Response.Redirect("~/AddStartUp.aspx?id=" + id, false);
+            InsertImagesIntoStartUp();
         }
     }
 }

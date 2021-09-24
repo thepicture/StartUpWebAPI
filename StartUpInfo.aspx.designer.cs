@@ -114,6 +114,24 @@ namespace StartUpWebAPI
         protected global::System.Web.UI.WebControls.Label IsActual;
 
         /// <summary>
+        /// PStartupEdit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PStartupEdit;
+
+        /// <summary>
+        /// LinkButtonModifyStartUp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButtonModifyStartUp;
+
+        /// <summary>
         /// CommentsCount control.
         /// </summary>
         /// <remarks>

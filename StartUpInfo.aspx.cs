@@ -23,6 +23,13 @@ namespace StartUpWebAPI
 
             startUp = AppData.Context.StartUp.Find(id);
 
+            bool userIsCreator = startUp.StartUpOfUser.Any(u => u.User.Login.ToLower().Equals(User.Identity.Name.ToLower()));
+
+            if (userIsCreator)
+            {
+                PStartupEdit.Visible = true;
+            }
+
             InsertComments();
             InsertStartUp();
         }
@@ -74,6 +81,13 @@ namespace StartUpWebAPI
             {
                 Console.WriteLine(ex.Message);
             }
+
+            MaintainScrollPositionOnPostBack = true;
+        }
+
+        protected void LinkButtonModifyStartUp_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/AddStartUp?id=" + startUp.Id);
         }
     }
 }

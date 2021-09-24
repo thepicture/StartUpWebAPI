@@ -34,6 +34,13 @@
                 <div class="round-div-block">
                     <asp:Label ID="IsActual" runat="server" ForeColor="Black"></asp:Label>
                 </div>
+                <asp:Panel runat="server" ID="PStartupEdit" Visible="false">
+                    <asp:LinkButton runat="server" Text='Изменить информацию'
+                        CssClass="round-div-block simple-cloud-button"
+                        ForeColor="White"
+                        ID="LinkButtonModifyStartUp"
+                        OnClick="LinkButtonModifyStartUp_Click"></asp:LinkButton>
+                </asp:Panel>
             </asp:Panel>
             &nbsp;
                 <p>
@@ -45,7 +52,11 @@
             </p>
             <div class="round-div-block">
                 <div class="unbordered-block">
-                    <asp:TextBox TextMode="SingleLine" CssClass="prevent-selection" placeholder="Введите комментарий для отправки" runat="server" ID="CommentBox" ForeColor="Black" Height="60" BorderStyle="None" BackColor="Transparent"></asp:TextBox>
+                    <asp:TextBox TextMode="SingleLine" CssClass="prevent-selection"
+                        placeholder="Введите комментарий для отправки"
+                        runat="server" ID="CommentBox" ForeColor="Black" Height="60"
+                        BorderStyle="None"
+                        BackColor="Transparent"></asp:TextBox>
                 </div>
             </div>
             <div class="round-div-block">
