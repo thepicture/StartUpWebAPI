@@ -46,6 +46,7 @@
                     <div class="startup-panel radius-like container-item ">
                             <img class="startup-image radius-like image-cover-auto" src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
                         <h1 class="tag-item"><%# Eval("Name") %></h1>
+                        <div class="tag-item gray-gradient radius-like" style="z-index:555;"></div>
                     </div>
                 </asp:LinkButton>
             </ItemTemplate>

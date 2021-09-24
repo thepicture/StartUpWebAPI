@@ -433,8 +433,7 @@ input[type="select"] {
 
 .startup-image {
     width: 100%;
-    opacity: .8;
-    filter: brightness(40%)
+    filter: brightness(100%)
 }
 
 /* Styles for panel in Startups. */
@@ -450,6 +449,11 @@ input[type="select"] {
         cursor: pointer;
         transform: scale(1.02);
     }
+
+.gray-gradient {
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,0) 19%, rgba(106,106,106,0.4) 33%, rgba(0,0,0,1) 89%);
+}
 
 /* Styles for register. */
 
