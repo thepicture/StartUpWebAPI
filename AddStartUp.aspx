@@ -18,6 +18,7 @@
     <asp:CheckBox runat="server" Text="Завершён" ID="CheckBoxDone" Checked='<%# Bind("IsDone") %>' Visible="false"
         AutoPostBack="true"></asp:CheckBox>
     <br />
+    <%-- ListView for demonstrating attached images if any. --%>
     <asp:ListView runat="server" ID="LViewImages" OnItemCommand="LViewImages_ItemCommand">
         <ItemTemplate>
             <div class="container-item startup-panel radius-like">
@@ -30,12 +31,36 @@
                     CommandName="RemoveImage"
                     CommandArgument='<%# Bind("Id") %>' ID="BtnRemoveImage"></asp:Button>
             </div>
-
         </ItemTemplate>
     </asp:ListView>
     <asp:FileUpload runat="server" AllowMultiple="true" ID="FileUploadImages" />
     <asp:Button runat="server" Text="Добавить изображения" ID="BtnAddImages"
         OnClick="BtnAddImages_Click" />
+    <br />
+    <asp:Label runat="server" Text="Документы (до 5Мб)"></asp:Label>
+    <%-- ListView for demonstrating attached documents if any. --%>
+    <asp:ListView runat="server" ID="LViewDocuments" OnItemCommand="LViewDocuments_ItemCommand">
+        <ItemTemplate>
+            <div class="container-item startup-panel radius-like">
+               <%-- <div class="radius-like">
+                    <asp:CheckBox runat="server" Text='Приватный' ID="PublicBox"
+                        Checked='<%# Eval("IsPublic") %>'></asp:CheckBox>
+                </div>--%>
+                <h1 class="tag-item"><%# Eval("FileName") %></h1>
+                <asp:Button runat="server"
+                    CssClass="tag-item round-div-block simple-cloud-button"
+                    Style="width: 90%; height: max-content;"
+                    Text="Удалить"
+                    CommandName="RemoveDocument"
+                    CommandArgument='<%# Bind("Id") %>' ID="BtnRemoveDocument"></asp:Button>
+            </div>
+        </ItemTemplate>
+    </asp:ListView>
+    <asp:FileUpload runat="server" AllowMultiple="true" ID="DocumentUpload" />
+    <asp:Button runat="server" Text="Добавить документы" ID="BtnAddDocuments"
+        OnClick="BtnAddDocuments_Click" />
+    <br />
+
     <asp:Button runat="server" OnClick="BtnSave_Click" ID="BtnSave" Text="Сохранить изменения" />
     <asp:Button runat="server" OnClick="BtnCancel_Click" ID="BtnCancel" Text="Отмена" />
 </asp:Content>

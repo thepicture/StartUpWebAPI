@@ -55,6 +55,7 @@ namespace StartUpWebAPI
             if (!IsPostBack)
             {
                 InsertImagesIntoStartUp();
+                InsertDocumentsIntoStartUp();
             }
 
         }
@@ -78,7 +79,9 @@ namespace StartUpWebAPI
 
         private void TryToFindStartUp()
         {
-            if (id != 0)
+            bool startUpIsNew = id != 0;
+
+            if (startUpIsNew)
             {
                 TryToAssignValuesInStartUp();
             }
@@ -231,11 +234,17 @@ namespace StartUpWebAPI
 
         protected void BtnAddImages_Click(object sender, EventArgs e)
         {
+            if (FileUploadImages.PostedFiles[0].ContentLength == 0)
+            {
+                return;
+            }
+
             List<HttpPostedFile> photos = FileUploadImages.PostedFiles.ToList();
 
             photos.ForEach(p =>
             {
-                if (!p.ContentType.Contains("image"))
+                bool isNotImage = !p.ContentType.Contains("image");
+                if (isNotImage)
                 {
                     return;
                 }
@@ -254,6 +263,77 @@ namespace StartUpWebAPI
             });
 
             InsertImagesIntoStartUp();
+        }
+
+        protected void LViewDocuments_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+            if (e.CommandName == "RemoveDocument")
+            {
+                int id = int.Parse((string)e.CommandArgument);
+
+                if (AppData.Context.DocumentOfStartUp.Any(d => d.Id == id))
+                {
+                    AppData.Context.DocumentOfStartUp.Remove(AppData
+                        .Context
+                        .DocumentOfStartUp
+                        .Find(int.Parse((string)e.CommandArgument)));
+
+                    InsertDocumentsIntoStartUp();
+                }
+            }
+        }
+
+        private void InsertDocumentsIntoStartUp()
+        {
+            if (currentStartUp != null)
+            {
+                LViewDocuments.DataSource = currentStartUp.DocumentOfStartUp.ToList();
+                LViewDocuments.DataBind();
+            }
+        }
+
+        protected void BtnAddDocuments_Click(object sender, EventArgs e)
+        {
+            if (DocumentUpload.PostedFiles[0].ContentLength == 0)
+            {
+                return;
+            }
+
+            List<HttpPostedFile> docs = DocumentUpload.PostedFiles.ToList();
+
+            docs.ForEach(p =>
+            {
+                bool contentIsGreaterThanFiveMb = p.ContentLength > 1024 * 1024 * 5;
+
+                if (contentIsGreaterThanFiveMb)
+                {
+                    return;
+                }
+
+                Stream blob = p.InputStream;
+
+                DocumentOfStartUp doc = new DocumentOfStartUp
+                {
+                    FileName = p.FileName,
+                    CreationDate = DateTime.Now,
+                    StartUp = currentStartUp,
+                    Blob = StreamToByteArray(blob),
+                    IsPublic = true
+                };
+
+                currentStartUp.DocumentOfStartUp.Add(doc);
+            });
+
+            InsertDocumentsIntoStartUp();
+        }
+
+        private byte[] StreamToByteArray(Stream source)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                source.CopyTo(ms);
+                return ms.ToArray();
+            }
         }
     }
 }
