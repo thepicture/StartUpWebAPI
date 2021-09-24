@@ -16,19 +16,21 @@ namespace StartUpWebAPI
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            string maybeId = Request.QueryString.Get("id");
-
-            if (maybeId != null)
-            {
-                CheckIfIdNotNull(maybeId);
-            }
-            else
-            {
-                id = 0;
-            }
 
             if (!Page.IsPostBack)
             {
+                string maybeId = Request.QueryString.Get("id");
+
+                if (maybeId != null)
+                {
+                    CheckIfIdNotNull(maybeId);
+                }
+                else
+                {
+                    id = 0;
+                }
+
+
                 InsertCategoriesBox();
                 TryToFindStartUp();
                 InsertCategory();
@@ -55,7 +57,7 @@ namespace StartUpWebAPI
 
         private void InsertImagesIntoStartUp()
         {
-            if (currentStartUp.StartUpImage.Count != 0)
+            if (currentStartUp != null)
             {
                 LViewImages.DataSource = currentStartUp.StartUpImage.ToList();
                 LViewImages.DataBind();
@@ -207,7 +209,10 @@ namespace StartUpWebAPI
         {
             if (e.CommandName == "RemoveImage")
             {
-                currentStartUp.StartUpImage.Remove(AppData.Context.StartUpImage.Find(e.CommandArgument));
+                currentStartUp.StartUpImage.Remove(AppData
+                    .Context
+                    .StartUpImage
+                    .Find(int.Parse((string)e.CommandArgument)));
                 LViewImages.DataBind();
             }
         }

@@ -7,7 +7,6 @@
     <asp:Label runat="server" Text="Категория"></asp:Label>
     <asp:DropDownList AutoPostBack="true" runat="server" ID="ComboCategories" Width="200"></asp:DropDownList>
     <br />
-    s
     <asp:Label runat="server" Text="Максимум участников"></asp:Label>
     <asp:TextBox runat="server" ID="TBoxMaxMembers" Width="50" TextMode="Number"></asp:TextBox>
     <br />
@@ -20,11 +19,19 @@
         <ItemTemplate>
             <asp:Label runat="server" ID="LImageName" Text='<%# Bind("Name") %>'></asp:Label>
             <br />
-            <asp:Image runat="server" Width="100" Height="100"
-                ImageUrl='<%# Bind("ImageInBase64") %>' />
-            <asp:Button runat="server" Text="Удалить" ID="BtnRemoveImage"
-                CommandName="RemoveImage"
-                CommandArgument='<%# Bind("Id") %>' />
+
+            <div class="container-item startup-panel radius-like">
+                <img class="startup-image radius-like" src='<%# Eval("ImageInBase64") %>' alt='<%# Eval("Name") %>' />
+                <h1 class="tag-item"><%# Eval("Name") %></h1>
+                <asp:Button runat="server"
+                    CssClass="tag-item round-div-block simple-cloud-button"
+                    Style="width: 90%; height: max-content;"
+                    Text="Удалить"
+                    CommandName="RemoveImage"
+                    CommandArgument='<%# Bind("Id") %>' ID="BtnRemoveImage"
+                    eve></asp:Button>
+            </div>
+
         </ItemTemplate>
     </asp:ListView>
     <input id="StartUpImages" type="file" draggable="true" multiple runat="server" />
