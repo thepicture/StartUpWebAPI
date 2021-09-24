@@ -53,7 +53,7 @@ namespace StartUpWebAPI
             currentStartUp = AppData.Context.StartUp.Find(id);
             if (!IsPostBack)
             {
-            InsertImagesIntoStartUp();
+                InsertImagesIntoStartUp();
 
             }
 
@@ -151,7 +151,10 @@ namespace StartUpWebAPI
             }
             catch (Exception)
             {
-                throw;
+                string reason = HttpUtility.UrlEncode("Стартап не был изменен или добавлен." +
+                    "Пожалуйста, попробуйте изменить стартап ещё раз");
+
+                Response.Redirect("~/Default?reason=" + reason, false);
             }
         }
 
@@ -177,7 +180,6 @@ namespace StartUpWebAPI
             {
                 User = user,
                 RoleType = role,
-                StartUp = currentStartUp
             };
 
             currentStartUp.StartUpOfUser.Add(userStartUp);
@@ -188,9 +190,11 @@ namespace StartUpWebAPI
             {
                 AppData.Context.SaveChanges();
 
+                int newStartupId = AppData.Context.StartUp.Where(s => s.CreationDate.Equals(currentStartUp.CreationDate)).First().Id;
+
                 string reason = HttpUtility.UrlEncode("Стартап был успешно сохранён!");
 
-                Response.Redirect("~/Default.aspx?reason=" + reason, false);
+                Response.Redirect("~/StartUpInfo.aspx?id=" + newStartupId + "$&reason=" + reason, false);
             }
             catch (Exception ex)
             {

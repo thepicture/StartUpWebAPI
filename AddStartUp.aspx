@@ -20,9 +20,6 @@
     <br />
     <asp:ListView runat="server" ID="LViewImages" OnItemCommand="LViewImages_ItemCommand">
         <ItemTemplate>
-            <asp:Label runat="server" ID="LImageName" Text='<%# Bind("Name") %>'></asp:Label>
-            <br />
-
             <div class="container-item startup-panel radius-like">
                 <img class="startup-image radius-like" src='<%# Eval("ImageInBase64") %>' alt='<%# Eval("Name") %>' />
                 <h1 class="tag-item"><%# Eval("Name") %></h1>
