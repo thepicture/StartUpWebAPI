@@ -20,9 +20,12 @@ namespace StartUpWebAPI
 
             if (maybeId != null)
             {
-                id = int.Parse(maybeId);
+                if (int.Parse(maybeId) != 0)
+                {
+                    id = int.Parse(maybeId);
 
-                currentStartUp = AppData.Context.StartUp.Find(id);
+                    currentStartUp = AppData.Context.StartUp.Find(id);
+                }
             }
             else
             {
@@ -33,12 +36,13 @@ namespace StartUpWebAPI
             {
                 InsertCategoriesBox();
                 TryToFindStartUp();
-
-                TBoxName.Text = currentStartUp.Name;
-                TBoxDescription.Text = currentStartUp.Description;
-                TBoxMaxMembers.Text = currentStartUp.MaxMembersCount.ToString();
+                InsertCategory();
             }
 
+        }
+
+        private void InsertCategory()
+        {
             if (currentStartUp.Category?.Name != null)
             {
                 ComboCategories.Items.FindByValue(currentStartUp.Category.Name).Selected = true;
@@ -49,22 +53,26 @@ namespace StartUpWebAPI
         {
             if (id != 0)
             {
-                currentStartUp = AppData.Context.StartUp.Find(id);
+                TryToAssignValuesInStartUp();
+            }
+        }
 
-                if (currentStartUp != null)
-                {
-                    TBoxName.Text = currentStartUp.Name;
-                    TBoxDescription.Text = currentStartUp.Description;
-                    TBoxMaxMembers.Text = currentStartUp.MaxMembersCount.ToString();
-                }
-                else
-                {
-                    string reason = HttpUtility.UrlEncode("Ошибка 404. Стартап не был найден." +
-                        "Пожалуйста, попробуйте найти другой стартап.");
+        private void TryToAssignValuesInStartUp()
+        {
+            currentStartUp = AppData.Context.StartUp.Find(id);
 
-                    Response.Redirect("~/Default?reason=" + reason);
-                }
+            if (currentStartUp != null)
+            {
+                TBoxName.Text = currentStartUp.Name;
+                TBoxDescription.Text = currentStartUp.Description;
+                TBoxMaxMembers.Text = currentStartUp.MaxMembersCount.ToString();
+            }
+            else
+            {
+                string reason = HttpUtility.UrlEncode("Ошибка 404. Стартап не был найден." +
+                    "Пожалуйста, попробуйте найти другой стартап.");
 
+                Response.Redirect("~/Default?reason=" + reason);
             }
         }
 
@@ -74,7 +82,6 @@ namespace StartUpWebAPI
         private void InsertCategoriesBox()
         {
             var categories = AppData.Context.Category.Select(c => c.Name).ToList();
-            categories.Insert(0, "Все категории");
             ComboCategories.DataSource = categories;
             ComboCategories.DataBind();
         }
@@ -110,7 +117,7 @@ namespace StartUpWebAPI
 
                 string reason = HttpUtility.UrlEncode("Стартап успешно изменён!");
 
-                Response.Redirect("~/Default?reason=" + reason);
+                Response.Redirect("~/Default?reason=" + reason, false);
             }
             catch (Exception)
             {
