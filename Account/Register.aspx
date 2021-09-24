@@ -1,7 +1,8 @@
-﻿<%@ Page Title="Регистрация" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Register.aspx.cs" Inherits="StartUpWebAPI.Account.Register" %>
+﻿<%@ Page Title="Регистрация" Language="C#" MasterPageFile="~/Site.Master"
+    AutoEventWireup="true" CodeBehind="Register.aspx.cs"
+    Inherits="StartUpWebAPI.Account.Register" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-    <h2 class="title-setting" style="color: white;"><%: Title %></h2>
     <p class="text-danger">
         <asp:Literal runat="server" ID="ErrorMessage" />
     </p>
@@ -11,6 +12,7 @@
             Введённое имя пользователя уже существует в системе. Пожалуйста, укажите другое имя пользователя.
         </div>
     </asp:PlaceHolder>
+
     <div class="form-horizontal request-center" style="display: none">
         <h4 class="textMarginAndSize">Создать новый аккаунт</h4>
         <asp:ValidationSummary runat="server" CssClass="text-danger" />
@@ -54,21 +56,30 @@
             </div>
         </div>
     </div>
+    <br />
+    <br />
+    <br />
+    <br />
+
     <div style="display: flex; justify-content: center; vertical-align: middle;">
-        <div class="round-div-block semi-transparent" style="width: 600px; height: fit-content; animation: none !important; display: inline-block;">
+        <div class="round-div-block semi-transparent-register-like"
+            style="width: 650px; height: 460px; animation: none !important; display: inline-block;">
+            <h2 class="title-setting-register-like" style="color: white;"><%: Title %></h2>
             <div style="display: flex; justify-content: center;">
-                <asp:TextBox ID="LoginBox" TextMode="SingleLine"
+                <asp:TextBox Style="margin: 20px 0px -10px 0px;" ID="LoginBox" TextMode="SingleLine"
                     runat="server"
-                    BorderStyle="None" CssClass="nice-text-box prevent-selection" placeholder="Логин"></asp:TextBox>
+                    BorderStyle="None" CssClass="nice-text-box prevent-selection textbox-style-setting" placeholder="Логин"></asp:TextBox>
             </div>
             <br />
+
+
             <div style="display: flex; justify-content: center;">
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="LoginBox"
-                    CssClass="text-danger" ErrorMessage="Поле логина обязательно для заполнения." />
+                    CssClass="text-danger-register-like" ErrorMessage="Поле логина обязательно для заполнения" />
             </div>
             <div style="display: flex; justify-content: center;">
-                <asp:TextBox ID="FullNameBox" runat="server" BorderStyle="None"
-                    CssClass="nice-text-box prevent-selection"
+                <asp:TextBox Style="margin: 0px 0px 0px 0px;" ID="FullNameBox" runat="server" BorderStyle="None"
+                    CssClass="nice-text-box prevent-selection textbox-style-setting"
                     placeholder="ФИО"
                     TextMode="SingleLine"></asp:TextBox>
 
@@ -76,38 +87,39 @@
             <br />
             <div style="display: flex; justify-content: center;">
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="FullNameBox"
-                    CssClass="text-danger" ErrorMessage="Поле ФИО обязательно для заполнения." />
+                    CssClass="text-danger-register-like" ErrorMessage="Поле ФИО обязательно для заполнения" />
             </div>
             <br />
             <div style="display: flex; justify-content: center;">
-                <asp:TextBox runat="server" ID="PasswordBox" TextMode="Password"
+                <asp:TextBox Style="margin: -30px 0px 0px 0px;" runat="server" ID="PasswordBox" TextMode="Password"
                     BorderStyle="None"
-                    CssClass="nice-text-box prevent-selection" placeholder="Пароль"></asp:TextBox>
+                    CssClass="nice-text-box prevent-selection textbox-style-setting" placeholder="Пароль"></asp:TextBox>
             </div>
             <br />
             <div style="display: flex; justify-content: center;">
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="PasswordBox"
-                    CssClass="text-danger" ErrorMessage="Поле пароля обязательно." />
+                    CssClass="text-danger-register-like" ErrorMessage="Поле пароля обязательно" />
             </div>
             <br />
             <div style="display: flex; justify-content: center;">
-                <asp:TextBox runat="server" ID="ConfirmPasswordBox"
+                <asp:TextBox Style="margin: -30px 0px 0px 0px;" runat="server" ID="ConfirmPasswordBox"
                     BorderStyle="None"
-                    CssClass="nice-text-box prevent-selection" placeholder="Повтор пароля"></asp:TextBox>
+                    CssClass="nice-text-box prevent-selection textbox-style-setting" placeholder="Повтор пароля"></asp:TextBox>
             </div>
             <br />
             <div style="display: flex; justify-content: center;">
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="ConfirmPasswordBox"
-                    CssClass="text-danger" Display="Dynamic" ErrorMessage="Подтверждение пароля обязательно." />
+                    CssClass="text-danger-register-like" Display="Dynamic" ErrorMessage="Подтверждение пароля обязательно" />
             </div>
-            <br />
-            <div style="display: flex; justify-content: center;">
+
+            <div style="display: flex; justify-content: center; margin-bottom: 20px;">
                 <asp:CompareValidator runat="server" ControlToCompare="PasswordBox" ControlToValidate="ConfirmPasswordBox"
-                    CssClass="text-danger" Display="Dynamic" ErrorMessage="Пароли не совпадают." />
+                    CssClass="text-danger-register-like" Display="Dynamic" ErrorMessage="Пароли не совпадают" />
             </div>
             <br />
             <div style="display: flex; justify-content: center;">
-                <asp:Button Text="Авторизоваться" CssClass="round-div-block simple-cloud-button"
+                <asp:Button Style="margin: -25px 0px 0px 0px; font-size: 26px !important;" Text="Зарегистрироваться"
+                    CssClass="round-div-block-specified-about about-like-cloud-button"
                     runat="server" ID="BtnLogIn" OnClick="CreateUser_Click" />
             </div>
         </div>

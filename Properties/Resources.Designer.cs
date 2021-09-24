@@ -71,11 +71,21 @@ namespace StartUpWebAPI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] contactBack {
+            get {
+                object obj = ResourceManager.GetObject("contactBack", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap commonLoginBg {
+        internal static System.Drawing.Bitmap contactImage {
             get {
-                object obj = ResourceManager.GetObject("commonLoginBg", resourceCulture);
+                object obj = ResourceManager.GetObject("contactImage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +93,9 @@ namespace StartUpWebAPI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap commonRegisterBg {
+        internal static System.Drawing.Bitmap loginRegisterBg {
             get {
-                object obj = ResourceManager.GetObject("commonRegisterBg", resourceCulture);
+                object obj = ResourceManager.GetObject("loginRegisterBg", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -107,15 +117,6 @@ namespace StartUpWebAPI.Properties {
             get {
                 object obj = ResourceManager.GetObject("noPicture", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 200.
-        /// </summary>
-        internal static string SmoothAddInterval {
-            get {
-                return ResourceManager.GetString("SmoothAddInterval", resourceCulture);
             }
         }
     }

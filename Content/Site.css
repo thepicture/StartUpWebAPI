@@ -80,13 +80,14 @@ body {
     min-width: 100%;
     min-height: 100%;
     z-index: -1;
+    width: 100%;
+    height: 100%;
     transition: all linear 1000s;
     animation-name: blick;
     animation-iteration-count: infinite;
     animation-duration: 10s;
     animation-timing-function: ease-in-out;
     animation-direction: alternate;
-    filter: blur(10px);
 }
 
 
@@ -100,11 +101,11 @@ body {
 
 @keyframes blick {
     from {
-        transform: scale(0.99);
+        transform: scale(1.01);
     }
 
     to {
-        transform: scale(1.01);
+        transform: scale(1.06);
     }
 }
 
@@ -165,7 +166,7 @@ div ul li a {
     color: black !important;
     font-family: 'Cormorant', serif;
     transition: all ease-in-out 100ms;
-    font-size: 20px;
+    font-size: 22px;
 }
 
     /* Change the color when the mouse is over a buttons. */
@@ -199,11 +200,12 @@ div ul li a {
 
 /* Set widths on the form inputs since otherwise they're 100% wide */
 input[type="text"],
+input[type="text"]:focus,
 input[type="password"],
 input[type="email"],
 input[type="tel"],
 input[type="select"] {
-    max-width: 280px;
+    max-width: 500px;
 }
 
 .startupnavbar {
@@ -292,8 +294,7 @@ input[type="select"] {
 }
 
 .delayed-fade-in {
-    animation-delay: 2s;
-    -webkit-animation-duration: 2s;
+    -webkit-animation-duration: 3s;
 }
 
 .align-h1 {
@@ -506,3 +507,70 @@ input[type="select"] {
     height: 100%;
     object-fit: cover;
 }
+
+/* Styles for master web form. */
+
+/* The title and size for master page. */
+.title-and-size {
+    font-family: 'Cormorant', serif;
+    font-size: 22px !important;
+}
+
+/* Styles for contact page. */
+
+.title-setting-contact {
+    margin-top: 1%;
+    font-size: 42px;
+}
+
+/* Styles for register and login. */
+
+.textbox-style-setting {
+    border: 1px solid #c4c4c4;
+    height: 40px;
+    width: 375px !important;
+    font-size: 13px;
+    padding: 4px 4px 4px 4px;
+    font-size: 20px;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    box-shadow: 0px 0px 8px #545454;
+    -moz-box-shadow: 0px 0px 8px #545454;
+    -webkit-box-shadow: 0px 0px 8px #d9d9d9;
+}
+
+    .textbox-style-setting:focus {
+        outline: none;
+        border: 1px solid #545454;
+        box-shadow: 0px 0px 8px #545454;
+        -moz-box-shadow: 0px 0px 8px #545454;
+        -webkit-box-shadow: 0px 0px 8px #545454;
+    }
+
+.text-danger-register-like {
+    color: white !important;
+    font-size: 18px;
+}
+
+.style-background-for-div {
+    opacity: 0.11;
+}
+
+.semi-transparent-register-like {
+    background-color: rgba(23,23,23,0.5) !important;
+}
+
+.blurred-register-like {
+    filter: blur(2px);
+}
+
+/* ?? */
+
+a {
+    text-decoration: none !important;
+}
+
+    a:focus {
+        text-decoration: none !important;
+    }

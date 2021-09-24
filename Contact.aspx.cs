@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StartUpWebAPI.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,12 @@ namespace StartUpWebAPI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            LoadBgImage();
+        }
 
+        private void LoadBgImage()
+        {
+            BgImage.ImageUrl = NativeImageUtils.ConvertFromBitmap(Properties.Resources.contactImage);
         }
     }
 }

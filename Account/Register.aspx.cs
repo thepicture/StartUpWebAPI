@@ -23,7 +23,7 @@ namespace StartUpWebAPI.Account
 
         private void LoadBgImage()
         {
-            BgImage.ImageUrl = NativeImageUtils.ConvertFromBitmap(Properties.Resources.commonRegisterBg);
+            BgImage.ImageUrl = NativeImageUtils.ConvertFromBitmap(Properties.Resources.loginRegisterBg);
         }
 
         protected void CreateUser_Click(object sender, EventArgs e)

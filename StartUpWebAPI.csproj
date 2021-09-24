@@ -205,6 +205,9 @@
     <Resource Include="Resources\Исландия.mp4" />
     <Resource Include="Resources\StarTup.png" />
     <Resource Include="Resources\noPicture.png" />
+    <Resource Include="Resources\loginRegisterBg.jpg" />
+    <Resource Include="Resources\contactImage.jpg" />
+    <Resource Include="Resources\contactBack.svg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -422,6 +425,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
