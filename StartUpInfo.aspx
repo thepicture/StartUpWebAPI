@@ -8,7 +8,9 @@
             <p class="lead">
             </p>
 
-            <asp:Image ID="MainImage" runat="server" CssClass="radius-like swimming-content" Height="200" Width="200" />
+            <div style="width: 200px; height: 200px;">
+                <asp:Image ID="MainImage" runat="server" CssClass="radius-like swimming-content image-cover-auto" />
+            </div>
             <asp:Panel ID="PanelMyStartups" runat="server">
                 <div class="round-div-block">
                     <asp:Label ID="Name" runat="server" ForeColor="Black"></asp:Label>

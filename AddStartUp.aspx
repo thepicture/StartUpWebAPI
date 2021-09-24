@@ -21,7 +21,7 @@
     <asp:ListView runat="server" ID="LViewImages" OnItemCommand="LViewImages_ItemCommand">
         <ItemTemplate>
             <div class="container-item startup-panel radius-like">
-                <img class="startup-image radius-like" src='<%# Eval("ImageInBase64") %>' alt='<%# Eval("Name") %>' />
+                <img class="startup-image radius-like image-cover-auto" src='<%# Eval("ImageInBase64") %>' alt='<%# Eval("Name") %>' />
                 <h1 class="tag-item"><%# Eval("Name") %></h1>
                 <asp:Button runat="server"
                     CssClass="tag-item round-div-block simple-cloud-button"

@@ -434,7 +434,6 @@ input[type="select"] {
 
 .startup-image {
     width: 100%;
-    height: 100%;
     opacity: .8;
     filter: brightness(40%)
 }
@@ -496,4 +495,11 @@ input[type="select"] {
 /* Styles for default form. */
 .request-normal-height {
     min-height: 400px;
+}
+
+/* Styles for startup info. */
+.image-cover-auto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
