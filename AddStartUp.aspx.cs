@@ -22,7 +22,7 @@ namespace StartUpWebAPI
 
             if (maybeId != null)
             {
-                CheckIfIdNotNull(maybeId);
+                CheckIfStartupIsNewAndPrepare(maybeId);
             }
             else
             {
@@ -38,7 +38,7 @@ namespace StartUpWebAPI
             }
         }
 
-        private void CheckIfIdNotNull(string maybeId)
+        private void CheckIfStartupIsNewAndPrepare(string maybeId)
         {
             if (int.Parse(maybeId) != 0)
             {
@@ -51,10 +51,10 @@ namespace StartUpWebAPI
             id = int.Parse(maybeId);
 
             currentStartUp = AppData.Context.StartUp.Find(id);
+
             if (!IsPostBack)
             {
                 InsertImagesIntoStartUp();
-
             }
 
         }
@@ -149,7 +149,7 @@ namespace StartUpWebAPI
 
                 Response.Redirect("~/Default?reason=" + reason, false);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 string reason = HttpUtility.UrlEncode("Стартап не был изменен или добавлен." +
                     "Пожалуйста, попробуйте изменить стартап ещё раз");
@@ -220,7 +220,7 @@ namespace StartUpWebAPI
         {
             if (e.CommandName == "RemoveImage")
             {
-                currentStartUp.StartUpImage.Remove(AppData
+                AppData.Context.StartUpImage.Remove(AppData
                     .Context
                     .StartUpImage
                     .Find(int.Parse((string)e.CommandArgument)));
