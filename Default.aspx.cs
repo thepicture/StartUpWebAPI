@@ -71,7 +71,7 @@ namespace StartUpWebAPI
 
         protected void BtnCreateStartUp_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/AddStartUp.aspx?id=0");
+            Response.Redirect("~/AddStartUp.aspx");
         }
     }
 }

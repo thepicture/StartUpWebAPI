@@ -98,40 +98,6 @@ body {
     background-color: green !important;
 }
 
-/* Smooth div cloud-like block. */
-.round-div-block {
-    border-radius: 30px;
-    height: 30px;
-    font-family: 'IBM Plex Serif', serif;
-    padding: 10px;
-    background: white;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    margin: 10px;
-}
-
-    .round-div-block:hover {
-        animation-name: blick;
-        animation-iteration-count: infinite;
-        animation-duration: 1s;
-        animation-timing-function: ease-in-out;
-        animation-direction: alternate;
-    }
-
-.simple-cloud-button {
-    background-color: deeppink;
-    color: white !important;
-    border: 0px;
-    padding: 0;
-    padding-left: 5px;
-    padding-right: 5px;
-}
-
-    .simple-cloud-button:hover {
-        background-color: lightpink !important;
-    }
-
 @keyframes blick {
     from {
         transform: scale(0.99);
@@ -486,3 +452,48 @@ input[type="select"] {
         cursor: pointer;
         transform: scale(1.02);
     }
+
+/* Styles for register. */
+
+/* Smooth div cloud-like block. */
+.round-div-block {
+    border-radius: 30px;
+    height: 30px;
+    font-family: 'IBM Plex Serif', serif;
+    padding: 10px;
+    background: white;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+    .round-div-block:hover {
+        animation-name: blick;
+        animation-iteration-count: infinite;
+        animation-duration: 1s;
+        animation-timing-function: ease-in-out;
+        animation-direction: alternate;
+    }
+
+.semi-transparent {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.simple-cloud-button {
+    background-color: deeppink;
+    color: white !important;
+    border: 0px;
+    padding: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+    .simple-cloud-button:hover {
+        background-color: lightpink !important;
+    }
+
+/* Styles for default form. */
+.request-normal-height {
+    min-height: 400px;
+}

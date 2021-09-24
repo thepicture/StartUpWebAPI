@@ -55,7 +55,7 @@
         </div>
     </div>
     <div style="display: flex; justify-content: center; vertical-align: middle;">
-        <div class="round-div-block" style="width: 600px; height: fit-content; animation: none !important; display: inline-block;">
+        <div class="round-div-block semi-transparent" style="width: 600px; height: fit-content; animation: none !important; display: inline-block;">
             <div style="display: flex; justify-content: center;">
                 <asp:TextBox ID="LoginBox" TextMode="SingleLine"
                     runat="server"

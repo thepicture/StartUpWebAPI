@@ -51,11 +51,11 @@
                     </asp:ListView>
                     <asp:Panel runat="server" ID="EmptyStartupsPanel" Visible="false">
                         <p class="lead">Стартапов пока нет. :(</p>
-                        <asp:Button ID="BtnCreateStartUp" OnClick="BtnCreateStartUp_Click" runat="server" CssClass="round-div-block simple-cloud-button" Text="Создать новую команду"></asp:Button>
                     </asp:Panel>
+                    <asp:Button ID="BtnCreateStartUp" OnClick="BtnCreateStartUp_Click" runat="server" CssClass="round-div-block simple-cloud-button" Text="Создать новый стартап"></asp:Button>
                     &nbsp;
                 </div>
-                <div class="jumbotron gradientable">
+                <div class="jumbotron gradientable marginaled">
                     <h1>Организованные мной команды</h1>
                     <asp:ListView runat="server" ID="LViewMyTeams" OnItemCommand="LViewMyTeams_ItemCommand">
                         <ItemTemplate>
@@ -66,8 +66,8 @@
                     </asp:ListView>
                     <asp:Panel runat="server" ID="EmptyTeamsPanel" Visible="false">
                         <p class="lead">Команд пока нет. :(</p>
-                        <asp:Button CssClass="round-div-block simple-cloud-button" runat="server" Text="Создать новую команду"></asp:Button>
                     </asp:Panel>
+                    <asp:Button CssClass="round-div-block simple-cloud-button" runat="server" Text="Создать новую команду"></asp:Button>
                     &nbsp;
                 </div>
             </div>
