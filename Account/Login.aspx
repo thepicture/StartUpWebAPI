@@ -2,7 +2,7 @@
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
     <div style="text-align: center;">
-        <h2 style="color: black;"><%: Title %></h2>
+        
     </div>
     <div style="display: none;">
         <div class="row">
@@ -65,32 +65,42 @@
             </div>
         </div>
     </div>
+      <br />
+      <br />
+      <br />
+      <br />
     <div style="display: flex; justify-content: center; vertical-align: middle;">
-        <div class="round-div-block" style="width: 600px; height: fit-content; animation: none !important; display: inline-block;">
+        <div class="round-div-block semi-transparent" style="width: 650px; height: 400px; animation: none !important; display: inline-block;">
+            <h2 class="title-setting-copy" style="color: white;"><%: Title %></h2>
             <div style="display: flex; justify-content: center;">
-                <asp:TextBox ID="LoginBox" runat="server" BorderStyle="None" CssClass="nice-text-box prevent-selection" placeholder="Логин"></asp:TextBox>
+                <asp:TextBox ID="LoginBox" style="margin:20px 0px -20px 0px;" runat="server" BorderStyle="None"
+                    CssClass="nice-text-box prevent-selection textboxstylesetting"
+                    placeholder="Логин"></asp:TextBox>
             </div>
             <br />
+
             <div style="display: flex; justify-content: center;">
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="LoginBox"
-                    CssClass="text-danger" ErrorMessage="Поле логина обязательно для заполнения." />
+                    CssClass="text-danger-copy" ErrorMessage="Поле логина обязательно для заполнения." />
             </div>
             <br />
             <div style="display: flex; justify-content: center;">
-                <asp:TextBox runat="server" ID="PasswordBox" BorderStyle="None" CssClass="nice-text-box prevent-selection" placeholder="Пароль"></asp:TextBox>
+                <asp:TextBox style="margin:-10px 0px -20px 0px;" runat="server" ID="PasswordBox" 
+                    BorderStyle="None"  CssClass="nice-text-box prevent-selection textboxstylesetting" placeholder="Пароль"></asp:TextBox>
             </div>
             <br />
             <div style="display: flex; justify-content: center;">
-                <asp:RequiredFieldValidator runat="server" ControlToValidate="PasswordBox" CssClass="text-danger"
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="PasswordBox"
+                    CssClass="text-danger-copy"
                     ErrorMessage="Поле пароля обязательно для заполнения." />
             </div>
             <br />
-            <div style="display: flex; justify-content: center;">
-                <asp:CheckBox Text="Запомнить меня" runat="server" ID="RememberMe" />
+            <div style="display: flex; justify-content: center; margin: -30px 0 20px 0px; color:white; font-size:20px;">
+                <asp:CheckBox Text="&nbsp Запомнить меня"  runat="server" style="margin:0 10px -5px 0; font-family: 'Cormorant', serif;" ID="RememberMe" />
             </div>
             <br />
             <div style="display: flex; justify-content: center;">
-                <asp:Button Text="Авторизоваться" CssClass="round-div-block simple-cloud-button"
+                <asp:Button  style="margin:-25px 0px 0px 0px; font-size:26px !important;" Text="Авторизоваться" CssClass="round-div-block-specified-about about-like-cloud-button"
                     runat="server" ID="BtnLogIn" OnClick="LogIn" />
             </div>
             <br />
@@ -99,6 +109,7 @@
                     runat="server"
                     ID="RegisterHyperLink"
                     NavigateUrl="~/Account/Register.aspx"
+                    style="color:white; font-family: 'Cormorant', serif; font-size:20px;"
                     ViewStateMode="Disabled">Ещё нет в системе?</asp:HyperLink>
             </div>
         </div>

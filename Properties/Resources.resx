@@ -121,11 +121,20 @@
   <data name="AeOf3UMV9WA_removebg_preview" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AeOf3UMV9WA-removebg-preview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="background_for_reg_and_avt" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\background-for-reg-and-avt.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="commonLoginBg" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\commonLoginBg.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="commonRegisterBg" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\commonRegisterBg.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Contact_back" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Contact-back.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Contact_image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Contact-image.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

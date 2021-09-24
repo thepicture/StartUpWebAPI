@@ -203,6 +203,9 @@
     <Resource Include="Resources\Исландия.mp4" />
     <Resource Include="Resources\StarTup.png" />
     <Resource Include="Resources\noPicture.png" />
+    <Resource Include="Resources\background-for-reg-and-avt.jpg" />
+    <Resource Include="Resources\Contact-image.jpg" />
+    <Resource Include="Resources\Contact-back.svg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

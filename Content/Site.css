@@ -54,9 +54,9 @@ body {
     }
 }
 
-.nice-text-box {
-    border-bottom: 2px solid deeppink !important;
-}
+/*.nice-text-box {
+    border-bottom: 2px solid #545454 !important;
+}*/
 
     .nice-text-box::placeholder {
         text-align: center;
@@ -86,7 +86,8 @@ body {
     animation-duration: 10s;
     animation-timing-function: ease-in-out;
     animation-direction: alternate;
-    filter: blur(10px);
+  width:100%;
+  height:100%;
 }
 
 
@@ -134,11 +135,11 @@ body {
 
 @keyframes blick {
     from {
-        transform: scale(0.99);
+        transform: scale(1.01);
     }
 
     to {
-        transform: scale(1.01);
+        transform: scale(1.06);
     }
 }
 
@@ -199,7 +200,7 @@ div ul li a {
     color: black !important;
     font-family: 'Cormorant', serif;
     transition: all ease-in-out 100ms;
-    font-size: 20px;
+    font-size: 22px;
 }
 
     /* Change the color when the mouse is over a buttons. */
@@ -233,11 +234,13 @@ div ul li a {
 
 /* Set widths on the form inputs since otherwise they're 100% wide */
 input[type="text"],
+input[type="text"]:focus,
 input[type="password"],
 input[type="email"],
 input[type="tel"],
 input[type="select"] {
-    max-width: 280px;
+    max-width: 500px;
+
 }
 
 .startupnavbar {
@@ -326,8 +329,8 @@ input[type="select"] {
 }
 
 .delayed-fade-in {
-    animation-delay: 2s;
-    -webkit-animation-duration: 2s;
+  
+    -webkit-animation-duration: 3s;
 }
 
 .align-h1 {
@@ -347,11 +350,11 @@ input[type="select"] {
     margin: 20px 0px 30px 0px;
 }
 
-    .round-div-block-specified-about:focus {
+ /*   .round-div-block-specified-about:focus {
         animation-name: blick;
         animation-iteration-count: infinite;
         animation-duration: 1s;
-    }
+    }*/
 
 .about-like-cloud-button {
     color: #181219 !important;
@@ -425,10 +428,6 @@ input[type="select"] {
     opacity: .3;
 }
 
-.blurred {
-    filter: blur(2px);
-}
-
 .shadow-container {
     position: relative;
     width: 100%;
@@ -485,3 +484,79 @@ input[type="select"] {
         cursor: pointer;
         transform: scale(1.02);
     }
+
+
+    /* Style textbox for login and registry*/
+
+.textboxstylesetting {
+    border: 1px solid #c4c4c4;
+    height: 40px;
+    width: 375px !important;
+    font-size: 13px;
+    padding: 4px 4px 4px 4px;
+    font-size: 20px;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    box-shadow: 0px 0px 8px #545454;
+    -moz-box-shadow: 0px 0px 8px #545454;
+    -webkit-box-shadow: 0px 0px 8px #d9d9d9;
+}
+
+    .textboxstylesetting:focus {
+        outline: none;
+        border: 1px solid #545454;
+        box-shadow: 0px 0px 8px #545454;
+        -moz-box-shadow: 0px 0px 8px #545454;
+        -webkit-box-shadow: 0px 0px 8px #545454;
+    }
+
+
+.text-danger-copy{
+    color:white !important;
+    font-size:18px;
+}
+
+
+
+
+.style-background-for-div{
+    opacity:0.11;
+}
+
+.semi-transparent {
+    background-color:rgba(23,23,23,0.5) !important;
+
+}
+
+
+/*blur for background*/
+.blurred {
+    filter: blur(2px);
+}
+
+.title-setting-copy {
+    text-align: center;
+    margin-top: 1%;
+    font-size: 42px;
+    
+}
+
+.title-and-size {
+    font-family: 'Cormorant', serif;
+    font-size:22px !important;
+}
+
+.title-setting-contact {
+   
+    margin-top: 1%;
+    font-size: 42px;
+}
+
+a{ 
+    text-decoration:none !important;
+}
+    a:focus {
+        text-decoration: none !important;
+    }
+   
