@@ -34,7 +34,7 @@ namespace StartUpWebAPI.Account
 
         private void LoadBgImage()
         {
-            BgImage.ImageUrl = NativeImageUtils.ConvertFromBytes(Properties.Resources.commonLoginBg);
+            BgImage.ImageUrl = NativeImageUtils.ConvertFromBitmap(Properties.Resources.commonLoginBg);
         }
 
         protected void LogIn(object sender, EventArgs e)

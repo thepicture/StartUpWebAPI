@@ -60,13 +60,13 @@ namespace StartUpWebAPI
         protected global::System.Web.UI.WebControls.ListView LViewImages;
 
         /// <summary>
-        /// StartUpImages элемент управления.
+        /// FileUploadImages элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputFile StartUpImages;
+        protected global::System.Web.UI.WebControls.FileUpload FileUploadImages;
 
         /// <summary>
         /// BtnAddImages элемент управления.

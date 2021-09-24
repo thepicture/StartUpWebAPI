@@ -1,11 +1,14 @@
 ﻿using StartUpWebAPI.Entities;
+using StartUpWebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Windows.Media.Imaging;
 
 namespace StartUpWebAPI
 {
@@ -215,6 +218,34 @@ namespace StartUpWebAPI
                     .Find(int.Parse((string)e.CommandArgument)));
                 LViewImages.DataBind();
             }
+        }
+
+        protected void BtnAddImages_Click(object sender, EventArgs e)
+        {
+            List<HttpPostedFile> photos = FileUploadImages.PostedFiles.ToList();
+
+            photos.ForEach(p =>
+            {
+                if (!p.ContentType.Contains("image"))
+                {
+                    return;
+                }
+
+                Stream blob = p.InputStream;
+                System.Drawing.Image image = NativeImageUtils.ConvertFromStream(blob);
+
+                StartUpImage newImage = new StartUpImage
+                {
+                    Name = "abc",
+                     Image = NativeImageUtils.co
+                }
+            });
+
+            List<Stream> blobs = photos.Select(p => p.InputStream).ToList();
+
+            List<System.Drawing.Image> images = blobs
+                .Select(b => NativeImageUtils.ConvertFromStream(b))
+                .ToList();
         }
     }
 }

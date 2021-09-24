@@ -28,14 +28,14 @@
                     Style="width: 90%; height: max-content;"
                     Text="Удалить"
                     CommandName="RemoveImage"
-                    CommandArgument='<%# Bind("Id") %>' ID="BtnRemoveImage"
-                    eve></asp:Button>
+                    CommandArgument='<%# Bind("Id") %>' ID="BtnRemoveImage"></asp:Button>
             </div>
 
         </ItemTemplate>
     </asp:ListView>
-    <input id="StartUpImages" type="file" draggable="true" multiple runat="server" />
-    <asp:Button runat="server" Text="Добавить изображения" ID="BtnAddImages" />
+    <asp:FileUpload runat="server" AllowMultiple="true" ID="FileUploadImages" />
+    <asp:Button runat="server" Text="Добавить изображения" ID="BtnAddImages" 
+        OnClick="BtnAddImages_Click"/>
     <asp:Button runat="server" OnClick="BtnSave_Click" ID="BtnSave" Text="Сохранить изменения" />
     <asp:Button runat="server" OnClick="BtnCancel_Click" ID="BtnCancel" Text="Отмена" />
 </asp:Content>

@@ -30,7 +30,7 @@ namespace StartUpWebAPI.Entities
                 }
                 else
                 {
-                    result = NativeImageUtils.ConvertFromBytes(Properties.Resources.noPicture);
+                    result = NativeImageUtils.ConvertFromBitmap(Properties.Resources.noPicture);
                 }
 
                 return result;
