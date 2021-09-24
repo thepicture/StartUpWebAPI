@@ -237,15 +237,25 @@ namespace StartUpWebAPI
                 StartUpImage newImage = new StartUpImage
                 {
                     Name = "abc",
-                     Image = NativeImageUtils.co
+                    Image = NativeImageUtils.ConvertImageToBytes(image),
+                    StartUp = currentStartUp
+                };
+
+                currentStartUp.StartUpImage.Add(newImage);
+
+                try
+                {
+                    AppData.Context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    string reason = HttpUtility.UrlEncode("Изображение не было прикреплено");
+
+                    // TODO: Error handling
                 }
             });
 
-            List<Stream> blobs = photos.Select(p => p.InputStream).ToList();
-
-            List<System.Drawing.Image> images = blobs
-                .Select(b => NativeImageUtils.ConvertFromStream(b))
-                .ToList();
+            Response.Redirect("~/AddStartUp.aspx?id=" + id, false);
         }
     }
 }
