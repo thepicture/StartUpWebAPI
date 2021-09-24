@@ -14,6 +14,21 @@
     <asp:Label runat="server" Text="Описание"></asp:Label>
     <asp:TextBox runat="server" ID="TBoxDescription" Width="200" Height="80"></asp:TextBox>
     <br />
+    <asp:Label runat="server" Text="Изображения стартапа"></asp:Label>
+    <br />
+    <asp:ListView runat="server" ID="LViewImages" OnItemCommand="LViewImages_ItemCommand">
+        <ItemTemplate>
+            <asp:Label runat="server" ID="LImageName" Text='<%# Bind("Name") %>'></asp:Label>
+            <br />
+            <asp:Image runat="server" Width="100" Height="100"
+                ImageUrl='<%# Bind("ImageInBase64") %>' />
+            <asp:Button runat="server" Text="Удалить" ID="BtnRemoveImage"
+                CommandName="RemoveImage"
+                CommandArgument='<%# Bind("Id") %>' />
+        </ItemTemplate>
+    </asp:ListView>
+    <input id="StartUpImages" type="file" draggable="true" multiple runat="server" />
+    <asp:Button runat="server" Text="Добавить изображения" ID="BtnAddImages" />
     <asp:Button runat="server" OnClick="BtnSave_Click" ID="BtnSave" Text="Сохранить изменения" />
     <asp:Button runat="server" OnClick="BtnCancel_Click" ID="BtnCancel" Text="Отмена" />
 </asp:Content>

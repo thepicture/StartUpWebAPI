@@ -20,12 +20,7 @@ namespace StartUpWebAPI
 
             if (maybeId != null)
             {
-                if (int.Parse(maybeId) != 0)
-                {
-                    id = int.Parse(maybeId);
-
-                    currentStartUp = AppData.Context.StartUp.Find(id);
-                }
+                CheckIfIdNotNull(maybeId);
             }
             else
             {
@@ -39,6 +34,32 @@ namespace StartUpWebAPI
                 InsertCategory();
             }
 
+        }
+
+        private void CheckIfIdNotNull(string maybeId)
+        {
+            if (int.Parse(maybeId) != 0)
+            {
+                PrepareStartUp(maybeId);
+            }
+        }
+
+        private void PrepareStartUp(string maybeId)
+        {
+            id = int.Parse(maybeId);
+
+            currentStartUp = AppData.Context.StartUp.Find(id);
+
+            InsertImagesIntoStartUp();
+        }
+
+        private void InsertImagesIntoStartUp()
+        {
+            if (currentStartUp.StartUpImage.Count != 0)
+            {
+                LViewImages.DataSource = currentStartUp.StartUpImage.ToList();
+                LViewImages.DataBind();
+            }
         }
 
         private void InsertCategory()
@@ -180,6 +201,15 @@ namespace StartUpWebAPI
             string reason = HttpUtility.UrlEncode("Создание или удаление стартапа было отменено!");
 
             Response.Redirect("~/Default.aspx?reason=" + reason);
+        }
+
+        protected void LViewImages_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+            if (e.CommandName == "RemoveImage")
+            {
+                currentStartUp.StartUpImage.Remove(AppData.Context.StartUpImage.Find(e.CommandArgument));
+                LViewImages.DataBind();
+            }
         }
     }
 }

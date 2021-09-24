@@ -51,6 +51,33 @@ namespace StartUpWebAPI
         protected global::System.Web.UI.WebControls.TextBox TBoxDescription;
 
         /// <summary>
+        /// LViewImages элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListView LViewImages;
+
+        /// <summary>
+        /// StartUpImages элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputFile StartUpImages;
+
+        /// <summary>
+        /// BtnAddImages элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnAddImages;
+
+        /// <summary>
         /// BtnSave элемент управления.
         /// </summary>
         /// <remarks>
