@@ -43,9 +43,9 @@
                             runat="server" CommandName="StartUpClicked" CommandArgument='<%# Eval("Id") %>' style="width: fit-content;" />
                 </asp:Panel>--%>
                 <asp:LinkButton runat="server" CommandName="StartUpClicked" CommandArgument='<%# Eval("Id") %>'>
-                    <div class="container-item startup-panel radius-like">
+                    <div class="startup-panel radius-like container-item ">
                             <img class="startup-image radius-like image-cover-auto" src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
-                        <h1 class="tag-item"><%# Eval("SpacedTitle") %></h1>
+                        <h1 class="tag-item"><%# Eval("Name") %></h1>
                     </div>
                 </asp:LinkButton>
             </ItemTemplate>
