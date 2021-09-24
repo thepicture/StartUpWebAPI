@@ -1,6 +1,7 @@
 ﻿using StartUpWebAPI.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -20,13 +21,32 @@ namespace StartUpWebAPI
             if (maybeId != null)
             {
                 id = int.Parse(maybeId);
+
+                currentStartUp = AppData.Context.StartUp.Find(id);
+            }
+            else
+            {
+                id = 0;
             }
 
             if (!Page.IsPostBack)
             {
                 InsertCategoriesBox();
+                TryToFindStartUp();
+
+                TBoxName.Text = currentStartUp.Name;
+                TBoxDescription.Text = currentStartUp.Description;
+                TBoxMaxMembers.Text = currentStartUp.MaxMembersCount.ToString();
             }
 
+            if (currentStartUp.Category?.Name != null)
+            {
+                ComboCategories.Items.FindByValue(currentStartUp.Category.Name).Selected = true;
+            }
+        }
+
+        private void TryToFindStartUp()
+        {
             if (id != 0)
             {
                 currentStartUp = AppData.Context.StartUp.Find(id);
@@ -46,15 +66,6 @@ namespace StartUpWebAPI
                 }
 
             }
-
-            TBoxName.Text = currentStartUp.Name;
-            TBoxDescription.Text = currentStartUp.Description;
-            TBoxMaxMembers.Text = currentStartUp.MaxMembersCount.ToString();
-
-            if (currentStartUp.Category?.Name != null)
-            {
-                ComboCategories.Items.FindByValue(currentStartUp.Category.Name).Selected = true;
-            }
         }
 
         /// <summary>
@@ -73,11 +84,37 @@ namespace StartUpWebAPI
         /// </summary>
         protected void BtnSave_Click(object sender, EventArgs e)
         {
-            bool isStartUpNew = id != 0;
+            bool isStartUpNew = id == 0;
 
             if (isStartUpNew)
             {
                 CreateStartUp();
+            }
+            else
+            {
+                UpdateStartUp();
+            }
+        }
+
+        private void UpdateStartUp()
+        {
+            currentStartUp.Name = TBoxName.Text;
+            currentStartUp.Description = TBoxDescription.Text;
+            currentStartUp.MaxMembersCount = int.Parse(TBoxMaxMembers.Text);
+            currentStartUp.Category = AppData.Context.Category.First(c => c.Name.Equals(ComboCategories.SelectedValue));
+
+            AppData.Context.StartUp.AddOrUpdate(currentStartUp);
+            try
+            {
+                AppData.Context.SaveChanges();
+
+                string reason = HttpUtility.UrlEncode("Стартап успешно изменён!");
+
+                Response.Redirect("~/Default?reason=" + reason);
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
@@ -96,13 +133,19 @@ namespace StartUpWebAPI
                 MaxMembersCount = int.Parse(TBoxMaxMembers.Text)
             };
 
+            User user = AppData.Context.User.First(u => u.Login.ToLower().Equals(User.Identity.Name.ToLower()));
+            RoleType role = AppData.Context.RoleType.First(r => r.Name.Equals("Организатор"));
+
             StartUpOfUser userStartUp = new StartUpOfUser
             {
-                User = AppData.Context.User.First(u => u.Login.Equals(User.Identity.Name)),
-                RoleType = AppData.Context.RoleType.First(r => r.Equals("Организатор"))
+                User = user,
+                RoleType = role,
+                StartUp = currentStartUp
             };
 
             currentStartUp.StartUpOfUser.Add(userStartUp);
+
+            AppData.Context.StartUp.Add(currentStartUp);
 
             try
             {
@@ -110,7 +153,7 @@ namespace StartUpWebAPI
 
                 string reason = HttpUtility.UrlEncode("Стартап был успешно сохранён!");
 
-                Response.Redirect("~/Default.aspx?reason" + reason);
+                Response.Redirect("~/Default.aspx?reason=" + reason, false);
             }
             catch (Exception ex)
             {
