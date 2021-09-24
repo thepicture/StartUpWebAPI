@@ -15,6 +15,15 @@ namespace StartUpWebAPI
     {
 
         /// <summary>
+        /// ServerRunner control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LoginView ServerRunner;
+
+        /// <summary>
         /// MainContent control.
         /// </summary>
         /// <remarks>

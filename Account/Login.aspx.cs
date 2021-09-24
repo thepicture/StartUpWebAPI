@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -56,7 +57,7 @@ namespace StartUpWebAPI.Account
 
             if (isUserFound)
             {
-                RedirectToMainPage(login);
+                RedirectToMainPage(user.Login);
             }
             else
             {
