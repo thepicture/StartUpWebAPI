@@ -4,29 +4,35 @@
     <div style="display: flex;">
         <div class="navbar navbar-inverse navbar-fixed-top request-white-bg" style="top: inherit;">
             <div style="display: flex; width: 100%; justify-content: center;">
-                <asp:TextBox ID="NameBox"
-                    Style="height: 30px;"
-                    TextMode="SingleLine" CssClass="nice-text-box prevent-selection" runat="server"
-                    ForeColor="Black" Height="60" BorderStyle="None"
-                    BackColor="Transparent"></asp:TextBox>
-                <asp:CheckBox runat="server" Text="Только актуальные" Checked="true" ID="ActualBox" />
-                <asp:UpdatePanel runat="server" ID="UpdateFiltration" UpdateMode="Conditional">
-                    <ContentTemplate>
-                        <asp:DropDownList ID="ComboCategories"
-                            Style="height: 30px; vertical-align: middle;" runat="server"
+              
+                
+                <asp:UpdatePanel runat="server" ID="UpdateFiltration" UpdateMode="Conditional" style="margin-left:10px;">
+                    <ContentTemplate >
+                     
+                         <asp:TextBox ID="NameBox"
+                    Style="height: 30px; width:300px !important; float:left !important; margin-right:6px"
+                    TextMode="SingleLine" CssClass="search-box" runat="server"
+                    ForeColor="Black" Height="60" BorderColor="#808080"  BorderStyle="NotSet"
+                    BackColor="Transparent" > </asp:TextBox>
+
+                        <asp:DropDownList  ID="ComboCategories" 
+                            class="form-control"
+                            Style="height: 30px !important; width:180px; margin-left:5px;  margin-right:10px; float:left !important; vertical-align: middle;" runat="server"
                             ForeColor="Black" Height="60"
                             BackColor="Transparent">
                         </asp:DropDownList>
-                          <asp:DropDownList ID="ComboMaxMembers"
-                            Style="height: 30px; vertical-align: middle;" runat="server"
+                          <asp:DropDownList  ID="ComboMaxMembers"
+                               class="form-control"
+                            Style="height: 30px; width:180px;  margin-right:6px; vertical-align:  middle; float:left !important;" runat="server"
                             ForeColor="Black" Height="60"
                             BackColor="Transparent">
                         </asp:DropDownList>
+                        <asp:CheckBox  runat="server" Text="Только актуальные"   Style="vertical-align:middle;  margin-left:5px;" Checked="true" ID="ActualBox" />
                     </ContentTemplate>
                 </asp:UpdatePanel>
-                <asp:Button Text="Искать" CssClass="round-div-block simple-cloud-button margin-bottom-top-as-usual"
+                <asp:Button Text="Искать" style="width:120px !important;" CssClass="button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual "
                     runat="server" ID="BtnSearch" OnClick="BtnSearch_Click" />
-                <asp:Button Text="Очистить фильтры" CssClass="round-div-block simple-cloud-button margin-bottom-top-as-usual"
+                <asp:Button Text="Очистить фильтры" style="margin-left:-2px;" CssClass="button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual "
                     runat="server" ID="BtnClear" OnClick="BtnClear_Click" />
             </div>
         </div>

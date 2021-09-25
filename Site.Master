@@ -95,7 +95,7 @@
                                     <a runat="server"><%: HttpContext.Current.User.Identity.Name %> </a>
                                 </li>
                                 <li>
-                                    <asp:Button Text="Выйти из системы" CssClass="round-div-block simple-cloud-button"
+                                    <asp:Button Text="Выйти из системы" CssClass="button-style-for-page about-like-cloud-button-for-page "
                                         runat="server" LogoutAction="Redirect" LogoutText="Выйти"
                                         LogoutPageUrl="~/" ID="BtnLogOut" OnClick="BtnLogOut_Click" />
                                 </li>
@@ -106,7 +106,7 @@
             </div>
         </div>
 
-        <div class="container body-content">
+        <div  class="container body-content" >
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
