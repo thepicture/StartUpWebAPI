@@ -185,7 +185,7 @@ namespace StartUpWebAPI
                     StartUp = ViewState["currentStartUp"] as StartUp
                 };
 
-                // AppData.Context.StartUpImage.Add(newImage);
+                AppData.Context.StartUpImage.Add(newImage);
 
                 try
                 {
@@ -260,9 +260,10 @@ namespace StartUpWebAPI
                     CreationDate = DateTime.Now,
                     Blob = StreamToBytesConverter.Convert(blob),
                     IsPublic = true,
+                    StartUp = ViewState["currentStartUp"] as StartUp
                 };
 
-                //AppData.Context.DocumentOfStartUp.Add(doc);
+                AppData.Context.DocumentOfStartUp.Add(doc);
 
                 try
                 {
