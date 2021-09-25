@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="Startups.aspx.cs" Inherits="StartUpWebAPI.Startups" EnableEventValidation="false" %>
 
-<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <asp:Panel runat="server" ID="FiltrationStartupsPanel" Style="width: 100%;">
+<asp:Content ID="SearchContent" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:Panel runat="server" ID="FiltrationStartupsPanel" Style="width: 100%;z-index:99999;">
         <div class="unbordered-block" style="display: flex; justify-content: space-between; position: fixed; top: inherit; background-color: white;">
             <asp:TextBox ID="NameBox"
                 Style="height: 30px; vertical-align: middle;"
@@ -20,7 +20,6 @@
             <asp:Button Text="Искать" CssClass="round-div-block simple-cloud-button"
                 runat="server" ID="BtnSearch" OnClick="BtnSearch_Click" />
             <br />
-
         </div>
     </asp:Panel>
     <br />
