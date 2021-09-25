@@ -31,7 +31,6 @@ namespace StartUpWebAPI
 
             if (!Page.IsPostBack)
             {
-
                 InsertCategoriesBox();
                 TryToFindStartUp();
                 InsertCategory();
@@ -52,7 +51,7 @@ namespace StartUpWebAPI
 
             currentStartUp = AppData.Context.StartUp.Find(id);
 
-            if (!IsPostBack)
+            if (!IsPostBack || 0 == 0)
             {
                 InsertImagesIntoStartUp();
                 InsertDocumentsIntoStartUp();
@@ -223,7 +222,7 @@ namespace StartUpWebAPI
         {
             if (e.CommandName == "RemoveImage")
             {
-                AppData.Context.StartUpImage.Remove(AppData
+                currentStartUp.StartUpImage.Remove(AppData
                     .Context
                     .StartUpImage
                     .Find(int.Parse((string)e.CommandArgument)));
@@ -269,17 +268,12 @@ namespace StartUpWebAPI
         {
             if (e.CommandName == "RemoveDocument")
             {
-                int id = int.Parse((string)e.CommandArgument);
+                currentStartUp.DocumentOfStartUp.Remove(AppData
+                    .Context
+                    .DocumentOfStartUp
+                    .Find(int.Parse((string)e.CommandArgument)));
 
-                if (AppData.Context.DocumentOfStartUp.Any(d => d.Id == id))
-                {
-                    AppData.Context.DocumentOfStartUp.Remove(AppData
-                        .Context
-                        .DocumentOfStartUp
-                        .Find(int.Parse((string)e.CommandArgument)));
-
-                    InsertDocumentsIntoStartUp();
-                }
+                InsertDocumentsIntoStartUp();
             }
         }
 

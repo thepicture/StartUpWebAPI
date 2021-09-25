@@ -317,11 +317,11 @@ input[type="select"] {
     margin: 20px 0px 30px 0px;
 }
 
-    .round-div-block-specified-about:focus {
+   /* .round-div-block-specified-about:focus {
         animation-name: blick;
         animation-iteration-count: infinite;
         animation-duration: 1s;
-    }
+    }*/
 
 .about-like-cloud-button {
     color: #181219 !important;

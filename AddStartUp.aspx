@@ -23,7 +23,7 @@
         <ItemTemplate>
             <div class="container-item startup-panel radius-like">
                 <img class="startup-image radius-like image-cover-auto" src='<%# Eval("ImageInBase64") %>' alt='<%# Eval("Name") %>' />
-                <h1 class="tag-item"><%# Eval("Name") %></h1>
+                <h1 class="tag-item" style="bottom: 50%;"><%# Eval("Name") %></h1>
                 <asp:Button runat="server"
                     CssClass="tag-item round-div-block simple-cloud-button"
                     Style="width: 90%; height: max-content;"
@@ -42,11 +42,11 @@
     <asp:ListView runat="server" ID="LViewDocuments" OnItemCommand="LViewDocuments_ItemCommand">
         <ItemTemplate>
             <div class="container-item startup-panel radius-like">
-               <%-- <div class="radius-like">
+                <%-- <div class="radius-like">
                     <asp:CheckBox runat="server" Text='Приватный' ID="PublicBox"
                         Checked='<%# Eval("IsPublic") %>'></asp:CheckBox>
                 </div>--%>
-                <h1 class="tag-item"><%# Eval("FileName") %></h1>
+                <h1 class="tag-item" style="bottom: 50%;"><%# Eval("FileName") %></h1>
                 <asp:Button runat="server"
                     CssClass="tag-item round-div-block simple-cloud-button"
                     Style="width: 90%; height: max-content;"
