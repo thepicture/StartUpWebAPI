@@ -370,8 +370,8 @@ input[type="select"] {
     position: relative;
     display: block;
     float: left;
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
 }
 
     .slideshow-wrapper::before {
@@ -429,7 +429,7 @@ input[type="select"] {
     display: flex;
     align-items: flex-end !important;
     font-family: 'Cormorant', serif;
-    font-size: 1.95em;
+    font-size: 1.45em;
 }
 
 .startup-image {
@@ -440,8 +440,8 @@ input[type="select"] {
 /* Styles for panel in Startups. */
 .startup-panel {
     margin: 10px;
-    width: 300px;
-    height: 300px;
+    width: 290px;
+    height: 290px;
     transition: transform ease-in-out 300ms;
 }
 

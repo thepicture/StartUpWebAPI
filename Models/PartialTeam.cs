@@ -6,6 +6,13 @@ namespace StartUpWebAPI.Entities
 {
     public partial class Team
     {
+        public string CountOfMembers
+        {
+            get
+            {
+                return TeamOfUser.Count().ToString();
+            }
+        }
         public string ImagePreview
         {
             get

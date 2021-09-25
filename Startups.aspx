@@ -45,8 +45,9 @@
                 <asp:LinkButton runat="server" CommandName="StartUpClicked" CommandArgument='<%# Eval("Id") %>'>
                     <div class="startup-panel radius-like container-item ">
                             <img class="startup-image radius-like image-cover-auto" src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
-                        <h1 class="tag-item"><%# Eval("Name") %></h1>
-                        <div class="tag-item gray-gradient radius-like" style="z-index:555;"></div>
+                        <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 45px;"><%# Eval("Name") %></h1>
+                        <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 20px;color:#d4d4dd; font-size:1.15em;"><%# Eval("SplittedCategory") %></h1>
+                        <div class="tag-item gray-gradient radius-like" style="z-index:555;opacity:.8"></div>
                     </div>
                 </asp:LinkButton>
             </ItemTemplate>

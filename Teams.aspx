@@ -3,7 +3,7 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <%--ListView for startups presentation.--%>
     <asp:Panel HorizontalAlign="Center" runat="server">
-        <asp:ListView ID="TeamsView" runat='server' OnItemCommand="TeamsView_ItemCommand">
+        <%--  <asp:ListView ID="TeamsView" runat='server' OnItemCommand="TeamsView_ItemCommand">
             <ItemTemplate>
                 <asp:Panel runat="server">
                     <div class="team-panel radius-like gradientable-purple pushable">
@@ -21,6 +21,21 @@
                     </div>
                 </asp:Panel>
             </ItemTemplate>
-        </asp:ListView>
+        </asp:ListView>--%>
+        <%--ListView for teams presentation.--%>
+        <asp:Panel HorizontalAlign="Center" runat="server">
+            <asp:ListView ID="TeamsView" runat='server' OnItemCommand="TeamsView_ItemCommand">
+                <ItemTemplate>
+                    <asp:LinkButton runat="server" CommandName="TeamClicked" CommandArgument='<%# Eval("Id") %>'>
+                    <div class="startup-panel radius-like container-item ">
+                            <img class="startup-image radius-like image-cover-auto" src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
+                        <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 45px;"><%# Eval("Name") %></h1>
+                        <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 20px;color:#d4d4dd; font-size:1.15em;"><%# (string) Eval("CountOfMembers") + " участников" %></h1>
+                        <div class="tag-item gray-gradient radius-like" style="z-index:555;opacity:.8"></div>
+                    </div>
+                    </asp:LinkButton>
+                </ItemTemplate>
+            </asp:ListView>
+        </asp:Panel>
     </asp:Panel>
 </asp:Content>

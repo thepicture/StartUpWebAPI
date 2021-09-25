@@ -2,6 +2,7 @@
 using System;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 
 namespace StartUpWebAPI.Entities
 {
@@ -15,6 +16,30 @@ namespace StartUpWebAPI.Entities
             get
             {
                 return Name.Replace(" ", "<br>");
+            }
+        }
+
+        public string SplittedCategory
+        {
+            get
+            {
+                string[] words = Category.Name.Split(' ');
+
+                if (words.Length > 2)
+                {
+                    return words[0] + " " + words[1] + "...";
+                }
+                else
+                {
+                    StringBuilder result = new StringBuilder();
+
+                    foreach (var word in words)
+                    {
+                        result.Append(word + " ");
+                    }
+
+                    return result.ToString();
+                }
             }
         }
         public string ImagePreview
