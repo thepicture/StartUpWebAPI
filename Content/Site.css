@@ -437,6 +437,11 @@ input[type="select"] {
     filter: brightness(100%)
 }
 
+.margin-bottom-top-as-usual {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+
 /* Styles for panel in Startups. */
 .startup-panel {
     margin: 10px;
