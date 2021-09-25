@@ -119,5 +119,15 @@ namespace StartUpWebAPI.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] StarTup {
+            get {
+                object obj = ResourceManager.GetObject("StarTup", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

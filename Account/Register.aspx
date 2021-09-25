@@ -52,7 +52,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10 btn-setting">
-                <asp:Button runat="server" OnClick="CreateUser_Click" Text="Зарегистрироваться" CssClass="btn btn-primary " />
+                <asp:Button runat="server" Style="margin: -25px 0px 0px 0px; width: auto; font-size: 24px !important;" OnClick="CreateUser_Click" Text="Зарегистрироваться" CssClass="round-div-block-specified-about about-like-cloud-button" />
             </div>
         </div>
     </div>
@@ -61,10 +61,10 @@
     <br />
     <br />
 
-    <div style="display: flex; justify-content: center; vertical-align: middle;">
-        <div class="round-div-block semi-transparent-register-like"
-            style="width: 650px; height: 460px; animation: none !important; display: inline-block;">
-            <h2 class="title-setting-register-like" style="color: white;"><%: Title %></h2>
+    <div style="display: flex; justify-content: center; align-items:center; vertical-align: middle;">
+        <div class="round-div-block semi-transparent-register-like request-auto-height"
+            style="width: 650px; animation: none !important; display: inline-block;">
+            <h2 class="title-setting" style="color: white;"><%: Title %></h2>
             <div style="display: flex; justify-content: center;">
                 <asp:TextBox Style="margin: 20px 0px -10px 0px;" ID="LoginBox" TextMode="SingleLine"
                     runat="server"

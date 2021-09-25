@@ -9,7 +9,7 @@
         <asp:LoginView runat="server">
             <AnonymousTemplate>
                 <div class="centerized-text">
-                    <asp:Button Text="Регистрация" CssClass="round-div-block-specified-about about-like-cloud-button fade-in delayed-fade-in"
+                    <asp:Button Text="Регистрация" CssClass="round-div-block-specified-about about-like-cloud-button fade-in delayed-fade-in suspended-fade-in"
                         runat="server" ID="BtnRegister" OnClick="BtnRegister_Click" Font-Size="3em" Height="70" />
                 </div>
             </AnonymousTemplate>

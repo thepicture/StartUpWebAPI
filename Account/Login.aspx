@@ -69,8 +69,8 @@
     <br />
     <br />
     <div style="display: flex; justify-content: center; vertical-align: middle;">
-        <div class="round-div-block semi-transparent-register-like" style="width: 650px; height: 400px; animation: none !important; display: inline-block;">
-            <h2 class="title-setting-register-like" style="color: white;"><%: Title %></h2>
+        <div class="round-div-block semi-transparent-register-like request-auto-height" style="width: 650px; animation: none !important; display: inline-block;">
+            <h2 class="title-setting" style="color: white;"><%: Title %></h2>
             <div style="display: flex; justify-content: center;">
                 <asp:TextBox ID="LoginBox" Style="margin: 20px 0px -20px 0px;" runat="server" BorderStyle="None"
                     CssClass="nice-text-box prevent-selection textbox-style-setting"

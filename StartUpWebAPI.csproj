@@ -203,11 +203,11 @@
     <Resource Include="Resources\AeOf3UMV9WA-removebg-preview.png" />
     <Resource Include="Resources\Logo.png" />
     <Resource Include="Resources\Исландия.mp4" />
-    <Resource Include="Resources\StarTup.png" />
     <Resource Include="Resources\noPicture.png" />
     <Resource Include="Resources\loginRegisterBg.jpg" />
     <Resource Include="Resources\contactImage.jpg" />
     <Resource Include="Resources\contactBack.svg" />
+    <Resource Include="Resources\StarTup.svg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -468,7 +468,6 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  
   <!--Roslyn bug fix. -->
   <Target Name="CopyRoslynFiles" AfterTargets="AfterBuild" Condition="!$(Disable_CopyWebApplication) And '$(OutDir)' != '$(OutputPath)'">
     <ItemGroup>
@@ -477,7 +476,6 @@
     <MakeDir Directories="$(WebProjectOutputDir)\bin\roslyn" />
     <Copy SourceFiles="@(RoslynFiles)" DestinationFolder="$(WebProjectOutputDir)\bin\roslyn" SkipUnchangedFiles="true" Retries="$(CopyRetryCount)" RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)" />
   </Target>
-  
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
