@@ -11,7 +11,7 @@ namespace StartUpWebAPI.Entities
 {
     using System;
     using System.Collections.Generic;
-    
+    [Serializable]
     public partial class StartUpOfUser
     {
         public int UserId { get; set; }

@@ -36,13 +36,14 @@ namespace StartUpWebAPI
 
         private void InsertComboMaxMembers()
         {
-            List<string> values = new List<string>();
-
-            values.Add("Любое количество");
-            values.Add("1-5");
-            values.Add("6-10");
-            values.Add("11-15");
-            values.Add("15-20");
+            List<string> values = new List<string>
+            {
+                "Любое количество",
+                "1-5",
+                "6-10",
+                "11-15",
+                "15-20"
+            };
 
             ComboMaxMembers.DataSource = values;
             ComboMaxMembers.DataBind();

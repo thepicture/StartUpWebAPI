@@ -9,6 +9,7 @@ namespace StartUpWebAPI.Entities
     /// <summary>
     /// Public partial class for the StartUp entity.
     /// </summary>
+    [Serializable]
     public partial class StartUp
     {
         public string SpacedTitle
@@ -23,7 +24,12 @@ namespace StartUpWebAPI.Entities
         {
             get
             {
-                string[] words = Category.Name.Split(' ');
+                string[] words = Category?.Name.Split(' ');
+
+                if (words == null)
+                {
+                    return "Неизвестно";
+                }
 
                 if (words.Length > 2)
                 {

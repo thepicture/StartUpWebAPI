@@ -45,6 +45,11 @@
                         ForeColor="White"
                         ID="LinkButtonModifyStartUp"
                         OnClick="LinkButtonModifyStartUp_Click"></asp:LinkButton>
+                     <asp:LinkButton runat="server" Text='Удалить стартап'
+                        CssClass="round-div-block simple-cloud-button"
+                        ForeColor="White"
+                        ID="BtnDeleteStartUp"
+                        OnClick="BtnDeleteStartUp_Click"></asp:LinkButton>
                 </asp:Panel>
                 <asp:Button ID="BtnSubscribe"
                     OnClick="BtnSubscribe_Click"

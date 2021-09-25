@@ -80,11 +80,11 @@ namespace StartUpWebAPI
 
             string creator = startUp.StartUpOfUser.FirstOrDefault(u => u.RoleType.Name == "Организатор")?.User.Name;
 
-            Creator.Text = "Стартапер: " + creator ?? "Неизвестен";
+            Creator.Text = "Стартапер: " + (string.IsNullOrWhiteSpace(creator) ? "Неизвестен" : creator);
             IsActual.Text = startUp.IsDone ? "Завершён" : "Актуален";
             DateOfCreation.Text = "Дата создания: " + startUp.CreationDate.ToString();
             Category.Text = "Категория: " + startUp.Category.Name;
-            Description.Text = startUp.Description ?? "Организатор не предоставил описание. Можете подать ему идею!";
+            Description.Text = string.IsNullOrWhiteSpace(startUp.Description) ? "Организатор не предоставил описание. Можете подать ему идею!" : startUp.Description;
             CommentsCount.Text = "Комментарии (" + startUp.StartUpComment.Count + "):";
             MainImage.ImageUrl = startUp.ImagePreview;
             MaxMembersCount.Text = "Максимум участников: " + startUp.MaxMembersCount.ToString();
@@ -175,6 +175,29 @@ namespace StartUpWebAPI
                 Response.Redirect("~/StartUpInfo?id=" + startUp.Id + "&reason=" + reason);
 
                 return;
+            }
+        }
+
+        protected void BtnDeleteStartUp_Click(object sender, EventArgs e)
+        {
+            AppData.Context.StartUpImage.RemoveRange(startUp.StartUpImage);
+            AppData.Context.DocumentOfStartUp.RemoveRange(startUp.DocumentOfStartUp);
+            AppData.Context.StartUpComment.RemoveRange(startUp.StartUpComment);
+            AppData.Context.StartUpOfUser.RemoveRange(startUp.StartUpOfUser);
+            AppData.Context.StartUpOfTeam.RemoveRange(startUp.StartUpOfTeam);
+
+            AppData.Context.StartUp.Remove(startUp);
+
+            try
+            {
+                AppData.Context.SaveChanges();
+
+                Response.Redirect("~/Default.aspx?reason=" + HttpUtility.UrlEncode("Стартап успешно удалён!"), false);
+            }
+            catch (Exception ex)
+            {
+                Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason=" + HttpUtility.UrlEncode("Стартап не был удалён! Ошибка: " + ex.Message + "."
+                    + "\nПожалуйста, попробуйте удалить стартап ещё раз"), false);
             }
         }
     }
