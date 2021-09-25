@@ -208,6 +208,7 @@
     <Resource Include="Resources\loginRegisterBg.jpg" />
     <Resource Include="Resources\contactImage.jpg" />
     <Resource Include="Resources\contactBack.svg" />
+    <Resource Include="Resources\StarTup.svg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

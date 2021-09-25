@@ -52,7 +52,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10 btn-setting">
-                <asp:Button runat="server" OnClick="CreateUser_Click" Text="Зарегистрироваться" CssClass="btn btn-primary " />
+                <asp:Button runat="server"  style="margin:-25px 0px 0px 0px; font-size:24px !important;"  OnClick="CreateUser_Click" Text="Зарегистрироваться" CssClass="round-div-block-specified-about about-like-cloud-button" />
             </div>
         </div>
     </div>
