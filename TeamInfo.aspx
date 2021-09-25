@@ -14,6 +14,9 @@
                     <asp:Label ID="Name" runat="server" ForeColor="Black"></asp:Label>
                 </div>
                 <div class="round-div-block">
+                    <asp:Label ID="MaxMembersCount" runat="server" ForeColor="Black"></asp:Label>
+                </div>
+                <div class="round-div-block">
                     <asp:Label ID="CountOfMembers" runat="server" ForeColor="Black"></asp:Label>
                 </div>
                 <div class="round-div-block">
@@ -25,6 +28,25 @@
                 <div class="round-div-block">
                     <asp:Label ID="DateOfCreation" runat="server" ForeColor="Black"></asp:Label>
                 </div>
+                <asp:Panel runat="server" ID="PTeamEdit" Visible="false">
+                    <asp:LinkButton runat="server" Text='Изменить информацию'
+                        CssClass="round-div-block simple-cloud-button"
+                        ForeColor="White"
+                        ID="LinkButtonModifyTeam"
+                        OnClick="LinkButtonModifyTeam_Click"></asp:LinkButton>
+                </asp:Panel>
+                <asp:Button ID="BtnSubscribe"
+                    OnClick="BtnSubscribe_Click"
+                    runat="server"
+                    CssClass="round-div-block simple-cloud-button"
+                    Text="Вступить в команду"
+                    Visible="false"></asp:Button>
+                <asp:Button ID="BtnUnsubscribe"
+                    OnClick="BtnUnsubscribe_Click"
+                    runat="server"
+                    CssClass="round-div-block simple-cloud-button"
+                    Text="Покинуть команду"
+                    Visible="false"></asp:Button>
             </asp:Panel>
             &nbsp;
                 <p>

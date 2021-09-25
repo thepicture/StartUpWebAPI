@@ -51,6 +51,15 @@ namespace StartUpWebAPI
         protected global::System.Web.UI.WebControls.Label Name;
 
         /// <summary>
+        /// MaxMembersCount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MaxMembersCount;
+
+        /// <summary>
         /// CountOfMembers control.
         /// </summary>
         /// <remarks>
@@ -130,6 +139,24 @@ namespace StartUpWebAPI
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkButtonModifyStartUp;
+
+        /// <summary>
+        /// BtnSubscribe control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnSubscribe;
+
+        /// <summary>
+        /// BtnUnsubscribe control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnUnsubscribe;
 
         /// <summary>
         /// CommentsCount control.

@@ -52,7 +52,11 @@
                     <asp:Panel runat="server" ID="EmptyStartupsPanel" Visible="false">
                         <p class="lead">Стартапов пока нет. :(</p>
                     </asp:Panel>
-                    <asp:Button ID="BtnCreateStartUp" OnClick="BtnCreateStartUp_Click" runat="server" CssClass="round-div-block simple-cloud-button" Text="Создать новый стартап"></asp:Button>
+                    <asp:Button ID="BtnCreateStartUp"
+                        OnClick="BtnCreateStartUp_Click"
+                        runat="server"
+                        CssClass="round-div-block simple-cloud-button"
+                        Text="Создать новый стартап"></asp:Button>
                     &nbsp;
                 </div>
                 <div class="jumbotron gradientable marginaled">

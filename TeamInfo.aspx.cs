@@ -26,8 +26,44 @@ namespace StartUpWebAPI
 
             team = AppData.Context.Team.Find(id);
 
+            bool userIsCreator = team.TeamOfUser.Any(u => u.User.Login.ToLower().Equals(User.Identity.Name.ToLower())
+                && u.RoleType.Name.Equals("Организатор"));
+
+            if (userIsCreator)
+            {
+                PTeamEdit.Visible = true;
+            }
+            else
+            {
+                ShowNeedyButtonsForMember();
+            }
+
             InsertComments();
             InsertTeams();
+        }
+
+        private void ShowNeedyButtonsForMember()
+        {
+            bool userInTeam = team.TeamOfUser.Any(u => u.User.Login.ToLower().Equals(User.Identity.Name.ToLower()));
+
+            if (userInTeam)
+            {
+                BtnUnsubscribe.Visible = true;
+            }
+            else
+            {
+                ShowSubscribeButtonIfNotMaxMembersCount();
+            }
+        }
+
+        private void ShowSubscribeButtonIfNotMaxMembersCount()
+        {
+            if (team.MaxMembersCount <= team.TeamOfUser.Count)
+            {
+                return;
+            }
+
+            BtnSubscribe.Visible = true;
         }
 
         private void InsertComments()
@@ -40,17 +76,32 @@ namespace StartUpWebAPI
         {
             Name.Text = MainName.Text = team.Name;
             CountOfMembers.Text = "Участников: " + team.TeamOfUser.Count.ToString();
-            CountOfStartUps.Text = "Команд: " + team.StartUpOfTeam.Count.ToString();
+            CountOfStartUps.Text = "Количество связанных стартапов: " + team.StartUpOfTeam.Count.ToString();
 
-            string creator = team.TeamOfUser.FirstOrDefault(u => u.RoleType.Name == "Организатор")?.User.Name;
-
+            string creator = "Организатор: " + team.TeamOfUser.FirstOrDefault(u => u.RoleType.Name == "Организатор")?.User.Name;
+            MaxMembersCount.Text = "Максимум участников: " + team.MaxMembersCount.ToString();
             Creator.Text = creator ?? "Неизвестен";
-            DateOfCreation.Text = team.CreationDate.ToString();
+            DateOfCreation.Text = "Дата создания: " + team.CreationDate.ToString();
             CommentsCount.Text = "Комментарии (" + team.TeamComment.Count + "):";
             MainImage.ImageUrl = team.ImagePreview;
         }
 
         protected void BtnSendComment_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkButtonModifyTeam_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void BtnUnsubscribe_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void BtnSubscribe_Click(object sender, EventArgs e)
         {
 
         }

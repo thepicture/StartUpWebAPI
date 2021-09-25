@@ -16,6 +16,9 @@
                     <asp:Label ID="Name" runat="server" ForeColor="Black"></asp:Label>
                 </div>
                 <div class="round-div-block">
+                    <asp:Label ID="MaxMembersCount" runat="server" ForeColor="Black"></asp:Label>
+                </div>
+                <div class="round-div-block">
                     <asp:Label ID="CountOfMembers" runat="server" ForeColor="Black"></asp:Label>
                 </div>
                 <div class="round-div-block">
@@ -43,6 +46,18 @@
                         ID="LinkButtonModifyStartUp"
                         OnClick="LinkButtonModifyStartUp_Click"></asp:LinkButton>
                 </asp:Panel>
+                <asp:Button ID="BtnSubscribe"
+                    OnClick="BtnSubscribe_Click"
+                    runat="server"
+                    CssClass="round-div-block simple-cloud-button"
+                    Text="Вступить в стартап"
+                    Visible="false"></asp:Button>
+                <asp:Button ID="BtnUnsubscribe"
+                    OnClick="BtnUnsubscribe_Click"
+                    runat="server"
+                    CssClass="round-div-block simple-cloud-button"
+                    Text="Покинуть стартап"
+                    Visible="false"></asp:Button>
             </asp:Panel>
             &nbsp;
                 <p>
