@@ -109,7 +109,7 @@ body {
 
 /* Div for divs to be on one line. */
 .inline-div {
-    display: flex;
+    display: block;
 }
 
 /* A class form black bg replacing */
@@ -219,7 +219,7 @@ input[type="select"] {
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-    .jumbotron {
+    .startup-panel{
         margin-top: 20px;
         padding-top: 20px !important;
     }
@@ -243,11 +243,7 @@ input[type="select"] {
 }
 
 .centerized-text {
-    margin-left: auto;
-    text-align: center !important;
-    margin-right: auto;
-    display: flex;
-    justify-content: center;
+    text-align: left;
 }
 
 .swimming-content {

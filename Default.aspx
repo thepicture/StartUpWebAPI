@@ -65,17 +65,21 @@
 
         </AnonymousTemplate>
         <LoggedInTemplate>
-            <h1>Привет, <%: User.Identity.Name %>. </h1>
             <div class="inline-div">
 
-                <div class="jumbotron gradientable marginaled">
-                    <h1>Организованные мной стартапы</h1>
+                <div class="jumbotron marginaled">
+                    <h1 style="color:black; font-size:6em; margin-block-end:30px;">Мои стартапы</h1>
                     <asp:ListView runat="server" ID="LViewMyStartups" OnItemCommand="LViewMyStartups_ItemCommand">
                         <ItemTemplate>
-                            <div class="round-div-block">
-                                <asp:LinkButton runat="server" Text='<%# Eval("Name") %>' ForeColor="Black" ID="BtnStartUpInfo" CommandName="StartUpClicked" CommandArgument='<%# Eval("Id") %>'></asp:LinkButton>
-                            </div>
-                        </ItemTemplate>
+                    <asp:LinkButton runat="server" CommandName="StartUpClicked" CommandArgument='<%# Eval("Id") %>'>
+                    <div class="startup-panel radius-like container-item ">
+                            <img class="startup-image radius-like image-cover-auto" src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
+                        <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 45px;font-size:1.65em"><%# Eval("Name") %></h1>
+                        <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 20px;color:#d4d4dd; font-size:1.15em;"><%# Eval("SplittedCategory") %></h1>
+                        <div class="tag-item gray-gradient radius-like" style="z-index:64;opacity:.8"></div>
+                    </div>
+                    </asp:LinkButton>
+                </ItemTemplate>
                     </asp:ListView>
                     <asp:Panel runat="server" ID="EmptyStartupsPanel" Visible="false">
                         <p class="lead">Стартапов пока нет. :(</p>
@@ -83,17 +87,20 @@
                     <asp:Button ID="BtnCreateStartUp" OnClick="BtnCreateStartUp_Click" runat="server" CssClass="round-div-block simple-cloud-button" Text="Создать новый стартап"></asp:Button>
                     &nbsp;
                 </div>
-                <div class="jumbotron gradientable marginaled">
-                    <h1>Организованные мной команды</h1>
+                <div class="jumbotron marginaled">
+                    <h1 style="color:black; font-size:6em; margin-block-end:30px;">Мои команды</h1>
                     <asp:ListView runat="server" ID="LViewMyTeams" OnItemCommand="LViewMyTeams_ItemCommand">
-                        <ItemTemplate>
-                            <div class="round-div-block">
-                                <asp:LinkButton runat="server" Text='<%# Eval("Team.Name") %>' ForeColor="Black" ID="BtnTeamInfo" CommandName="TeamClicked" CommandArgument='<%# Eval("Team.Id") %>'></asp:LinkButton>
-                            </div>
-                        </ItemTemplate>
+                       <ItemTemplate>
+                    <div class="unbordered-block">
+                        <asp:Image Width="100" Height="100" runat="server" CssClass="startup-image-radius radius-like marginaled" ImageUrl='<%# Eval("GetCommentImage") %>'></asp:Image>
+                        <asp:Label Font-Bold="true" runat="server" Text='<%# Eval("User.Name") %>'></asp:Label>
+                        <asp:Label runat="server" Text='<%# Eval("CreationDate") %>'></asp:Label>
+                        <asp:Label runat="server" Text='<%# Eval("CommentText") %>'></asp:Label>
+                    </div>
+                </ItemTemplate>
                     </asp:ListView>
                     <asp:Panel runat="server" ID="EmptyTeamsPanel" Visible="false">
-                        <p class="lead">Команд пока нет. :(</p>
+                        <p class="lead" style="color:black; font-size:3em; margin-block-end:30px; margin-block-start: 30px;">Команд пока нет :(</p>
                     </asp:Panel>
                     <asp:Button CssClass="round-div-block simple-cloud-button" runat="server" Text="Создать новую команду"></asp:Button>
                     &nbsp;
