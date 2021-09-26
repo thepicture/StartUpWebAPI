@@ -15,7 +15,7 @@
 
                 <br />
 
-                <asp:Image ID="MainImage" runat="server" CssClass="radius-like swimming-content" Height="200" Width="200" />
+                <asp:Image ID="MainImage" runat="server" CssClass="radius-like swimming-content image-cover-auto" Height="200" Width="200" />
 
                 <asp:Panel ID="PanelMyTeams" runat="server">
                     <div>

@@ -89,17 +89,63 @@ namespace StartUpWebAPI
 
         protected void BtnSendComment_Click(object sender, EventArgs e)
         {
+            string username = User.Identity.Name;
+            User currentUser = AppData.Context.User.First(u => u.Login.Equals(username));
 
+            TeamComment comment = new TeamComment
+            {
+                CommentText = CommentBox.Text,
+                CreationDate = DateTime.Now,
+                User = currentUser,
+                Team = team,
+            };
+
+            team.TeamComment.Add(comment);
+
+            try
+            {
+                AppData.Context.SaveChanges();
+                InsertComments();
+            }
+            catch (Exception)
+            {
+                string reason = HttpUtility.UrlEncode("Не удалось написать комментарий. Попробуйте, пожалуйста, ещё раз.");
+                Response.Redirect("~/TeamInfo?id=" + team.Id + "&reason=" + reason);
+            }
+
+            MaintainScrollPositionOnPostBack = true;
         }
 
         protected void LinkButtonModifyTeam_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("~/AddTeam?id=" + team.Id);
         }
 
         protected void BtnUnsubscribe_Click(object sender, EventArgs e)
         {
+            string reason;
+            TeamOfUser currentTeamOfUser = FindStartUp();
+            AppData.Context.TeamOfUser.Remove(currentTeamOfUser);
 
+            try
+            {
+                AppData.Context.SaveChanges();
+                reason = HttpUtility.UrlEncode("Вы успешно покинули команду");
+                Response.Redirect("~/TeamInfo?id=" + team.Id + "&reason=" + reason);
+            }
+            catch (Exception)
+            {
+                reason = HttpUtility.UrlEncode("Не удалось покинуть команду. Попробуйте, пожалуйста, ещё раз.");
+                Response.Redirect("~/TeamInfo?id=" + team.Id + "&reason=" + reason);
+
+                return;
+            }
+        }
+
+        private TeamOfUser FindStartUp()
+        {
+            return AppData.Context.TeamOfUser.First(s => s.User.Login.Equals(User.Identity.Name)
+                        && s.TeamId == team.Id);
         }
 
         protected void BtnSubscribe_Click(object sender, EventArgs e)

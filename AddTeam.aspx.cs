@@ -16,6 +16,8 @@ namespace StartUpWebAPI
         {
             if (!Page.IsPostBack)
             {
+                TeamImage.ImageUrl = NativeImageUtils.ConvertFromBitmap(Properties.Resources.noPicture);
+
                 LoadBgImg();
                 ViewState["image"] = null;
                 ViewState["imageDelete"] = false;
@@ -38,11 +40,22 @@ namespace StartUpWebAPI
                             TBoxDescription.Text = ((Team)ViewState["currentTeam"]).Description;
                             TBoxMaxMembers.Text = ((Team)ViewState["currentTeam"]).MaxMembersCount.ToString();
 
-                            ViewState["image"] = nullableTeam.Image;
+                            if (nullableTeam.Image != null)
+                            {
+                                ViewState["image"] = nullableTeam.Image;
+                                BtnRemoveImage.Visible = true;
+                            }
                             InsertImageIntoTeam();
                         }
                     }
                 }
+            }
+
+            object nullableImage = ViewState["image"];
+
+            if (nullableImage != null)
+            {
+                BtnRemoveImage.Visible = true;
             }
         }
 
@@ -170,7 +183,7 @@ namespace StartUpWebAPI
 
             if ((bool)ViewState["imageDelete"] == false)
             {
-                addedTeam.Image = image;
+                AppData.Context.Entry(addedTeam).Entity.Image = null;
             }
             else
             {
@@ -201,6 +214,8 @@ namespace StartUpWebAPI
         {
             TeamImage.ImageUrl = NativeImageUtils.ConvertFromBitmap(Properties.Resources.noPicture);
             BtnRemoveImage.Visible = false;
+            ViewState["image"] = null;
+            InsertImageIntoTeam();
         }
     }
 }

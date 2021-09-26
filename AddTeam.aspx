@@ -5,8 +5,8 @@
         <div class="round-div-block semi-transparent-register-like-two request-auto-height"
             style="width: 740px; animation: none !important; display: inline-block;">
             <br />
-
-            <asp:Label runat="server" Style="font-size: 20px; margin-left: 70px; margin-right: 20px;" Text="Название команды"></asp:Label>
+            <br />
+            <asp:Label runat="server" Style="font-size: 20px; margin-left: 70px; margin-right: 20px;" Text="Название"></asp:Label>
             <asp:TextBox runat="server" ID="TBoxName" Style="width: 515px !important; max-width: 700px; color: black !important;" CssClass="nice-text-box prevent-selection textbox-style-setting" TextMode="SingleLine" Wrap="true"></asp:TextBox>
             <br />
             <br />
@@ -27,10 +27,11 @@
 
                 <asp:Button runat="server"
                     CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page-four margin-bottom-top-as-usual"
-                    Style="width: 90%; height: max-content;"
+                    Style="width: 90%; height: max-content; bottom: 0; position: absolute;"
                     Text="Удалить"
                     ID="BtnRemoveImage"
-                    OnClick="BtnRemoveImage_Click"></asp:Button>
+                    OnClick="BtnRemoveImage_Click"
+                    Visible="false"></asp:Button>
                 <br />
             </asp:Panel>
             <asp:FileUpload runat="server"
@@ -41,20 +42,21 @@
             <asp:Button runat="server" Style="margin-bottom: 10px !important; font-size: 17px !important; margin-left: 70px; height: 35px !important; border-radius: 5px !important; color: black !important;"
                 CssClass="round-div-block-specified-about about-like-cloud-button-three" Text="Прикрепить логотип команды" ID="BtnAddImage"
                 OnClick="BtnAddImage_Click" />
+            <div style="display: inline-block;">
+                <asp:Button runat="server"
+                    Style="margin-bottom: 0px !important; float: left; margin-right: 40px !important; font-size: 17px !important; margin-left: 70px; height: 35px !important;"
+                    CssClass="round-div-block-specified-about about-like-cloud-button-three"
+                    OnClick="BtnSave_Click"
+                    ID="BtnSave"
+                    Text="Сохранить изменения" />
 
-            <asp:Button runat="server"
-                Style="margin-bottom: 0px !important; float: left; margin-right: 40px !important; font-size: 17px !important; margin-left: 70px; height: 35px !important;"
-                CssClass="round-div-block-specified-about about-like-cloud-button-three"
-                OnClick="BtnSave_Click"
-                ID="BtnSave"
-                Text="Сохранить изменения" />
-
-            <asp:Button runat="server"
-                Style="width: 170px !important; font-size: 17px !important; margin-left: 70px; height: 35px !important;"
-                CssClass="round-div-block-specified-about about-like-cloud-button-three"
-                OnClick="BtnCancel_Click"
-                ID="BtnCancel"
-                Text="Отмена" />
+                <asp:Button runat="server"
+                    Style="width: 170px !important; font-size: 17px !important; margin-left: 70px; height: 35px !important;"
+                    CssClass="round-div-block-specified-about about-like-cloud-button-three"
+                    OnClick="BtnCancel_Click"
+                    ID="BtnCancel"
+                    Text="Отмена" />
+            </div>
         </div>
         <asp:Image runat="server" ID="BgImage" CssClass="bg-image"></asp:Image>
     </div>
