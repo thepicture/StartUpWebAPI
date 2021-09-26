@@ -15,6 +15,7 @@ namespace StartUpWebAPI
         {
             if (HttpContext.Current.User.Identity.IsAuthenticated)
             {
+                AppData.Context.ChangeTracker.Entries().ToList().ForEach(s => s.Reload());
                 LoadStartups();
                 LoadTeams();
             }
