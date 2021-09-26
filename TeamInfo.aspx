@@ -16,8 +16,9 @@
                 <br />
 
                 <asp:Image ID="MainImage" runat="server" CssClass="radius-like swimming-content" Height="200" Width="200" />
+
                 <asp:Panel ID="PanelMyTeams" runat="server">
-                    <div class="round-div-block">
+                    <div >
                         <asp:Label ID="Name" runat="server" ForeColor="Black"></asp:Label>
                     </div>
                     <div class="round-div-block">
@@ -53,7 +54,7 @@
                     <asp:Button ID="BtnUnsubscribe"
                         OnClick="BtnUnsubscribe_Click"
                         runat="server"
-                        Style="height: 40px; margin-left: 20px; width: 200px;"
+                        Style="height: 40px ; margin-left: 20px; width: 200px;"
                         CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                         Text="Покинуть команду"
                         Visible="false"></asp:Button>

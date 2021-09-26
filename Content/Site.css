@@ -219,6 +219,13 @@ input[type="select"] {
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
+    .jumbojumbo {
+        margin-top: 20px;
+        padding-top: 20px !important;
+        margin-left: 60px !important;
+        margin-right: 60px !important;
+    }
+
     .jumbotron {
         margin-top: 20px;
         padding-top: 20px !important;

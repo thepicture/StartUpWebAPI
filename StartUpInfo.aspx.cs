@@ -13,7 +13,7 @@ namespace StartUpWebAPI
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ((HtmlGenericControl)Master.FindControl("BodyControl")).Attributes.Add("class", "body-content");
+           
 
             int id = Convert.ToInt32(Request.QueryString.Get("id"));
 
@@ -78,20 +78,20 @@ namespace StartUpWebAPI
 
         private void InsertStartUp()
         {
-            Name.Text = MainName.Text = startUp.Name;
-            CountOfMembers.Text = "Участников: " + startUp.StartUpOfUser.Count.ToString();
-            CountOfTeams.Text = "Команд: " + startUp.StartUpOfTeam.Count.ToString();
+            Name.Text = MainName.Text =startUp.Name;
+            CountOfMembers.Text = startUp.StartUpOfUser.Count.ToString();
+            CountOfTeams.Text =  startUp.StartUpOfTeam.Count.ToString();
 
             string creator = startUp.StartUpOfUser.FirstOrDefault(u => u.RoleType.Name == "Организатор")?.User.Name;
 
-            Creator.Text = "Стартапер: " + (string.IsNullOrWhiteSpace(creator) ? "Неизвестен" : creator);
+            Creator.Text =  (string.IsNullOrWhiteSpace(creator) ? "Неизвестен" : creator);
             IsActual.Text = startUp.IsDone ? "Завершён" : "Актуален";
-            DateOfCreation.Text = "Дата создания: " + startUp.CreationDate.ToString();
-            Category.Text = "Категория: " + startUp.Category.Name;
+            DateOfCreation.Text = startUp.CreationDate.ToString();
+            Category.Text = startUp.Category.Name;
             Description.Text = string.IsNullOrWhiteSpace(startUp.Description) ? "Организатор не предоставил описание. Можете подать ему идею!" : startUp.Description;
             CommentsCount.Text = "Комментарии (" + startUp.StartUpComment.Count + "):";
             MainImage.ImageUrl = startUp.ImagePreview;
-            MaxMembersCount.Text = "Максимум участников: " + startUp.MaxMembersCount.ToString();
+            MaxMembersCount.Text = startUp.MaxMembersCount.ToString();
         }
 
         protected void BtnSendComment_Click(object sender, EventArgs e)
