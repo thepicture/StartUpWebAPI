@@ -45,7 +45,7 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <div class="reason"></div>
+        <asp:Label runat="server" class="reason" ID="ReasonBox" Visible="false">Текст</asp:Label>
 
         <div class="navbar navbar-inverse navbar-fixed-top request-white-bg">
 

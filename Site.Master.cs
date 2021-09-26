@@ -72,6 +72,11 @@ namespace StartUpWebAPI
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Request.QueryString.Get("reason") != null)
+            {
+                ReasonBox.Text = Request.QueryString.Get("reason");
+                ReasonBox.Visible = true;
+            }
         }
 
         protected void BtnLogOut_Click(object sender, EventArgs e)
