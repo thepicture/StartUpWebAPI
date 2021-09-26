@@ -18,6 +18,7 @@ namespace StartUpWebAPI
             if (!Page.IsPostBack)
             {
                 ViewState["images"] = new List<StartUpImage>();
+                ViewState["documents"] = new List<DocumentOfStartUp>();
                 ViewState["currentStartUp"] = new StartUp();
                 string idString = Request.QueryString.Get("id");
 
@@ -40,6 +41,7 @@ namespace StartUpWebAPI
                             TBoxMaxMembers.Text = ((StartUp)ViewState["currentStartUp"]).MaxMembersCount.ToString();
                             CheckBoxDone.Checked = ((StartUp)ViewState["currentStartUp"]).IsDone;
                             ((List<StartUpImage>)ViewState["images"]).AddRange(nullableStartUp.StartUpImage.ToList());
+                            ((List<DocumentOfStartUp>)ViewState["documents"]).AddRange(nullableStartUp.DocumentOfStartUp.ToList());
                             InsertCategory();
                             InsertDocumentsIntoStartUp();
                             InsertImagesIntoStartUp();
@@ -51,13 +53,13 @@ namespace StartUpWebAPI
 
         private void InsertDocumentsIntoStartUp()
         {
-            LViewDocuments.DataSource = ((StartUp)ViewState["currentStartUp"]).DocumentOfStartUp.ToList();
+            LViewDocuments.DataSource = ((List<DocumentOfStartUp>)ViewState["documents"]).Where(i => i.Id >= 0).ToList();
             LViewDocuments.DataBind();
         }
 
         private void InsertImagesIntoStartUp()
         {
-            LViewImages.DataSource = ((List<StartUpImage>)ViewState["images"]).ToList();
+            LViewImages.DataSource = ((List<StartUpImage>)ViewState["images"]).Where(i => i.Id >= 0).ToList();
             LViewImages.DataBind();
         }
 
@@ -87,6 +89,34 @@ namespace StartUpWebAPI
 
         private void UpdateStartUp()
         {
+            string errors = "";
+
+            if (string.IsNullOrWhiteSpace(TBoxName.Text))
+            {
+                errors += "Имя не должно быть пустым\n";
+            }
+
+            if (int.TryParse(TBoxMaxMembers.Text, out _))
+            {
+                if (int.Parse(TBoxMaxMembers.Text) < 0
+                || string.IsNullOrWhiteSpace(TBoxMaxMembers.Text) || TBoxMaxMembers.Text.Length > 4)
+                {
+                    errors += "Количество участников - положительное число длиной от 1 до 4 цифр\n";
+                }
+            }
+            else
+            {
+                errors += "Количество участников должно быть положнительным числом, а не буквенным представлением\n";
+            }
+
+
+
+            if (errors.Length > 0)
+            {
+                Response.Redirect(Request.RawUrl + "&reason=" + HttpUtility.UrlEncode(errors), false);
+                return;
+            }
+
             ((StartUp)ViewState["currentStartUp"]).Name = TBoxName.Text;
             ((StartUp)ViewState["currentStartUp"]).Description = TBoxDescription.Text;
             ((StartUp)ViewState["currentStartUp"]).MaxMembersCount = int.Parse(TBoxMaxMembers.Text);
@@ -138,7 +168,15 @@ namespace StartUpWebAPI
                 StartUp addedStartUp = AppData.Context.StartUp.First(s => s.Id == id);
                 image.StartUpId = addedStartUp.Id;
 
-                AppData.Context.StartUpImage.Add(image);
+                if (image.Id >= 0 && !AppData.Context.StartUpImage.Any(i => i.Name.Equals(image.Name)))
+                {
+                    AppData.Context.StartUpImage.Add(image);
+                }
+                else if (image.Id < 0 && AppData.Context.StartUpImage.Any(i => i.Name.Equals(image.Name)))
+                {
+                    AppData.Context.StartUpImage.Remove(AppData.Context.StartUpImage.First(i => i.Name.Equals(image.Name)));
+                }
+
 
                 try
                 {
@@ -146,7 +184,39 @@ namespace StartUpWebAPI
                 }
                 catch (Exception)
                 {
-                    throw;
+                    Response
+                        .Redirect(Request.RawUrl + "&reason=" + HttpUtility.UrlEncode(
+                        "Не удалось добавить изображения в стартап. " +
+                        "Попробуйте ещё раз"), false);
+                }
+            }
+
+            foreach (var doc in (List<DocumentOfStartUp>)ViewState["documents"])
+            {
+                int id = ((StartUp)ViewState["currentStartUp"]).Id;
+                StartUp addedStartUp = AppData.Context.StartUp.First(s => s.Id == id);
+                doc.StartUpId = addedStartUp.Id;
+
+                if (doc.Id >= 0 && !AppData.Context.DocumentOfStartUp.Any(i => i.FileName.Equals(doc.FileName)))
+                {
+                    AppData.Context.DocumentOfStartUp.Add(doc);
+                }
+                else if (doc.Id < 0 && AppData.Context.DocumentOfStartUp.Any(i => i.FileName.Equals(doc.FileName)))
+                {
+                    AppData.Context.DocumentOfStartUp.Remove(AppData.Context.DocumentOfStartUp.First(i => i.FileName.Equals(doc.FileName)));
+                }
+
+
+                try
+                {
+                    AppData.Context.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    Response
+                         .Redirect(Request.RawUrl + "&reason=" + HttpUtility.UrlEncode(
+                         "Не удалось добавить документы в стартап. " +
+                         "Попробуйте ещё раз"), false);
                 }
             }
         }
@@ -162,8 +232,9 @@ namespace StartUpWebAPI
         {
             if (e.CommandName == "RemoveImage")
             {
-                StartUpImage imageToRemove = ((List<StartUpImage>)ViewState["images"]).Find(i => i.Name.Equals(e.CommandArgument));
-                ((List<StartUpImage>)ViewState["images"]).Remove(imageToRemove);
+                ((List<StartUpImage>)ViewState["images"])
+                    .Find(i => i.Name.Equals(e.CommandArgument))
+                    .Id = -1;
 
                 InsertImagesIntoStartUp();
             }
@@ -180,7 +251,7 @@ namespace StartUpWebAPI
 
             photos.ForEach(p =>
             {
-                bool isNotImage = !p.ContentType.Contains("image");
+                bool isNotImage = !p.ContentType.Contains("image") || ((List<StartUpImage>)ViewState["images"]).Any(i => i.Name.Equals(p.FileName));
 
                 if (isNotImage)
                 {
@@ -197,7 +268,6 @@ namespace StartUpWebAPI
                 };
 
                 (ViewState["images"] as List<StartUpImage>).Add(newImage);
-
             });
 
             InsertImagesIntoStartUp();
@@ -207,27 +277,9 @@ namespace StartUpWebAPI
         {
             if (e.CommandName == "RemoveDocument")
             {
-                DocumentOfStartUp doc = AppData.Context.DocumentOfStartUp.Find(int.Parse((string)e.CommandArgument));
-
-                if (doc != null)
-                {
-                    AppData.Context.DocumentOfStartUp.Remove(doc);
-
-                    try
-                    {
-                        AppData.Context.SaveChanges();
-                    }
-                    catch (Exception ex)
-                    {
-                        Response.Redirect("~/AddStartUp.aspx?id=" + ((StartUp)ViewState["currentStartUp"]).Id
-                            + "&reason="
-                            + HttpUtility.UrlEncode("Документ не был удален из стартапа. Попробуйте ещё раз. " + ex.Message), false);
-                    }
-                }
-
-                ((StartUp)ViewState["currentStartUp"]).DocumentOfStartUp.Remove(((StartUp)ViewState["currentStartUp"])
-                    .DocumentOfStartUp
-                    .First(d => d.Id.Equals(int.Parse((string)e.CommandArgument))));
+                ((List<DocumentOfStartUp>)ViewState["documents"])
+                    .Find(i => i.FileName.Equals(e.CommandArgument))
+                    .Id = -1;
 
                 InsertDocumentsIntoStartUp();
             }
@@ -244,9 +296,11 @@ namespace StartUpWebAPI
 
             docs.ForEach(p =>
             {
-                bool contentIsGreaterThanFiveMb = p.ContentLength > 1024 * 1024 * 5;
+                bool contentIsGreaterThanFiveMbOrExists = p.ContentLength > 1024 * 1024 * 5
+                || ((List<DocumentOfStartUp>)ViewState["documents"])
+                .Any(i => i.FileName.Equals(p.FileName));
 
-                if (contentIsGreaterThanFiveMb)
+                if (contentIsGreaterThanFiveMbOrExists)
                 {
                     return;
                 }
@@ -261,20 +315,7 @@ namespace StartUpWebAPI
                     IsPublic = true,
                 };
 
-                //AppData.Context.DocumentOfStartUp.Add(doc);
-
-                try
-                {
-                    AppData.Context.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    Response.Redirect("~/AddStartUp.aspx?id=" + ((StartUp)ViewState["currentStartUp"]).Id
-                        + "&reason="
-                        + HttpUtility.UrlEncode("Документ не был добавлен в стартап. Попробуйте ещё раз. " + ex.Message), false);
-                }
-
-                ((StartUp)ViewState["currentStartUp"]).DocumentOfStartUp.Add(AppData.Context.Entry(doc).Entity);
+                (ViewState["documents"] as List<DocumentOfStartUp>).Add(doc);
             });
 
             InsertDocumentsIntoStartUp();

@@ -52,7 +52,7 @@
                     Style="width: 90%; height: max-content;"
                     Text="Удалить"
                     CommandName="RemoveDocument"
-                    CommandArgument='<%# Bind("Id") %>' ID="BtnRemoveDocument"></asp:Button>
+                    CommandArgument='<%# Bind("FileName") %>' ID="BtnRemoveDocument"></asp:Button>
             </div>
         </ItemTemplate>
     </asp:ListView>
