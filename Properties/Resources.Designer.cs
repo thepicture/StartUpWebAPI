@@ -93,6 +93,16 @@ namespace StartUpWebAPI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap latexBlackBg {
+            get {
+                object obj = ResourceManager.GetObject("latexBlackBg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap loginRegisterBg {
             get {
                 object obj = ResourceManager.GetObject("loginRegisterBg", resourceCulture);

@@ -15,24 +15,6 @@ namespace StartUpWebAPI
     {
 
         /// <summary>
-        /// NameBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox NameBox;
-
-        /// <summary>
-        /// ActualBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox ActualBox;
-
-        /// <summary>
         /// UpdateFiltration control.
         /// </summary>
         /// <remarks>
@@ -40,6 +22,15 @@ namespace StartUpWebAPI
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdateFiltration;
+
+        /// <summary>
+        /// NameBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox NameBox;
 
         /// <summary>
         /// ComboCategories control.
@@ -58,6 +49,15 @@ namespace StartUpWebAPI
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ComboMaxMembers;
+
+        /// <summary>
+        /// ActualBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox ActualBox;
 
         /// <summary>
         /// BtnSearch control.

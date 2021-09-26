@@ -85,7 +85,7 @@
             <br />
             <div style="display: flex; justify-content: center;">
                 <asp:TextBox Style="margin: -10px 0px -20px 0px;" runat="server" ID="PasswordBox"
-                    BorderStyle="None" CssClass="nice-text-box prevent-selection textbox-style-setting" placeholder="Пароль"></asp:TextBox>
+                    BorderStyle="None" CssClass="nice-text-box prevent-selection textbox-style-setting" TextMode="Password" placeholder="Пароль"></asp:TextBox>
             </div>
             <br />
             <div style="display: flex; justify-content: center;">
