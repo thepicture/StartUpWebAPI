@@ -113,7 +113,7 @@ namespace StartUpWebAPI
 
             if (errors.Length > 0)
             {
-                Response.Redirect(Request.RawUrl + "&reason=" + HttpUtility.UrlEncode(errors), false);
+                Response.Redirect("~/AddStartUp?id=" + ((StartUp)ViewState["currentStartUp"]).Id + "&reason=" + HttpUtility.UrlEncode(errors), false);
                 return;
             }
 
@@ -148,11 +148,9 @@ namespace StartUpWebAPI
             {
                 AppData.Context.SaveChanges();
 
-                StartUp addedStartUp = AppData.Context.StartUp.First(s => s.CreationDate == ((StartUp)ViewState["currentStartUp"]).CreationDate);
-
                 string reason = HttpUtility.UrlEncode("Стартап успешно изменён!");
 
-                Response.Redirect("~/StartUpInfo?id=" + addedStartUp.Id + "&reason=" + reason, false);
+                Response.Redirect("~/StartUpInfo?id=" + ((StartUp)ViewState["currentStartUp"]).Id + "&reason=" + reason, false);
             }
             catch (Exception ex)
             {
