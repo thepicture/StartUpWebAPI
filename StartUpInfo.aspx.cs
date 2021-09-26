@@ -13,8 +13,6 @@ namespace StartUpWebAPI
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ((HtmlGenericControl)Master.FindControl("BodyControl")).Attributes.Add("class", "body-content");
-
             int id = Convert.ToInt32(Request.QueryString.Get("id"));
 
             bool isStartUp = AppData.Context.StartUp.Count(s => s.Id == id) != 0;

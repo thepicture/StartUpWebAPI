@@ -28,5 +28,14 @@ namespace StartUpWebAPI.Models
         {
             return (byte[])new ImageConverter().ConvertTo(source, typeof(byte[]));
         }
+
+        public static string ConvertFromBytes(byte[] source)
+        {
+            string result = "data:image/jpg;base64,";
+
+            result += Convert.ToBase64String(source);
+
+            return result;
+        }
     }
 }

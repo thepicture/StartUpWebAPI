@@ -59,7 +59,6 @@
                     <label style="display: block; font-size: 17px; color: darkslateblue">Проект:</label>
                     <asp:Label ID="IsActual" runat="server" ForeColor="Black"></asp:Label>
                 </div>
-                <br />
 
                 <asp:Panel Style="display: block" runat="server" ID="PStartupEdit" Visible="false">
 
@@ -68,6 +67,11 @@
                         ForeColor="White"
                         ID="LinkButtonModifyStartUp"
                         OnClick="LinkButtonModifyStartUp_Click"></asp:LinkButton>
+                    <asp:LinkButton runat="server" Text='Удалить стартап'
+                        CssClass="round-div-block simple-cloud-button"
+                        ForeColor="White"
+                        ID="BtnDeleteStartUp"
+                        OnClick="BtnDeleteStartUp_Click"></asp:LinkButton>
                 </asp:Panel>
                 <asp:Button ID="BtnSubscribe"
                     OnClick="BtnSubscribe_Click"

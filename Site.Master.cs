@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Web;
@@ -72,6 +73,8 @@ namespace StartUpWebAPI
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
+
             if (Request.QueryString.Get("reason") != null)
             {
                 ReasonBox.Text = Request.QueryString.Get("reason");

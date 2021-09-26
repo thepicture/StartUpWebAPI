@@ -15,10 +15,9 @@ namespace StartUpWebAPI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            LoadBgImage();
-
             if (!Page.IsPostBack)
             {
+                LoadBgImage();
                 ViewState["images"] = new List<StartUpImage>();
                 ViewState["documents"] = new List<DocumentOfStartUp>();
                 ViewState["currentStartUp"] = new StartUp();
@@ -100,7 +99,7 @@ namespace StartUpWebAPI
 
             if (string.IsNullOrWhiteSpace(TBoxName.Text))
             {
-                errors += "Имя не должно быть пустым\n";
+                errors += "Имя не должно быть пустым; \n";
             }
 
             if (int.TryParse(TBoxMaxMembers.Text, out _))
@@ -108,15 +107,13 @@ namespace StartUpWebAPI
                 if (int.Parse(TBoxMaxMembers.Text) < 0
                 || string.IsNullOrWhiteSpace(TBoxMaxMembers.Text) || TBoxMaxMembers.Text.Length > 4)
                 {
-                    errors += "Количество участников - положительное число длиной от 1 до 4 цифр\n";
+                    errors += "Количество участников - положительное число длиной от 1 до 4 цифр; \n";
                 }
             }
             else
             {
-                errors += "Количество участников должно быть положнительным числом, а не буквенным представлением\n";
+                errors += "Количество участников должно быть положительным числом, а не буквенным представлением; \n";
             }
-
-
 
             if (errors.Length > 0)
             {
@@ -140,50 +137,53 @@ namespace StartUpWebAPI
                     User = AppData.Context.User.First(u => u.Login.Equals(User.Identity.Name)),
                     RoleType = AppData.Context.RoleType.First(r => r.Name.Equals("Организатор"))
                 });
-            }
 
-            if (((StartUp)ViewState["currentStartUp"]).Id == 0)
-            {
                 AppData.Context.StartUp.Add((StartUp)ViewState["currentStartUp"]);
             }
             else
             {
-                StartUp updatingStartUp = AppData.Context.StartUp.Find(((StartUp)ViewState["currentStartUp"]).Id);
+                int startUpId = ((StartUp)ViewState["currentStartUp"]).Id;
+                StartUp updatingStartUp = AppData.Context.StartUp.Find(startUpId);
 
-                AppData.Context.Entry(updatingStartUp).CurrentValues.SetValues(((StartUp)ViewState["currentStartUp"]));
+                StartUp insertingStartUp = (StartUp)ViewState["currentStartUp"];
+                AppData.Context.Entry(updatingStartUp).CurrentValues.SetValues(insertingStartUp);
             }
+
+            StartUp addedStartUp = null;
+            int id;
 
             try
             {
                 AppData.Context.SaveChanges();
 
-                StartUp addedStartUp = AppData.Context.StartUp.First(s => s.CreationDate == ((StartUp)ViewState["currentStartUp"]).CreationDate);
+                id = ((StartUp)ViewState["currentStartUp"]).Id;
+
+                addedStartUp = AppData.Context.StartUp.First((System.Linq.Expressions.Expression<Func<StartUp, bool>>)(s => s.Id == id));
 
                 string reason = HttpUtility.UrlEncode("Стартап успешно изменён!");
 
                 Response.Redirect("~/StartUpInfo?id=" + ((StartUp)ViewState["currentStartUp"]).Id + "&reason=" + reason, false);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 string reason = HttpUtility.UrlEncode("Стартап не был изменен или добавлен." +
-                    "Пожалуйста, попробуйте изменить стартап ещё раз. " + ex.Message);
+                    "Пожалуйста, попробуйте изменить стартап ещё раз. ");
 
                 Response.Redirect("~/StartUpInfo?id=" + ((StartUp)ViewState["currentStartUp"]).Id + "&reason=" + reason, false);
             }
 
             foreach (var image in (List<StartUpImage>)ViewState["images"])
             {
-                int id = ((StartUp)ViewState["currentStartUp"]).Id;
-                StartUp addedStartUp = AppData.Context.StartUp.First(s => s.Id == id);
                 image.StartUpId = addedStartUp.Id;
 
-                if (image.Id >= 0 && !AppData.Context.StartUpImage.Any(i => i.Name.Equals(image.Name)))
+                if (image.Id >= 0 && !addedStartUp.StartUpImage.Any(i => i.Name.Equals(image.Name)))
                 {
                     AppData.Context.StartUpImage.Add(image);
                 }
-                else if (image.Id < 0 && AppData.Context.StartUpImage.Any(i => i.Name.Equals(image.Name)))
+                else if (image.Id < 0 && addedStartUp.StartUpImage.Any(i => i.Name.Equals(image.Name)))
                 {
                     AppData.Context.StartUpImage.Remove(AppData.Context.StartUpImage.First(i => i.Name.Equals(image.Name)));
+                    addedStartUp.StartUpImage.Remove(AppData.Context.StartUpImage.First(i => i.Name.Equals(image.Name)));
                 }
 
 
@@ -202,17 +202,16 @@ namespace StartUpWebAPI
 
             foreach (var doc in (List<DocumentOfStartUp>)ViewState["documents"])
             {
-                int id = ((StartUp)ViewState["currentStartUp"]).Id;
-                StartUp addedStartUp = AppData.Context.StartUp.First(s => s.Id == id);
                 doc.StartUpId = addedStartUp.Id;
 
-                if (doc.Id >= 0 && !AppData.Context.DocumentOfStartUp.Any(i => i.FileName.Equals(doc.FileName)))
+                if (doc.Id >= 0 && !addedStartUp.DocumentOfStartUp.Any(i => i.FileName.Equals(doc.FileName)))
                 {
                     AppData.Context.DocumentOfStartUp.Add(doc);
                 }
                 else if (doc.Id < 0 && AppData.Context.DocumentOfStartUp.Any(i => i.FileName.Equals(doc.FileName)))
                 {
                     AppData.Context.DocumentOfStartUp.Remove(AppData.Context.DocumentOfStartUp.First(i => i.FileName.Equals(doc.FileName)));
+                    addedStartUp.DocumentOfStartUp.Remove(AppData.Context.DocumentOfStartUp.First(i => i.FileName.Equals(doc.FileName)));
                 }
 
 
@@ -220,7 +219,7 @@ namespace StartUpWebAPI
                 {
                     AppData.Context.SaveChanges();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     Response
                          .Redirect(Request.RawUrl + "&reason=" + HttpUtility.UrlEncode(

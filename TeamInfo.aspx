@@ -64,11 +64,7 @@
                 </p>
             </div>
 
-
-
         </div>
-
-
 
         <div class="jumbotron gradientable paddinated">
             <p style="margin-left: 10px;" class="lead">

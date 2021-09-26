@@ -9,7 +9,6 @@ namespace StartUpWebAPI.Entities
     /// <summary>
     /// Public partial class for the StartUp entity.
     /// </summary>
-    [Serializable]
     public partial class StartUp
     {
         public string SpacedTitle
