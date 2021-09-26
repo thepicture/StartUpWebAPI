@@ -66,38 +66,51 @@
         </AnonymousTemplate>
         <LoggedInTemplate>
             <h1>Привет, <%: User.Identity.Name %>. </h1>
-            <div class="inline-div">
-
-                <div class="jumbotron gradientable marginaled">
-                    <h1>Организованные мной стартапы</h1>
+            <div class="jumbotron marginaled">
+                <h1 style="color: black;">Организованные мной стартапы</h1>
+                <asp:Panel HorizontalAlign="Center" runat="server">
                     <asp:ListView runat="server" ID="LViewMyStartups" OnItemCommand="LViewMyStartups_ItemCommand">
                         <ItemTemplate>
-                            <div class="round-div-block">
-                                <asp:LinkButton runat="server" Text='<%# Eval("Name") %>' ForeColor="Black" ID="BtnStartUpInfo" CommandName="StartUpClicked" CommandArgument='<%# Eval("Id") %>'></asp:LinkButton>
-                            </div>
+                            <asp:LinkButton runat="server" ID="BtnStartUpInfo" CommandName="StartUpClicked" CommandArgument='<%# Eval("Id") %>'>
+                                    <div class="startup-panel radius-like container-item">
+                                        <img class="startup-image radius-like image-cover-auto" src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
+                                        <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 45px;"><%# Eval("Name") %></h1>
+                                        <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 20px;color:#d4d4dd; font-size:1.15em;"><%# Eval("SplittedCategory") %></h1>
+                                    <div class="tag-item gray-gradient radius-like" style="z-index:64;opacity:.8;"></div>
+                                </div>
+                            </asp:LinkButton>
                         </ItemTemplate>
                     </asp:ListView>
                     <asp:Panel runat="server" ID="EmptyStartupsPanel" Visible="false">
                         <p class="lead">Стартапов пока нет. :(</p>
                     </asp:Panel>
-                    <asp:Button ID="BtnCreateStartUp" OnClick="BtnCreateStartUp_Click" runat="server" CssClass="round-div-block simple-cloud-button" Text="Создать новый стартап"></asp:Button>
-                    &nbsp;
-                </div>
-                <div class="jumbotron gradientable marginaled">
-                    <h1>Организованные мной команды</h1>
-                    <asp:ListView runat="server" ID="LViewMyTeams" OnItemCommand="LViewMyTeams_ItemCommand">
-                        <ItemTemplate>
-                            <div class="round-div-block">
-                                <asp:LinkButton runat="server" Text='<%# Eval("Team.Name") %>' ForeColor="Black" ID="BtnTeamInfo" CommandName="TeamClicked" CommandArgument='<%# Eval("Team.Id") %>'></asp:LinkButton>
-                            </div>
-                        </ItemTemplate>
-                    </asp:ListView>
-                    <asp:Panel runat="server" ID="EmptyTeamsPanel" Visible="false">
-                        <p class="lead">Команд пока нет. :(</p>
-                    </asp:Panel>
-                    <asp:Button CssClass="round-div-block simple-cloud-button" runat="server" Text="Создать новую команду"></asp:Button>
-                    &nbsp;
-                </div>
+                    <asp:Button ID="BtnCreateStartUp"
+                        OnClick="BtnCreateStartUp_Click"
+                        runat="server"
+                        CssClass="round-div-block simple-cloud-button"
+                        Text="Создать новый стартап"></asp:Button>
+                </asp:Panel>
+                &nbsp;
+            </div>
+            <div class="jumbotron marginaled">
+                <h1 style="color: black;">Организованные мной команды</h1>
+                <asp:ListView runat="server" ID="LViewMyTeams" OnItemCommand="LViewMyTeams_ItemCommand">
+                    <ItemTemplate>
+                        <asp:LinkButton runat="server" ID="BtnTeamInfo" CommandName="TeamClicked" CommandArgument='<%# Eval("Id") %>'>
+                            <div class="startup-panel radius-like container-item ">
+                                <img class="startup-image radius-like image-cover-auto" src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
+                                <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 45px;"><%# Eval("Name") %></h1>
+                                <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 20px;color:#d4d4dd; font-size:1.15em;"><%# (string) Eval("CountOfMembers") + " участников" %></h1>
+                                <div class="tag-item gray-gradient radius-like" style="z-index:555;opacity:.8"></div>
+                    </div>
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:ListView>
+                <asp:Panel runat="server" ID="EmptyTeamsPanel" Visible="false">
+                    <p class="lead">Команд пока нет. :(</p>
+                </asp:Panel>
+                <asp:Button CssClass="round-div-block simple-cloud-button" runat="server" Text="Создать новую команду"></asp:Button>
+                &nbsp;
             </div>
         </LoggedInTemplate>
     </asp:LoginView>

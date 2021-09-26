@@ -29,14 +29,15 @@ namespace StartUpWebAPI
             {
                 return;
             }
-            (RecursiveControlFinder.FindControlRecursive(this, "LViewMyStartups") as ListView).DataSource = startUps;
 
             if (startUps.Count == 0)
             {
                 (RecursiveControlFinder.FindControlRecursive(this, "EmptyStartupsPanel") as Panel).Visible = true;
+                return;
             }
 
-             (RecursiveControlFinder.FindControlRecursive(this, "LViewMyStartups") as ListView).DataBind();
+            (RecursiveControlFinder.FindControlRecursive(this, "LViewMyStartups") as ListView).DataSource = startUps;
+            (RecursiveControlFinder.FindControlRecursive(this, "LViewMyStartups") as ListView).DataBind();
         }
 
 
@@ -44,13 +45,14 @@ namespace StartUpWebAPI
         private void LoadTeams()
         {
             List<TeamOfUser> teams = AppData.Context.User.First(u => u.Login.Equals(HttpContext.Current.User.Identity.Name))?.TeamOfUser.ToList();
-            (RecursiveControlFinder.FindControlRecursive(this, "LViewMyTeams") as ListView).DataSource = teams;
 
             if (teams.Count == 0)
             {
                 (RecursiveControlFinder.FindControlRecursive(this, "EmptyTeamsPanel") as Panel).Visible = true;
+                return;
             }
 
+            (RecursiveControlFinder.FindControlRecursive(this, "LViewMyTeams") as ListView).DataSource = teams;
             (RecursiveControlFinder.FindControlRecursive(this, "LViewMyTeams") as ListView).DataBind();
         }
 

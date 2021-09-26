@@ -30,9 +30,9 @@
                         <asp:CheckBox runat="server" Text="Только актуальные" Style="vertical-align: middle; margin-left: 5px;" Checked="true" ID="ActualBox" />
                     </ContentTemplate>
                 </asp:UpdatePanel>
-                <asp:Button Text="Искать" Style="width: 120px !important;" CssClass="button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual "
+                <asp:Button Text="Искать" Style="width: 120px !important;" CssClass="button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                     runat="server" ID="BtnSearch" OnClick="BtnSearch_Click" />
-                <asp:Button Text="Очистить фильтры" Style="margin-left: -2px;" CssClass="button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual "
+                <asp:Button Text="Очистить фильтры" Style="margin-left: -2px;" CssClass="button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                     runat="server" ID="BtnClear" OnClick="BtnClear_Click" />
             </div>
         </div>
@@ -55,11 +55,11 @@
                             runat="server" CommandName="StartUpClicked" CommandArgument='<%# Eval("Id") %>' style="width: fit-content;" />
                 </asp:Panel>--%>
                     <asp:LinkButton runat="server" CommandName="StartUpClicked" CommandArgument='<%# Eval("Id") %>'>
-                    <div class="startup-panel radius-like container-item ">
+                        <div class="startup-panel radius-like container-item">
                             <img class="startup-image radius-like image-cover-auto" src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
-                        <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 45px;"><%# Eval("Name") %></h1>
-                        <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 20px;color:#d4d4dd; font-size:1.15em;"><%# Eval("SplittedCategory") %></h1>
-                        <div class="tag-item gray-gradient radius-like" style="z-index:64;opacity:.8"></div>
+                            <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 45px;"><%# Eval("Name") %></h1>
+                            <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 20px;color:#d4d4dd; font-size:1.15em;"><%# Eval("SplittedCategory") %></h1>
+                        <div class="tag-item gray-gradient radius-like" style="z-index:64;opacity:.8;"></div>
                     </div>
                     </asp:LinkButton>
                 </ItemTemplate>
