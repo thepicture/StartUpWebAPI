@@ -73,7 +73,14 @@ namespace StartUpWebAPI
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
+            try
+            {
+                AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+            }
 
             if (Request.QueryString.Get("reason") != null)
             {

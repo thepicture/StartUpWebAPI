@@ -17,7 +17,7 @@ namespace StartUpWebAPI
 
         private void LoadBgImage()
         {
-            BgImage.ImageUrl = NativeImageUtils.ConvertFromBitmap(Properties.Resources.contactImage);
+            BgImage.ImageUrl = NativeImageUtils.ConvertFromBitmap(Properties.Resources.contactImageTwo);
         }
     }
 }

@@ -212,6 +212,7 @@
     <Content Include="MyAccount.aspx" />
     <Resource Include="Resources\commonBg.jpg" />
     <Resource Include="Resources\startupAddBg.jpeg" />
+    <Resource Include="Resources\contactImageTwo.jpeg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

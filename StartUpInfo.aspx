@@ -16,7 +16,7 @@
 
 
                 <div style="margin-top: 70px !important; margin-left: 240px !important; margin-top: 90px !important; width: 570px !important; height: 150px !important;">
-                    <asp:Label Style="margin-top: 90px !important;" ID="Description" runat="server" ForeColor="Black"></asp:Label>
+                    <asp:Label Style="margin-top: 90px !important; font-size: x-large;" ID="Description" runat="server" ForeColor="Black"></asp:Label>
                 </div>
 
                 <div style="margin-left: 240px; width: 200px; height: 70px; float: left;">
