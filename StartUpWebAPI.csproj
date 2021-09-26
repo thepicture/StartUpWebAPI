@@ -208,6 +208,8 @@
     <Resource Include="Resources\contactBack.svg" />
     <Resource Include="Resources\StarTup.svg" />
     <Resource Include="Resources\latexBlackBg.jpg" />
+    <Resource Include="Resources\IndoAdd.jpeg" />
+    <Resource Include="Resources\backimage.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

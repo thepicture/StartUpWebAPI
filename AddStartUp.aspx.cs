@@ -15,6 +15,8 @@ namespace StartUpWebAPI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            LoadBgImage();
+
             if (!Page.IsPostBack)
             {
                 ViewState["currentStartUp"] = new StartUp();
@@ -46,6 +48,12 @@ namespace StartUpWebAPI
                 }
             }
         }
+
+        private void LoadBgImage()
+        {
+            BgImage.ImageUrl = NativeImageUtils.ConvertFromBitmap(Properties.Resources.backimage);
+        }
+
 
         private void InsertDocumentsIntoStartUp()
         {

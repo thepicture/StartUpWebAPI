@@ -47,7 +47,7 @@
                     <asp:Button ID="BtnSubscribe"
                         OnClick="BtnSubscribe_Click"
                         runat="server"
-                        CssClass="round-div-block simple-cloud-button"
+                         CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                         Text="Вступить в команду"
                         Visible="false"></asp:Button>
                     <asp:Button ID="BtnUnsubscribe"

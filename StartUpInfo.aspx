@@ -41,7 +41,7 @@
                 </div>
                 <asp:Panel runat="server" ID="PStartupEdit" Visible="false">
                     <asp:LinkButton runat="server" Text='Изменить информацию'
-                        CssClass="round-div-block simple-cloud-button"
+                         CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                         ForeColor="White"
                         ID="LinkButtonModifyStartUp"
                         OnClick="LinkButtonModifyStartUp_Click"></asp:LinkButton>
