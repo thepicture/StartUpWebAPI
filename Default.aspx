@@ -68,10 +68,9 @@
             <h1>Привет, <%: User.Identity.Name %>. </h1>
             <div class="marginaled">
                 <h1 style="color: black;">Организованные мной стартапы</h1>
-                <asp:Panel HorizontalAlign="Center" runat="server">
-                    <asp:ListView runat="server" ID="LViewMyStartups" OnItemCommand="LViewMyStartups_ItemCommand">
-                        <ItemTemplate>
-                            <asp:LinkButton runat="server" ID="BtnStartUpInfo" CommandName="StartUpClicked" CommandArgument='<%# Eval("Id") %>'>
+                <asp:ListView runat="server" ID="LViewMyStartups" OnItemCommand="LViewMyStartups_ItemCommand">
+                    <ItemTemplate>
+                        <asp:LinkButton runat="server" ID="BtnStartUpInfo" CommandName="StartUpClicked" CommandArgument='<%# Eval("Id") %>'>
                                 <div class="startup-panel radius-like container-item">
                                     <img class="startup-image radius-like image-cover-auto" src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
                                     <h1 class="tag-item" style="margin-left: 20px; margin-bottom: 45px; z-index:128"><%# Eval("Name") %></h1>
@@ -79,21 +78,20 @@
                                     <div class="tag-item gray-gradient radius-like" style="z-index: 64; opacity: .8;"></div>
                                     <asp:Label class="sign-my-startup tag-item" style="left: auto;" Visible='<%# ((HashSet<StartUpWebAPI.Entities.StartUpOfUser>)Eval("StartUpOfUser")).Any(s => s.User.Login.Equals(User.Identity.Name))%>' runat="server">Мой стартап</asp:Label>
                                 </div>
-                            </asp:LinkButton>
-                        </ItemTemplate>
-                    </asp:ListView>
-                    <asp:Panel runat="server" ID="EmptyStartupsPanel" Visible="false">
-                        <p class="lead">Стартапов пока нет. :(</p>
-                    </asp:Panel>
-                    <asp:Button ID="BtnCreateStartUp"
-                        OnClick="BtnCreateStartUp_Click"
-                        runat="server"
-                        CssClass="round-div-block simple-cloud-button"
-                        Text="Создать новый стартап"></asp:Button>
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:ListView>
+                <asp:Panel runat="server" ID="EmptyStartupsPanel" Visible="false">
+                    <p class="lead">Стартапов пока нет. :(</p>
                 </asp:Panel>
+                <asp:Button ID="BtnCreateStartUp"
+                    OnClick="BtnCreateStartUp_Click"
+                    runat="server"
+                    CssClass="round-div-block simple-cloud-button"
+                    Text="Создать новый стартап"></asp:Button>
                 &nbsp;
             </div>
-            <div class="jumbotron marginaled">
+            <div class="marginaled">
                 <h1 style="color: black;">Организованные мной команды</h1>
                 <asp:ListView runat="server" ID="LViewMyTeams" OnItemCommand="LViewMyTeams_ItemCommand">
                     <ItemTemplate>
@@ -102,8 +100,8 @@
                                 <img class="startup-image radius-like image-cover-auto" src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
                                 <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 45px; z-index:128;"><%# Eval("Name") %></h1>
                                 <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 20px;color:#d4d4dd; z-index:128; font-size:1.15em;"><%# (string) Eval("CountOfMembers") + " участников" %></h1>
-                                <div class="tag-item gray-gradient radius-like" style="z-index:555;opacity:.8"></div>
-                                <asp:Label class="sign-my-startup tag-item" style="left: auto;" Visible='<%# ((HashSet<StartUpWebAPI.Entities.StartUpOfUser>)Eval("StartUpOfUser")).Any(s => s.User.Login.Equals(User.Identity.Name))%>' runat="server">Моя команда</asp:Label>
+                                <div class="tag-item gray-gradient radius-like" style="z-index:64;opacity:.8;"></div>
+                                <asp:Label class="sign-my-startup tag-item" style="left: auto;" Visible='<%# ((HashSet<StartUpWebAPI.Entities.TeamOfUser>)Eval("TeamOfUser")).Any(s => s.User.Login.Equals(User.Identity.Name))%>' runat="server">Моя команда</asp:Label>
                     </div>
                         </asp:LinkButton>
                     </ItemTemplate>

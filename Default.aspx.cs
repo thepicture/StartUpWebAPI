@@ -44,7 +44,7 @@ namespace StartUpWebAPI
 
         private void LoadTeams()
         {
-            List<TeamOfUser> teams = AppData.Context.User.First(u => u.Login.Equals(HttpContext.Current.User.Identity.Name))?.TeamOfUser.ToList();
+            List<Team> teams = AppData.Context.Team.ToList();
 
             if (teams.Count == 0)
             {
