@@ -65,9 +65,9 @@
 
         </AnonymousTemplate>
         <LoggedInTemplate>
-            <h1>Привет, <%: User.Identity.Name %>. </h1>
-            <div class="marginaled">
-                <h1 style="color: black;">Организованные мной стартапы</h1>
+            <h1 style="text-align: center;">Привет, <%: User.Identity.Name %>. </h1>
+            <div class="marginaled center-align">
+                <h1 style="color: black; font-size: 5em; margin-block-end: 30px; text-align: center;">Мои стартапы</h1>
                 <asp:ListView runat="server" ID="LViewMyStartups" OnItemCommand="LViewMyStartups_ItemCommand">
                     <ItemTemplate>
                         <asp:LinkButton runat="server" ID="BtnStartUpInfo" CommandName="StartUpClicked" CommandArgument='<%# Eval("Id") %>'>
@@ -82,17 +82,18 @@
                     </ItemTemplate>
                 </asp:ListView>
                 <asp:Panel runat="server" ID="EmptyStartupsPanel" Visible="false">
-                    <p class="lead">Стартапов пока нет. :(</p>
+                    <p class="lead" style="font-size: 3em;">Стартапов пока нет :(</p>
                 </asp:Panel>
                 <asp:Button ID="BtnCreateStartUp"
                     OnClick="BtnCreateStartUp_Click"
                     runat="server"
-                    CssClass="round-div-block simple-cloud-button"
+                    Style="height: 40px; margin-block-start: 30px; width: 250px;"
+                    CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usua"
                     Text="Создать новый стартап"></asp:Button>
                 &nbsp;
             </div>
-            <div class="marginaled">
-                <h1 style="color: black;">Организованные мной команды</h1>
+            <div class="marginaled center-align">
+                <h1 style="color: black; font-size: 5em; margin-block-end: 30px; text-align: center;">Мои команды</h1>
                 <asp:ListView runat="server" ID="LViewMyTeams" OnItemCommand="LViewMyTeams_ItemCommand">
                     <ItemTemplate>
                         <asp:LinkButton runat="server" ID="BtnTeamInfo" CommandName="TeamClicked" CommandArgument='<%# Eval("Id") %>'>
@@ -107,9 +108,14 @@
                     </ItemTemplate>
                 </asp:ListView>
                 <asp:Panel runat="server" ID="EmptyTeamsPanel" Visible="false">
-                    <p class="lead">Команд пока нет. :(</p>
+                    <p class="lead" style="font-size: 3em;">Команд пока нет :(</p>
                 </asp:Panel>
-                <asp:Button CssClass="round-div-block simple-cloud-button" runat="server" Text="Создать новую команду"></asp:Button>
+                <div class="center-align">
+                    <asp:Button Style="height: 40px; margin-block-start: 30px; width: 250px;"
+                        CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usua"
+                        runat="server"
+                        Text="Создать новую команду"></asp:Button>
+                </div>
                 &nbsp;
             </div>
         </LoggedInTemplate>

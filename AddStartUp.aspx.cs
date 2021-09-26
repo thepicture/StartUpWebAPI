@@ -15,6 +15,8 @@ namespace StartUpWebAPI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            LoadBgImage();
+
             if (!Page.IsPostBack)
             {
                 ViewState["images"] = new List<StartUpImage>();
@@ -49,6 +51,11 @@ namespace StartUpWebAPI
                     }
                 }
             }
+        }
+
+        private void LoadBgImage()
+        {
+            BgImage.ImageUrl = NativeImageUtils.ConvertFromBitmap(Properties.Resources.commonBg);
         }
 
         private void InsertDocumentsIntoStartUp()
@@ -113,7 +120,9 @@ namespace StartUpWebAPI
 
             if (errors.Length > 0)
             {
-                Response.Redirect(Request.RawUrl + "&reason=" + HttpUtility.UrlEncode(errors), false);
+                Response.Redirect("~/AddStartUp?id="
+                    + ((StartUp)ViewState["currentStartUp"]).Id
+                    + "&reason=" + HttpUtility.UrlEncode(errors), false);
                 return;
             }
 
@@ -152,7 +161,7 @@ namespace StartUpWebAPI
 
                 string reason = HttpUtility.UrlEncode("Стартап успешно изменён!");
 
-                Response.Redirect("~/StartUpInfo?id=" + addedStartUp.Id + "&reason=" + reason, false);
+                Response.Redirect("~/StartUpInfo?id=" + ((StartUp)ViewState["currentStartUp"]).Id + "&reason=" + reason, false);
             }
             catch (Exception ex)
             {

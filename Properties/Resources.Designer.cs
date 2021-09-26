@@ -71,6 +71,16 @@ namespace StartUpWebAPI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap commonBg {
+            get {
+                object obj = ResourceManager.GetObject("commonBg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] contactBack {
@@ -137,6 +147,16 @@ namespace StartUpWebAPI.Properties {
             get {
                 object obj = ResourceManager.GetObject("StarTup", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap startupAddBg {
+            get {
+                object obj = ResourceManager.GetObject("startupAddBg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

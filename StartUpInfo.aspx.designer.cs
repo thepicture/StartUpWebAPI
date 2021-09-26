@@ -42,6 +42,15 @@ namespace StartUpWebAPI
         protected global::System.Web.UI.WebControls.Panel PanelMyStartups;
 
         /// <summary>
+        /// Description control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Description;
+
+        /// <summary>
         /// Name control.
         /// </summary>
         /// <remarks>
@@ -96,15 +105,6 @@ namespace StartUpWebAPI
         protected global::System.Web.UI.WebControls.Label DateOfCreation;
 
         /// <summary>
-        /// Description control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Description;
-
-        /// <summary>
         /// Category control.
         /// </summary>
         /// <remarks>
@@ -139,15 +139,6 @@ namespace StartUpWebAPI
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkButtonModifyStartUp;
-
-        /// <summary>
-        /// BtnDeleteStartUp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton BtnDeleteStartUp;
 
         /// <summary>
         /// BtnSubscribe control.

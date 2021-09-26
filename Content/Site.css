@@ -1010,3 +1010,53 @@ table {
     padding-left: 15px;
     padding-right: 15px;
 }
+
+/* Style for add or info pages. */
+.semi-transparent-register-like-two {
+    background-color: rgba(68,67,67,0.5) !important;
+    font-family: 'IBM Plex Serif', serif;
+    color: white;
+}
+
+.about-like-cloud-button-three {
+    color: #181219 !important;
+    border: 0px;
+    padding: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+    width: auto;
+    font-size: 30px !important;
+}
+
+    .about-like-cloud-button-three:hover {
+        color: white !important;
+        background-color: #6174C8 !important;
+    }
+
+.about-like-cloud-button-for-page-four {
+    color: #181219 !important;
+    border: 0px;
+    padding: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+    width: 170px;
+    font-size: 15px !important;
+}
+
+    .about-like-cloud-button-for-page-four:hover {
+        color: white !important;
+        background-color: #6174C8 !important;
+    }
+
+.jumbojumbo {
+    margin-top: 20px;
+    padding-top: 20px !important;
+    margin-left: 60px !important;
+    margin-right: 60px !important;
+}
+
+.center-align {
+    text-align: -webkit-center;
+}

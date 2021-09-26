@@ -209,6 +209,8 @@
     <Resource Include="Resources\StarTup.svg" />
     <Resource Include="Resources\latexBlackBg.jpg" />
     <Content Include="MyAccount.aspx" />
+    <Resource Include="Resources\commonBg.jpg" />
+    <Resource Include="Resources\startupAddBg.jpeg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
