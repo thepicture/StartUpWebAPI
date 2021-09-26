@@ -682,6 +682,16 @@ title-setting-register-like {
 
 /* Styles for all pages.*/
 
+.reason {
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:400px;
+    height:200px;
+    margin: 20px;
+    border-radius: 20px;
+}
+
 /* Style button. */
 .button-style-for-page {
     text-align: center !important;

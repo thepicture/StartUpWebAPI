@@ -45,6 +45,8 @@
             </Scripts>
         </asp:ScriptManager>
 
+        <div class="reason"></div>
+
         <div class="navbar navbar-inverse navbar-fixed-top request-white-bg">
 
             <div class="container">
