@@ -66,17 +66,18 @@
         </AnonymousTemplate>
         <LoggedInTemplate>
             <h1>Привет, <%: User.Identity.Name %>. </h1>
-            <div class="jumbotron marginaled">
+            <div class="marginaled">
                 <h1 style="color: black;">Организованные мной стартапы</h1>
                 <asp:Panel HorizontalAlign="Center" runat="server">
                     <asp:ListView runat="server" ID="LViewMyStartups" OnItemCommand="LViewMyStartups_ItemCommand">
                         <ItemTemplate>
                             <asp:LinkButton runat="server" ID="BtnStartUpInfo" CommandName="StartUpClicked" CommandArgument='<%# Eval("Id") %>'>
-                                    <div class="startup-panel radius-like container-item">
-                                        <img class="startup-image radius-like image-cover-auto" src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
-                                        <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 45px;"><%# Eval("Name") %></h1>
-                                        <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 20px;color:#d4d4dd; font-size:1.15em;"><%# Eval("SplittedCategory") %></h1>
-                                    <div class="tag-item gray-gradient radius-like" style="z-index:64;opacity:.8;"></div>
+                                <div class="startup-panel radius-like container-item">
+                                    <img class="startup-image radius-like image-cover-auto" src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
+                                    <h1 class="tag-item" style="margin-left: 20px; margin-bottom: 45px;"><%# Eval("Name") %></h1>
+                                    <h1 class="tag-item" style="margin-left: 20px; margin-bottom: 20px; color: #d4d4dd; font-size: 1.15em;"><%# Eval("SplittedCategory") %></h1>
+                                    <div class="tag-item gray-gradient radius-like" style="z-index: 64; opacity: .8;"></div>
+                                    <asp:Label class="sign-my-startup tag-item" style="left: auto;" Visible='<%# ((HashSet<StartUpWebAPI.Entities.StartUpOfUser>)Eval("StartUpOfUser")).Any(s => s.User.Login.Equals(User.Identity.Name))%>' runat="server">Мой стартап</asp:Label>
                                 </div>
                             </asp:LinkButton>
                         </ItemTemplate>

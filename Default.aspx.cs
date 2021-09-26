@@ -23,7 +23,7 @@ namespace StartUpWebAPI
 
         private void LoadStartups()
         {
-            List<StartUp> startUps = AppData.Context.User.FirstOrDefault(u => u.Login.Equals(HttpContext.Current.User.Identity.Name))?.StartUpOfUser.Select(s => s.StartUp).ToList();
+            List<StartUp> startUps = AppData.Context.StartUp.ToList();
 
             if (startUps == null)
             {

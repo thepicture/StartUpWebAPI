@@ -519,6 +519,18 @@ input[type="select"] {
     object-fit: cover;
 }
 
+.sign-my-startup {
+    border-width: 50px;
+    border-style: solid;
+    border-color: #6174C8 #6174C8 transparent transparent;
+    font-size: small;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+}
+
+
 /* Styles for master web form. */
 
 /* The title and size for master page. */
