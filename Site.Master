@@ -59,8 +59,8 @@
                 <div class="navbar-collapse collapse">
 
                     <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/About">Главная</a></li>
-                        <li><a runat="server" href="~/Default">
+                        <li><a runat="server" href="~/About" style="padding-left: 5px !important; padding-right: 9px  !important;">Главная</a></li>
+                        <li><a runat="server" href="~/Default" style="padding-left: 5px !important; padding-right: 9px  !important;">
                             <asp:LoginView runat="server" ID="ServerRunner">
                                 <AnonymousTemplate>
                                     О проекте
@@ -70,15 +70,20 @@
                                 </LoggedInTemplate>
                             </asp:LoginView>
                         </a></li>
-                        <li><a runat="server" href="~/Contact">Контакты</a></li>
+                        <asp:LoginView runat="server" ID="MyAccountView">
+                            <LoggedInTemplate>
+                                <li><a runat="server" href="~/MyAccount" style="padding-left: 5px !important; padding-right: 9px  !important;">Личный кабинет</a></li>
+                            </LoggedInTemplate>
+                        </asp:LoginView>
+                        <li><a runat="server" href="~/Contact" style="padding-left: 5px !important; padding-right: 9px  !important;">Контакты</a></li>
                     </ul>
                     <asp:LoginView runat="server">
                         <%-- Do not show the startups and commands headers
                             if the user is anonymous. --%>
                         <LoggedInTemplate>
                             <ul class="nav navbar-nav">
-                                <li><a runat="server" href="~/Teams">Команды</a></li>
-                                <li><a runat="server" href="~/Startups">Стартапы</a></li>
+                                <li><a runat="server" href="~/Teams" style="padding-left: 5px !important; padding-right: 9px  !important;">Команды</a></li>
+                                <li><a runat="server" href="~/Startups" style="padding-left: 5px !important; padding-right: 9px  !important;">Стартапы</a></li>
                             </ul>
                         </LoggedInTemplate>
                     </asp:LoginView>
