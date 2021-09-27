@@ -188,10 +188,11 @@ namespace StartUpWebAPI
                 InsertComments();
                 UpdateCommentsCount();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 string reason = HttpUtility.UrlEncode("Не удалось написать комментарий. Попробуйте, пожалуйста, ещё раз.");
                 Response.Redirect("~/TeamInfo?id=" + team.Id + "&reason=" + reason);
+                System.Diagnostics.Debug.WriteLine(ex.StackTrace);
             }
 
             MaintainScrollPositionOnPostBack = true;
@@ -220,10 +221,11 @@ namespace StartUpWebAPI
                 reason = HttpUtility.UrlEncode("Вы успешно покинули команду");
                 Response.Redirect("~/TeamInfo?id=" + team.Id + "&reason=" + reason, false);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 reason = HttpUtility.UrlEncode("Не удалось покинуть команду. Попробуйте, пожалуйста, ещё раз.");
                 Response.Redirect("~/TeamInfo?id=" + team.Id + "&reason=" + reason);
+                System.Diagnostics.Debug.WriteLine(ex.StackTrace);
 
                 return;
             }
@@ -261,12 +263,36 @@ namespace StartUpWebAPI
                 reason = HttpUtility.UrlEncode("Вы успешно вступили в команду");
                 Response.Redirect("~/TeamInfo?id=" + team.Id + "&reason=" + reason, false);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 reason = HttpUtility.UrlEncode("Не удалось вступить в команлу. Попробуйте, пожалуйста, ещё раз.");
                 Response.Redirect("~/TeamInfo?id=" + team.Id + "&reason=" + reason, false);
+                System.Diagnostics.Debug.WriteLine(ex.StackTrace);
 
                 return;
+            }
+        }
+
+        protected void BtnDeleteTeam_Click(object sender, EventArgs e)
+        {
+            AppData.Context.TeamComment.RemoveRange(team.TeamComment);
+            AppData.Context.TeamOfUser.RemoveRange(team.TeamOfUser);
+            AppData.Context.StartUpOfTeam.RemoveRange(team.StartUpOfTeam);
+
+            AppData.Context.Team.Remove(team);
+
+            try
+            {
+                AppData.Context.SaveChanges();
+
+                Response.Redirect("~/Default.aspx?reason=" + HttpUtility.UrlEncode("Команда успешно удалена!"), false);
+            }
+            catch (Exception ex)
+            {
+                Response.Redirect("~/TeamInfo.aspx?id=" + team.Id + "&reason="
+                    + HttpUtility.UrlEncode("Стартап не был удалён! "
+                    + "\nПожалуйста, попробуйте удалить стартап ещё раз"));
+                System.Diagnostics.Debug.WriteLine(ex.StackTrace);
             }
         }
     }

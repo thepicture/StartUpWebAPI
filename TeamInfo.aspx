@@ -42,6 +42,11 @@
                             CssClass="round-div-block button-style-for-page-two about-like-cloud-button-for-page-two margin-bottom-top-as-usual"
                             ID="LinkButtonModifyTeam"
                             OnClick="LinkButtonModifyTeam_Click"></asp:LinkButton>
+                        <asp:LinkButton runat="server" Text='Удалить команду'
+                            CssClass="round-div-block simple-cloud-button"
+                            ForeColor="White"
+                            ID="BtnDeleteTeam"
+                            OnClick="BtnDeleteTeam_Click"></asp:LinkButton>
                     </asp:Panel>
 
 
