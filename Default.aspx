@@ -76,7 +76,7 @@
                                     <h1 class="tag-item" style="margin-left: 20px; margin-bottom: 45px; z-index:128"><%# Eval("Name") %></h1>
                                     <h1 class="tag-item" style="margin-left: 20px; margin-bottom: 20px; z-index:128; color: #d4d4dd; font-size: 1.15em;"><%# Eval("SplittedCategory") %></h1>
                                     <div class="tag-item gray-gradient radius-like" style="z-index: 64; opacity: .8;"></div>
-                                    <asp:Label class="sign-my-startup tag-item" style="left: auto;" Visible='<%# ((HashSet<StartUpWebAPI.Entities.StartUpOfUser>)Eval("StartUpOfUser")).Any(s => s.User.Login.Equals(User.Identity.Name))%>' runat="server">Мой стартап</asp:Label>
+                                    <asp:Label class="sign-my-startup tag-item" style="left: auto;" Visible='<%# ((HashSet<StartUpWebAPI.Entities.StartUpOfUser>)Eval("StartUpOfUser")).Any(s => s.User.Login.Equals(User.Identity.Name) && !s.RoleType.Name.Equals("Участник"))%>' runat="server"><%# Eval("MyRole") %></asp:Label>
                                 </div>
                         </asp:LinkButton>
                     </ItemTemplate>

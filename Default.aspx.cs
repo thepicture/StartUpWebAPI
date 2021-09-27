@@ -60,8 +60,7 @@ namespace StartUpWebAPI
         {
             if (e.CommandName.Equals("StartUpClicked"))
             {
-                Response.Redirect("~/StartUpInfo.aspx?id=" + e.CommandArgument, false);
-                Context.ApplicationInstance.CompleteRequest();
+                Response.Redirect("~/StartUpInfo.aspx?id=" + e.CommandArgument);
             }
         }
 
@@ -69,15 +68,13 @@ namespace StartUpWebAPI
         {
             if (e.CommandName.Equals("TeamClicked"))
             {
-                Response.Redirect("~/TeamInfo.aspx?id=" + e.CommandArgument, false);
-                Context.ApplicationInstance.CompleteRequest();
+                Response.Redirect("~/TeamInfo.aspx?id=" + e.CommandArgument);
             }
         }
 
         protected void BtnCreateStartUp_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/AddStartUp.aspx", false);
-            Context.ApplicationInstance.CompleteRequest();
+            Response.Redirect("~/AddStartUp.aspx");
         }
     }
 }

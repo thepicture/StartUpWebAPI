@@ -15,12 +15,13 @@ namespace StartUpWebAPI
         {
             int id = Convert.ToInt32(Request.QueryString.Get("id"));
 
-            bool isStartUp = AppData.Context.StartUp.Count(s => s.Id == id) != 0;
+            bool isStartUp = AppData.Context.StartUp.Any(s => s.Id == id);
 
             if (!isStartUp)
             {
                 string reason = HttpUtility.UrlEncode("Стартап не существует или был удалён. Пожалуйста, найдите другой стартап.");
                 Response.Redirect("~/Default.aspx?reason=" + reason, false);
+                return;
             }
 
             startUp = AppData.Context.StartUp.Find(id);
@@ -31,8 +32,8 @@ namespace StartUpWebAPI
                 userIsCreator = startUp
                     .StartUpOfUser
                     .Any(u => u.User.Login.Equals(User.Identity.Name)
-                    && u.RoleType.Name.Equals("Организатор")
-                    || u.RoleType.Name.Equals("Помощник"));
+                    && (u.RoleType.Name.Equals("Организатор")
+                    || u.RoleType.Name.Equals("Помощник")));
             }
 
             if (userIsCreator)
@@ -130,7 +131,6 @@ namespace StartUpWebAPI
         protected void LinkButtonModifyStartUp_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/AddStartUp?id=" + startUp.Id, false);
-            Context.ApplicationInstance.CompleteRequest();
         }
 
         protected void BtnUnsubscribe_Click(object sender, EventArgs e)

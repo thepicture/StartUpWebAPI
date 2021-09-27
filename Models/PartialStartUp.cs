@@ -3,6 +3,7 @@ using System;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Web;
 
 namespace StartUpWebAPI.Entities
 {
@@ -11,6 +12,32 @@ namespace StartUpWebAPI.Entities
     /// </summary>
     public partial class StartUp
     {
+        public string MyRole
+        {
+            get
+            {
+                string nullableLogin = HttpContext.Current.User.Identity.Name;
+
+                if (!StartUpOfUser.Any(u => nullableLogin.Equals(u.User.Login)))
+                {
+                    return "";
+                }
+                else
+                {
+                    string role = StartUpOfUser.First(u => nullableLogin.Equals(u.User.Login)).RoleType.Name;
+
+                    if (role.Equals("Организатор"))
+                    {
+                        return "Мой стартап";
+                    }
+                    else
+                    {
+                        return role;
+                    }
+                }
+            }
+        }
+
         public string SpacedTitle
         {
             get

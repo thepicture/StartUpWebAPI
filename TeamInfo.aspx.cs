@@ -131,9 +131,9 @@ namespace StartUpWebAPI
             {
                 AppData.Context.SaveChanges();
                 reason = HttpUtility.UrlEncode("Вы успешно покинули команду");
-                Response.Redirect("~/TeamInfo?id=" + team.Id + "&reason=" + reason);
+                Response.Redirect("~/TeamInfo?id=" + team.Id + "&reason=" + reason, false);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 reason = HttpUtility.UrlEncode("Не удалось покинуть команду. Попробуйте, пожалуйста, ещё раз.");
                 Response.Redirect("~/TeamInfo?id=" + team.Id + "&reason=" + reason);
@@ -150,7 +150,30 @@ namespace StartUpWebAPI
 
         protected void BtnSubscribe_Click(object sender, EventArgs e)
         {
+            string reason;
 
+            TeamOfUser teamOfUser = new TeamOfUser
+            {
+                Team = team,
+                User = AppData.Context.User.First(u => u.Login.Equals(User.Identity.Name)),
+                RoleType = AppData.Context.RoleType.First(r => r.Name.Equals("Участник"))
+            };
+
+            AppData.Context.Team.Find(team.Id).TeamOfUser.Add(teamOfUser);
+
+            try
+            {
+                AppData.Context.SaveChanges();
+                reason = HttpUtility.UrlEncode("Вы успешно вступили в команду");
+                Response.Redirect("~/TeamInfo?id=" + team.Id + "&reason=" + reason, false);
+            }
+            catch (Exception)
+            {
+                reason = HttpUtility.UrlEncode("Не удалось вступить в команлу. Попробуйте, пожалуйста, ещё раз.");
+                Response.Redirect("~/TeamInfo?id=" + team.Id + "&reason=" + reason, false);
+
+                return;
+            }
         }
     }
 }

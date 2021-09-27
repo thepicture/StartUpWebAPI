@@ -119,14 +119,14 @@ namespace StartUpWebAPI
             {
                 Response.Redirect("~/AddStartUp?id="
                     + ((StartUp)ViewState["currentStartUp"]).Id
-                    + "&reason=" + HttpUtility.UrlEncode(errors), false);
+                    + "&reason=" + HttpUtility.UrlEncode(errors));
                 return;
             }
 
             ((StartUp)ViewState["currentStartUp"]).Name = TBoxName.Text;
             ((StartUp)ViewState["currentStartUp"]).Description = TBoxDescription.Text;
             ((StartUp)ViewState["currentStartUp"]).MaxMembersCount = int.Parse(TBoxMaxMembers.Text);
-            ((StartUp)ViewState["currentStartUp"]).Category = AppData.Context.Category.First(c => c.Name.Equals(ComboCategories.SelectedValue));
+            ((StartUp)ViewState["currentStartUp"]).CategoryId = AppData.Context.Category.First(c => c.Name.Equals(ComboCategories.SelectedValue)).Id;
             ((StartUp)ViewState["currentStartUp"]).IsDone = CheckBoxDone.Checked;
 
             if (((StartUp)ViewState["currentStartUp"]).Id == 0)
@@ -158,20 +158,18 @@ namespace StartUpWebAPI
 
                 id = ((StartUp)ViewState["currentStartUp"]).Id;
 
-                addedStartUp = AppData.Context.StartUp.First((System.Linq.Expressions.Expression<Func<StartUp, bool>>)(s => s.Id == id));
+                addedStartUp = AppData.Context.StartUp.First(s => s.Id == id);
 
                 string reason = HttpUtility.UrlEncode("Стартап успешно изменён!");
 
                 Response.Redirect("~/StartUpInfo?id=" + ((StartUp)ViewState["currentStartUp"]).Id + "&reason=" + reason, false);
-                Context.ApplicationInstance.CompleteRequest();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                string reason = HttpUtility.UrlEncode("Стартап не был изменен или добавлен." +
+                string reason = HttpUtility.UrlEncode("Стартап не был изменен или добавлен. " +
                     "Пожалуйста, попробуйте изменить стартап ещё раз. ");
 
-                Response.Redirect("~/StartUpInfo?id=" + ((StartUp)ViewState["currentStartUp"]).Id + "&reason=" + reason, false);
-                Context.ApplicationInstance.CompleteRequest();
+                Response.Redirect("~/StartUpInfo?id=" + ((StartUp)ViewState["currentStartUp"]).Id + "&reason=" + reason);
             }
 
             foreach (var image in (List<StartUpImage>)ViewState["images"])
@@ -198,7 +196,7 @@ namespace StartUpWebAPI
                     Response
                         .Redirect(Request.RawUrl + "&reason=" + HttpUtility.UrlEncode(
                         "Не удалось добавить изображения в стартап. " +
-                        "Попробуйте ещё раз"), false);
+                        "Попробуйте ещё раз"));
                 }
             }
 
@@ -226,16 +224,18 @@ namespace StartUpWebAPI
                     Response
                          .Redirect(Request.RawUrl + "&reason=" + HttpUtility.UrlEncode(
                          "Не удалось добавить документы в стартап. " +
-                         "Попробуйте ещё раз"), false);
+                         "Попробуйте ещё раз"));
                 }
             }
+
+            AppData.Context.ChangeTracker.Entries().ToList().ForEach(s => s.Reload());
         }
 
         protected void BtnCancel_Click(object sender, EventArgs e)
         {
             string reason = HttpUtility.UrlEncode("Создание или удаление стартапа было отменено!");
 
-            Response.Redirect("~/StartUpInfo.aspx?id=" + ((StartUp)ViewState["currentStartUp"]).Id + "&reason=" + reason, false); Context.ApplicationInstance.CompleteRequest();
+            Response.Redirect("~/StartUpInfo.aspx?id=" + ((StartUp)ViewState["currentStartUp"]).Id + "&reason=" + reason);
         }
 
         protected void LViewImages_ItemCommand(object sender, ListViewCommandEventArgs e)

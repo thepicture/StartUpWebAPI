@@ -73,18 +73,9 @@ namespace StartUpWebAPI
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            try
-            {
-                AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.StackTrace);
-            }
-
             if (Request.QueryString.Get("reason") != null)
             {
-                ReasonBox.Text = Request.QueryString.Get("reason");
+                ReasonBox.Text = Request.QueryString.Get("reason").Replace(";", ";<br>");
                 ReasonBox.Visible = true;
             }
         }
