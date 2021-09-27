@@ -52,6 +52,9 @@ namespace StartUpWebAPI
             InsertImageIntoTeam();
         }
 
+        /// <summary>
+        /// Inserts the attached images into the team.
+        /// </summary>
         private void InsertImageIntoTeam()
         {
             if ((byte[])ViewState["image"] != null)
@@ -61,11 +64,17 @@ namespace StartUpWebAPI
             }
         }
 
+        /// <summary>
+        /// Loads background image.
+        /// </summary>
         private void LoadBgImg()
         {
             BgImage.ImageUrl = NativeImageUtils.ConvertFromBitmap(Properties.Resources.commonBg);
         }
 
+        /// <summary>
+        /// Pre-actions for adding the attached images.
+        /// </summary>
         protected void BtnAddImage_Click(object sender, EventArgs e)
         {
             var input = FileUploadImage.PostedFile;
@@ -91,11 +100,17 @@ namespace StartUpWebAPI
             InsertImageIntoTeam();
         }
 
+        /// <summary>
+        /// Pre-actions for updating teams.
+        /// </summary>
         protected void BtnSave_Click(object sender, EventArgs e)
         {
             UpdateTeam();
         }
 
+        /// <summary>
+        /// Updates the team in DbContext.
+        /// </summary>
         private void UpdateTeam()
         {
             string errors = "";
@@ -199,6 +214,9 @@ namespace StartUpWebAPI
             }
         }
 
+        /// <summary>
+        /// Cancels editing/creating of a team.
+        /// </summary>
         protected void BtnCancel_Click(object sender, EventArgs e)
         {
             string reason = HttpUtility.UrlEncode("Создание или удаление стартапа было отменено!");
@@ -206,6 +224,9 @@ namespace StartUpWebAPI
             Response.Redirect("~/TeamInfo.aspx?id=" + ((Team)ViewState["currentTeam"]).Id + "&reason=" + reason);
         }
 
+        /// <summary>
+        /// Remove image from the team.
+        /// </summary>
         protected void BtnRemoveImage_Click(object sender, EventArgs e)
         {
             TeamImage.ImageUrl = NativeImageUtils.ConvertFromBitmap(Properties.Resources.noPicture);

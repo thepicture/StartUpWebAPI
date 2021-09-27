@@ -52,17 +52,26 @@ namespace StartUpWebAPI
             }
         }
 
+        /// <summary>
+        /// Loads background image.
+        /// </summary>
         private void LoadBgImage()
         {
             BgImage.ImageUrl = NativeImageUtils.ConvertFromBitmap(Properties.Resources.commonBg);
         }
 
+        /// <summary>
+        /// Inserts the attached documents into the startup.
+        /// </summary>
         private void InsertDocumentsIntoStartUp()
         {
             LViewDocuments.DataSource = ((List<DocumentOfStartUp>)ViewState["documents"]).Where(i => i.Id >= 0).ToList();
             LViewDocuments.DataBind();
         }
 
+        /// <summary>
+        /// Insert the attached images into the startup.
+        /// </summary>
         private void InsertImagesIntoStartUp()
         {
             LViewImages.DataSource = ((List<StartUpImage>)ViewState["images"]).Where(i => i.Id >= 0).ToList();
@@ -93,6 +102,9 @@ namespace StartUpWebAPI
             UpdateStartUp();
         }
 
+        /// <summary>
+        /// Updates the startup.
+        /// </summary>
         private void UpdateStartUp()
         {
             string errors = "";
@@ -231,6 +243,9 @@ namespace StartUpWebAPI
             AppData.Context.ChangeTracker.Entries().ToList().ForEach(s => s.Reload());
         }
 
+        /// <summary>
+        /// Cancels editing/creating of the startup.
+        /// </summary>
         protected void BtnCancel_Click(object sender, EventArgs e)
         {
             string reason = HttpUtility.UrlEncode("Создание или удаление стартапа было отменено!");
@@ -238,6 +253,9 @@ namespace StartUpWebAPI
             Response.Redirect("~/StartUpInfo.aspx?id=" + ((StartUp)ViewState["currentStartUp"]).Id + "&reason=" + reason);
         }
 
+        /// <summary>
+        /// Pre-actions for removing images.
+        /// </summary>
         protected void LViewImages_ItemCommand(object sender, ListViewCommandEventArgs e)
         {
             if (e.CommandName == "RemoveImage")
@@ -250,6 +268,9 @@ namespace StartUpWebAPI
             }
         }
 
+        /// <summary>
+        /// Pre-actions for adding images.
+        /// </summary>
         protected void BtnAddImages_Click(object sender, EventArgs e)
         {
             if (FileUploadImages.PostedFiles[0].ContentLength == 0)
@@ -283,6 +304,9 @@ namespace StartUpWebAPI
             InsertImagesIntoStartUp();
         }
 
+        /// <summary>
+        /// Pre-actions for removing the attached documents.
+        /// </summary>
         protected void LViewDocuments_ItemCommand(object sender, ListViewCommandEventArgs e)
         {
             if (e.CommandName == "RemoveDocument")
@@ -295,6 +319,9 @@ namespace StartUpWebAPI
             }
         }
 
+        /// <summary>
+        /// Pre-actions for adding documents to the startup.
+        /// </summary>
         protected void BtnAddDocuments_Click(object sender, EventArgs e)
         {
             if (DocumentUpload.PostedFiles[0].ContentLength == 0)

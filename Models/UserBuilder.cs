@@ -4,10 +4,17 @@ using System.Linq;
 
 namespace StartUpWebAPI.Models
 {
+    /// <summary>
+    /// Class for building users and inserting them in DbContext after.
+    /// </summary>
     public class UserBuilder
     {
         private User user;
 
+        /// <summary>
+        /// Creates a new instance of a user.
+        /// </summary>
+        /// <returns></returns>
         public UserBuilder NewInstance()
         {
             user = new User();
@@ -15,6 +22,11 @@ namespace StartUpWebAPI.Models
             return this;
         }
 
+        /// <summary>
+        /// Appends the login.
+        /// </summary>
+        /// <param name="login">The login.</param>
+        /// <returns></returns>
         public UserBuilder WithLogin(string login)
         {
             user.Login = login;
@@ -22,6 +34,11 @@ namespace StartUpWebAPI.Models
             return this;
         }
 
+        /// <summary>
+        /// Appends the full name.
+        /// </summary>
+        /// <param name="fullName">The full name.</param>
+        /// <returns></returns>
         public UserBuilder WithFullName(string fullName)
         {
             user.Name = fullName;
@@ -29,6 +46,11 @@ namespace StartUpWebAPI.Models
             return this;
         }
 
+        /// <summary>
+        /// Appends the password.
+        /// </summary>
+        /// <param name="password">The password.</param>
+        /// <returns></returns>
         public UserBuilder WithPassword(string password)
         {
             user.Password = password;
@@ -36,6 +58,9 @@ namespace StartUpWebAPI.Models
             return this;
         }
 
+        /// <summary>
+        /// Saves the builded user into DbContext.
+        /// </summary>
         public void Save()
         {
             user.TypeOfUser = AppData.Context.TypeOfUser.First(t => t.Name.Equals("Пользователь"));
@@ -48,7 +73,7 @@ namespace StartUpWebAPI.Models
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                System.Diagnostics.Debug.WriteLine(ex.Message);
             }
         }
     }
