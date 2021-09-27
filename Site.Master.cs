@@ -72,10 +72,13 @@ namespace StartUpWebAPI
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Request.QueryString.Get("reason") != null)
+            if (!Page.IsPostBack)
             {
-                ReasonBox.Text = Request.QueryString.Get("reason").Replace(";", ";<br>");
-                ReasonBox.Visible = true;
+                if (Request.QueryString.Get("reason") != null)
+                {
+                    ReasonBox.Text = Request.QueryString.Get("reason").Replace(";", "<br>");
+                    ReasonBox.Visible = true;
+                }
             }
         }
 
