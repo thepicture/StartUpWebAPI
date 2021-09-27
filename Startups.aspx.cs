@@ -26,6 +26,9 @@ namespace StartUpWebAPI
             }
         }
 
+        /// <summary>
+        /// Check if the page was not reloaded, otherwise loads member parameter values into ComboBox.
+        /// </summary>
         private void CheckOrSetMaxMembers()
         {
             if (!IsPostBack)
@@ -34,6 +37,9 @@ namespace StartUpWebAPI
             }
         }
 
+        /// <summary>
+        /// Inserts members parameters into the ComboBox.
+        /// </summary>
         private void InsertComboMaxMembers()
         {
             List<string> values = new List<string>
@@ -50,6 +56,9 @@ namespace StartUpWebAPI
             ComboMaxMembers.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Checks if the page loaded for the first time, otherwise inserts categories.
+        /// </summary>
         private void CheckOrSetCategories()
         {
             if (!IsPostBack)
@@ -128,12 +137,18 @@ namespace StartUpWebAPI
             UpdateLView();
         }
 
+        /// <summary>
+        /// Pre-actions for clearing filtration values.
+        /// </summary>
         protected void BtnClear_Click(object sender, EventArgs e)
         {
             ClearElements();
             UpdateLView();
         }
 
+        /// <summary>
+        /// Clears filtration values.
+        /// </summary>
         private void ClearElements()
         {
             NameBox.Text = null;

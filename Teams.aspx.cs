@@ -23,6 +23,9 @@ namespace StartUpWebAPI
             }
         }
 
+        /// <summary>
+        /// Checks if the page was reloaded, if not then it inserts max members values into ComboBox.
+        /// </summary>
         private void CheckOrSetMaxMembers()
         {
             if (!IsPostBack)
@@ -97,7 +100,7 @@ namespace StartUpWebAPI
         }
 
         /// <summary>
-        /// Clear filtration's filters.
+        /// Clears filtration's filters and updates teams ListView.
         /// </summary>
         protected void BtnClear_Click(object sender, EventArgs e)
         {
@@ -105,6 +108,9 @@ namespace StartUpWebAPI
             UpdateTeamsView();
         }
 
+        /// <summary>
+        /// Clears the filtration.
+        /// </summary>
         private void ClearElements()
         {
             NameBox.Text = null;

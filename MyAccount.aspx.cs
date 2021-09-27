@@ -26,6 +26,10 @@ namespace StartUpWebAPI
             LabelRole.Text = user.TypeOfUser.Name;
         }
 
+        /// <summary>
+        /// Reloads the user's image.
+        /// </summary>
+        /// <param name="user">Who is user.</param>
         private void ReloadUserImage(User user)
         {
             if (user.UserImage != null)
@@ -38,6 +42,9 @@ namespace StartUpWebAPI
             }
         }
 
+        /// <summary>
+        /// Adds a new image as the user's image.
+        /// </summary>
         protected void BtnAddImage_Click(object sender, EventArgs e)
         {
             if (FileUploadImage.Visible)
@@ -50,6 +57,9 @@ namespace StartUpWebAPI
             }
         }
 
+        /// <summary>
+        /// Changes the current user's image to new from FileUpload control.
+        /// </summary>
         private void ChangePicture()
         {
             if (FileUploadImage.HasFile)

@@ -21,6 +21,9 @@ namespace StartUpWebAPI
             }
         }
 
+        /// <summary>
+        /// Inserts the startups from db into the ListView.
+        /// </summary>
         private void LoadStartups()
         {
             List<StartUp> startUps = AppData.Context.StartUp.ToList();
@@ -42,6 +45,9 @@ namespace StartUpWebAPI
             (RecursiveControlFinder.FindControlRecursive(this, "LViewMyStartups") as ListView).DataBind();
         }
 
+        /// <summary>
+        /// Loads the teams from the db into the ListView.
+        /// </summary>
         private void LoadTeams()
         {
             List<Team> teams = AppData.Context.Team.ToList();
@@ -63,6 +69,9 @@ namespace StartUpWebAPI
             (RecursiveControlFinder.FindControlRecursive(this, "LViewMyTeams") as ListView).DataBind();
         }
 
+        /// <summary>
+        /// Redirects the user to the clicked startup.
+        /// </summary>
         protected void LViewMyStartups_ItemCommand(object sender, ListViewCommandEventArgs e)
         {
             if (e.CommandName.Equals("StartUpClicked"))
@@ -71,6 +80,9 @@ namespace StartUpWebAPI
             }
         }
 
+        /// <summary>
+        /// Redirects the user to the clicked team.
+        /// </summary>
         protected void LViewMyTeams_ItemCommand(object sender, ListViewCommandEventArgs e)
         {
             if (e.CommandName.Equals("TeamClicked"))
@@ -79,11 +91,17 @@ namespace StartUpWebAPI
             }
         }
 
+        /// <summary>
+        /// Redirects the user to the add/modify startup page.
+        /// </summary>
         protected void BtnCreateStartUp_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/AddStartUp.aspx");
         }
 
+        /// <summary>
+        /// Redirects the user to the add/modify team page.
+        /// </summary>
         protected void BtnCreateTeam_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/AddTeam.aspx");

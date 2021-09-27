@@ -16,6 +16,9 @@ namespace StartUpWebAPI
             footer.Visible = false;
         }
 
+        /// <summary>
+        /// Redirects the user to the register page.
+        /// </summary>
         protected void BtnRegister_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Account/Register.aspx");

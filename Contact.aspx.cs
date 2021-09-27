@@ -15,6 +15,9 @@ namespace StartUpWebAPI
             LoadBgImage();
         }
 
+        /// <summary>
+        /// Loads the background image as a background.
+        /// </summary>
         private void LoadBgImage()
         {
             BgImage.ImageUrl = NativeImageUtils.ConvertFromBitmap(Properties.Resources.contactImageTwo);

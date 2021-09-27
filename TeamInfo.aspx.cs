@@ -53,6 +53,9 @@ namespace StartUpWebAPI
             InsertTeams();
         }
 
+        /// <summary>
+        /// Show appropriate control elements for the current user depending on his role.
+        /// </summary>
         private void ShowNeedyButtonsForMember()
         {
             bool userInTeam = team.TeamOfUser.Any(u => u.User.Login.ToLower().Equals(User.Identity.Name.ToLower()));
@@ -67,6 +70,9 @@ namespace StartUpWebAPI
             }
         }
 
+        /// <summary>
+        /// Shows subscribe button for the user.
+        /// </summary>
         private void ShowSubscribeButtonIfNotMaxMembersCount()
         {
             if (team.MaxMembersCount <= team.TeamOfUser.Count)
@@ -77,17 +83,26 @@ namespace StartUpWebAPI
             BtnSubscribe.Visible = true;
         }
 
+        /// <summary>
+        /// Inserts comments into ListView.
+        /// </summary>
         private void InsertComments()
         {
             LViewTeamComments.DataSource = team.TeamComment.OrderByDescending(c => c.CreationDate).ToList();
             LViewTeamComments.DataBind();
         }
 
+        /// <summary>
+        /// Updates the comments count.
+        /// </summary>
         private void UpdateCommentsCount()
         {
             CommentsCount.Text = "Комментарии (" + team.TeamComment.Count + "):";
         }
 
+        /// <summary>
+        /// Inserts team into view.
+        /// </summary>
         private void InsertTeams()
         {
             Name.Text = MainName.Text = team.Name;
@@ -102,6 +117,9 @@ namespace StartUpWebAPI
             MainImage.ImageUrl = team.ImagePreview;
         }
 
+        /// <summary>
+        /// Pre-actions for sending comments.
+        /// </summary>
         protected void BtnSendComment_Click(object sender, EventArgs e)
         {
             string errors = "";
@@ -141,6 +159,10 @@ namespace StartUpWebAPI
             SendComment(currentUser);
         }
 
+        /// <summary>
+        /// Sends the user's comment.
+        /// </summary>
+        /// <param name="currentUser">Who is sending the comment.</param>
         private void SendComment(User currentUser)
         {
             TeamComment comment = new TeamComment
@@ -175,11 +197,17 @@ namespace StartUpWebAPI
             MaintainScrollPositionOnPostBack = true;
         }
 
+        /// <summary>
+        /// Redirects for editing the team.
+        /// </summary>
         protected void LinkButtonModifyTeam_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/AddTeam?id=" + team.Id);
         }
 
+        /// <summary>
+        /// Unsubscribes the user from the team.
+        /// </summary>
         protected void BtnUnsubscribe_Click(object sender, EventArgs e)
         {
             string reason;
@@ -201,12 +229,19 @@ namespace StartUpWebAPI
             }
         }
 
+        /// <summary>
+        /// Finds the start up and returns it.
+        /// </summary>
+        /// <returns>The found startup.</returns>
         private TeamOfUser FindStartUp()
         {
             return AppData.Context.TeamOfUser.First(s => s.User.Login.Equals(User.Identity.Name)
                         && s.TeamId == team.Id);
         }
 
+        /// <summary>
+        /// Subscribes the user to the team.
+        /// </summary>
         protected void BtnSubscribe_Click(object sender, EventArgs e)
         {
             string reason;

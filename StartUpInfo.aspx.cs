@@ -58,7 +58,7 @@ namespace StartUpWebAPI
         }
 
         /// <summary>
-        /// If an user in the startup then show appropriate buttons for him.
+        /// If an user in the startup, then the method shows appropriate buttons for him.
         /// </summary>
         private void ShowNeedyButtonsForMember()
         {
@@ -74,6 +74,9 @@ namespace StartUpWebAPI
             }
         }
 
+        /// <summary>
+        /// Shows the subscribe button, if the max members count does not equal to the current members count.
+        /// </summary>
         private void ShowSubscribeButtonIfNotMaxMembersCount()
         {
             if (startUp.MaxMembersCount <= startUp.StartUpOfUser.Count + startUp.StartUpOfTeam.Count)
@@ -84,12 +87,18 @@ namespace StartUpWebAPI
             BtnSubscribe.Visible = true;
         }
 
+        /// <summary>
+        /// Inserts comments into the page.
+        /// </summary>
         private void InsertComments()
         {
             LViewStartUpComments.DataSource = startUp.StartUpComment.OrderByDescending(c => c.DateTime).ToList();
             LViewStartUpComments.DataBind();
         }
 
+        /// <summary>
+        /// Fullfill the current startup into the view.
+        /// </summary>
         private void InsertStartUp()
         {
             Name.Text = MainName.Text = startUp.Name;
@@ -108,11 +117,17 @@ namespace StartUpWebAPI
             MaxMembersCount.Text = startUp.MaxMembersCount.ToString();
         }
 
+        /// <summary>
+        /// Updates comments count.
+        /// </summary>
         private void UpdateCommentsCount()
         {
             CommentsCount.Text = "Комментарии (" + startUp.StartUpComment.Count + "):";
         }
 
+        /// <summary>
+        /// Pre-actions for sending comment.
+        /// </summary>
         protected void BtnSendComment_Click(object sender, EventArgs e)
         {
             string errors = "";
@@ -152,6 +167,10 @@ namespace StartUpWebAPI
             SendComment(currentUser);
         }
 
+        /// <summary>
+        /// Sends the user's comment.
+        /// </summary>
+        /// <param name="currentUser">Who is sending the comment.</param>
         private void SendComment(User currentUser)
         {
             StartUpComment comment = new StartUpComment
@@ -186,11 +205,17 @@ namespace StartUpWebAPI
             MaintainScrollPositionOnPostBack = true;
         }
 
+        /// <summary>
+        /// Redirects to the edit startup page.
+        /// </summary>
         protected void LinkButtonModifyStartUp_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/AddStartUp?id=" + startUp.Id, false);
         }
 
+        /// <summary>
+        /// Unsubscribes the user from the startup.
+        /// </summary>
         protected void BtnUnsubscribe_Click(object sender, EventArgs e)
         {
             string reason;
@@ -212,12 +237,19 @@ namespace StartUpWebAPI
             }
         }
 
+        /// <summary>
+        /// Finds a startup in the db.
+        /// </summary>
+        /// <returns>The found startup.</returns>
         private StartUpOfUser FindStartUp()
         {
             return AppData.Context.StartUpOfUser.First(s => s.User.Login.Equals(User.Identity.Name)
                          && s.StartUpId == startUp.Id);
         }
 
+        /// <summary>
+        /// Subscribes the user to the startup.
+        /// </summary>
         protected void BtnSubscribe_Click(object sender, EventArgs e)
         {
             string reason;
@@ -246,6 +278,9 @@ namespace StartUpWebAPI
             }
         }
 
+        /// <summary>
+        /// Deletes the startup from the db.
+        /// </summary>
         protected void BtnDeleteStartUp_Click(object sender, EventArgs e)
         {
             AppData.Context.StartUpImage.RemoveRange(startUp.StartUpImage);
