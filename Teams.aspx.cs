@@ -1,5 +1,6 @@
 ﻿using StartUpWebAPI.Entities;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Security;
 using System.Web.UI;
@@ -17,8 +18,36 @@ namespace StartUpWebAPI
             }
             else
             {
+                CheckOrSetMaxMembers();
                 UpdateTeamsView();
             }
+        }
+
+        private void CheckOrSetMaxMembers()
+        {
+            if (!IsPostBack)
+            {
+                InsertComboMaxMembers();
+            }
+        }
+
+        /// <summary>
+        /// Inserts max members count into the ComboBox.
+        /// </summary>
+        private void InsertComboMaxMembers()
+        {
+            List<string> values = new List<string>
+            {
+                "Любое кол-во участников",
+                "1-5",
+                "6-10",
+                "11-15",
+                "15-20"
+            };
+
+            ComboMaxMembers.DataSource = values;
+            ComboMaxMembers.DataBind();
+            ComboMaxMembers.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -29,6 +58,20 @@ namespace StartUpWebAPI
             var currentTeams = AppData.Context.Team.ToList();
 
             currentTeams.RemoveAll(s => s.TeamOfUser.Any(e => e.User.Name.Equals(User.Identity.Name) && e.RoleType.Name.Equals("Забанен")));
+
+            if (ComboMaxMembers.SelectedIndex != 0)
+            {
+                string[] values = ComboMaxMembers.SelectedValue.Split('-');
+                int from = int.Parse(values[0]);
+                int to = int.Parse(values[1]);
+
+                currentTeams = currentTeams.Where(s => s.MaxMembersCount > from && s.MaxMembersCount < to).ToList();
+            }
+
+            if (!string.IsNullOrWhiteSpace(NameBox.Text))
+            {
+                currentTeams = currentTeams.Where(s => s.Name.ToLower().Contains(NameBox.Text.ToLower())).ToList();
+            }
 
             TeamsView.DataSource = currentTeams;
             TeamsView.DataBind();
@@ -43,6 +86,29 @@ namespace StartUpWebAPI
             {
                 Response.Redirect("~/TeamInfo.aspx?id=" + e.CommandArgument);
             }
+        }
+
+        /// <summary>
+        /// Search startups with given filters.
+        /// </summary>
+        protected void BtnSearch_Click(object sender, EventArgs e)
+        {
+            UpdateTeamsView();
+        }
+
+        /// <summary>
+        /// Clear filtration's filters.
+        /// </summary>
+        protected void BtnClear_Click(object sender, EventArgs e)
+        {
+            ClearElements();
+            UpdateTeamsView();
+        }
+
+        private void ClearElements()
+        {
+            NameBox.Text = null;
+            ComboMaxMembers.SelectedIndex = 0;
         }
     }
 }

@@ -1,28 +1,42 @@
-﻿<%@ Page EnableEventValidation="false" Title="Команды" Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="Teams.aspx.cs" Inherits="StartUpWebAPI.Teams" %>
+﻿<%@ Page EnableEventValidation="false" Title="Команды"
+    Language="C#"
+    AutoEventWireup="true"
+    MasterPageFile="~/Site.Master"
+    CodeBehind="Teams.aspx.cs" Inherits="StartUpWebAPI.Teams" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+
+    <div style="display: flex;">
+        <div class="navbar navbar-inverse navbar-fixed-top request-white-bg" style="top: inherit;">
+            <div style="display: flex; width: 100%; justify-content: center;">
+                <asp:UpdatePanel runat="server" ID="UpdateFiltration" UpdateMode="Conditional" style="margin-left: 10px;">
+                    <ContentTemplate>
+                        <asp:TextBox ID="NameBox"
+                            Style="height: 30px; width: 200px !important; float: left !important; margin-right: 6px"
+                            TextMode="SingleLine" CssClass="search-box" runat="server"
+                            ForeColor="Black" Height="60" BorderColor="#808080" BorderStyle="NotSet"
+                            BackColor="Transparent"> </asp:TextBox>
+                        <asp:DropDownList ID="ComboMaxMembers"
+                            class="form-control"
+                            Style="height: 30px; width: max-content; margin-right: 6px; vertical-align: middle; float: left !important;"
+                            runat="server"
+                            ForeColor="Black" Height="60"
+                            BackColor="Transparent">
+                        </asp:DropDownList>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+                <asp:Button Text="Искать" Style="width: 120px !important;"
+                    CssClass="button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
+                    runat="server" ID="BtnSearch" OnClick="BtnSearch_Click" />
+                <asp:Button Text="Очистить фильтры" Style="margin-left: -2px;"
+                    CssClass="button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
+                    runat="server" ID="BtnClear" OnClick="BtnClear_Click" />
+            </div>
+        </div>
+    </div>
+
     <%--ListView for startups presentation.--%>
-    <asp:Panel HorizontalAlign="Center" runat="server">
-        <%--  <asp:ListView ID="TeamsView" runat='server' OnItemCommand="TeamsView_ItemCommand">
-            <ItemTemplate>
-                <asp:Panel runat="server">
-                    <div class="team-panel radius-like gradientable-purple pushable">
-                        <div>
-                            <asp:Label CssClass="startup-name" runat="server" Font-Bold="true" Font-Size="Large" Text='<%# Eval("Name") %>'></asp:Label>
-                        </div>
-                        <asp:Image Width="100" Height="100" runat='server' CssClass="startup-image-radius radius-like marginaled" ImageUrl='<%# Eval("ImagePreview") %>' />
-                        <br />
-                        <asp:Label CssClass="startup-name" runat="server" Text='<%# Eval("FirstCreator") %>'></asp:Label>
-                        <br />
-                        <asp:Label CssClass="startup-name" runat="server" Font-Bold="true" Text='<%# "Дата создания: " + Eval("CreationDate") %>'></asp:Label>
-                        <br />
-                        <asp:LinkButton Text="Подробнее" CssClass="round-div-block simple-cloud-button-teams" ID="BtnRedirect"
-                            runat="server" CommandName="TeamClicked" CommandArgument='<%# Eval("Id") %>' Style="width: fit-content;" />
-                    </div>
-                </asp:Panel>
-            </ItemTemplate>
-        </asp:ListView>--%>
-        <%--ListView for teams presentation.--%>
+    <asp:Panel HorizontalAlign="Center" runat="server" Style="margin-top: 100px; z-index: 0;">
         <asp:Panel HorizontalAlign="Center" runat="server">
             <asp:ListView ID="TeamsView" runat='server' OnItemCommand="TeamsView_ItemCommand">
                 <ItemTemplate>
