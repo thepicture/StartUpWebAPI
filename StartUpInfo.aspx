@@ -61,7 +61,6 @@
                 </div>
 
                 <asp:Panel Style="display: block" runat="server" ID="PStartupEdit" Visible="false">
-
                     <asp:LinkButton runat="server" Text='Изменить информацию'
                         CssClass="round-div-block simple-cloud-button"
                         ForeColor="White"

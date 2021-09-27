@@ -528,6 +528,7 @@ input[type="select"] {
     right: 0;
     width: 0;
     height: 0;
+    z-index: 0 !important;
 }
 
 /* Styles for master web form. */
@@ -695,6 +696,7 @@ title-setting-register-like {
     margin: 20px;
     border-radius: 20px;
     animation: fade-out-reason 5s ease-in-out 3s forwards;
+    z-index: 9999;
 }
 
 @keyframes fade-out-reason {

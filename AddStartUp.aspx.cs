@@ -163,6 +163,7 @@ namespace StartUpWebAPI
                 string reason = HttpUtility.UrlEncode("Стартап успешно изменён!");
 
                 Response.Redirect("~/StartUpInfo?id=" + ((StartUp)ViewState["currentStartUp"]).Id + "&reason=" + reason, false);
+                Context.ApplicationInstance.CompleteRequest();
             }
             catch (Exception)
             {
@@ -170,6 +171,7 @@ namespace StartUpWebAPI
                     "Пожалуйста, попробуйте изменить стартап ещё раз. ");
 
                 Response.Redirect("~/StartUpInfo?id=" + ((StartUp)ViewState["currentStartUp"]).Id + "&reason=" + reason, false);
+                Context.ApplicationInstance.CompleteRequest();
             }
 
             foreach (var image in (List<StartUpImage>)ViewState["images"])
@@ -233,7 +235,7 @@ namespace StartUpWebAPI
         {
             string reason = HttpUtility.UrlEncode("Создание или удаление стартапа было отменено!");
 
-            Response.Redirect("~/StartUpInfo.aspx?id=" + ((StartUp)ViewState["currentStartUp"]).Id + "&reason=" + reason);
+            Response.Redirect("~/StartUpInfo.aspx?id=" + ((StartUp)ViewState["currentStartUp"]).Id + "&reason=" + reason, false); Context.ApplicationInstance.CompleteRequest();
         }
 
         protected void LViewImages_ItemCommand(object sender, ListViewCommandEventArgs e)

@@ -20,13 +20,20 @@ namespace StartUpWebAPI
             if (!isStartUp)
             {
                 string reason = HttpUtility.UrlEncode("Стартап не существует или был удалён. Пожалуйста, найдите другой стартап.");
-                Response.Redirect("~/Default.aspx?reason=" + reason);
+                Response.Redirect("~/Default.aspx?reason=" + reason, false);
             }
 
             startUp = AppData.Context.StartUp.Find(id);
 
-            bool userIsCreator = startUp.StartUpOfUser.Any(u => u.User.Login.ToLower().Equals(User.Identity.Name.ToLower())
-                && u.RoleType.Name.Equals("Организатор"));
+            bool userIsCreator = false;
+            if (startUp != null)
+            {
+                userIsCreator = startUp
+                    .StartUpOfUser
+                    .Any(u => u.User.Login.Equals(User.Identity.Name)
+                    && u.RoleType.Name.Equals("Организатор")
+                    || u.RoleType.Name.Equals("Помощник"));
+            }
 
             if (userIsCreator)
             {
@@ -122,7 +129,8 @@ namespace StartUpWebAPI
 
         protected void LinkButtonModifyStartUp_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/AddStartUp?id=" + startUp.Id);
+            Response.Redirect("~/AddStartUp?id=" + startUp.Id, false);
+            Context.ApplicationInstance.CompleteRequest();
         }
 
         protected void BtnUnsubscribe_Click(object sender, EventArgs e)
@@ -135,12 +143,12 @@ namespace StartUpWebAPI
             {
                 AppData.Context.SaveChanges();
                 reason = HttpUtility.UrlEncode("Вы успешно покинули стартап");
-                Response.Redirect("~/StartUpInfo?id=" + startUp.Id + "&reason=" + reason);
+                Response.Redirect("~/StartUpInfo?id=" + startUp.Id + "&reason=" + reason, false);
             }
             catch (Exception)
             {
                 reason = HttpUtility.UrlEncode("Не удалось покинуть стартап. Попробуйте, пожалуйста, ещё раз.");
-                Response.Redirect("~/StartUpInfo?id=" + startUp.Id + "&reason=" + reason);
+                Response.Redirect("~/StartUpInfo?id=" + startUp.Id + "&reason=" + reason, false);
 
                 return;
             }
@@ -169,12 +177,12 @@ namespace StartUpWebAPI
             {
                 AppData.Context.SaveChanges();
                 reason = HttpUtility.UrlEncode("Вы успешно вступили в стартап");
-                Response.Redirect("~/StartUpInfo?id=" + startUp.Id + "&reason=" + reason);
+                Response.Redirect("~/StartUpInfo?id=" + startUp.Id + "&reason=" + reason, false);
             }
             catch (Exception)
             {
                 reason = HttpUtility.UrlEncode("Не удалось вступить в стартап. Попробуйте, пожалуйста, ещё раз.");
-                Response.Redirect("~/StartUpInfo?id=" + startUp.Id + "&reason=" + reason);
+                Response.Redirect("~/StartUpInfo?id=" + startUp.Id + "&reason=" + reason, false);
 
                 return;
             }

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="AddStartUp.aspx.cs" Inherits="StartUpWebAPI.AddStartUp" %>
+﻿<%@ Page EnableEventValidation="false" Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="AddStartUp.aspx.cs" Inherits="StartUpWebAPI.AddStartUp" EnableViewState="true" %>
 
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContent" ID="BindingStartupsContent">
@@ -46,13 +46,17 @@
                     </div>
                 </ItemTemplate>
             </asp:ListView>
+
             <asp:FileUpload runat="server"
                 Style="margin-bottom: 0px !important; font-size: 17px; margin-left: 70px; margin-right: 20px;"
                 AllowMultiple="true"
                 ID="FileUploadImages" />
 
-            <asp:Button runat="server" Style="margin-bottom: 10px !important; font-size: 17px !important; margin-left: 70px; height: 35px !important; border-radius: 5px !important; color: black !important;"
-                CssClass="round-div-block-specified-about about-like-cloud-button-three" Text="Добавить изображения" ID="BtnAddImages"
+            <asp:Button runat="server"
+                Style="margin-bottom: 10px !important; font-size: 17px !important; margin-left: 70px; height: 35px !important; border-radius: 5px !important; color: black !important;"
+                CssClass="round-div-block-specified-about about-like-cloud-button-three"
+                Text="Добавить изображения"
+                ID="BtnAddImages"
                 OnClick="BtnAddImages_Click" />
 
             <asp:Label runat="server" Style="font-size: 20px; margin-bottom: 10px !important; margin-left: 70px; margin-right: 20px;" Text="Документы (до 5Мб)"></asp:Label>
@@ -77,7 +81,10 @@
                 </ItemTemplate>
             </asp:ListView>
             <br />
-            <asp:FileUpload Style="margin-bottom: 10px !important; font-size: 17px; margin-left: 70px; margin-right: 20px;" runat="server" AllowMultiple="true" ID="DocumentUpload" />
+            <asp:FileUpload Style="margin-bottom: 10px !important; font-size: 17px; margin-left: 70px; margin-right: 20px;"
+                runat="server"
+                AllowMultiple="true"
+                ID="DocumentUpload" />
 
             <asp:Button Style="margin-bottom: 10px !important; margin-bottom: 0px !important; font-size: 17px !important; margin-left: 70px; height: 35px !important;" CssClass="round-div-block-specified-about about-like-cloud-button-three" runat="server" Text="Добавить документы" ID="BtnAddDocuments"
                 OnClick="BtnAddDocuments_Click" />
