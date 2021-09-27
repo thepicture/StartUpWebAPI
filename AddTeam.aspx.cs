@@ -36,27 +36,20 @@ namespace StartUpWebAPI
                         {
                             ViewState["currentTeam"] = nullableTeam;
 
+                            if (nullableTeam.Image != null)
+                            {
+                                ViewState["image"] = nullableTeam.Image;
+                            }
+
                             TBoxName.Text = ((Team)ViewState["currentTeam"]).Name;
                             TBoxDescription.Text = ((Team)ViewState["currentTeam"]).Description;
                             TBoxMaxMembers.Text = ((Team)ViewState["currentTeam"]).MaxMembersCount.ToString();
 
-                            if (nullableTeam.Image != null)
-                            {
-                                ViewState["image"] = nullableTeam.Image;
-                                BtnRemoveImage.Visible = true;
-                            }
-                            InsertImageIntoTeam();
                         }
                     }
                 }
             }
-
-            object nullableImage = ViewState["image"];
-
-            if (nullableImage != null)
-            {
-                BtnRemoveImage.Visible = true;
-            }
+            InsertImageIntoTeam();
         }
 
         private void InsertImageIntoTeam()
@@ -64,6 +57,7 @@ namespace StartUpWebAPI
             if ((byte[])ViewState["image"] != null)
             {
                 TeamImage.ImageUrl = NativeImageUtils.ConvertFromBytes((byte[])ViewState["image"]);
+                BtnRemoveImage.Visible = true;
             }
         }
 
@@ -181,13 +175,15 @@ namespace StartUpWebAPI
 
             var image = ViewState["image"] as byte[];
 
-            if ((bool)ViewState["imageDelete"] == false)
+            if ((bool)ViewState["imageDelete"] == true)
             {
                 AppData.Context.Entry(addedTeam).Entity.Image = null;
+                ViewState["image"] = null;
+                ViewState["imageDelete"] = false;
             }
             else
             {
-                addedTeam.Image = null;
+                addedTeam.Image = (byte[])ViewState["image"];
             }
 
             try

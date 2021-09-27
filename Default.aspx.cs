@@ -85,5 +85,10 @@ namespace StartUpWebAPI
         {
             Response.Redirect("~/AddStartUp.aspx");
         }
+
+        protected void BtnCreateTeam_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/AddTeam.aspx");
+        }
     }
 }

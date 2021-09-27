@@ -114,6 +114,8 @@
                     <asp:Button Style="height: 40px; margin-block-start: 30px; width: 250px;"
                         CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usua"
                         runat="server"
+                        ID="BtnCreateTeam"
+                        OnClick="BtnCreateTeam_Click"
                         Text="Создать новую команду"></asp:Button>
                 </div>
                 &nbsp;
