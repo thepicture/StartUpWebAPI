@@ -42,8 +42,6 @@ namespace StartUpWebAPI
             (RecursiveControlFinder.FindControlRecursive(this, "LViewMyStartups") as ListView).DataBind();
         }
 
-
-
         private void LoadTeams()
         {
             List<Team> teams = AppData.Context.Team.ToList();

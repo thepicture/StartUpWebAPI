@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="AddTeam.aspx.cs" Inherits="StartUpWebAPI.AddTeam" %>
+﻿<%@ Page Language="C#" Title="Добавление команды" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="AddTeam.aspx.cs" Inherits="StartUpWebAPI.AddTeam" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContent" ID="BindingTeamsContent">
     <div style="display: flex; justify-content: center; align-items: center; vertical-align: middle;">

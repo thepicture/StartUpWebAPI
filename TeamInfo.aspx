@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TeamInfo.aspx.cs" MasterPageFile="~/Site.Master" Inherits="StartUpWebAPI.TeamInfo" %>
+﻿<%@ Page Language="C#" Title="Информация о команде" AutoEventWireup="true" CodeBehind="TeamInfo.aspx.cs" MasterPageFile="~/Site.Master" Inherits="StartUpWebAPI.TeamInfo" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContent">
 
@@ -79,11 +79,14 @@
                 BorderStyle="None"
                 BackColor="Transparent"></asp:TextBox>
             <div style="width: 1030px !important" class="round-div-block button-style-for-page-two about-like-cloud-button-for-page-two margin-bottom-top-as-usual">
-                <asp:LinkButton runat="server" Text='Отправить' ForeColor="Black" ID="BtnSendComment" OnClick="BtnSendComment_Click"></asp:LinkButton>
+                <asp:LinkButton runat="server"
+                    Text='Отправить'
+                    ForeColor="Black"
+                    ID="BtnSendComment"
+                    OnClick="BtnSendComment_Click"></asp:LinkButton>
             </div>
         </div>
         <br />
-
 
         <asp:Panel runat="server" ID="CommentsPanel">
             <asp:ListView runat="server" ID="LViewTeamComments">
@@ -93,7 +96,11 @@
                         <tr>
                             <td class="poster_info td1 hide-for-print">
                                 <p>
-                                    <asp:Image Width="100" Height="100" runat="server" CssClass="startup-image-radius radius-like marginaled" ImageUrl='<%# Eval("GetCommentImage") %>'></asp:Image>
+                                    <asp:Image Width="100"
+                                        Height="100"
+                                        runat="server"
+                                        CssClass="startup-image-radius radius-like marginaled image-cover-auto"
+                                        ImageUrl='<%# Eval("GetCommentImage") %>'></asp:Image>
                                 </p>
                                 <td class="message td2" rowspan="2">
                                     <div class="post_head">

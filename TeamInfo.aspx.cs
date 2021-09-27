@@ -1,4 +1,5 @@
 ﻿using StartUpWebAPI.Entities;
+using StartUpWebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -82,6 +83,11 @@ namespace StartUpWebAPI
             LViewTeamComments.DataBind();
         }
 
+        private void UpdateCommentsCount()
+        {
+            CommentsCount.Text = "Комментарии (" + team.TeamComment.Count + "):";
+        }
+
         private void InsertTeams()
         {
             Name.Text = MainName.Text = team.Name;
@@ -92,15 +98,51 @@ namespace StartUpWebAPI
             MaxMembersCount.Text = "Максимум участников: " + team.MaxMembersCount.ToString();
             Creator.Text = creator ?? "Неизвестен";
             DateOfCreation.Text = "Дата создания: " + team.CreationDate.ToString();
-            CommentsCount.Text = "Комментарии (" + team.TeamComment.Count + "):";
+            UpdateCommentsCount();
             MainImage.ImageUrl = team.ImagePreview;
         }
 
         protected void BtnSendComment_Click(object sender, EventArgs e)
         {
+            string errors = "";
+
+            if (string.IsNullOrWhiteSpace(CommentBox.Text))
+            {
+                errors += "Пожалуйста, введите непустой комментарий";
+            }
+
+            if (errors.Length > 0)
+            {
+                Response.Redirect("~/TeamInfo.aspx?id=" + team.Id + "&reason="
+                      + HttpUtility.UrlEncode(errors));
+                return;
+            }
+
             string username = User.Identity.Name;
+
+            DateTime? lastComment = team.TeamComment
+                .Where(c => c.User.Login.Equals(username))?
+                .OrderByDescending(c => c.CreationDate)
+                .FirstOrDefault()?
+                .CreationDate;
+
+            if (lastComment != null)
+            {
+                if (AntiSpamChecker.IsLastCommentRecentThat(5, lastComment.Value))
+                {
+                    Response.Redirect("~/TeamInfo.aspx?id=" + team.Id + "&reason="
+                        + HttpUtility.UrlEncode("Нельзя отправлять комментарии слишком часто"));
+                    return;
+                }
+            }
+
             User currentUser = AppData.Context.User.First(u => u.Login.Equals(username));
 
+            SendComment(currentUser);
+        }
+
+        private void SendComment(User currentUser)
+        {
             TeamComment comment = new TeamComment
             {
                 CommentText = CommentBox.Text,
@@ -114,7 +156,15 @@ namespace StartUpWebAPI
             try
             {
                 AppData.Context.SaveChanges();
+
+                AppData.Context.ChangeTracker.Entries().ToList().ForEach(e => e.Reload());
+
+                Response.Redirect("~/TeamInfo.aspx?id=" + team.Id + "&reason="
+                    + HttpUtility.UrlEncode("Комментарий успешно добавлен!"), false);
+
+                CommentBox.Text = null;
                 InsertComments();
+                UpdateCommentsCount();
             }
             catch (Exception)
             {

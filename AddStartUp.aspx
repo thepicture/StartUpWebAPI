@@ -1,4 +1,4 @@
-﻿<%@ Page EnableEventValidation="false" Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="AddStartUp.aspx.cs" Inherits="StartUpWebAPI.AddStartUp" EnableViewState="true" %>
+﻿<%@ Page EnableEventValidation="false" Title="Добавление стартапа" Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="AddStartUp.aspx.cs" Inherits="StartUpWebAPI.AddStartUp" EnableViewState="true" %>
 
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContent" ID="BindingStartupsContent">

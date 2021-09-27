@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="StartUpInfo.aspx.cs" Inherits="StartUpWebAPI.StartUpInfo" %>
+﻿<%@ Page Language="C#" Title="Информация о стартапе" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="StartUpInfo.aspx.cs" Inherits="StartUpWebAPI.StartUpInfo" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContent" Style="padding-left: 50px; padding-right: 50px;">
     <asp:Panel runat="server">
@@ -122,7 +122,7 @@
                         <tr>
                             <td class="poster_info td1 hide-for-print">
                                 <p>
-                                    <asp:Image Width="100" Height="100" runat="server" CssClass="startup-image-radius radius-like marginaled" ImageUrl='<%# Eval("GetCommentImage") %>'></asp:Image>
+                                    <asp:Image Width="100" Height="100" runat="server" CssClass="startup-image-radius radius-like marginaled image-cover-auto" ImageUrl='<%# Eval("GetCommentImage") %>'></asp:Image>
                                 </p>
                                 <td class="message td2" rowspan="2">
                                     <div class="post_head">

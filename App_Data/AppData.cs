@@ -12,6 +12,9 @@ namespace StartUpWebAPI.Entities
     {
         static private StartUpBaseEntities context;
 
+        /// <summary>
+        /// Returns the current DbContext instance.
+        /// </summary>
         public static StartUpBaseEntities Context
         {
             get
