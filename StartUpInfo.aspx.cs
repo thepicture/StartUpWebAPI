@@ -1,4 +1,5 @@
 ﻿using StartUpWebAPI.Entities;
+using StartUpWebAPI.Models;
 using System;
 using System.Linq;
 using System.Web;
@@ -102,16 +103,57 @@ namespace StartUpWebAPI
             DateOfCreation.Text = startUp.CreationDate.ToString();
             Category.Text = startUp.Category.Name;
             Description.Text = string.IsNullOrWhiteSpace(startUp.Description) ? "Организатор не предоставил описание. Можете подать ему идею!" : startUp.Description;
-            CommentsCount.Text = "Комментарии (" + startUp.StartUpComment.Count + "):";
+            UpdateCommentsCount();
             MainImage.ImageUrl = startUp.ImagePreview;
             MaxMembersCount.Text = startUp.MaxMembersCount.ToString();
         }
 
+        private void UpdateCommentsCount()
+        {
+            CommentsCount.Text = "Комментарии (" + startUp.StartUpComment.Count + "):";
+        }
+
         protected void BtnSendComment_Click(object sender, EventArgs e)
         {
+            string errors = "";
+
+            if (string.IsNullOrWhiteSpace(CommentBox.Text))
+            {
+                errors += "Пожалуйста, введите непустой комментарий";
+            }
+
+            if (errors.Length > 0)
+            {
+                Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
+                      + HttpUtility.UrlEncode(errors));
+                return;
+            }
+
             string username = User.Identity.Name;
+
+            DateTime? lastComment = startUp.StartUpComment
+                .Where(c => c.User.Login.Equals(username))?
+                .OrderByDescending(c => c.DateTime)
+                .FirstOrDefault()?
+                .DateTime;
+
+            if (lastComment != null)
+            {
+                if (AntiSpamChecker.IsLastCommentRecentThat(5, lastComment.Value))
+                {
+                    Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
+                        + HttpUtility.UrlEncode("Нельзя отправлять комментарии слишком часто"));
+                    return;
+                }
+            }
+
             User currentUser = AppData.Context.User.First(u => u.Login.Equals(username));
 
+            SendComment(currentUser);
+        }
+
+        private void SendComment(User currentUser)
+        {
             StartUpComment comment = new StartUpComment
             {
                 CommentText = CommentBox.Text,
@@ -125,11 +167,20 @@ namespace StartUpWebAPI
             try
             {
                 AppData.Context.SaveChanges();
+
+                AppData.Context.ChangeTracker.Entries().ToList().ForEach(e => e.Reload());
+
+                Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
+                    + HttpUtility.UrlEncode("Комментарий успешно добавлен!"), false);
+
+                CommentBox.Text = null;
                 InsertComments();
+                UpdateCommentsCount();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine(ex.Message);
+                string reason = HttpUtility.UrlEncode("Не удалось написать комментарий. Попробуйте, пожалуйста, ещё раз.");
+                Response.Redirect("~/StartUpInfo?id=" + startUp.Id + "&reason=" + reason);
             }
 
             MaintainScrollPositionOnPostBack = true;
