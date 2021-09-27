@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Главная" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="StartUpWebAPI._Default" %>
+﻿<%@ Page Title="Главная" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="StartUpWebAPI.Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <asp:LoginView runat="server">
@@ -102,7 +102,7 @@
                                 <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 45px; z-index:128;"><%# Eval("Name") %></h1>
                                 <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 20px;color:#d4d4dd; z-index:128; font-size:1.15em;"><%# (string) Eval("CountOfMembers") + " участников" %></h1>
                                 <div class="tag-item gray-gradient radius-like" style="z-index:64;opacity:.8;"></div>
-                                <asp:Label class="sign-my-startup tag-item" style="left: auto;" Visible='<%# ((HashSet<StartUpWebAPI.Entities.TeamOfUser>)Eval("TeamOfUser")).Any(s => s.User.Login.Equals(User.Identity.Name))%>' runat="server">Моя команда</asp:Label>
+                                <asp:Label class="sign-my-startup tag-item" style="left: auto;" Visible='<%# ((HashSet<StartUpWebAPI.Entities.TeamOfUser>)Eval("TeamOfUser")).Any(s => s.User.Login.Equals(User.Identity.Name) && !s.RoleType.Name.Equals("Участник"))%>' runat="server"><%# Eval("MyRole") %></asp:Label>
                     </div>
                         </asp:LinkButton>
                     </ItemTemplate>

@@ -128,7 +128,7 @@ namespace StartUpWebAPI
             {
                 Response.Redirect("~/AddTeam?id="
                     + ((Team)ViewState["currentTeam"]).Id
-                    + "&reason=" + HttpUtility.UrlEncode(errors), false);
+                    + "&reason=" + HttpUtility.UrlEncode(errors));
                 return;
             }
 
@@ -176,7 +176,7 @@ namespace StartUpWebAPI
                 string reason = HttpUtility.UrlEncode("Команда не была изменена или добавлена." +
                     "Пожалуйста, попробуйте изменить команду ещё раз. ");
 
-                Response.Redirect("~/TeamInfo?id=" + ((Team)ViewState["currentTeam"]).Id + "&reason=" + reason, false);
+                Response.Redirect("~/TeamInfo?id=" + ((Team)ViewState["currentTeam"]).Id + "&reason=" + reason);
             }
 
             var image = ViewState["image"] as byte[];
@@ -199,7 +199,7 @@ namespace StartUpWebAPI
                 Response
                     .Redirect(Request.RawUrl + "&reason=" + HttpUtility.UrlEncode(
                     "Не удалось добавить изображения в команду. " +
-                    "Попробуйте ещё раз"), false);
+                    "Попробуйте ещё раз"));
             }
         }
 

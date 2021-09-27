@@ -1,11 +1,38 @@
 ﻿using StartUpWebAPI.Models;
 using System;
 using System.Linq;
+using System.Web;
 
 namespace StartUpWebAPI.Entities
 {
     public partial class Team
     {
+        public string MyRole
+        {
+            get
+            {
+                string nullableLogin = HttpContext.Current.User.Identity.Name;
+
+                if (!TeamOfUser.Any(u => nullableLogin.Equals(u.User.Login)))
+                {
+                    return "";
+                }
+                else
+                {
+                    string role = TeamOfUser.First(u => nullableLogin.Equals(u.User.Login)).RoleType.Name;
+
+                    if (role.Equals("Организатор"))
+                    {
+                        return "Моя команда";
+                    }
+                    else
+                    {
+                        return role;
+                    }
+                }
+            }
+        }
+
         public string CountOfMembers
         {
             get

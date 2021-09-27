@@ -133,7 +133,7 @@ namespace StartUpWebAPI
                 reason = HttpUtility.UrlEncode("Вы успешно покинули команду");
                 Response.Redirect("~/TeamInfo?id=" + team.Id + "&reason=" + reason, false);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 reason = HttpUtility.UrlEncode("Не удалось покинуть команду. Попробуйте, пожалуйста, ещё раз.");
                 Response.Redirect("~/TeamInfo?id=" + team.Id + "&reason=" + reason);

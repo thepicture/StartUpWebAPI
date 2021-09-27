@@ -164,7 +164,7 @@ namespace StartUpWebAPI
 
                 Response.Redirect("~/StartUpInfo?id=" + ((StartUp)ViewState["currentStartUp"]).Id + "&reason=" + reason, false);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 string reason = HttpUtility.UrlEncode("Стартап не был изменен или добавлен. " +
                     "Пожалуйста, попробуйте изменить стартап ещё раз. ");
@@ -219,7 +219,7 @@ namespace StartUpWebAPI
                 {
                     AppData.Context.SaveChanges();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     Response
                          .Redirect(Request.RawUrl + "&reason=" + HttpUtility.UrlEncode(
