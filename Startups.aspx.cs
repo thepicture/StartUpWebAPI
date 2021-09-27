@@ -38,7 +38,7 @@ namespace StartUpWebAPI
         {
             List<string> values = new List<string>
             {
-                "Любое количество",
+                "Любое кол-во участников",
                 "1-5",
                 "6-10",
                 "11-15",
@@ -87,6 +87,8 @@ namespace StartUpWebAPI
         public void UpdateLView()
         {
             var currentStartups = AppData.Context.StartUp.ToList();
+
+            currentStartups.RemoveAll(s => s.StartUpOfUser.Any(e => e.User.Name.Equals(User.Identity.Name) && e.RoleType.Name.Equals("Забанен")));
 
             if (ActualBox.Checked)
             {

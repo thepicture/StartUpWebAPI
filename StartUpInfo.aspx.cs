@@ -26,6 +26,13 @@ namespace StartUpWebAPI
 
             startUp = AppData.Context.StartUp.Find(id);
 
+            if (startUp.StartUpOfUser.Any(s => s.User.Login.Equals(User.Identity.Name) && s.RoleType.Name.Equals("Забанен")))
+            {
+                Response.Redirect("~/Default.aspx?reason=" + HttpUtility.UrlEncode("К сожалению, доступ к данному сообществу для вас ограничен. " +
+                    "Пожалуйста, найдите другие сообщества."));
+                return;
+            }
+
             bool userIsCreator = false;
             if (startUp != null)
             {

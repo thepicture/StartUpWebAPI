@@ -29,9 +29,9 @@
                     <asp:LinkButton runat="server" CommandName="TeamClicked" CommandArgument='<%# Eval("Id") %>'>
                     <div class="startup-panel radius-like container-item ">
                             <img class="startup-image radius-like image-cover-auto" src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
-                        <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 45px;"><%# Eval("Name") %></h1>
-                        <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 20px;color:#d4d4dd; font-size:1.15em;"><%# (string) Eval("CountOfMembers") + " участников" %></h1>
-                        <div class="tag-item gray-gradient radius-like" style="z-index:555;opacity:.8"></div>
+                        <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 45px; z-index:600;"><%# Eval("Name") %></h1>
+                        <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 20px;color:#d4d4dd; font-size:1.15em; z-index:129;"><%# (string) Eval("CountOfMembers") + " участников" %></h1>
+                        <div class="tag-item gray-gradient radius-like" style="z-index:127;opacity:.8"></div>
                     </div>
                     </asp:LinkButton>
                 </ItemTemplate>

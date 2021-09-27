@@ -36,6 +36,8 @@ namespace StartUpWebAPI
                 return;
             }
 
+            startUps.RemoveAll(s => s.StartUpOfUser.Any(e => e.User.Login.Equals(User.Identity.Name) && e.RoleType.Name.Equals("Забанен")));
+
             (RecursiveControlFinder.FindControlRecursive(this, "LViewMyStartups") as ListView).DataSource = startUps;
             (RecursiveControlFinder.FindControlRecursive(this, "LViewMyStartups") as ListView).DataBind();
         }
@@ -46,11 +48,18 @@ namespace StartUpWebAPI
         {
             List<Team> teams = AppData.Context.Team.ToList();
 
+            if (teams == null)
+            {
+                return;
+            }
+
             if (teams.Count == 0)
             {
                 (RecursiveControlFinder.FindControlRecursive(this, "EmptyTeamsPanel") as Panel).Visible = true;
                 return;
             }
+
+            teams.RemoveAll(s => s.TeamOfUser.Any(e => e.User.Login.Equals(User.Identity.Name) && e.RoleType.Name.Equals("Забанен")));
 
             (RecursiveControlFinder.FindControlRecursive(this, "LViewMyTeams") as ListView).DataSource = teams;
             (RecursiveControlFinder.FindControlRecursive(this, "LViewMyTeams") as ListView).DataBind();

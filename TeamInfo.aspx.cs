@@ -18,6 +18,7 @@ namespace StartUpWebAPI
             int id = Convert.ToInt32(Request.QueryString.Get("id"));
 
             bool isTeam = id != 0;
+
             if (!isTeam)
             {
                 string reason = HttpUtility.UrlEncode("Команда не существует или была удалена. Пожалуйста, найдите другую команду.");
@@ -26,6 +27,14 @@ namespace StartUpWebAPI
             }
 
             team = AppData.Context.Team.Find(id);
+
+            if (team.TeamOfUser.Any(t => t.User.Login.Equals(User.Identity.Name) && t.RoleType.Name.Equals("Забанен")))
+            {
+                Response.Redirect("~/Default.aspx?reason=" +
+                    HttpUtility.UrlEncode("К сожалению, доступ к данному сообществу для вас ограничен. " +
+                    "Пожалуйста, найдите другие сообщества."));
+                return;
+            }
 
             bool userIsCreator = team.TeamOfUser.Any(u => u.User.Login.ToLower().Equals(User.Identity.Name.ToLower())
                 && u.RoleType.Name.Equals("Организатор"));
