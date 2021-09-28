@@ -317,6 +317,8 @@ namespace StartUpWebAPI
                 {
                     AppData.Context.SaveChanges();
 
+                    AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
+
                     Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
                         + HttpUtility.UrlEncode("Комментарий успешно удалён!"), false);
                 }
@@ -350,6 +352,8 @@ namespace StartUpWebAPI
                 try
                 {
                     AppData.Context.SaveChanges();
+
+                    AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
 
                     Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
                         + HttpUtility.UrlEncode("Роль комментатора успешно изменена!"), false);

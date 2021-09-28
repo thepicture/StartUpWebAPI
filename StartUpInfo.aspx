@@ -4,7 +4,7 @@
     MasterPageFile="~/Site.Master"
     CodeBehind="StartUpInfo.aspx.cs"
     Inherits="StartUpWebAPI.StartUpInfo"
-    EnableEventValidation="false"%>
+    EnableEventValidation="false" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContent" Style="padding-left: 50px; padding-right: 50px;">
     <asp:Panel runat="server">
@@ -40,6 +40,10 @@
                     <asp:Label ID="CountOfMembers" runat="server" ForeColor="Black"></asp:Label>
                 </div>
 
+                <div style="width: 100px; height: 70px; float:left;">
+                    <label style="display: block; font-size: 17px; color: darkslateblue">Проект:</label>
+                    <asp:Label ID="IsActual" runat="server" ForeColor="Black"></asp:Label>
+                </div>
 
                 <div style="margin-top: 15px; margin-left: 240px !important; width: 200px; height: 70px; float: left;">
                     <label style="display: block; font-size: 17px; color: darkslateblue">Команд:</label>
@@ -56,28 +60,32 @@
                     <asp:Label ID="DateOfCreation" runat="server" ForeColor="Black"></asp:Label>
                 </div>
 
-                <div style="margin-left: 240px; margin-top: 15px; width: 200px; height: 70px; float: left;">
+                <div style="margin-top: 15px; width: 100px; height: 70px; float: left;">
                     <label style="display: block; font-size: 17px; color: darkslateblue">Категория:</label>
                     <asp:Label ID="Category" runat="server" ForeColor="Black"></asp:Label>
                 </div>
 
-                <div style="margin-top: 15px; width: 200px; height: 70px; float: left;">
-                    <label style="display: block; font-size: 17px; color: darkslateblue">Проект:</label>
-                    <asp:Label ID="IsActual" runat="server" ForeColor="Black"></asp:Label>
-                </div>
+                
 
-                <asp:Panel Style="display: block" runat="server" ID="PStartupEdit" Visible="false">
-                    <asp:LinkButton runat="server" Text='Изменить информацию'
-                        CssClass="round-div-block simple-cloud-button"
-                        ForeColor="White"
-                        ID="LinkButtonModifyStartUp"
-                        OnClick="LinkButtonModifyStartUp_Click"></asp:LinkButton>
-                    <asp:LinkButton runat="server" Text='Удалить стартап'
-                        CssClass="round-div-block simple-cloud-button"
-                        ForeColor="White"
-                        ID="BtnDeleteStartUp"
-                        OnClick="BtnDeleteStartUp_Click"></asp:LinkButton>
-                </asp:Panel>
+            </asp:Panel>
+
+            &nbsp;
+                <p>
+                </p>
+        </div>
+        <br />
+        <br />
+        <asp:Panel Style="display: block" runat="server" ID="PStartupEdit" Visible="false">
+                <asp:LinkButton runat="server" Text='Изменить'
+                    CssClass="button-style-for-page about-like-cloud-button-for-page round-div-block simple-cloud-button"
+                    ForeColor="White"
+                    ID="LinkButtonModifyStartUp"
+                    OnClick="LinkButtonModifyStartUp_Click"></asp:LinkButton>
+                <asp:LinkButton  runat="server" Text='Удалить'
+                    CssClass="button-style-for-page about-like-cloud-button-for-page round-div-block simple-cloud-button"
+                    ForeColor="White"
+                    ID="BtnDeleteStartUp"
+                    OnClick="BtnDeleteStartUp_Click"></asp:LinkButton>
                 <asp:Button ID="BtnSubscribe"
                     OnClick="BtnSubscribe_Click"
                     runat="server"
@@ -92,13 +100,6 @@
                     Text="Покинуть стартап"
                     Visible="false"></asp:Button>
             </asp:Panel>
-
-            &nbsp;
-                <p>
-                </p>
-        </div>
-        <br />
-        <br />
         <div class="jumbotron ">
             <p style="margin-left: 10px;" class="lead">
                 <asp:Label runat="server" ID="CommentsCount"></asp:Label>
@@ -118,8 +119,6 @@
                 <asp:LinkButton runat="server" Text='Отправить' ForeColor="Black" ID="BtnSendComment" OnClick="BtnSendComment_Click"></asp:LinkButton>
             </div>
         </div>
-
-
 
         <asp:Panel runat="server" ID="CommentsPanel">
             <asp:ListView runat="server" ID="LViewStartUpComments" OnItemCommand="LViewStartUpComments_ItemCommand">
