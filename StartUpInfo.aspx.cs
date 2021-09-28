@@ -299,8 +299,68 @@ namespace StartUpWebAPI
             }
             catch (Exception ex)
             {
-                Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason=" + HttpUtility.UrlEncode("Стартап не был удалён! Ошибка: " + ex.Message + "."
-                    + "\nПожалуйста, попробуйте удалить стартап ещё раз"), false);
+                Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
+                    + HttpUtility.UrlEncode("Стартап не был удалён! Ошибка: " + ex.Message + "."
+                    + "\nПожалуйста, попробуйте удалить стартап ещё раз"));
+            }
+        }
+
+        protected void LViewStartUpComments_ItemCommand(object sender, System.Web.UI.WebControls.ListViewCommandEventArgs e)
+        {
+            if (e.CommandName.Equals("DeleteCommentById"))
+            {
+                StartUpComment comment = AppData.Context.StartUpComment.Find(Convert.ToInt32(e.CommandArgument));
+
+                AppData.Context.StartUpComment.Remove(comment);
+
+                try
+                {
+                    AppData.Context.SaveChanges();
+
+                    Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
+                        + HttpUtility.UrlEncode("Комментарий успешно удалён!"), false);
+                }
+                catch (Exception ex)
+                {
+                    Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
+                       + HttpUtility.UrlEncode("Комментарий не удалён! Пожалуйста, попробуйте ещё раз"));
+
+                    System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                }
+                return;
+            }
+
+            if (e.CommandName.Equals("BanUserByCommentId"))
+            {
+                StartUpComment comment = AppData.Context.StartUpComment.Find(Convert.ToInt32(e.CommandArgument));
+
+                User user = comment.User;
+
+                StartUpOfUser tuple = AppData.Context.StartUp.Find(startUp.Id).StartUpOfUser.First(s => s.User.Equals(user));
+
+                if (tuple.RoleType.Name.Equals("Забанен"))
+                {
+                    AppData.Context.Entry(tuple).Entity.RoleType = AppData.Context.RoleType.First(r => r.Name.Equals("Пользователь"));
+                }
+                else
+                {
+                    AppData.Context.Entry(tuple).Entity.RoleType = AppData.Context.RoleType.First(r => r.Name.Equals("Забанен"));
+                }
+
+                try
+                {
+                    AppData.Context.SaveChanges();
+
+                    Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
+                        + HttpUtility.UrlEncode("Роль комментатора успешно изменена!"), false);
+                }
+                catch (Exception ex)
+                {
+                    Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
+                       + HttpUtility.UrlEncode("Роль комментатора не изменена! Пожалуйста, попробуйте ещё раз"));
+
+                    System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                }
             }
         }
     }

@@ -1,4 +1,10 @@
-﻿<%@ Page Language="C#" Title="Информация о стартапе" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="StartUpInfo.aspx.cs" Inherits="StartUpWebAPI.StartUpInfo" %>
+﻿<%@ Page Language="C#"
+    Title="Информация о стартапе"
+    AutoEventWireup="true"
+    MasterPageFile="~/Site.Master"
+    CodeBehind="StartUpInfo.aspx.cs"
+    Inherits="StartUpWebAPI.StartUpInfo"
+    EnableEventValidation="false"%>
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContent" Style="padding-left: 50px; padding-right: 50px;">
     <asp:Panel runat="server">
@@ -116,7 +122,7 @@
 
 
         <asp:Panel runat="server" ID="CommentsPanel">
-            <asp:ListView runat="server" ID="LViewStartUpComments">
+            <asp:ListView runat="server" ID="LViewStartUpComments" OnItemCommand="LViewStartUpComments_ItemCommand">
                 <ItemTemplate>
                     <table>
                         <tr>
@@ -141,6 +147,22 @@
                                         <div class="post_body">
                                             <asp:Label runat="server" Text='<%# Eval("CommentText") %>'></asp:Label>
                                         </div>
+                                        <asp:Button Text="Удалить комментарий"
+                                            Visible='<%# Eval("IsNotSelfCommentAndICanChange") %>'
+                                            CssClass="button-style-for-page about-like-cloud-button-for-page inline-button"
+                                            runat="server"
+                                            LogoutAction="Redirect"
+                                            LogoutText="Выйти"
+                                            CommandName="DeleteCommentById"
+                                            CommandArgument='<%# Eval("Id") %>' />
+                                        <asp:Button Text='<%# Eval("BanUserText") %>'
+                                            Visible='<%# Eval("IsNotSelfCommentAndICanChange") %>'
+                                            CssClass="button-style-for-page about-like-cloud-button-for-page inline-button"
+                                            runat="server"
+                                            LogoutAction="Redirect"
+                                            LogoutText="Выйти"
+                                            CommandName="BanUserByCommentId"
+                                            CommandArgument='<%# Eval("Id") %>' />
                                     </div>
                                 </td>
                             </td>

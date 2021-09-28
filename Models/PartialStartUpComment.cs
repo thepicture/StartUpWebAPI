@@ -8,6 +8,32 @@ namespace StartUpWebAPI.Entities
 {
     public partial class StartUpComment
     {
+        public bool IsNotSelfCommentAndICanChange
+        {
+            get
+            {
+                return !User.Login.Equals(HttpContext.Current.User.Identity.Name)
+                    && StartUp
+                    .StartUpOfUser.Any(s => s.User.Login.Equals(HttpContext.Current.User.Identity.Name)
+                    && (s.RoleType.Name.Equals("Организатор") || s.RoleType.Name.Equals("Помощник")));
+            }
+        }
+
+        public string BanUserText
+        {
+            get
+            {
+                if (StartUp.StartUpOfUser.Any(s => s.User.Login.Equals(User.Login) && s.RoleType.Name.Equals("Забанен")))
+                {
+                    return "Разбанить комментатора";
+                }
+                else
+                {
+                    return "Ограничить доступ комментатора к стартапу";
+                }
+            }
+        }
+
         public string GetCommentImage
         {
             get

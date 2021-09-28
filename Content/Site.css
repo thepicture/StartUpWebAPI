@@ -765,7 +765,7 @@ title-setting-register-like {
     }
 
 
-/* ComboBox sorting.*/
+/* ComboBox sorting. */
 
 @media (min-width: 768px) {
     .form-search .combobox-container,
@@ -999,6 +999,10 @@ table {
     line-height: 18px;
 }
 
+.inline-button {
+    display: inline-block;
+    width: max-content !important;
+}
 
 /* Background. */
 .container {
