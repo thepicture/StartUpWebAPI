@@ -19,6 +19,16 @@ namespace StartUpWebAPI.Entities
             }
         }
 
+        public bool ICanChange
+        {
+            get
+            {
+                return User.Login.Equals(HttpContext.Current.User.Identity.Name) || StartUp
+                    .StartUpOfUser.Any(s => s.User.Login.Equals(HttpContext.Current.User.Identity.Name)
+                    && (s.RoleType.Name.Equals("Организатор") || s.RoleType.Name.Equals("Помощник")));
+            }
+        }
+
         public string BanUserText
         {
             get

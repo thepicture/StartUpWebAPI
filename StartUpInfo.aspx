@@ -166,7 +166,7 @@
                                             <asp:Label runat="server" Text='<%# Eval("CommentText") %>'></asp:Label>
                                         </div>
                                         <asp:LinkButton Text="Удалить комментарий"
-                                            Visible='<%# Eval("IsNotSelfCommentAndICanChange") %>'
+                                            Visible='<%# Eval("ICanChange") %>'
                                             CssClass="button-style-for-page about-like-cloud-button-for-page inline-button"
                                             runat="server"
                                             LogoutAction="Redirect"
