@@ -520,15 +520,21 @@ input[type="select"] {
 }
 
 .sign-my-startup {
-    border-width: 50px;
+    border-width: 40px;
     border-style: solid;
-    border-color: #6174C8 #6174C8 transparent transparent;
+    border-color: #FF0000 #FF0000 transparent transparent;
     font-size: x-small;
     top: 0;
     right: 0;
     width: 0;
     height: 0;
     z-index: 0 !important;
+}
+
+.rotated-text {
+    transform: rotate( 45deg );
+    font-size: large;
+    padding-top: 10px;
 }
 
 /* Styles for master web form. */

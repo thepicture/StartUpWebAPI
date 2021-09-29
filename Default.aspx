@@ -70,13 +70,31 @@
                 <h1 style="color: black; font-size: 5em; margin-block-end: 30px; text-align: center;">Мои стартапы</h1>
                 <asp:ListView runat="server" ID="LViewMyStartups" OnItemCommand="LViewMyStartups_ItemCommand">
                     <ItemTemplate>
-                        <asp:LinkButton runat="server" ID="BtnStartUpInfo" CommandName="StartUpClicked" CommandArgument='<%# Eval("Id") %>'>
+                        <asp:LinkButton runat="server"
+                            ID="BtnStartUpInfo"
+                            CommandName="StartUpClicked"
+                            CommandArgument='<%# Eval("Id") %>'>
                                 <div class="startup-panel radius-like container-item">
-                                    <img class="startup-image radius-like image-cover-auto" src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
-                                    <h1 class="tag-item" style="margin-left: 20px; margin-bottom: 45px; z-index:128"><%# Eval("Name") %></h1>
-                                    <h1 class="tag-item" style="margin-left: 20px; margin-bottom: 20px; z-index:128; color: #d4d4dd; font-size: 1.15em;"><%# Eval("SplittedCategory") %></h1>
-                                    <div class="tag-item gray-gradient radius-like" style="z-index: 64; opacity: .8;"></div>
-                                    <asp:Label class="sign-my-startup tag-item" style="left: auto;" Visible='<%# ((HashSet<StartUpWebAPI.Entities.StartUpOfUser>)Eval("StartUpOfUser")).Any(s => s.User.Login.Equals(User.Identity.Name) && !s.RoleType.Name.Equals("Участник"))%>' runat="server"><%# Eval("MyRole") %></asp:Label>
+                                    <img class="startup-image radius-like image-cover-auto"
+                                         src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
+                                    <h1 class="tag-item"
+                                        style="margin-left: 20px; margin-bottom: 45px; z-index:128"><%# Eval("Name") %></h1>
+                                          <h1 class="tag-item"
+                                        style="margin-left: 20px; margin-bottom: 20px; z-index:128; color: #d4d4dd; font-size: 1.15em;"><%# Eval("SplittedCategory") %></h1>
+                                          <h1 class="tag-item blue-sign"
+                                              style=" background-color: deepskyblue;height: 15px;width: max-content;font-size: 1.05em;padding-left: 5px;padding-right: 5px;margin-bottom: 20px;margin-left: 100px;z-index:127;"
+                                              runat="server"
+                                              visible='<%# ((HashSet<StartUpWebAPI.Entities.StartUpOfUser>)Eval("StartUpOfUser")).Any(s => s.User.Login.Equals(User.Identity.Name) && !s.RoleType.Name.Equals("Участник"))%>'><%# Eval("MyRole") %></h1>
+                                  
+                                    <div class="tag-item gray-gradient radius-like"
+                                        style="z-index: 64; opacity: .8;"></div>
+                                    <div class="sign-my-startup tag-item"
+                                        style="left: auto;"
+                                        runat="server"
+                                        Visible='<%#((HashSet<StartUpWebAPI.Entities.StartUpOfUser>)Eval("StartUpOfUser")).Count >= Convert.ToInt32(Eval("MaxMembersCount")) %>'>
+                                        <asp:Label runat="server"
+                                            class="rotated-text">MAX</asp:Label>
+                                    </div>
                                 </div>
                         </asp:LinkButton>
                     </ItemTemplate>
