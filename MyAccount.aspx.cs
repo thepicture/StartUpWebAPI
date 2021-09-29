@@ -13,6 +13,7 @@ namespace StartUpWebAPI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            LoadBgImage(); 
             if (!User.Identity.IsAuthenticated)
             {
                 Response.Redirect("~/Default.aspx?reason=" + HttpUtility.UrlEncode("Вы не авторизованы. Пожалуйста, войдите в систему"));
@@ -41,6 +42,11 @@ namespace StartUpWebAPI
                 UserImage.ImageUrl = NativeImageUtils.ConvertFromBitmap(Properties.Resources.noPicture);
             }
         }
+        private void LoadBgImage()
+        {
+            BgImage.ImageUrl = NativeImageUtils.ConvertFromBitmap(Properties.Resources.bgacc);
+        }
+
 
         /// <summary>
         /// Adds a new image as the user's image.

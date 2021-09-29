@@ -686,12 +686,14 @@ title-setting-register-like {
     position: fixed;
     bottom: 0;
     left: 0;
-    background-color: rgba(194, 194, 194, 0.9);
+    background-color: rgba(45, 45, 45, 0.9);
     display: flex;
     justify-content: center;
     align-items: center;
     width: 400px;
     height: 200px;
+    color:white;
+    text-align:center;
     margin: 20px;
     border-radius: 20px;
     animation: fade-out-reason 5s ease-in-out 3s forwards;

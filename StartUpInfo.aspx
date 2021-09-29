@@ -83,7 +83,7 @@
 
                 
 
-                <asp:Panel Style="display: block" runat="server"   ID="PStartupEdit"   Visible="false">
+                <asp:Panel Style="display: block;" runat="server"   ID="PStartupEdit"   Visible="false">
                     <table style="margin-left:-10px; margin-top:-20px; " >
                         <tr>
                             <td>
@@ -233,4 +233,5 @@
             </asp:ListView>
         </asp:Panel>
     </asp:Panel>
+      <asp:Image runat="server" ID="BgImage" CssClass="bg-image"></asp:Image>
 </asp:Content>

@@ -14,6 +14,7 @@ namespace StartUpWebAPI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             if (!User.Identity.IsAuthenticated)
             {
                 FormsAuthentication.RedirectToLoginPage();
@@ -26,6 +27,8 @@ namespace StartUpWebAPI
             }
         }
 
+
+       
         /// <summary>
         /// Check if the page was not reloaded, otherwise loads member parameter values into ComboBox.
         /// </summary>

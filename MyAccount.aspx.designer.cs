@@ -24,24 +24,6 @@ namespace StartUpWebAPI
         protected global::System.Web.UI.WebControls.Image UserImage;
 
         /// <summary>
-        /// FileUploadImage элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileUploadImage;
-
-        /// <summary>
-        /// BtnAddImage элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnAddImage;
-
-        /// <summary>
         /// LabelName элемент управления.
         /// </summary>
         /// <remarks>
@@ -58,6 +40,24 @@ namespace StartUpWebAPI
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LabelRole;
+
+        /// <summary>
+        /// BtnAddImage элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnAddImage;
+
+        /// <summary>
+        /// FileUploadImage элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload FileUploadImage;
 
         /// <summary>
         /// BgImage элемент управления.

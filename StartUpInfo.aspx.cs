@@ -14,7 +14,7 @@ namespace StartUpWebAPI
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            LoadBgImage();
             int id = Convert.ToInt32(Request.QueryString.Get("id"));
 
             bool isStartUp = AppData.Context.StartUp.Any(s => s.Id == id);
@@ -213,6 +213,12 @@ namespace StartUpWebAPI
         {
             Response.Redirect("~/AddStartUp?id=" + startUp.Id, false);
         }
+
+        private void LoadBgImage()
+        {
+            BgImage.ImageUrl = NativeImageUtils.ConvertFromBitmap(Properties.Resources.bgacc);
+        }
+
 
         /// <summary>
         /// Unsubscribes the user from the startup.

@@ -16,6 +16,7 @@ namespace StartUpWebAPI
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            LoadBgImage();
             int id = Convert.ToInt32(Request.QueryString.Get("id"));
 
             bool isTeam = id != 0;
@@ -100,19 +101,24 @@ namespace StartUpWebAPI
             CommentsCount.Text = "Комментарии (" + team.TeamComment.Count + "):";
         }
 
+
+        private void LoadBgImage()
+        {
+            BgImage.ImageUrl = NativeImageUtils.ConvertFromBitmap(Properties.Resources.bgacc);
+        }
         /// <summary>
         /// Inserts team into view.
         /// </summary>
         private void InsertTeams()
         {
             Name.Text = MainName.Text = team.Name;
-            CountOfMembers.Text = "Участников: " + team.TeamOfUser.Count.ToString();
-            CountOfStartUps.Text = "Количество связанных стартапов: " + team.StartUpOfTeam.Count.ToString();
+            CountOfMembers.Text =team.TeamOfUser.Count.ToString();
+            CountOfStartUps.Text = team.StartUpOfTeam.Count.ToString();
 
-            string creator = "Организатор: " + team.TeamOfUser.FirstOrDefault(u => u.RoleType.Name == "Организатор")?.User.Name;
-            MaxMembersCount.Text = "Максимум участников: " + team.MaxMembersCount.ToString();
+            string creator = team.TeamOfUser.FirstOrDefault(u => u.RoleType.Name == "Организатор")?.User.Name;
+            MaxMembersCount.Text =  team.MaxMembersCount.ToString();
             Creator.Text = creator ?? "Неизвестен";
-            DateOfCreation.Text = "Дата создания: " + team.CreationDate.ToString();
+            DateOfCreation.Text =  team.CreationDate.ToString();
             UpdateCommentsCount();
             MainImage.ImageUrl = team.ImagePreview;
         }

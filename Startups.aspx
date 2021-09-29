@@ -52,4 +52,5 @@
             </asp:ListView>
         </asp:Panel>
     </div>
+     <asp:Image runat="server" ID="BgImage" CssClass="bg-image"></asp:Image>
 </asp:Content>
