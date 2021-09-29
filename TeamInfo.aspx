@@ -46,7 +46,8 @@
                             CssClass="round-div-block simple-cloud-button"
                             ForeColor="White"
                             ID="BtnDeleteTeam"
-                            OnClick="BtnDeleteTeam_Click"></asp:LinkButton>
+                            OnClick="BtnDeleteTeam_Click"
+                            OnClientClick="return getDeleteItemState(`команду`);"></asp:LinkButton>
                     </asp:Panel>
 
 
@@ -132,6 +133,7 @@
             </asp:ListView>
 
         </asp:Panel>
-
     </asp:Panel>
+    <script src='<%=ResolveUrl("~/Scripts/delete-confirmer.js") %>'
+        type="text/javascript"></script>
 </asp:Content>

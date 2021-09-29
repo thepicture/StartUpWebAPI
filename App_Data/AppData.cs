@@ -19,7 +19,10 @@ namespace StartUpWebAPI.Entities
         {
             get
             {
-                context = new StartUpBaseEntities();
+                if (context == null)
+                {
+                    context = new StartUpBaseEntities();
+                }
 
                 return context;
             }

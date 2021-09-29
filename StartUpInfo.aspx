@@ -93,9 +93,9 @@
                         CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                         ForeColor="White"
                         ID="BtnDeleteStartUp"
+                        OnClientClick="return getDeleteItemState(`стартап`);"
                         OnClick="BtnDeleteStartUp_Click"></asp:LinkButton>
                 </asp:Panel>
-
                 <asp:Button ID="BtnSubscribe"
                     OnClick="BtnSubscribe_Click"
                     runat="server"
@@ -190,4 +190,7 @@
             </asp:ListView>
         </asp:Panel>
     </asp:Panel>
+    <script src='<%=ResolveUrl("~/Scripts/delete-confirmer.js") %>'
+        type="text/javascript">
+    </script>
 </asp:Content>

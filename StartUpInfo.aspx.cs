@@ -279,7 +279,7 @@ namespace StartUpWebAPI
         }
 
         /// <summary>
-        /// Deletes the startup from the db.
+        /// Delete the startup in the DbContext.
         /// </summary>
         protected void BtnDeleteStartUp_Click(object sender, EventArgs e)
         {
@@ -294,13 +294,16 @@ namespace StartUpWebAPI
             try
             {
                 AppData.Context.SaveChanges();
-
-                Response.Redirect("~/Default.aspx?reason=" + HttpUtility.UrlEncode("Стартап успешно удалён!"), false);
+                Response
+                    .Redirect("~/Default.aspx?reason=" + HttpUtility.UrlEncode("Стартап успешно удалён!"), false);
             }
             catch (Exception ex)
             {
-                Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
-                    + HttpUtility.UrlEncode("Стартап не был удалён! Ошибка: " + ex.Message + "."
+                Response.Redirect("~/StartUpInfo.aspx?id="
+                    + startUp.Id
+                    + "&reason="
+                    + HttpUtility.UrlEncode("Стартап не был удалён! Ошибка: "
+                    + ex.Message + "."
                     + "\nПожалуйста, попробуйте удалить стартап ещё раз"));
             }
         }
