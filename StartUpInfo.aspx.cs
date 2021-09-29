@@ -317,6 +317,8 @@ namespace StartUpWebAPI
                 {
                     AppData.Context.SaveChanges();
 
+                    AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
+
                     Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
                         + HttpUtility.UrlEncode("Комментарий успешно удалён!"), false);
                 }
@@ -332,24 +334,62 @@ namespace StartUpWebAPI
 
             if (e.CommandName.Equals("BanUserByCommentId"))
             {
-                StartUpComment comment = AppData.Context.StartUpComment.Find(Convert.ToInt32(e.CommandArgument));
-
+                StartUpComment comment = AppData
+                    .Context
+                    .StartUpComment
+                    .Find(Convert.ToInt32(e.CommandArgument));
                 User user = comment.User;
+                StartUpOfUser tuple = AppData
+                    .Context
+                    .Entry(startUp)
+                    .Entity
+                    .StartUpOfUser
+                    .FirstOrDefault(s => s.User.Login.Equals(user.Login));
+                StartUpOfUser bannedUserOfStartUp = new StartUpOfUser();
 
-                StartUpOfUser tuple = AppData.Context.StartUp.Find(startUp.Id).StartUpOfUser.First(s => s.User.Equals(user));
-
-                if (tuple.RoleType.Name.Equals("Забанен"))
+                if (tuple != null)
                 {
-                    AppData.Context.Entry(tuple).Entity.RoleType = AppData.Context.RoleType.First(r => r.Name.Equals("Пользователь"));
+                    AppData.Context.Entry(tuple).State = System.Data.Entity.EntityState.Deleted;
+                    AppData.Context.SaveChanges();
+
+                    if (AppData.Context.RoleType.Find(tuple.RoleTypeId).Name.Equals("Забанен"))
+                    {
+                        bannedUserOfStartUp = new StartUpOfUser
+                        {
+                            RoleType = AppData
+                            .Context
+                            .RoleType
+                            .First(r => r.Name.Equals("Участник")),
+                            User = user,
+                            StartUp = startUp,
+                        };
+                    }
+                    else
+                    {
+                        bannedUserOfStartUp = new StartUpOfUser
+                        {
+                            RoleType = AppData.Context.RoleType.First(r => r.Name.Equals("Забанен")),
+                            User = user,
+                            StartUp = startUp
+                        };
+                    }
                 }
                 else
                 {
-                    AppData.Context.Entry(tuple).Entity.RoleType = AppData.Context.RoleType.First(r => r.Name.Equals("Забанен"));
+                    bannedUserOfStartUp = new StartUpOfUser
+                    {
+                        RoleTypeId = AppData.Context.RoleType.First(r => r.Name.Equals("Забанен")).Id,
+                        UserId = user.Id,
+                        StartUpId = startUp.Id
+                    };
                 }
+
+                AppData.Context.StartUpOfUser.Add(bannedUserOfStartUp);
 
                 try
                 {
                     AppData.Context.SaveChanges();
+                    AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
 
                     Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
                         + HttpUtility.UrlEncode("Роль комментатора успешно изменена!"), false);

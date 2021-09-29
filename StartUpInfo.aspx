@@ -22,64 +22,80 @@
 
 
                 <div style="margin-top: 70px !important; margin-left: 240px !important; margin-top: 90px !important; width: 570px !important; height: 150px !important;">
-                    <asp:Label Style="margin-top: 90px !important; font-size: x-large;"
-                        ID="Description" runat="server"
-                        ForeColor="Black"></asp:Label>
+                    <asp:Label Style="margin-top: 90px !important; font-size: x-large;" ID="Description" runat="server" ForeColor="Black"></asp:Label>
                 </div>
 
-                <div style="margin-left: 240px; width: 200px; height: 70px; float: left;">
-                    <label style="display: block; font-size: 17px; color: darkslateblue">Название:</label>
-                    <asp:Label ID="Name" runat="server" ForeColor="Black"></asp:Label>
-                </div>
+                <table align="center" runat="server" cellpadding="5" style="border-spacing: 30px !important;" cellspacing="9">
+                    <tr cellspacing="9" runat="server">
 
-                <div style="width: 200px; height: 70px; float: left;">
-                    <label style="display: block; font-size: 17px; color: darkslateblue">Максимиум участников:</label>
-                    <asp:Label ID="MaxMembersCount" runat="server" ForeColor="Black"></asp:Label>
-                </div>
+                        <th runat="server" style="margin-right: 20px;">
+                            <label style="display: block; font-size: 17px; color: darkslateblue">Название:</label>
+                            <asp:Label ID="Name" runat="server" ForeColor="Black"></asp:Label>
+                        </th>
 
-                <div style="width: 200px; height: 70px; float: left;">
-                    <label style="display: block; font-size: 17px; color: darkslateblue">Участников:</label>
-                    <asp:Label ID="CountOfMembers" runat="server" ForeColor="Black"></asp:Label>
-                </div>
+                        <th>
+                            <label style="display: block; font-size: 17px; color: darkslateblue">Максимиум участников:</label>
+                            <asp:Label ID="MaxMembersCount" runat="server" ForeColor="Black"></asp:Label>
+                        </th>
+
+                        <th>
+                            <label style="display: block; font-size: 17px; color: darkslateblue">Участников:</label>
+                            <asp:Label ID="CountOfMembers" runat="server" ForeColor="Black"></asp:Label>
+                        </th>
+
+                        <th>
+                            <label style="display: block; font-size: 17px; color: darkslateblue">Команд:</label>
+                            <asp:Label ID="CountOfTeams" runat="server" ForeColor="Black"></asp:Label>
+                        </th>
+
+                    </tr>
+
+                    <tr>
+
+                        <th>
+                            <label style="display: block; font-size: 17px; color: darkslateblue">Стартапер:</label>
+                            <asp:Label ID="Creator" runat="server" ForeColor="Black"></asp:Label>
+                        </th>
+
+                        <th>
+                            <label style="display: block; font-size: 17px; color: darkslateblue">Дата создания:</label>
+                            <asp:Label ID="DateOfCreation" runat="server" ForeColor="Black"></asp:Label>
+                        </th>
+
+                        <th>
+                            <label style="display: block; font-size: 17px; color: darkslateblue">Категория:</label>
+                            <asp:Label ID="Category" runat="server" ForeColor="Black"></asp:Label>
+                        </th>
+
+                        <th>
+                            <label style="display: block; font-size: 17px; color: darkslateblue">Проект:</label>
+                            <asp:Label ID="IsActual" runat="server" ForeColor="Black"></asp:Label>
+                        </th>
+
+                    </tr>
+
+                    <tr>
+                    </tr>
+
+                </table>
 
 
-                <div style="margin-top: 15px; margin-left: 240px !important; width: 200px; height: 70px; float: left;">
-                    <label style="display: block; font-size: 17px; color: darkslateblue">Команд:</label>
-                    <asp:Label ID="CountOfTeams" runat="server" ForeColor="Black"></asp:Label>
-                </div>
-
-                <div style="margin-top: 15px; width: 200px; height: 70px; float: left;">
-                    <label style="display: block; font-size: 17px; color: darkslateblue">Стартапер:</label>
-                    <asp:Label ID="Creator" runat="server" ForeColor="Black"></asp:Label>
-                </div>
-
-                <div style="margin-top: 15px; width: 200px; height: 70px; float: left;">
-                    <label style="display: block; font-size: 17px; color: darkslateblue">Дата создания:</label>
-                    <asp:Label ID="DateOfCreation" runat="server" ForeColor="Black"></asp:Label>
-                </div>
-
-                <div style="margin-left: 240px; margin-top: 15px; width: 200px; height: 70px; float: left;">
-                    <label style="display: block; font-size: 17px; color: darkslateblue">Категория:</label>
-                    <asp:Label ID="Category" runat="server" ForeColor="Black"></asp:Label>
-                </div>
-
-                <div style="margin-top: 15px; width: 200px; height: 70px; float: left;">
-                    <label style="display: block; font-size: 17px; color: darkslateblue">Проект:</label>
-                    <asp:Label ID="IsActual" runat="server" ForeColor="Black"></asp:Label>
-                </div>
 
                 <asp:Panel Style="display: block" runat="server" ID="PStartupEdit" Visible="false">
                     <asp:LinkButton runat="server" Text='Изменить информацию'
-                        CssClass="round-div-block simple-cloud-button"
+                        Style="float: left; height: 40px !important; margin-left: 170px !important;"
+                        CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                         ForeColor="White"
                         ID="LinkButtonModifyStartUp"
                         OnClick="LinkButtonModifyStartUp_Click"></asp:LinkButton>
                     <asp:LinkButton runat="server" Text='Удалить стартап'
-                        CssClass="round-div-block simple-cloud-button"
+                        Style="height: 40px !important;"
+                        CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                         ForeColor="White"
                         ID="BtnDeleteStartUp"
                         OnClick="BtnDeleteStartUp_Click"></asp:LinkButton>
                 </asp:Panel>
+
                 <asp:Button ID="BtnSubscribe"
                     OnClick="BtnSubscribe_Click"
                     runat="server"
@@ -101,7 +117,7 @@
         </div>
         <br />
         <br />
-        <div class="jumbotron">
+        <div class="jumbotron ">
             <p style="margin-left: 10px;" class="lead">
                 <asp:Label runat="server" ID="CommentsCount"></asp:Label>
             </p>
@@ -116,46 +132,30 @@
                 BorderStyle="None"
                 BackColor="Transparent"></asp:TextBox>
 
-            <div style="width: 1030px !important"
-                class="round-div-block button-style-for-page-two about-like-cloud-button-for-page-two margin-bottom-top-as-usual">
-                <asp:LinkButton runat="server"
-                    Text='Отправить'
-                    ForeColor="Black"
-                    ID="BtnSendComment"
-                    OnClick="BtnSendComment_Click"></asp:LinkButton>
+            <div style="width: 1030px !important" class="round-div-block button-style-for-page-two about-like-cloud-button-for-page-two margin-bottom-top-as-usual">
+                <asp:LinkButton runat="server" Text='Отправить' ForeColor="Black" ID="BtnSendComment" OnClick="BtnSendComment_Click"></asp:LinkButton>
             </div>
         </div>
 
 
 
         <asp:Panel runat="server" ID="CommentsPanel">
-            <asp:ListView runat="server"
-                ID="LViewStartUpComments"
-                OnItemCommand="LViewStartUpComments_ItemCommand">
+            <asp:ListView runat="server" ID="LViewStartUpComments" OnItemCommand="LViewStartUpComments_ItemCommand">
                 <ItemTemplate>
                     <table>
                         <tr>
                             <td class="poster_info td1 hide-for-print">
                                 <p>
-                                    <asp:Image Width="100"
-                                        Height="100"
-                                        runat="server"
-                                        CssClass="startup-image-radius radius-like marginaled image-cover-auto"
-                                        ImageUrl='<%# Eval("GetCommentImage") %>'></asp:Image>
+                                    <asp:Image Width="100" Height="100" runat="server" CssClass="startup-image-radius radius-like marginaled image-cover-auto" ImageUrl='<%# Eval("GetCommentImage") %>'></asp:Image>
                                 </p>
                                 <td class="message td2" rowspan="2">
                                     <div class="post_head">
                                         <p class="post-time">
-                                            <asp:Label Font-Bold="true"
-                                                runat="server"
-                                                Style="font-size: 20px;"
-                                                Text='<%# Eval("User.Name") %>'></asp:Label>
+                                            <asp:Label Font-Bold="true" runat="server" Style="font-size: 20px;" Text='<%# Eval("User.Name") %>'></asp:Label>
                                         </p>
 
                                         <p style="float: right; padding: 3px 2px 4px;">
-                                            <asp:Label runat="server"
-                                                Style="font-size: 13px;"
-                                                Text='<%# Eval("DateTime") %>'></asp:Label>
+                                            <asp:Label runat="server" Style="font-size: 13px;" Text='<%# Eval("DateTime") %>'></asp:Label>
                                         </p>
                                         <div class="clear"></div>
 
@@ -169,12 +169,16 @@
                                             Visible='<%# Eval("IsNotSelfCommentAndICanChange") %>'
                                             CssClass="button-style-for-page about-like-cloud-button-for-page inline-button"
                                             runat="server"
+                                            LogoutAction="Redirect"
+                                            LogoutText="Выйти"
                                             CommandName="DeleteCommentById"
-                                            CommandArgument='<%# Eval("Id") %>'/>
+                                            CommandArgument='<%# Eval("Id") %>' />
                                         <asp:LinkButton Text='<%# Eval("BanUserText") %>'
                                             Visible='<%# Eval("IsNotSelfCommentAndICanChange") %>'
                                             CssClass="button-style-for-page about-like-cloud-button-for-page inline-button"
                                             runat="server"
+                                            LogoutAction="Redirect"
+                                            LogoutText="Выйти"
                                             CommandName="BanUserByCommentId"
                                             CommandArgument='<%# Eval("Id") %>' />
                                     </div>
