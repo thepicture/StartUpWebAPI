@@ -45,6 +45,14 @@ namespace StartUpWebAPI.Entities
             }
         }
 
+        public string IsDoneText
+        {
+            get
+            {
+                return IsDone ? "Завершён" : "Актуален";
+            }
+        }
+
         public string SpacedTitle
         {
             get

@@ -108,7 +108,7 @@ namespace StartUpWebAPI
             string creator = startUp.StartUpOfUser.FirstOrDefault(u => u.RoleType.Name == "Организатор")?.User.Name;
 
             Creator.Text = (string.IsNullOrWhiteSpace(creator)) ? "Неизвестен" : creator;
-            IsActual.Text = startUp.IsDone ? "Завершён" : "Актуален";
+            IsActual.Text = startUp.IsDoneText;
             DateOfCreation.Text = startUp.CreationDate.ToString();
             Category.Text = startUp.Category.Name;
             Description.Text = startUp.SafeDescription;

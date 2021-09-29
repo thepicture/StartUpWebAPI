@@ -85,6 +85,9 @@
                                               style=" background-color: deepskyblue;height: 15px;width: max-content;font-size: 1.05em;padding-left: 5px;padding-right: 5px;margin-bottom: 20px;margin-left: 100px;z-index:127;"
                                               runat="server"
                                               visible='<%# ((HashSet<StartUpWebAPI.Entities.StartUpOfUser>)Eval("StartUpOfUser")).Any(s => s.User.Login.Equals(User.Identity.Name) && !s.RoleType.Name.Equals("Участник"))%>'><%# Eval("MyRole") %></h1>
+                                      <h1 class="tag-item blue-sign"
+                                              style=" background-color: deepskyblue;height: 15px;width: max-content;font-size: 1.05em;padding-left: 5px;padding-right: 5px;margin-bottom: 20px;margin-left: 200px;z-index:127;"
+                                              runat="server"><%# Eval("IsDoneText") %></h1>
                                   
                                     <div class="tag-item gray-gradient radius-like"
                                         style="z-index: 64; opacity: .8;"></div>
