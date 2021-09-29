@@ -512,6 +512,13 @@ input[type="select"] {
     min-height: 400px;
 }
 
+.default-lead {
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.4;
+}
+
 /* Styles for startup info. */
 .image-cover-auto {
     width: 100%;

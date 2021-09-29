@@ -15,7 +15,6 @@ namespace StartUpWebAPI
         {
             if (HttpContext.Current.User.Identity.IsAuthenticated)
             {
-                AppData.Context.ChangeTracker.Entries().ToList().ForEach(s => s.Reload());
                 LoadStartups();
                 LoadTeams();
             }
@@ -33,14 +32,15 @@ namespace StartUpWebAPI
                 return;
             }
 
+
+            startUps.RemoveAll(s => s.StartUpOfUser.Any(e => e.User.Login.Equals(User.Identity.Name) && e.RoleType.Name.Equals("Забанен")));
+            startUps.RemoveAll(s => !s.StartUpOfUser.Select(i => i.User.Login).Contains(User.Identity.Name));
+
             if (startUps.Count == 0)
             {
                 (RecursiveControlFinder.FindControlRecursive(this, "EmptyStartupsPanel") as Panel).Visible = true;
                 return;
             }
-
-            startUps.RemoveAll(s => s.StartUpOfUser.Any(e => e.User.Login.Equals(User.Identity.Name) && e.RoleType.Name.Equals("Забанен")));
-            startUps.RemoveAll(s => !s.StartUpOfUser.Select(i => i.User.Login).Contains(User.Identity.Name));
 
             (RecursiveControlFinder.FindControlRecursive(this, "LViewMyStartups") as ListView).DataSource = startUps;
             (RecursiveControlFinder.FindControlRecursive(this, "LViewMyStartups") as ListView).DataBind();
@@ -58,14 +58,15 @@ namespace StartUpWebAPI
                 return;
             }
 
+
+            teams.RemoveAll(s => s.TeamOfUser.Any(e => e.User.Login.Equals(User.Identity.Name) && e.RoleType.Name.Equals("Забанен")));
+            teams.RemoveAll(t => !t.TeamOfUser.Select(i => i.User.Login).Contains(User.Identity.Name));
+
             if (teams.Count == 0)
             {
                 (RecursiveControlFinder.FindControlRecursive(this, "EmptyTeamsPanel") as Panel).Visible = true;
                 return;
             }
-
-            teams.RemoveAll(s => s.TeamOfUser.Any(e => e.User.Login.Equals(User.Identity.Name) && e.RoleType.Name.Equals("Забанен")));
-            teams.RemoveAll(t => !t.TeamOfUser.Select(i => i.User.Login).Contains(User.Identity.Name));
 
             (RecursiveControlFinder.FindControlRecursive(this, "LViewMyTeams") as ListView).DataSource = teams;
             (RecursiveControlFinder.FindControlRecursive(this, "LViewMyTeams") as ListView).DataBind();

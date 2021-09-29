@@ -103,7 +103,7 @@
                     </ItemTemplate>
                 </asp:ListView>
                 <asp:Panel runat="server" ID="EmptyStartupsPanel" Visible="false">
-                    <p class="lead" style="font-size: 3em;">Стартапов пока нет :(</p>
+                    <p class="default-lead" style="font-size: 3em;">Стартапов пока нет :(</p>
                 </asp:Panel>
                 <asp:Button ID="BtnCreateStartUp"
                     OnClick="BtnCreateStartUp_Click"
@@ -129,7 +129,7 @@
                     </ItemTemplate>
                 </asp:ListView>
                 <asp:Panel runat="server" ID="EmptyTeamsPanel" Visible="false">
-                    <p class="lead" style="font-size: 3em;">Команд пока нет :(</p>
+                    <p class="default-lead" style="font-size: 3em;">Команд пока нет :(</p>
                 </asp:Panel>
                 <div class="center-align">
                     <asp:Button Style="height: 40px; margin-block-start: 30px; width: 250px;"
