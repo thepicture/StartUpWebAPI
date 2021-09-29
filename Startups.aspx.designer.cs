@@ -60,6 +60,15 @@ namespace StartUpWebAPI
         protected global::System.Web.UI.WebControls.CheckBox ActualBox;
 
         /// <summary>
+        /// DoneBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox DoneBox;
+
+        /// <summary>
         /// BtnSearch control.
         /// </summary>
         /// <remarks>

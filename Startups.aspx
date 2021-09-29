@@ -27,7 +27,19 @@
                             ForeColor="Black" Height="60"
                             BackColor="Transparent">
                         </asp:DropDownList>
-                        <asp:CheckBox runat="server" Text="Только актуальные" Style="vertical-align: middle; margin-left: 5px;" Checked="true" ID="ActualBox" />
+                        <div class="inline-button centerized-div">
+                            <asp:CheckBox runat="server"
+                                Text="Показывать актуальные"
+                                CssClass="search-text-box"
+                                Checked="false"
+                                ID="ActualBox" />
+                            <br />
+                            <asp:CheckBox runat="server"
+                                Text="Показывать завершенные"
+                                CssClass="search-text-box"
+                                Checked="true"
+                                ID="DoneBox" />
+                        </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
                 <asp:Button Text="Искать" Style="width: 120px !important;" CssClass="button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"

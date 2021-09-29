@@ -99,8 +99,17 @@ namespace StartUpWebAPI
 
             currentStartups.RemoveAll(s => s.StartUpOfUser.Any(e => e.User.Name.Equals(User.Identity.Name) && e.RoleType.Name.Equals("Забанен")));
 
-            if (ActualBox.Checked)
+            if (ActualBox.Checked && !DoneBox.Checked)
             {
+                currentStartups = currentStartups.Where(s => s.IsDone == false).ToList();
+            }
+            else if (!ActualBox.Checked && DoneBox.Checked)
+            {
+                currentStartups = currentStartups.Where(s => s.IsDone == true).ToList();
+            }
+            else if (!DoneBox.Checked && !ActualBox.Checked)
+            {
+                ActualBox.Checked = true;
                 currentStartups = currentStartups.Where(s => s.IsDone == false).ToList();
             }
 
@@ -153,6 +162,7 @@ namespace StartUpWebAPI
         {
             NameBox.Text = null;
             ActualBox.Checked = true;
+            DoneBox.Checked = false;
             ComboCategories.SelectedIndex = 0;
             ComboMaxMembers.SelectedIndex = 0;
         }
