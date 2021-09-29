@@ -80,6 +80,12 @@ namespace StartUpWebAPI
                     ReasonBox.Visible = true;
                 }
             }
+            if (Session["reservedReason"] != null)
+            {
+                ReasonBox.Text = (Session["reservedReason"] as string).Replace(";", "<br>");
+                ReasonBox.Visible = true;
+                Session["reservedReason"] = null;
+            }
         }
 
         protected void BtnLogOut_Click(object sender, EventArgs e)

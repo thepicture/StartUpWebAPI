@@ -369,7 +369,7 @@ namespace StartUpWebAPI
                 (ViewState["documents"] as List<DocumentOfStartUp>).Add(doc);
             });
 
-
+            Session["reservedReason"] = "Документы успешно изменены. Вирусы не обнаружены";
             InsertDocumentsIntoStartUp();
         }
     }
