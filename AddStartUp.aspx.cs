@@ -17,6 +17,10 @@ namespace StartUpWebAPI
         {
             if (!Page.IsPostBack)
             {
+                if (!Request.RawUrl.Contains("id="))
+                {
+                    Response.Redirect(Request.RawUrl + "?id=0");
+                }
                 LoadBgImage();
                 ViewState["images"] = new List<StartUpImage>();
                 ViewState["documents"] = new List<DocumentOfStartUp>();
@@ -129,7 +133,7 @@ namespace StartUpWebAPI
 
             if (errors.Length > 0)
             {
-                Response.Redirect("~/AddStartUp?id="
+                HttpContext.Current.RewritePath("~/AddStartUp?id="
                     + ((StartUp)ViewState["currentStartUp"]).Id
                     + "&reason=" + HttpUtility.UrlEncode(errors));
                 return;
@@ -237,10 +241,18 @@ namespace StartUpWebAPI
                          .Redirect(Request.RawUrl + "&reason=" + HttpUtility.UrlEncode(
                          "Не удалось добавить документы в стартап. " +
                          "Попробуйте ещё раз"));
+                    return;
                 }
             }
 
             AppData.Context.ChangeTracker.Entries().ToList().ForEach(s => s.Reload());
+
+            RemoveSession();
+        }
+
+        private void RemoveSession()
+        {
+            ViewState["currentStartUp"] = null;
         }
 
         /// <summary>
@@ -249,6 +261,8 @@ namespace StartUpWebAPI
         protected void BtnCancel_Click(object sender, EventArgs e)
         {
             string reason = HttpUtility.UrlEncode("Создание или удаление стартапа было отменено!");
+
+            RemoveSession();
 
             Response.Redirect("~/StartUpInfo.aspx?id=" + ((StartUp)ViewState["currentStartUp"]).Id + "&reason=" + reason);
         }
@@ -354,6 +368,7 @@ namespace StartUpWebAPI
 
                 (ViewState["documents"] as List<DocumentOfStartUp>).Add(doc);
             });
+
 
             InsertDocumentsIntoStartUp();
         }
