@@ -117,16 +117,39 @@ namespace StartUpWebAPI
 
             if (ComboCategories.SelectedIndex != 0)
             {
-                currentStartups = currentStartups.Where(s => s.Category.Name.Equals(ComboCategories.SelectedValue)).ToList();
+                List<string> selectedValues = ComboCategories
+                    .Items
+                    .Cast<ListItem>()
+                    .Where(i => i.Selected)
+                    .Select(i => i.Value)
+                    .ToList();
+                currentStartups = currentStartups
+                    .Where(s => selectedValues.Contains(s.Category.Name))
+                    .ToList();
             }
 
             if (ComboMaxMembers.SelectedIndex != 0)
             {
-                string[] values = ComboMaxMembers.SelectedValue.Split('-');
-                int from = int.Parse(values[0]);
-                int to = int.Parse(values[1]);
+                List<string> selectedValues = ComboMaxMembers
+                   .Items
+                   .Cast<ListItem>()
+                   .Where(i => i.Selected)
+                   .Select(i => i.Value)
+                   .ToList();
 
-                currentStartups = currentStartups.Where(s => s.MaxMembersCount > from && s.MaxMembersCount < to).ToList();
+                List<StartUp> startUpsToUnion = new List<StartUp>();
+                foreach (string value in selectedValues)
+                {
+                    string[] values = value.Split('-');
+                    int from = int.Parse(values[0]);
+                    int to = int.Parse(values[1]);
+
+                    startUpsToUnion
+                        .AddRange(currentStartups.Where(s => s.MaxMembersCount > from && s.MaxMembersCount < to)
+                        .ToList());
+                }
+
+                currentStartups = startUpsToUnion.Distinct().ToList();
             }
 
             if (!string.IsNullOrWhiteSpace(NameBox.Text))

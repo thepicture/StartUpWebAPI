@@ -16,13 +16,15 @@
                             TextMode="SingleLine" CssClass="search-box" runat="server"
                             ForeColor="Black" Height="60" BorderColor="#808080" BorderStyle="NotSet"
                             BackColor="Transparent"> </asp:TextBox>
-                        <asp:DropDownList ID="ComboMaxMembers"
-                            class="form-control"
-                            Style="height: 30px; width: max-content; margin-right: 6px; vertical-align: middle; float: left !important;"
-                            runat="server"
-                            ForeColor="Black" Height="60"
-                            BackColor="Transparent">
-                        </asp:DropDownList>
+                        <div class="inline-button request-overflow-y">
+                            <asp:CheckBoxList ID="ComboMaxMembers"
+                                class="form-control"
+                                Style="height: 40px; width: max-content; margin-right: 6px; vertical-align: middle; float: left !important;"
+                                runat="server"
+                                ForeColor="Black" Height="60"
+                                BackColor="Transparent">
+                            </asp:CheckBoxList>
+                        </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
                 <asp:Button Text="Искать" Style="width: 120px !important;"

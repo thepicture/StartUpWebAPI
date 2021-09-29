@@ -39,7 +39,7 @@ namespace StartUpWebAPI
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ComboCategories;
+        protected global::System.Web.UI.WebControls.CheckBoxList ComboCategories;
 
         /// <summary>
         /// ComboMaxMembers control.
@@ -48,7 +48,7 @@ namespace StartUpWebAPI
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ComboMaxMembers;
+        protected global::System.Web.UI.WebControls.CheckBoxList ComboMaxMembers;
 
         /// <summary>
         /// ActualBox control.

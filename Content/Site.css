@@ -1071,3 +1071,8 @@ table {
     vertical-align: middle;
     margin-left: 5px;
 }
+
+.request-overflow-y {
+    overflow-y: scroll;
+    height: 40px;
+}

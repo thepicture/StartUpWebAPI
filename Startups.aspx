@@ -10,23 +10,28 @@
                     <ContentTemplate>
 
                         <asp:TextBox ID="NameBox"
-                            Style="height: 30px; width: 300px !important; float: left !important; margin-right: 6px"
+                            Style="height: 30px; width: 200px !important; float: left !important; margin-right: 6px;"
                             TextMode="SingleLine" CssClass="search-box" runat="server"
                             ForeColor="Black" Height="60" BorderColor="#808080" BorderStyle="NotSet"
                             BackColor="Transparent"> </asp:TextBox>
-
-                        <asp:DropDownList ID="ComboCategories"
-                            class="form-control"
-                            Style="height: 30px !important; width: 180px; margin-left: 5px; margin-right: 10px; float: left !important; vertical-align: middle;" runat="server"
-                            ForeColor="Black" Height="60"
-                            BackColor="Transparent">
-                        </asp:DropDownList>
-                        <asp:DropDownList ID="ComboMaxMembers"
-                            class="form-control"
-                            Style="height: 30px; width: 180px; margin-right: 6px; vertical-align: middle; float: left !important;" runat="server"
-                            ForeColor="Black" Height="60"
-                            BackColor="Transparent">
-                        </asp:DropDownList>
+                        <div class="inline-button request-overflow-y">
+                            <asp:CheckBoxList ID="ComboCategories"
+                                class="form-control"
+                                Style="height: 40px; width: max-content; margin-left: 5px; margin-right: 10px; float: left !important; vertical-align: middle;"
+                                runat="server"
+                                ForeColor="Black" Height="60"
+                                BackColor="Transparent">
+                            </asp:CheckBoxList>
+                        </div>
+                        <div class="inline-button request-overflow-y">
+                            <asp:CheckBoxList ID="ComboMaxMembers"
+                                class="form-control"
+                                Style="height: 40px; width: max-content; margin-right: 6px; vertical-align: middle; float: left !important;"
+                                runat="server"
+                                ForeColor="Black" Height="60"
+                                BackColor="Transparent">
+                            </asp:CheckBoxList>
+                        </div>
                         <div class="inline-button centerized-div">
                             <asp:CheckBox runat="server"
                                 Text="Показывать актуальные"
@@ -42,9 +47,11 @@
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
-                <asp:Button Text="Искать" Style="width: 120px !important;" CssClass="button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
+                <asp:Button Text="Искать" Style="width: 120px !important;"
+                    CssClass="button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                     runat="server" ID="BtnSearch" OnClick="BtnSearch_Click" />
-                <asp:Button Text="Очистить фильтры" Style="margin-left: -2px;" CssClass="button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
+                <asp:Button Text="Очистить фильтры" Style="margin-left: -2px;"
+                    CssClass="button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                     runat="server" ID="BtnClear" OnClick="BtnClear_Click" />
             </div>
         </div>

@@ -45,7 +45,10 @@ namespace StartUpWebAPI
                 "1-5",
                 "6-10",
                 "11-15",
-                "15-20"
+                "15-20",
+                 "21-100",
+                  "101-1000",
+                  "1000-и больше"
             };
 
             ComboMaxMembers.DataSource = values;
@@ -60,15 +63,31 @@ namespace StartUpWebAPI
         {
             var currentTeams = AppData.Context.Team.ToList();
 
-            currentTeams.RemoveAll(s => s.TeamOfUser.Any(e => e.User.Name.Equals(User.Identity.Name) && e.RoleType.Name.Equals("Забанен")));
+            currentTeams
+                .RemoveAll(s => s.TeamOfUser.Any(e => e.User.Login.Equals(User.Identity.Name) && e.RoleType.Name.Equals("Забанен")));
 
             if (ComboMaxMembers.SelectedIndex != 0)
             {
-                string[] values = ComboMaxMembers.SelectedValue.Split('-');
-                int from = int.Parse(values[0]);
-                int to = int.Parse(values[1]);
+                List<string> selectedValues = ComboMaxMembers
+                    .Items
+                    .Cast<ListItem>()
+                    .Where(i => i.Selected)
+                    .Select(i => i.Value)
+                    .ToList();
 
-                currentTeams = currentTeams.Where(s => s.MaxMembersCount > from && s.MaxMembersCount < to).ToList();
+                List<Team> teamsToUnion = new List<Team>();
+                foreach (string value in selectedValues)
+                {
+                    string[] values = value.Split('-');
+                    int from = int.Parse(values[0]);
+                    int to = int.Parse(values[1].Replace("и больше", int.MaxValue.ToString()));
+
+                    teamsToUnion
+                        .AddRange(currentTeams.Where(s => s.MaxMembersCount > from && s.MaxMembersCount < to)
+                        .ToList());
+                }
+
+                currentTeams = teamsToUnion.Distinct().ToList();
             }
 
             if (!string.IsNullOrWhiteSpace(NameBox.Text))
