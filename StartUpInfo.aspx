@@ -8,7 +8,7 @@
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContent" Style="padding-left: 50px; padding-right: 50px;">
     <asp:Panel runat="server">
-        <div class="jumbotron  ">
+        <div class="jumbotron  " style="padding-bottom:0px !important; margin-bottom:-30px !important;">
             <h1>
                 <asp:Label runat="server" ID="MainName" Style="color: black;" CssClass="centerized-text"></asp:Label></h1>
             <p class="lead">
@@ -21,8 +21,8 @@
             <asp:Panel Style="display: block" ID="PanelMyStartups" runat="server">
 
 
-                <div style="margin-top: 70px !important; margin-left: 240px !important; margin-top: 90px !important; width: 570px !important; height: 150px !important;">
-                    <asp:Label Style="margin-top: 90px !important; font-size: x-large;" ID="Description" runat="server" ForeColor="Black"></asp:Label>
+                <div style="margin-top: 70px !important; margin-left: 240px !important; overflow-y:auto !important; margin-top: 90px !important;  height: 150px !important;">
+                    <asp:Label Style="margin-top: 90px !important;  font-size: x-large;  text-wrap:normal !important;" ID="Description" runat="server" ForeColor="Black"></asp:Label>
                 </div>
 
                 <table align="center"  runat="server" cellpadding="5" Style="border-spacing:30px !important;" cellspacing="9">
@@ -83,44 +83,84 @@
 
                 
 
-                <asp:Panel Style="display: block" runat="server" ID="PStartupEdit"   Visible="false">
-                    <asp:LinkButton runat="server" Text='Изменить информацию'
-                         Style="float:left; height:40px !important; margin-left:170px !important;"
+                <asp:Panel Style="display: block" runat="server"   ID="PStartupEdit"   Visible="false">
+                    <table style="margin-left:-10px; margin-top:-20px; " >
+                        <tr>
+                            <td>
+                        <asp:LinkButton runat="server" Text='Изменить информацию'
+                        Style="float:left; margin-left:170px !important;"
                         CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                         ForeColor="White"
                         ID="LinkButtonModifyStartUp"
                         OnClick="LinkButtonModifyStartUp_Click"></asp:LinkButton>
-                    <asp:LinkButton runat="server" Text='Удалить стартап'
-                        Style="height:40px !important;"
+                            </td>
+                            <td>
+                        <asp:LinkButton runat="server" Text='Удалить стартап'
+                       
                         CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                         ForeColor="White"
                         ID="BtnDeleteStartUp"
                         OnClick="BtnDeleteStartUp_Click"></asp:LinkButton>
+                            </td>
+                        </tr>
+                    </table>
+                  <%--  <asp:LinkButton runat="server" Text='Изменить информацию'
+                         Style="float:left; height:40px !important; margin-left:170px !important;"
+                        CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
+                        ForeColor="White"
+                        ID="LinkButtonModifyStartUp"
+                        OnClick="LinkButtonModifyStartUp_Click"></asp:LinkButton>--%>
+                   <%-- <asp:LinkButton runat="server" Text='Удалить стартап'
+                        Style="height:40px !important;"
+                        CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
+                        ForeColor="White"
+                        ID="BtnDeleteStartUp"
+                        OnClick="BtnDeleteStartUp_Click"></asp:LinkButton>--%>
+
+                    <br />
                 </asp:Panel>
-               
-                <asp:Button ID="BtnSubscribe"
+               <table  style="margin-left:150px; margin-top:-30px;" class="inline-button">
+                   <tr>
+                       <td>
+                    <asp:Button ID="BtnSubscribe"
                     OnClick="BtnSubscribe_Click"
                     runat="server"
-                    CssClass="round-div-block simple-cloud-button"
+                         Style="float:left;  width:170px !important;"
+                   CssClass="button-style-for-page about-like-cloud-button-for-page inline-button"
                     Text="Вступить в стартап"
                     Visible="false"></asp:Button>
-                <br />
+                       </td>
+                       <td>
+                    <asp:Button ID="BtnUnsubscribe"
+                    OnClick="BtnUnsubscribe_Click"
+                    runat="server"
+                         Style="float:left; "
+                    CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
+                    Text="Покинуть стартап"
+                    Visible="false"></asp:Button>
+                       </td>
+                   </tr>
+               </table>
+               <%-- <asp:Button ID="BtnSubscribe"
+                    OnClick="BtnSubscribe_Click"
+                    runat="server"
+                   CssClass="button-style-for-page about-like-cloud-button-for-page inline-button"
+                    Text="Вступить в стартап"
+                    Visible="true"></asp:Button>--%>
+           <%--     <br />
                 <asp:Button ID="BtnUnsubscribe"
                     OnClick="BtnUnsubscribe_Click"
                     runat="server"
                     CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                     Text="Покинуть стартап"
-                    Visible="false"></asp:Button>
+                    Visible="true"></asp:Button>--%>
             </asp:Panel>
 
-            &nbsp;
-                <p>
-                </p>
+       
+                <br />
         </div>
-        <br />
-        <br />
         <div class="jumbotron ">
-            <p style="margin-left: 10px;" class="lead">
+            <p style="margin-left: 10px ; color:black;" class="lead" >
                 <asp:Label runat="server" ID="CommentsCount"></asp:Label>
             </p>
 
@@ -134,8 +174,8 @@
                 BorderStyle="None"
                 BackColor="Transparent"></asp:TextBox>
 
-            <div style="width: 1030px !important" class="round-div-block button-style-for-page-two about-like-cloud-button-for-page-two margin-bottom-top-as-usual">
-                <asp:LinkButton runat="server" Text='Отправить' ForeColor="Black" ID="BtnSendComment" OnClick="BtnSendComment_Click"></asp:LinkButton>
+            <div style="width: 1030px !important" class="round-div-block about-like-cloud-button-for-page-five button-style-for-page margin-bottom-top-as-usual">
+                <asp:LinkButton runat="server" ForeColor="White" Text='Отправить'  ID="BtnSendComment" OnClick="BtnSendComment_Click" ></asp:LinkButton>
             </div>
         </div>
 
@@ -167,6 +207,7 @@
                                         <div class="post_body">
                                             <asp:Label runat="server" Text='<%# Eval("CommentText") %>'></asp:Label>
                                         </div>
+                                         
                                         <asp:Button Text="Удалить комментарий"
                                             Visible='<%# Eval("IsNotSelfCommentAndICanChange") %>'
                                             CssClass="button-style-for-page about-like-cloud-button-for-page inline-button"

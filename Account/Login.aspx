@@ -99,7 +99,8 @@
             </div>
             <br />
             <div style="display: flex; justify-content: center;">
-                <asp:Button Style="margin: -25px 0px 0px 0px; font-size: 26px !important;" Text="Авторизоваться" CssClass="round-div-block-specified-about about-like-cloud-button"
+                <asp:Button Style="margin: -25px 0px 0px 0px; font-size: 26px !important;" Text="Авторизоваться" 
+                    CssClass="round-div-block-specified-about about-like-cloud-button"
                     runat="server" ID="BtnLogIn" OnClick="LogIn" />
             </div>
             <br />

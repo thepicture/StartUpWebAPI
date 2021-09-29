@@ -14,6 +14,7 @@ namespace StartUpWebAPI
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
             int id = Convert.ToInt32(Request.QueryString.Get("id"));
 
             bool isStartUp = AppData.Context.StartUp.Any(s => s.Id == id);

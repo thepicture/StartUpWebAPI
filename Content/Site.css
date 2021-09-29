@@ -335,7 +335,6 @@ input[type="select"] {
 }
 
     .about-like-cloud-button:hover {
-        background-color: lightpink !important;
         background-color: #181219 !important;
         color: white !important;
     }
@@ -1066,3 +1065,40 @@ table {
 .center-align {
     text-align: -webkit-center;
 }
+
+.about-like-cloud-button-for-page-five {
+    color: white !important;
+    border: 0px;
+    padding: 0;
+    background-color: #6174C8;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+    width: 170px;
+    font-size: 15px !important;
+}
+
+    .about-like-cloud-button-for-page-five:hover {
+        background-color: #434244 !important;
+        color: white !important;
+    }
+
+.semi-transparent-my-account {
+    background-color: #434244  !important;
+}
+
+.about-like-cloud-button-for-page-account {
+    color: #181219 !important;
+    border: 0px;
+    padding: 0;
+    text-align: center;
+    margin-left:5px !important;
+    width: 170px;
+    height:30px !important;
+    font-size: 15px !important;
+}
+
+    .about-like-cloud-button-for-page-account:hover {
+        background-color: #6174C8 !important;
+        color: white !important;
+    }
