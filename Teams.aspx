@@ -42,7 +42,12 @@
         <asp:Panel HorizontalAlign="Center" runat="server">
             <asp:ListView ID="TeamsView" runat='server' OnItemCommand="TeamsView_ItemCommand">
                 <ItemTemplate>
-                    <asp:LinkButton runat="server" CommandName="TeamClicked" CommandArgument='<%# Eval("Id") %>'>
+                    <asp:LinkButton runat="server"
+                        CommandName="TeamClicked"
+                        CommandArgument='<%# Eval("Id") %>'
+                        onmouseenter='<%# "showDescription(`team-" + Eval("Id")  + "`, `" + Eval("SafeDescription") + "`)"%>'
+                        onmouseleave="hideDescription()"
+                        class='<%# "team-" + Eval("Id") %>'>
                     <div class="startup-panel radius-like container-item ">
                             <img class="startup-image radius-like image-cover-auto" src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
                         <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 45px; z-index:600;"><%# Eval("Name") %></h1>
@@ -54,4 +59,7 @@
             </asp:ListView>
         </asp:Panel>
     </asp:Panel>
+    <script src='<%=ResolveUrl("~/Scripts/descriptor-presenter.js") %>'
+        type="text/javascript">
+    </script>
 </asp:Content>

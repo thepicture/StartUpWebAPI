@@ -56,19 +56,32 @@
             </div>
         </div>
         <%--ListView for startups presentation.--%>
-        <asp:Panel HorizontalAlign="Center" runat="server" Style="margin-top: 100px; z-index: 0;">
-            <asp:ListView ID="StartupsView" runat='server' OnItemCommand="StartupsView_ItemCommand">
+        <asp:Panel HorizontalAlign="Center" runat="server"
+            Style="margin-top: 100px; z-index: 0;">
+            <asp:ListView ID="StartupsView" runat='server'
+                OnItemCommand="StartupsView_ItemCommand">
                 <ItemTemplate>
-                    <asp:LinkButton runat="server" CommandName="StartUpClicked" CommandArgument='<%# Eval("Id") %>'>
+                    <asp:LinkButton runat="server"
+                        CommandName="StartUpClicked"
+                        CommandArgument='<%# Eval("Id") %>'
+                        onmouseenter='<%# "showDescription(`start-up-" + Eval("Id")  + "`, `" + Eval("SafeDescription") + "`)"%>'
+                        onmouseleave="hideDescription()"
+                        class='<%# "start-up-" + Eval("Id") %>'>
                         <div class="startup-panel radius-like container-item">
-                            <img class="startup-image radius-like image-cover-auto" src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
-                            <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 45px;"><%# Eval("Name") %></h1>
-                            <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 20px;color:#d4d4dd; font-size:1.15em;"><%# Eval("SplittedCategory") %></h1>
+                            <img class="startup-image radius-like image-cover-auto"
+                                src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
+                            <h1 class="tag-item"
+                                style="margin-left: 20px;margin-bottom: 45px;"><%# Eval("Name") %></h1>
+                            <h1 class="tag-item"
+                                style="margin-left: 20px;margin-bottom: 20px;color:#d4d4dd; font-size:1.15em;"><%# Eval("SplittedCategory") %></h1>
                         <div class="tag-item gray-gradient radius-like" style="z-index:64;opacity:.8;"></div>
-                    </div>
+                        </div>
                     </asp:LinkButton>
                 </ItemTemplate>
             </asp:ListView>
         </asp:Panel>
     </div>
+    <script src='<%=ResolveUrl("~/Scripts/descriptor-presenter.js") %>'
+        type="text/javascript">
+    </script>
 </asp:Content>

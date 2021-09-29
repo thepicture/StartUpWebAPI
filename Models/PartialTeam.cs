@@ -7,6 +7,13 @@ namespace StartUpWebAPI.Entities
 {
     public partial class Team
     {
+        public string SafeDescription
+        {
+            get
+            {
+                return string.IsNullOrEmpty(Description) ? "Организатор не предоставил описание. Можете подать ему идею!" : Description;
+            }
+        }
         public string MyRole
         {
             get

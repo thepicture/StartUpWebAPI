@@ -97,7 +97,7 @@ namespace StartUpWebAPI
         }
 
         /// <summary>
-        /// Fullfill the current startup into the view.
+        /// Fulfills the current startup into the view.
         /// </summary>
         private void InsertStartUp()
         {
@@ -111,7 +111,7 @@ namespace StartUpWebAPI
             IsActual.Text = startUp.IsDone ? "Завершён" : "Актуален";
             DateOfCreation.Text = startUp.CreationDate.ToString();
             Category.Text = startUp.Category.Name;
-            Description.Text = string.IsNullOrWhiteSpace(startUp.Description) ? "Организатор не предоставил описание. Можете подать ему идею!" : startUp.Description;
+            Description.Text = startUp.SafeDescription;
             UpdateCommentsCount();
             MainImage.ImageUrl = startUp.ImagePreview;
             MaxMembersCount.Text = startUp.MaxMembersCount.ToString();

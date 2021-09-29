@@ -12,6 +12,13 @@ namespace StartUpWebAPI.Entities
     /// </summary>
     public partial class StartUp
     {
+        public string SafeDescription
+        {
+            get
+            {
+                return string.IsNullOrWhiteSpace(Description) ? "Организатор не предоставил описание. Можете подать ему идею!" : Description;
+            }
+        }
         public string MyRole
         {
             get
