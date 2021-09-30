@@ -82,13 +82,17 @@
                                           <h1 class="tag-item"
                                         style="margin-left: 20px; margin-bottom: 20px; z-index:128; color: #d4d4dd; font-size: 1.15em;"><%# Eval("SplittedCategory") %></h1>
                                           <h1 class="tag-item blue-sign"
-                                              style=" background-color: deepskyblue;height: 15px;width: max-content;font-size: 1.05em;padding-left: 5px;padding-right: 5px;margin-bottom: 20px;margin-left: 100px;z-index:127;"
+                                              style=" background-color: deepskyblue;height: 15px;width: max-content;font-size: 1.05em;padding-left: 5px;padding-right: 5px;margin-bottom: 20px;margin-left: 120px;z-index:127;"
                                               runat="server"
                                               visible='<%# ((HashSet<StartUpWebAPI.Entities.StartUpOfUser>)Eval("StartUpOfUser")).Any(s => s.User.Login.Equals(User.Identity.Name) && !s.RoleType.Name.Equals("Участник"))%>'><%# Eval("MyRole") %></h1>
                                       <h1 class="tag-item blue-sign"
                                               style=" background-color: deepskyblue;height: 15px;width: max-content;font-size: 1.05em;padding-left: 5px;padding-right: 5px;margin-bottom: 20px;margin-left: 200px;z-index:127;"
                                               runat="server"><%# Eval("IsDoneText") %></h1>
-                                  
+                                    <%-- The startup is ended sign. --%> <%-- TODO --%>
+                                      <div class="tag-item startup-end-block">
+                                          <div class="tag-item transparent-blue"></div>
+                                          <span class="tag-item request-solid-color done-text">Завершён</span>
+                                      </div>
                                     <div class="tag-item gray-gradient radius-like"
                                         style="z-index: 64; opacity: .8;"></div>
                                     <div class="sign-my-startup tag-item"

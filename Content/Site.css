@@ -519,6 +519,30 @@ input[type="select"] {
     line-height: 1.4;
 }
 
+/* Sets the blue background with transparency. */
+.transparent-blue {
+    background-color: deepskyblue;
+    opacity: .5;
+}
+
+/* Sets white font color. */
+.request-solid-color {
+    color: white;
+}
+
+/* Align text items at center. */
+.done-text {
+    text-align: center;
+    font-size: 2.5em;
+    font-family: 'Cormorant', serif;
+}
+
+/* Styles for startup ended blocks. */
+.startup-end-block {
+    height: 80px;
+    margin-bottom: 30%;
+}
+
 /* Styles for startup info. */
 .image-cover-auto {
     width: 100%;
