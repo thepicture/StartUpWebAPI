@@ -85,11 +85,10 @@
                                               style=" background-color: deepskyblue;height: 15px;width: max-content;font-size: 1.05em;padding-left: 5px;padding-right: 5px;margin-bottom: 20px;margin-left: 120px;z-index:127;"
                                               runat="server"
                                               visible='<%# ((HashSet<StartUpWebAPI.Entities.StartUpOfUser>)Eval("StartUpOfUser")).Any(s => s.User.Login.Equals(User.Identity.Name) && !s.RoleType.Name.Equals("Участник"))%>'><%# Eval("MyRole") %></h1>
-                                      <h1 class="tag-item blue-sign"
-                                              style=" background-color: deepskyblue;height: 15px;width: max-content;font-size: 1.05em;padding-left: 5px;padding-right: 5px;margin-bottom: 20px;margin-left: 200px;z-index:127;"
-                                              runat="server"><%# Eval("IsDoneText") %></h1>
-                                    <%-- The startup is ended sign. --%> <%-- TODO --%>
-                                      <div class="tag-item startup-end-block">
+                                    <%-- The startup is ended sign. --%>
+                                      <div class="tag-item startup-end-block"
+                                          runat="server"
+                                          visible='<%# Convert.ToBoolean(Eval("IsDone")) %>'>
                                           <div class="tag-item transparent-blue"></div>
                                           <span class="tag-item request-solid-color done-text">Завершён</span>
                                       </div>
@@ -98,7 +97,9 @@
                                     <div class="sign-my-startup tag-item"
                                         style="left: auto;"
                                         runat="server"
-                                        Visible='<%#((HashSet<StartUpWebAPI.Entities.StartUpOfUser>)Eval("StartUpOfUser")).Count >= Convert.ToInt32(Eval("MaxMembersCount")) %>'>
+                                        Visible='<%#((HashSet<StartUpWebAPI.Entities.StartUpOfUser>)Eval("StartUpOfUser"))
+                                            .Count >= Convert.ToInt32(Eval("MaxMembersCount")) 
+                                            && !Convert.ToBoolean(Eval("IsDone")) %>'>
                                         <asp:Label runat="server"
                                             class="rotated-text">MAX</asp:Label>
                                     </div>

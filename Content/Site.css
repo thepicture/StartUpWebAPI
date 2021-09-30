@@ -535,6 +535,9 @@ input[type="select"] {
     text-align: center;
     font-size: 2.5em;
     font-family: 'Cormorant', serif;
+    display: flex;
+    justify-content: center;
+    flex-flow: wrap-reverse;
 }
 
 /* Styles for startup ended blocks. */
