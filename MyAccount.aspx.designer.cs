@@ -24,24 +24,6 @@ namespace StartUpWebAPI
         protected global::System.Web.UI.WebControls.Image UserImage;
 
         /// <summary>
-        /// FileUploadImage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FileUploadImage;
-
-        /// <summary>
-        /// BtnAddImage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnAddImage;
-
-        /// <summary>
         /// LabelName control.
         /// </summary>
         /// <remarks>
@@ -58,6 +40,24 @@ namespace StartUpWebAPI
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LabelRole;
+
+        /// <summary>
+        /// BtnAddImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnAddImage;
+
+        /// <summary>
+        /// FileUploadImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload FileUploadImage;
 
         /// <summary>
         /// BgImage control.

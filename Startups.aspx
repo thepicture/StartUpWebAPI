@@ -82,4 +82,5 @@
     <script src='<%=ResolveUrl("~/Scripts/descriptor-presenter.js") %>'
         type="text/javascript">
     </script>
+    <asp:Image runat="server" ID="BgImage" CssClass="bg-image"></asp:Image>
 </asp:Content>

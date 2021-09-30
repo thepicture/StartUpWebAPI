@@ -335,7 +335,6 @@ input[type="select"] {
 }
 
     .about-like-cloud-button:hover {
-        background-color: lightpink !important;
         background-color: #181219 !important;
         color: white !important;
     }
@@ -571,6 +570,10 @@ input[type="select"] {
     padding-top: 10px;
 }
 
+.vertical-align-text {
+    vertical-align: middle;
+}
+
 /* Styles for master web form. */
 
 /* The title and size for master page. */
@@ -727,7 +730,7 @@ title-setting-register-like {
     position: fixed;
     bottom: 0;
     left: 0;
-    background-color: rgba(194, 194, 194, 0.9);
+    background-color: rgba(45, 45, 45, 0.9);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -737,6 +740,8 @@ title-setting-register-like {
     border-radius: 20px;
     animation: fade-out-reason 5s ease-in-out 3s forwards;
     z-index: 9999;
+    color: white;
+    text-align: center;
 }
 
 .description {
@@ -793,7 +798,7 @@ title-setting-register-like {
     padding-left: 5px;
     padding-right: 5px;
     text-align: center;
-    width: 170px;
+    width: 190px;
     font-size: 15px !important;
 }
 
@@ -1142,3 +1147,40 @@ table {
     overflow-y: scroll;
     height: 40px;
 }
+
+.about-like-cloud-button-for-page-five {
+    color: white !important;
+    border: 0px;
+    padding: 0;
+    background-color: #6174C8;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+    width: 170px;
+    font-size: 15px !important;
+}
+
+    .about-like-cloud-button-for-page-five:hover {
+        background-color: #434244 !important;
+        color: white !important;
+    }
+
+.semi-transparent-my-account {
+    background-color: #434244 !important;
+}
+
+.about-like-cloud-button-for-page-account {
+    color: #181219 !important;
+    border: 0px;
+    padding: 0;
+    text-align: center;
+    margin-left: 5px !important;
+    width: 170px;
+    height: 30px !important;
+    font-size: 15px !important;
+}
+
+    .about-like-cloud-button-for-page-account:hover {
+        background-color: #6174C8 !important;
+        color: white !important;
+    }

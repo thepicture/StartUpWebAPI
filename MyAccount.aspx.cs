@@ -13,6 +13,10 @@ namespace StartUpWebAPI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Page.IsPostBack)
+            {
+                LoadBackgroundImage();
+            }
             if (!User.Identity.IsAuthenticated)
             {
                 Response.Redirect("~/Default.aspx?reason=" + HttpUtility.UrlEncode("Вы не авторизованы. Пожалуйста, войдите в систему"));
@@ -24,6 +28,11 @@ namespace StartUpWebAPI
 
             LabelName.Text = user.Name;
             LabelRole.Text = user.TypeOfUser.Name;
+        }
+
+        private void LoadBackgroundImage()
+        {
+            BgImage.ImageUrl = NativeImageUtils.ConvertFromBitmap(Properties.Resources.myAccountBg);
         }
 
         /// <summary>

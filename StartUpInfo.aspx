@@ -8,7 +8,7 @@
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContent" Style="padding-left: 50px; padding-right: 50px;">
     <asp:Panel runat="server">
-        <div class="jumbotron  ">
+        <div class="jumbotron  " style="padding-bottom: 0px !important; margin-bottom: -30px !important;">
             <h1>
                 <asp:Label runat="server" ID="MainName" Style="color: black;" CssClass="centerized-text"></asp:Label></h1>
             <p class="lead">
@@ -21,8 +21,8 @@
             <asp:Panel Style="display: block" ID="PanelMyStartups" runat="server">
 
 
-                <div style="margin-top: 70px !important; margin-left: 240px !important; margin-top: 90px !important; width: 570px !important; height: 150px !important;">
-                    <asp:Label Style="margin-top: 90px !important; font-size: x-large;" ID="Description" runat="server" ForeColor="Black"></asp:Label>
+                <div style="margin-top: 70px !important; margin-left: 240px !important; overflow-y: auto !important; margin-top: 90px !important; height: 150px !important;">
+                    <asp:Label Style="margin-top: 90px !important; font-size: x-large; text-wrap: normal !important;" ID="Description" runat="server" ForeColor="Black"></asp:Label>
                 </div>
 
                 <table align="center" runat="server" cellpadding="5" style="border-spacing: 30px !important;" cellspacing="9">
@@ -34,7 +34,7 @@
                         </th>
 
                         <th>
-                            <label style="display: block; font-size: 17px; color: darkslateblue">Максимиум участников:</label>
+                            <label style="display: block; font-size: 17px; color: darkslateblue">Максимум участников:</label>
                             <asp:Label ID="MaxMembersCount" runat="server" ForeColor="Black"></asp:Label>
                         </th>
 
@@ -81,44 +81,58 @@
 
 
 
-                <asp:Panel Style="display: block" runat="server" ID="PStartupEdit" Visible="false">
-                    <asp:LinkButton runat="server" Text='Изменить информацию'
-                        Style="float: left; height: 40px !important; margin-left: 170px !important;"
-                        CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
-                        ForeColor="White"
-                        ID="LinkButtonModifyStartUp"
-                        OnClick="LinkButtonModifyStartUp_Click"></asp:LinkButton>
-                    <asp:LinkButton runat="server" Text='Удалить стартап'
-                        Style="height: 40px !important;"
-                        CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
-                        ForeColor="White"
-                        ID="BtnDeleteStartUp"
-                        OnClientClick="return getDeleteItemState(`стартап`);"
-                        OnClick="BtnDeleteStartUp_Click"></asp:LinkButton>
+                <asp:Panel Style="display: block;" runat="server" ID="PStartupEdit" Visible="false">
+                    <table style="margin-left: -10px; margin-top: -20px;">
+                        <tr>
+                            <td>
+                                <asp:LinkButton runat="server" Style="float: left; margin-left: 170px !important;"
+                                    Text="Изменить информацию"
+                                    CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual request-solid-color"
+                                    ID="LinkButtonModifyStartUp"
+                                    OnClick="LinkButtonModifyStartUp_Click"></asp:LinkButton>
+                            </td>
+                            <td>
+                                <asp:LinkButton runat="server"
+                                    Text='Удалить стартап'
+                                    CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
+                                    ForeColor="White"
+                                    ID="BtnDeleteStartUp"
+                                    OnClick="BtnDeleteStartUp_Click"
+                                    OnClientClick="return getDeleteItemState(`стартап`);"></asp:LinkButton>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <br />
                 </asp:Panel>
-                <asp:Button ID="BtnSubscribe"
-                    OnClick="BtnSubscribe_Click"
-                    runat="server"
-                    CssClass="round-div-block simple-cloud-button"
-                    Text="Вступить в стартап"
-                    Visible="false"></asp:Button>
-                <br />
-                <asp:Button ID="BtnUnsubscribe"
-                    OnClick="BtnUnsubscribe_Click"
-                    runat="server"
-                    CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
-                    Text="Покинуть стартап"
-                    Visible="false"></asp:Button>
+                <table style="margin-left: 150px; margin-top: -30px;" class="inline-button">
+                    <tr>
+                        <td>
+                            <asp:Button ID="BtnSubscribe"
+                                OnClick="BtnSubscribe_Click"
+                                runat="server"
+                                Style="float: left; width: 170px !important;"
+                                CssClass="button-style-for-page about-like-cloud-button-for-page inline-button"
+                                Text="Вступить в стартап"
+                                Visible="false"></asp:Button>
+                        </td>
+                        <td>
+                            <asp:Button ID="BtnUnsubscribe"
+                                OnClick="BtnUnsubscribe_Click"
+                                runat="server"
+                                Style="float: left;"
+                                CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
+                                Text="Покинуть стартап"
+                                Visible="false"></asp:Button>
+                        </td>
+                    </tr>
+                </table>
             </asp:Panel>
 
-            &nbsp;
-                <p>
-                </p>
+            <br />
         </div>
-        <br />
-        <br />
         <div class="jumbotron ">
-            <p style="margin-left: 10px;" class="lead">
+            <p style="margin-left: 10px; color: black;" class="lead">
                 <asp:Label runat="server" ID="CommentsCount"></asp:Label>
             </p>
 
@@ -132,8 +146,8 @@
                 BorderStyle="None"
                 BackColor="Transparent"></asp:TextBox>
 
-            <div style="width: 1030px !important" class="round-div-block button-style-for-page-two about-like-cloud-button-for-page-two margin-bottom-top-as-usual">
-                <asp:LinkButton runat="server" Text='Отправить' ForeColor="Black" ID="BtnSendComment" OnClick="BtnSendComment_Click"></asp:LinkButton>
+            <div style="width: 1030px !important" class="round-div-block about-like-cloud-button-for-page-five button-style-for-page margin-bottom-top-as-usual">
+                <asp:LinkButton runat="server" ForeColor="White" Text='Отправить' ID="BtnSendComment" OnClick="BtnSendComment_Click"></asp:LinkButton>
             </div>
         </div>
 
@@ -165,22 +179,26 @@
                                         <div class="post_body">
                                             <asp:Label runat="server" Text='<%# Eval("CommentText") %>'></asp:Label>
                                         </div>
-                                        <asp:LinkButton Text="Удалить комментарий"
+
+                                        <asp:LinkButton
                                             Visible='<%# Eval("ICanChange") %>'
                                             CssClass="button-style-for-page about-like-cloud-button-for-page inline-button"
                                             runat="server"
                                             LogoutAction="Redirect"
                                             LogoutText="Выйти"
                                             CommandName="DeleteCommentById"
-                                            CommandArgument='<%# Eval("Id") %>' />
-                                        <asp:LinkButton Text='<%# Eval("BanUserText") %>'
-                                            Visible='<%# Eval("IsNotSelfCommentAndICanChange") %>'
+                                            CommandArgument='<%# Eval("Id") %>'>
+                                            <span class="vertical-align-text">Удалить комментарий</span>
+                                        </asp:LinkButton>
+                                        <asp:LinkButton Visible='<%# Eval("IsNotSelfCommentAndICanChange") %>'
                                             CssClass="button-style-for-page about-like-cloud-button-for-page inline-button"
                                             runat="server"
                                             LogoutAction="Redirect"
                                             LogoutText="Выйти"
                                             CommandName="BanUserByCommentId"
-                                            CommandArgument='<%# Eval("Id") %>' />
+                                            CommandArgument='<%# Eval("Id") %>'>
+                                             <span class="vertical-align-text"><%# Eval("BanUserText") %></span>
+                                        </asp:LinkButton>
                                     </div>
                                 </td>
                             </td>
@@ -190,6 +208,7 @@
             </asp:ListView>
         </asp:Panel>
     </asp:Panel>
+    <asp:Image runat="server" ID="BgImage" CssClass="bg-image"></asp:Image>
     <script src='<%=ResolveUrl("~/Scripts/delete-confirmer.js") %>'
         type="text/javascript">
     </script>

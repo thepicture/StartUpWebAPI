@@ -14,6 +14,11 @@ namespace StartUpWebAPI
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Page.IsPostBack)
+            {
+                LoadBackgroundImage();
+            }
+
             int id = Convert.ToInt32(Request.QueryString.Get("id"));
 
             bool isStartUp = AppData.Context.StartUp.Any(s => s.Id == id);
@@ -55,6 +60,19 @@ namespace StartUpWebAPI
 
             InsertComments();
             InsertStartUp();
+        }
+
+        /// <summary>
+        /// Redirects to the edit startup page.
+        /// </summary>
+        protected void LinkButtonModifyStartUp_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/AddStartUp?id=" + startUp.Id, false);
+        }
+
+        private void LoadBackgroundImage()
+        {
+            BgImage.ImageUrl = NativeImageUtils.ConvertFromBitmap(Properties.Resources.myAccountBg);
         }
 
         /// <summary>
@@ -203,14 +221,6 @@ namespace StartUpWebAPI
             }
 
             MaintainScrollPositionOnPostBack = true;
-        }
-
-        /// <summary>
-        /// Redirects to the edit startup page.
-        /// </summary>
-        protected void LinkButtonModifyStartUp_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/AddStartUp?id=" + startUp.Id, false);
         }
 
         /// <summary>
@@ -405,6 +415,7 @@ namespace StartUpWebAPI
                     System.Diagnostics.Debug.WriteLine(ex.StackTrace);
                 }
             }
+            MaintainScrollPositionOnPostBack = true;
         }
     }
 }

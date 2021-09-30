@@ -143,6 +143,16 @@ namespace StartUpWebAPI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap myAccountBg {
+            get {
+                object obj = ResourceManager.GetObject("myAccountBg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap noPicture {
             get {
                 object obj = ResourceManager.GetObject("noPicture", resourceCulture);

@@ -16,6 +16,11 @@ namespace StartUpWebAPI
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Page.IsPostBack)
+            {
+                LoadBackgroundImage();
+            }
+
             int id = Convert.ToInt32(Request.QueryString.Get("id"));
 
             bool isTeam = id != 0;
@@ -51,6 +56,19 @@ namespace StartUpWebAPI
 
             InsertComments();
             InsertTeams();
+        }
+        /// <summary>
+        /// Redirects to the edit team page.
+        /// </summary>
+        protected void LinkButtonModifyTeam_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/AddTeam?id=" + team.Id, false);
+        }
+
+
+        private void LoadBackgroundImage()
+        {
+            BgImage.ImageUrl = NativeImageUtils.ConvertFromBitmap(Properties.Resources.myAccountBg);
         }
 
         /// <summary>
@@ -106,13 +124,13 @@ namespace StartUpWebAPI
         private void InsertTeams()
         {
             Name.Text = MainName.Text = team.Name;
-            CountOfMembers.Text = "Участников: " + team.TeamOfUser.Count.ToString();
-            CountOfStartUps.Text = "Количество связанных стартапов: " + team.StartUpOfTeam.Count.ToString();
+            CountOfMembers.Text = team.TeamOfUser.Count.ToString();
+            CountOfStartUps.Text = team.StartUpOfTeam.Count.ToString();
 
-            string creator = "Организатор: " + team.TeamOfUser.FirstOrDefault(u => u.RoleType.Name == "Организатор")?.User.Name;
-            MaxMembersCount.Text = "Максимум участников: " + team.MaxMembersCount.ToString();
+            string creator = team.TeamOfUser.FirstOrDefault(u => u.RoleType.Name == "Организатор")?.User.Name;
+            MaxMembersCount.Text = team.MaxMembersCount.ToString();
             Creator.Text = creator ?? "Неизвестен";
-            DateOfCreation.Text = "Дата создания: " + team.CreationDate.ToString();
+            DateOfCreation.Text = team.CreationDate.ToString();
             UpdateCommentsCount();
             MainImage.ImageUrl = team.ImagePreview;
         }
@@ -196,14 +214,6 @@ namespace StartUpWebAPI
             }
 
             MaintainScrollPositionOnPostBack = true;
-        }
-
-        /// <summary>
-        /// Redirects for editing the team.
-        /// </summary>
-        protected void LinkButtonModifyTeam_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/AddTeam?id=" + team.Id);
         }
 
         /// <summary>

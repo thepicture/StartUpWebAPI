@@ -133,7 +133,7 @@ namespace StartUpWebAPI
 
             if (errors.Length > 0)
             {
-                HttpContext.Current.RewritePath("~/AddStartUp?id="
+                Response.Redirect("~/AddStartUp?id="
                     + ((StartUp)ViewState["currentStartUp"]).Id
                     + "&reason=" + HttpUtility.UrlEncode(errors));
                 return;

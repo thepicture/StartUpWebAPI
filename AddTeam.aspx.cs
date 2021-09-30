@@ -219,7 +219,7 @@ namespace StartUpWebAPI
         /// </summary>
         protected void BtnCancel_Click(object sender, EventArgs e)
         {
-            string reason = HttpUtility.UrlEncode("Создание или удаление стартапа было отменено!");
+            string reason = HttpUtility.UrlEncode("Создание или удаление команды было отменено!");
 
             Response.Redirect("~/TeamInfo.aspx?id=" + ((Team)ViewState["currentTeam"]).Id + "&reason=" + reason);
         }
