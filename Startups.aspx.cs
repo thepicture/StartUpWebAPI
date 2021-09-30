@@ -80,17 +80,6 @@ namespace StartUpWebAPI
         }
 
         /// <summary>
-        /// Redirect to the selected startup.
-        /// </summary>
-        protected void StartupsView_ItemCommand(object sender, ListViewCommandEventArgs e)
-        {
-            if (e.CommandName.Equals("StartUpClicked"))
-            {
-                Response.Redirect("~/StartUpInfo.aspx?id=" + e.CommandArgument);
-            }
-        }
-
-        /// <summary>
         /// Inserts startups into ListView.
         /// </summary>
         public void UpdateLView()

@@ -100,17 +100,6 @@ namespace StartUpWebAPI
         }
 
         /// <summary>
-        /// Redirects to the info about the clicked team.
-        /// </summary>
-        protected void TeamsView_ItemCommand(object sender, ListViewCommandEventArgs e)
-        {
-            if (e.CommandName == "TeamClicked")
-            {
-                Response.Redirect("~/TeamInfo.aspx?id=" + e.CommandArgument);
-            }
-        }
-
-        /// <summary>
         /// Search startups with given filters.
         /// </summary>
         protected void BtnSearch_Click(object sender, EventArgs e)

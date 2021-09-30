@@ -40,11 +40,10 @@
     <%--ListView for startups presentation.--%>
     <asp:Panel HorizontalAlign="Center" runat="server" Style="margin-top: 100px; z-index: 0;">
         <asp:Panel HorizontalAlign="Center" runat="server">
-            <asp:ListView ID="TeamsView" runat='server' OnItemCommand="TeamsView_ItemCommand">
+            <asp:ListView ID="TeamsView" runat='server'>
                 <ItemTemplate>
                     <asp:LinkButton runat="server"
-                        CommandName="TeamClicked"
-                        CommandArgument='<%# Eval("Id") %>'
+                        href='<%#"/TeamInfo?id=" + Eval("Id") %>'
                         onmouseenter='<%# "showDescription(`team-" + Eval("Id")  + "`, `" + Eval("SafeDescription") + "`)"%>'
                         onmouseleave="hideDescription()"
                         class='<%# "team-" + Eval("Id") %>'>

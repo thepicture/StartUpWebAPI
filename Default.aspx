@@ -68,12 +68,11 @@
             <h1 style="text-align: center;">Привет, <%: User.Identity.Name %>. </h1>
             <div class="marginaled center-align">
                 <h1 style="color: black; font-size: 5em; margin-block-end: 30px; text-align: center;">Мои стартапы</h1>
-                <asp:ListView runat="server" ID="LViewMyStartups" OnItemCommand="LViewMyStartups_ItemCommand">
+                <asp:ListView runat="server" ID="LViewMyStartups">
                     <ItemTemplate>
                         <asp:LinkButton runat="server"
                             ID="BtnStartUpInfo"
-                            CommandName="StartUpClicked"
-                            CommandArgument='<%# Eval("Id") %>'>
+                            href='<%#"/StartUpInfo?id=" + Eval("Id") %>'>
                                 <div class="startup-panel radius-like container-item">
                                     <img class="startup-image radius-like image-cover-auto"
                                          src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
@@ -120,9 +119,11 @@
             </div>
             <div class="marginaled center-align">
                 <h1 style="color: black; font-size: 5em; margin-block-end: 30px; text-align: center;">Мои команды</h1>
-                <asp:ListView runat="server" ID="LViewMyTeams" OnItemCommand="LViewMyTeams_ItemCommand">
+                <asp:ListView runat="server" ID="LViewMyTeams">
                     <ItemTemplate>
-                        <asp:LinkButton runat="server" ID="BtnTeamInfo" CommandName="TeamClicked" CommandArgument='<%# Eval("Id") %>'>
+                        <asp:LinkButton runat="server"
+                            ID="BtnTeamInfo"
+                            href='<%#"/TeamInfo?id=" + Eval("Id") %>'>
                             <div class="startup-panel radius-like container-item ">
                                 <img class="startup-image radius-like image-cover-auto" src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
                                 <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 45px; z-index:128;"><%# Eval("Name") %></h1>

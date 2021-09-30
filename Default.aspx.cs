@@ -73,28 +73,6 @@ namespace StartUpWebAPI
         }
 
         /// <summary>
-        /// Redirects the user to the clicked startup.
-        /// </summary>
-        protected void LViewMyStartups_ItemCommand(object sender, ListViewCommandEventArgs e)
-        {
-            if (e.CommandName.Equals("StartUpClicked"))
-            {
-                Response.Redirect("~/StartUpInfo.aspx?id=" + e.CommandArgument);
-            }
-        }
-
-        /// <summary>
-        /// Redirects the user to the clicked team.
-        /// </summary>
-        protected void LViewMyTeams_ItemCommand(object sender, ListViewCommandEventArgs e)
-        {
-            if (e.CommandName.Equals("TeamClicked"))
-            {
-                Response.Redirect("~/TeamInfo.aspx?id=" + e.CommandArgument);
-            }
-        }
-
-        /// <summary>
         /// Redirects the user to the add/modify startup page.
         /// </summary>
         protected void BtnCreateStartUp_Click(object sender, EventArgs e)
