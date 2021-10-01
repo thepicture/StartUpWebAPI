@@ -26,7 +26,11 @@
                                 <p style="color: white !important; float: left; padding: 3px 2px 4px;">
                                     <asp:Label ID="LabelRole" runat="server" Style="font-size: 13px; font-size: 20px !important;" Text='Роль'></asp:Label>
                                 </p>
-
+                                <asp:FileUpload runat="server"
+                                    Style="margin-bottom: 0px !important; color: white !important; margin-left: 5px !important; font-size: 17px;"
+                                    AllowMultiple="false"
+                                    Visible="false"
+                                    ID="FileUploadImage" />
                                 <div class="clear"></div>
                             </div>
                 </tr>
@@ -41,11 +45,7 @@
 
                     </td>
                     <td>
-                        <asp:FileUpload runat="server"
-                            Style="margin-bottom: 0px !important; color: white !important; margin-left: 5px !important; font-size: 17px;"
-                            AllowMultiple="false"
-                            Visible="false"
-                            ID="FileUploadImage" />
+                        <%-- Do not delete --%>
                     </td>
 
                 </tr>
