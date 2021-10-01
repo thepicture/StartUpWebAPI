@@ -36,6 +36,9 @@
         <AssociationConnector Association="StartUpBaseModel.FK_TeamComment_User" ManuallyRouted="false" />
         <AssociationConnector Association="StartUpBaseModel.FK_TeamOfUser_User" ManuallyRouted="false" />
         <AssociationConnector Association="StartUpBaseModel.FK_User_TypeOfUser" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="StartUpBaseModel.Region" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <AssociationConnector Association="StartUpBaseModel.FK_StartUp_Region" />
+        <AssociationConnector Association="StartUpBaseModel.FK_Team_Region" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

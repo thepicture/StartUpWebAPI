@@ -133,6 +133,7 @@ namespace StartUpWebAPI
             DateOfCreation.Text = team.CreationDate.ToString();
             UpdateCommentsCount();
             MainImage.ImageUrl = team.ImagePreview;
+            Region.Text = team.RegionText;
         }
 
         /// <summary>

@@ -12,6 +12,14 @@ namespace StartUpWebAPI.Entities
     /// </summary>
     public partial class StartUp
     {
+        public string RegionText
+        {
+            get
+            {
+                string regionId = RegionId?.ToString();
+                return int.TryParse(regionId, out int _) ? Region.Name : "Регион не указан";
+            }
+        }
         public string SafeDescription
         {
             get

@@ -742,6 +742,7 @@ title-setting-register-like {
     z-index: 9999;
     color: white;
     text-align: center;
+    pointer-events: none;
 }
 
 .description {

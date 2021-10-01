@@ -64,7 +64,17 @@ namespace StartUpWebAPI
             if (!IsPostBack)
             {
                 InsertComboCategories();
+                InsertComboCountries();
             }
+        }
+
+        private void InsertComboCountries()
+        {
+            var countries = AppData.Context.Region.Select(c => c.Name).ToList();
+            countries.Insert(0, "Все регионы");
+            ComboCountries.DataSource = countries;
+            ComboCountries.DataBind();
+            ComboCountries.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -114,6 +124,19 @@ namespace StartUpWebAPI
                     .ToList();
                 currentStartups = currentStartups
                     .Where(s => selectedValues.Contains(s.Category.Name))
+                    .ToList();
+            }
+
+            if (ComboCountries.SelectedIndex != 0)
+            {
+                List<string> selectedValues = ComboCountries
+                    .Items
+                    .Cast<ListItem>()
+                    .Where(i => i.Selected)
+                    .Select(i => i.Value)
+                    .ToList();
+                currentStartups = currentStartups
+                    .Where(s => selectedValues.Contains(s.Region.Name))
                     .ToList();
             }
 

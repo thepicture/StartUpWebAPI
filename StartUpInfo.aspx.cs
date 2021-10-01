@@ -133,6 +133,7 @@ namespace StartUpWebAPI
             UpdateCommentsCount();
             MainImage.ImageUrl = startUp.ImagePreview;
             MaxMembersCount.Text = startUp.MaxMembersCount.ToString();
+            Region.Text = startUp.RegionText;
         }
 
         /// <summary>
@@ -415,6 +416,14 @@ namespace StartUpWebAPI
                     System.Diagnostics.Debug.WriteLine(ex.StackTrace);
                 }
             }
+
+            if (e.CommandName.Equals("ChangeUserRoleType"))
+            {
+                StartUpComment comment = AppData.Context.StartUpComment.Find(Convert.ToInt32(e.CommandArgument));
+
+                User user = comment.User;
+            }
+
             MaintainScrollPositionOnPostBack = true;
         }
     }

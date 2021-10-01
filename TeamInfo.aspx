@@ -56,7 +56,10 @@
                             <label style="display: block; font-size: 17px; color: darkslateblue">Дата создания:</label>
                             <asp:Label ID="DateOfCreation" runat="server" ForeColor="Black"></asp:Label>
                         </th>
-
+                         <th>
+                            <label style="display: block; font-size: 17px; color: darkslateblue">Регион:</label>
+                            <asp:Label ID="Region" runat="server" ForeColor="Black"></asp:Label>
+                        </th>
                     </tr>
                 </table>
 

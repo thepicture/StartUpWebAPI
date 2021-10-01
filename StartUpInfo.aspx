@@ -21,7 +21,7 @@
             <asp:Panel Style="display: block" ID="PanelMyStartups" runat="server">
 
 
-                <div style="margin-top: 70px !important; margin-left: 240px !important; overflow-y: auto !important; overflow-wrap: break-word ; margin-top: 90px !important; height: 150px !important;">
+                <div style="margin-top: 70px !important; margin-left: 240px !important; overflow-y: auto !important; overflow-wrap: break-word; margin-top: 90px !important; height: 150px !important;">
                     <asp:Label Style="margin-top: 90px !important; font-size: x-large; text-wrap: normal !important;"
                         ID="Description"
                         runat="server"
@@ -73,6 +73,10 @@
                         <td>
                             <label style="display: block; font-size: 17px; color: darkslateblue">Проект:</label>
                             <asp:Label ID="IsActual" runat="server" ForeColor="Black"></asp:Label>
+                        </td>
+                        <td>
+                            <label style="display: block; font-size: 17px; color: darkslateblue">Регион:</label>
+                            <asp:Label ID="Region" runat="server" ForeColor="Black"></asp:Label>
                         </td>
 
                     </tr>
@@ -187,8 +191,6 @@
                                             Visible='<%# Eval("ICanChange") %>'
                                             CssClass="button-style-for-page about-like-cloud-button-for-page inline-button"
                                             runat="server"
-                                            LogoutAction="Redirect"
-                                            LogoutText="Выйти"
                                             CommandName="DeleteCommentById"
                                             CommandArgument='<%# Eval("Id") %>'>
                                             <span class="vertical-align-text">Удалить комментарий</span>
@@ -196,11 +198,16 @@
                                         <asp:LinkButton Visible='<%# Eval("IsNotSelfCommentAndICanChange") %>'
                                             CssClass="button-style-for-page about-like-cloud-button-for-page inline-button"
                                             runat="server"
-                                            LogoutAction="Redirect"
-                                            LogoutText="Выйти"
                                             CommandName="BanUserByCommentId"
                                             CommandArgument='<%# Eval("Id") %>'>
                                              <span class="vertical-align-text"><%# Eval("BanUserText") %></span>
+                                        </asp:LinkButton>
+                                        <asp:LinkButton Visible='<%# Eval("IsNotSelfAndIAmOrganizer") %>'
+                                            CssClass="button-style-for-page about-like-cloud-button-for-page inline-button"
+                                            runat="server"
+                                            CommandName="ChangeUserRoleType"
+                                            CommandArgument='<%# Eval("Id") %>'>
+                                             <span class="vertical-align-text"><%# Eval("ChangeUserRoleTypeText") %></span>
                                         </asp:LinkButton>
                                     </div>
                                 </td>

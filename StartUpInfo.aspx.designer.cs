@@ -123,6 +123,15 @@ namespace StartUpWebAPI
         protected global::System.Web.UI.WebControls.Label IsActual;
 
         /// <summary>
+        /// Region элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Region;
+
+        /// <summary>
         /// PStartupEdit элемент управления.
         /// </summary>
         /// <remarks>

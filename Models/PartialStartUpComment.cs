@@ -8,6 +8,32 @@ namespace StartUpWebAPI.Entities
 {
     public partial class StartUpComment
     {
+        public string ChangeUserRoleTypeText
+        {
+            get
+            {
+                if (StartUp.StartUpOfUser.Any(s => s.User.Login.Equals(User.Login) && s.RoleType.Name.Equals("Помощник")))
+                {
+                    return "Убрать статус помощника";
+                }
+                else
+                {
+                    return "Назначить помощником";
+                }
+            }
+        }
+        public bool IsNotSelfAndIAmOrganizer
+        {
+            get
+            {
+                bool isNotSelf = !User.Login.Equals(HttpContext.Current.User.Identity.Name);
+                bool iAmAOrganizer = StartUp
+                    .StartUpOfUser.Any(s => s.User.Login.Equals(HttpContext.Current.User.Identity.Name)
+                    && (s.RoleType.Name.Equals("Организатор")));
+
+                return isNotSelf && iAmAOrganizer;
+            }
+        }
         public bool IsNotSelfCommentAndICanChange
         {
             get

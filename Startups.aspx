@@ -24,6 +24,15 @@
                             </asp:CheckBoxList>
                         </div>
                         <div class="inline-button request-overflow-y">
+                            <asp:CheckBoxList ID="ComboCountries"
+                                class="form-control"
+                                Style="height: 40px; width: max-content; margin-left: 5px; margin-right: 10px; float: left !important; vertical-align: middle;"
+                                runat="server"
+                                ForeColor="Black" Height="60"
+                                BackColor="Transparent">
+                            </asp:CheckBoxList>
+                        </div>
+                        <div class="inline-button request-overflow-y">
                             <asp:CheckBoxList ID="ComboMaxMembers"
                                 class="form-control"
                                 Style="height: 40px; width: max-content; margin-right: 6px; vertical-align: middle; float: left !important;"
