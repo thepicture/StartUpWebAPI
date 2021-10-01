@@ -1,12 +1,9 @@
 ﻿using StartUpWebAPI.Entities;
-using StartUpWebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Security;
 using System.Web.UI.WebControls;
-using System.Windows.Forms;
-using System.Windows.Threading;
 
 namespace StartUpWebAPI
 {
@@ -68,6 +65,9 @@ namespace StartUpWebAPI
             }
         }
 
+        /// <summary>
+        /// Inserts the regions into the combobox.
+        /// </summary>
         private void InsertComboCountries()
         {
             var countries = AppData.Context.Region.Select(c => c.Name).ToList();

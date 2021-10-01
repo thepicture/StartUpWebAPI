@@ -30,6 +30,9 @@ namespace StartUpWebAPI
             LabelRole.Text = user.TypeOfUser.Name;
         }
 
+        /// <summary>
+        /// Loads the background image.
+        /// </summary>
         private void LoadBackgroundImage()
         {
             BgImage.ImageUrl = NativeImageUtils.ConvertFromBitmap(Properties.Resources.myAccountBg);

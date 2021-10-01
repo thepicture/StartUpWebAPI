@@ -65,7 +65,9 @@ namespace StartUpWebAPI
             Response.Redirect("~/AddTeam?id=" + team.Id, false);
         }
 
-
+        /// <summary>
+        /// Loads background image.
+        /// </summary>
         private void LoadBackgroundImage()
         {
             BgImage.ImageUrl = NativeImageUtils.ConvertFromBitmap(Properties.Resources.myAccountBg);
@@ -284,6 +286,9 @@ namespace StartUpWebAPI
             }
         }
 
+        /// <summary>
+        /// Deletes the team.
+        /// </summary>
         protected void BtnDeleteTeam_Click(object sender, EventArgs e)
         {
             AppData.Context.TeamComment.RemoveRange(team.TeamComment);
@@ -307,6 +312,9 @@ namespace StartUpWebAPI
             }
         }
 
+        /// <summary>
+        /// Command handling depending on the selected item in the listview of team comments.
+        /// </summary>
         protected void LViewTeamComments_ItemCommand(object sender, ListViewCommandEventArgs e)
         {
             if (e.CommandName.Equals("DeleteCommentById"))

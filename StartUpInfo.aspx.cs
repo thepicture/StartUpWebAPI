@@ -3,8 +3,6 @@ using StartUpWebAPI.Models;
 using System;
 using System.Linq;
 using System.Web;
-using System.Web.UI.HtmlControls;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace StartUpWebAPI
 {
@@ -70,6 +68,9 @@ namespace StartUpWebAPI
             Response.Redirect("~/AddStartUp?id=" + startUp.Id, false);
         }
 
+        /// <summary>
+        /// Loads the background image.
+        /// </summary>
         private void LoadBackgroundImage()
         {
             BgImage.ImageUrl = NativeImageUtils.ConvertFromBitmap(Properties.Resources.myAccountBg);
@@ -319,6 +320,9 @@ namespace StartUpWebAPI
             }
         }
 
+        /// <summary>
+        /// Commands handling depending on buttons in the listview of startups.
+        /// </summary>
         protected void LViewStartUpComments_ItemCommand(object sender, System.Web.UI.WebControls.ListViewCommandEventArgs e)
         {
             if (e.CommandName.Equals("DeleteCommentById"))

@@ -35,6 +35,9 @@ namespace StartUpWebAPI
             }
         }
 
+        /// <summary>
+        /// Inserts regions into the combobox.
+        /// </summary>
         private void InsertComboCountries()
         {
             var countries = AppData.Context.Region.Select(c => c.Name).ToList();

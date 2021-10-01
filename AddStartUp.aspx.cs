@@ -82,6 +82,9 @@ namespace StartUpWebAPI
             LViewImages.DataBind();
         }
 
+        /// <summary>
+        /// Inserts a category type into the startup.
+        /// </summary>
         private void InsertCategory()
         {
             ComboCategories.Items.FindByValue(((StartUp)ViewState["currentStartUp"]).Category.Name).Selected = true;
@@ -250,6 +253,9 @@ namespace StartUpWebAPI
             RemoveSession();
         }
 
+        /// <summary>
+        /// Disposes the current session.
+        /// </summary>
         private void RemoveSession()
         {
             ViewState["currentStartUp"] = null;
