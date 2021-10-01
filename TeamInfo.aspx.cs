@@ -306,5 +306,147 @@ namespace StartUpWebAPI
                 System.Diagnostics.Debug.WriteLine(ex.StackTrace);
             }
         }
+
+        protected void LViewTeamComments_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+            if (e.CommandName.Equals("DeleteCommentById"))
+            {
+                TeamComment comment = AppData.Context.TeamComment.Find(Convert.ToInt32(e.CommandArgument));
+
+                AppData.Context.TeamComment.Remove(comment);
+
+                try
+                {
+                    AppData.Context.SaveChanges();
+
+                    AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
+
+                    Response.Redirect("~/TeamInfo.aspx?id=" + team.Id + "&reason="
+                        + HttpUtility.UrlEncode("Комментарий успешно удалён!"), false);
+                }
+                catch (Exception ex)
+                {
+                    Response.Redirect("~/TeamInfo.aspx?id=" + team.Id + "&reason="
+                       + HttpUtility.UrlEncode("Комментарий не удалён! Пожалуйста, попробуйте ещё раз"));
+
+                    System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                }
+                return;
+            }
+
+            if (e.CommandName.Equals("BanUserByCommentId"))
+            {
+                TeamComment comment = AppData
+                    .Context
+                    .TeamComment
+                    .Find(Convert.ToInt32(e.CommandArgument));
+                User user = comment.User;
+                TeamOfUser tuple = AppData
+                    .Context
+                    .Entry(team)
+                    .Entity
+                    .TeamOfUser
+                    .FirstOrDefault(s => s.User.Login.Equals(user.Login));
+                TeamOfUser bannedUserOfTeam = new TeamOfUser();
+
+                if (tuple != null)
+                {
+                    AppData.Context.Entry(tuple).State = System.Data.Entity.EntityState.Deleted;
+                    AppData.Context.SaveChanges();
+
+                    if (AppData.Context.RoleType.Find(tuple.RoleTypeId).Name.Equals("Забанен"))
+                    {
+                        bannedUserOfTeam = new TeamOfUser
+                        {
+                            RoleType = AppData
+                            .Context
+                            .RoleType
+                            .First(r => r.Name.Equals("Участник")),
+                            User = user,
+                            Team = team,
+                        };
+                    }
+                    else
+                    {
+                        bannedUserOfTeam = new TeamOfUser
+                        {
+                            RoleType = AppData.Context.RoleType.First(r => r.Name.Equals("Забанен")),
+                            User = user,
+                            Team = team
+                        };
+                    }
+                }
+                else
+                {
+                    bannedUserOfTeam = new TeamOfUser
+                    {
+                        RoleTypeId = AppData.Context.RoleType.First(r => r.Name.Equals("Забанен")).Id,
+                        UserId = user.Id,
+                        TeamId = team.Id
+                    };
+                }
+
+                AppData.Context.TeamOfUser.Add(bannedUserOfTeam);
+
+                try
+                {
+                    AppData.Context.SaveChanges();
+                    AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
+
+                    Response.Redirect("~/TeamInfo.aspx?id=" + team.Id + "&reason="
+                        + HttpUtility.UrlEncode("Роль комментатора успешно изменена!"), false);
+                }
+                catch (Exception ex)
+                {
+                    Response.Redirect("~/TeamInfo.aspx?id=" + team.Id + "&reason="
+                       + HttpUtility.UrlEncode("Роль комментатора не изменена! Пожалуйста, попробуйте ещё раз"));
+
+                    System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                }
+                return;
+            }
+
+            if (e.CommandName.Equals("ChangeUserRoleType"))
+            {
+                TeamComment comment = AppData.Context.TeamComment.Find(Convert.ToInt32(e.CommandArgument));
+
+                User user = comment.User;
+
+                TeamOfUser nullableTeam = team.TeamOfUser.FirstOrDefault(s => s.UserId == user.Id
+                && s.RoleType.Name.Equals("Помощник"));
+                bool isTeamOfUserExists = nullableTeam != null && nullableTeam.UserId != 0;
+
+                if (isTeamOfUserExists)
+                {
+                    AppData.Context.Entry(nullableTeam).State = System.Data.Entity.EntityState.Deleted;
+                }
+                else
+                {
+                    TeamOfUser helperOfUser = new TeamOfUser
+                    {
+                        RoleTypeId = AppData.Context.RoleType.First(r => r.Name.Equals("Помощник")).Id,
+                        UserId = user.Id,
+                        TeamId = comment.Team.Id
+                    };
+                    AppData.Context.TeamOfUser.Add(helperOfUser);
+                }
+
+                try
+                {
+                    AppData.Context.SaveChanges();
+                    AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
+
+                    Response.Redirect("~/TeamInfo.aspx?id=" + team.Id + "&reason="
+                        + HttpUtility.UrlEncode("Роль помощника у участника изменена!"), false);
+                }
+                catch (Exception ex)
+                {
+                    Response.Redirect("~/TeamInfo.aspx?id=" + team.Id + "&reason="
+                       + HttpUtility.UrlEncode("Роль помощника комментатора не изменена! Пожалуйста, попробуйте ещё раз"));
+
+                    System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                }
+            }
+        }
     }
 }

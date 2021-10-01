@@ -15,7 +15,14 @@ namespace StartUpWebAPI.Entities
                 bool isMember = AppData.Context.StartUpOfUser.Any(s => s.UserId == User.Id
                 && s.RoleType.Name.Equals("Участник")
                 && s.StartUpId == StartUp.Id);
-                bool isNotBanned = !AppData.Context.StartUpOfUser.Any(s => s.UserId == User.Id && s.RoleType.Name.Equals("Забанен"));
+                bool isNotBanned = !AppData.Context.StartUpOfUser.Any(s => s.UserId == User.Id
+                && s.RoleType.Name.Equals("Забанен")
+                && s.StartUpId == StartUp.Id);
+
+                if (!isNotBanned)
+                {
+                    return "Забанен";
+                }
 
                 return isMember && isNotBanned ? "Участник" : "Гость";
             }
@@ -24,7 +31,10 @@ namespace StartUpWebAPI.Entities
         {
             get
             {
-                if (StartUp.StartUpOfUser.Any(s => s.User.Login.Equals(User.Login) && s.RoleType.Name.Equals("Помощник")))
+                bool isHelper = StartUp.StartUpOfUser.Any(s => s.User.Login.Equals(User.Login)
+                                   && s.RoleType.Name.Equals("Помощник")
+                                   && s.StartUpId == StartUp.Id);
+                if (isHelper)
                 {
                     return "Убрать статус помощника";
                 }
@@ -41,7 +51,8 @@ namespace StartUpWebAPI.Entities
                 bool isNotSelf = !User.Login.Equals(HttpContext.Current.User.Identity.Name);
                 bool iAmAOrganizer = StartUp
                     .StartUpOfUser.Any(s => s.User.Login.Equals(HttpContext.Current.User.Identity.Name)
-                    && (s.RoleType.Name.Equals("Организатор")));
+                    && s.RoleType.Name.Equals("Организатор")
+                    && s.StartUpId == StartUp.Id);
                 bool userIsMember = AppData.Context.StartUpOfUser.Any(s => s.UserId == User.Id
                 && s.RoleType.Name.Equals("Участник")
                 && s.StartUpId == StartUp.Id);
@@ -56,7 +67,8 @@ namespace StartUpWebAPI.Entities
                 return !User.Login.Equals(HttpContext.Current.User.Identity.Name)
                     && StartUp
                     .StartUpOfUser.Any(s => s.User.Login.Equals(HttpContext.Current.User.Identity.Name)
-                    && (s.RoleType.Name.Equals("Организатор") || s.RoleType.Name.Equals("Помощник")));
+                    && (s.RoleType.Name.Equals("Организатор") || s.RoleType.Name.Equals("Помощник"))
+                    && s.StartUpId == StartUp.Id);
             }
         }
 
@@ -66,7 +78,8 @@ namespace StartUpWebAPI.Entities
             {
                 return User.Login.Equals(HttpContext.Current.User.Identity.Name) || StartUp
                     .StartUpOfUser.Any(s => s.User.Login.Equals(HttpContext.Current.User.Identity.Name)
-                    && (s.RoleType.Name.Equals("Организатор") || s.RoleType.Name.Equals("Помощник")));
+                    && (s.RoleType.Name.Equals("Организатор") || s.RoleType.Name.Equals("Помощник"))
+                    && s.StartUpId == StartUp.Id);
             }
         }
 
@@ -74,7 +87,11 @@ namespace StartUpWebAPI.Entities
         {
             get
             {
-                if (StartUp.StartUpOfUser.Any(s => s.User.Login.Equals(User.Login) && s.RoleType.Name.Equals("Забанен")))
+                bool userIsBanned = StartUp.StartUpOfUser.Any(s => s.User.Login.Equals(User.Login)
+                                   && s.RoleType.Name.Equals("Забанен")
+                                    && s.StartUpId == StartUp.Id);
+
+                if (userIsBanned)
                 {
                     return "Разбанить комментатора";
                 }

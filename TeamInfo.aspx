@@ -27,7 +27,7 @@
                         </th>
 
                         <th>
-                            <label style="display: block; font-size: 17px; color: darkslateblue">Максимиум участников:</label>
+                            <label style="display: block; font-size: 17px; color: darkslateblue">Максимум участников:</label>
                             <asp:Label ID="MaxMembersCount" runat="server" ForeColor="Black"></asp:Label>
                         </th>
 
@@ -43,7 +43,7 @@
                     <tr>
 
                         <th>
-                            <label style="display: block; font-size: 17px; color: darkslateblue">Колличество стартапов:</label>
+                            <label style="display: block; font-size: 17px; color: darkslateblue">Количество стартапов:</label>
                             <asp:Label ID="CountOfStartUps" runat="server" ForeColor="Black"></asp:Label>
 
                         </th>
@@ -56,7 +56,7 @@
                             <label style="display: block; font-size: 17px; color: darkslateblue">Дата создания:</label>
                             <asp:Label ID="DateOfCreation" runat="server" ForeColor="Black"></asp:Label>
                         </th>
-                         <th>
+                        <th>
                             <label style="display: block; font-size: 17px; color: darkslateblue">Регион:</label>
                             <asp:Label ID="Region" runat="server" ForeColor="Black"></asp:Label>
                         </th>
@@ -159,7 +159,7 @@
         <br />
 
         <asp:Panel runat="server" ID="CommentsPanel">
-            <asp:ListView runat="server" ID="LViewTeamComments">
+            <asp:ListView runat="server" ID="LViewTeamComments" OnItemCommand="LViewTeamComments_ItemCommand">
                 <ItemTemplate>
 
                     <table>
@@ -180,6 +180,9 @@
                                         <p style="float: right; padding: 3px 2px 4px;">
                                             <asp:Label runat="server" Style="font-size: 13px;" Text='<%# Eval("CreationDate") %>'></asp:Label>
                                         </p>
+                                        <p style="float: right; padding: 3px 2px 4px;">
+                                            <asp:Label runat="server" Style="font-size: 13px;" Text='<%# Eval("IsMemberText") %>'></asp:Label>
+                                        </p>
                                         <div class="clear"></div>
 
                                     </div>
@@ -188,7 +191,28 @@
                                             <asp:Label runat="server" Text='<%# Eval("CommentText") %>'></asp:Label>
                                         </div>
 
-
+                                        <asp:LinkButton
+                                            Visible='<%# Eval("ICanChange") %>'
+                                            CssClass="button-style-for-page about-like-cloud-button-for-page inline-button"
+                                            runat="server"
+                                            CommandName="DeleteCommentById"
+                                            CommandArgument='<%# Eval("Id") %>'>
+                                            <span class="vertical-align-text">Удалить комментарий</span>
+                                        </asp:LinkButton>
+                                        <asp:LinkButton Visible='<%# Eval("IsNotSelfCommentAndICanChange") %>'
+                                            CssClass="button-style-for-page about-like-cloud-button-for-page inline-button"
+                                            runat="server"
+                                            CommandName="BanUserByCommentId"
+                                            CommandArgument='<%# Eval("Id") %>'>
+                                             <span class="vertical-align-text"><%# Eval("BanUserText") %></span>
+                                        </asp:LinkButton>
+                                        <asp:LinkButton Visible='<%# Eval("IsNotSelfAndIAmOrganizerAndUserIsMember") %>'
+                                            CssClass="button-style-for-page about-like-cloud-button-for-page inline-button"
+                                            runat="server"
+                                            CommandName="ChangeUserRoleType"
+                                            CommandArgument='<%# Eval("Id") %>'>
+                                             <span class="vertical-align-text"><%# Eval("ChangeUserRoleTypeText") %></span>
+                                        </asp:LinkButton>
 
                                     </div>
                                 </td>
