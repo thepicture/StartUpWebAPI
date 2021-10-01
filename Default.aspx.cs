@@ -13,7 +13,9 @@ namespace StartUpWebAPI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (HttpContext.Current.User.Identity.IsAuthenticated)
+            bool isAuthenticated = HttpContext.Current.User.Identity.IsAuthenticated;
+
+            if (isAuthenticated)
             {
                 LoadStartups();
                 LoadTeams();
@@ -27,7 +29,9 @@ namespace StartUpWebAPI
         {
             List<StartUp> startUps = AppData.Context.StartUp.ToList();
 
-            if (startUps == null)
+            bool noAnyStartups = startUps == null;
+
+            if (noAnyStartups)
             {
                 return;
             }
@@ -36,7 +40,9 @@ namespace StartUpWebAPI
             startUps.RemoveAll(s => s.StartUpOfUser.Any(e => e.User.Login.Equals(User.Identity.Name) && e.RoleType.Name.Equals("Забанен")));
             startUps.RemoveAll(s => !s.StartUpOfUser.Select(i => i.User.Login).Contains(User.Identity.Name));
 
-            if (startUps.Count == 0)
+            bool startupsAreEmpty = startUps.Count == 0;
+
+            if (startupsAreEmpty)
             {
                 (RecursiveControlFinder.FindControlRecursive(this, "EmptyStartupsPanel") as Panel).Visible = true;
                 return;
@@ -53,7 +59,8 @@ namespace StartUpWebAPI
         {
             List<Team> teams = AppData.Context.Team.ToList();
 
-            if (teams == null)
+            bool teamsAreEmpty = teams == null;
+            if (teamsAreEmpty)
             {
                 return;
             }
@@ -62,7 +69,9 @@ namespace StartUpWebAPI
             teams.RemoveAll(s => s.TeamOfUser.Any(e => e.User.Login.Equals(User.Identity.Name) && e.RoleType.Name.Equals("Забанен")));
             teams.RemoveAll(t => !t.TeamOfUser.Select(i => i.User.Login).Contains(User.Identity.Name));
 
-            if (teams.Count == 0)
+            bool teamsCountIsZero = teams.Count == 0;
+
+            if (teamsCountIsZero)
             {
                 (RecursiveControlFinder.FindControlRecursive(this, "EmptyTeamsPanel") as Panel).Visible = true;
                 return;

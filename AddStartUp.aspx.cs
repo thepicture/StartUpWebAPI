@@ -17,7 +17,9 @@ namespace StartUpWebAPI
         {
             if (!Page.IsPostBack)
             {
-                if (!Request.RawUrl.Contains("id="))
+                bool noIdIsPresented = !Request.RawUrl.Contains("id=");
+
+                if (noIdIsPresented)
                 {
                     Response.Redirect(Request.RawUrl + "?id=0");
                 }
@@ -29,11 +31,15 @@ namespace StartUpWebAPI
 
                 InsertCategoriesBox();
 
-                if (idString != null)
+                bool idIsNotNull = idString != null;
+
+                if (idIsNotNull)
                 {
                     int id = int.Parse(idString);
 
-                    if (id != 0)
+                    bool isStartUpExists = id != 0;
+
+                    if (isStartUpExists)
                     {
                         StartUp nullableStartUp = AppData.Context.StartUp.Find(id);
 
@@ -116,15 +122,20 @@ namespace StartUpWebAPI
         {
             string errors = "";
 
-            if (string.IsNullOrWhiteSpace(TBoxName.Text))
+            bool badName = string.IsNullOrWhiteSpace(TBoxName.Text);
+
+            if (badName)
             {
                 errors += "Имя не должно быть пустым; \n";
             }
 
-            if (int.TryParse(TBoxMaxMembers.Text, out _))
+            bool badMembersCountFormat = int.TryParse(TBoxMaxMembers.Text, out _);
+
+            if (badMembersCountFormat)
             {
-                if (int.Parse(TBoxMaxMembers.Text) < 0
-                || string.IsNullOrWhiteSpace(TBoxMaxMembers.Text) || TBoxMaxMembers.Text.Length > 4)
+                bool badMembersCountNumber = int.Parse(TBoxMaxMembers.Text) < 0
+                                || string.IsNullOrWhiteSpace(TBoxMaxMembers.Text) || TBoxMaxMembers.Text.Length > 4;
+                if (badMembersCountNumber)
                 {
                     errors += "Количество участников - положительное число длиной от 1 до 4 цифр; \n";
                 }
@@ -134,7 +145,9 @@ namespace StartUpWebAPI
                 errors += "Количество участников должно быть положительным числом, а не буквенным представлением; \n";
             }
 
-            if (errors.Length > 0)
+            bool hasAnyErrors = errors.Length > 0;
+
+            if (hasAnyErrors)
             {
                 Response.Redirect("~/AddStartUp?id="
                     + ((StartUp)ViewState["currentStartUp"]).Id
@@ -148,7 +161,9 @@ namespace StartUpWebAPI
             ((StartUp)ViewState["currentStartUp"]).CategoryId = AppData.Context.Category.First(c => c.Name.Equals(ComboCategories.SelectedValue)).Id;
             ((StartUp)ViewState["currentStartUp"]).IsDone = CheckBoxDone.Checked;
 
-            if (((StartUp)ViewState["currentStartUp"]).Id == 0)
+            bool startUpIsNew = ((StartUp)ViewState["currentStartUp"]).Id == 0;
+
+            if (startUpIsNew)
             {
                 ((StartUp)ViewState["currentStartUp"]).CreationDate = DateTime.Now;
                 ((StartUp)ViewState["currentStartUp"]).StartUpOfUser.Add(new StartUpOfUser
@@ -195,11 +210,15 @@ namespace StartUpWebAPI
             {
                 image.StartUpId = addedStartUp.Id;
 
-                if (image.Id >= 0 && !addedStartUp.StartUpImage.Any(i => i.Name.Equals(image.Name)))
+                bool anyImages = !(image.Id < 0 || addedStartUp.StartUpImage.Any(i => i.Name.Equals(image.Name)));
+
+                bool anyImagesInDeleteState = image.Id < 0 && addedStartUp.StartUpImage.Any(i => i.Name.Equals(image.Name));
+
+                if (anyImages)
                 {
                     AppData.Context.StartUpImage.Add(image);
                 }
-                else if (image.Id < 0 && addedStartUp.StartUpImage.Any(i => i.Name.Equals(image.Name)))
+                else if (anyImagesInDeleteState)
                 {
                     AppData.Context.StartUpImage.Remove(AppData.Context.StartUpImage.First(i => i.Name.Equals(image.Name)));
                     addedStartUp.StartUpImage.Remove(AppData.Context.StartUpImage.First(i => i.Name.Equals(image.Name)));
@@ -223,11 +242,14 @@ namespace StartUpWebAPI
             {
                 doc.StartUpId = addedStartUp.Id;
 
-                if (doc.Id >= 0 && !addedStartUp.DocumentOfStartUp.Any(i => i.FileName.Equals(doc.FileName)))
+                bool anyDocs = doc.Id >= 0 && !addedStartUp.DocumentOfStartUp.Any(i => i.FileName.Equals(doc.FileName));
+                bool anyDocsInDeleteState = doc.Id < 0 && AppData.Context.DocumentOfStartUp.Any(i => i.FileName.Equals(doc.FileName));
+
+                if (anyDocs)
                 {
                     AppData.Context.DocumentOfStartUp.Add(doc);
                 }
-                else if (doc.Id < 0 && AppData.Context.DocumentOfStartUp.Any(i => i.FileName.Equals(doc.FileName)))
+                else if (anyDocsInDeleteState)
                 {
                     AppData.Context.DocumentOfStartUp.Remove(AppData.Context.DocumentOfStartUp.First(i => i.FileName.Equals(doc.FileName)));
                     addedStartUp.DocumentOfStartUp.Remove(AppData.Context.DocumentOfStartUp.First(i => i.FileName.Equals(doc.FileName)));
@@ -293,7 +315,8 @@ namespace StartUpWebAPI
         /// </summary>
         protected void BtnAddImages_Click(object sender, EventArgs e)
         {
-            if (FileUploadImages.PostedFiles[0].ContentLength == 0)
+            bool imageIsEmpty = FileUploadImages.PostedFiles[0].ContentLength == 0;
+            if (imageIsEmpty)
             {
                 return;
             }
@@ -344,7 +367,8 @@ namespace StartUpWebAPI
         /// </summary>
         protected void BtnAddDocuments_Click(object sender, EventArgs e)
         {
-            if (DocumentUpload.PostedFiles[0].ContentLength == 0)
+            bool documentIsEmpty = DocumentUpload.PostedFiles[0].ContentLength == 0;
+            if (documentIsEmpty)
             {
                 return;
             }

@@ -1,6 +1,7 @@
 ﻿using StartUpWebAPI.Entities;
 using StartUpWebAPI.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
@@ -30,15 +31,21 @@ namespace StartUpWebAPI
 
             startUp = AppData.Context.StartUp.Find(id);
 
-            if (startUp.StartUpOfUser.Any(s => s.User.Login.Equals(User.Identity.Name) && s.RoleType.Name.Equals("Забанен")))
+            bool userIsBanned = startUp.StartUpOfUser.Any(s => s.User.Login.Equals(User.Identity.Name)
+                           && s.RoleType.Name.Equals("Забанен")
+                           && s.StartUpId == startUp.Id);
+
+            if (userIsBanned)
             {
                 Response.Redirect("~/Default.aspx?reason=" + HttpUtility.UrlEncode("К сожалению, доступ к данному сообществу для вас ограничен. " +
-                    "Пожалуйста, найдите другие сообщества."));
+                    "Пожалуйста, найдите другие сообщества."), false);
                 return;
             }
 
             bool userIsCreator = false;
-            if (startUp != null)
+            bool isStartUpExists = startUp != null;
+
+            if (isStartUpExists)
             {
                 userIsCreator = startUp
                     .StartUpOfUser
@@ -98,7 +105,9 @@ namespace StartUpWebAPI
         /// </summary>
         private void ShowSubscribeButtonIfNotMaxMembersCount()
         {
-            if (startUp.MaxMembersCount <= startUp.StartUpOfUser.Count + startUp.StartUpOfTeam.Count)
+            bool isMaxMembersCount = startUp.MaxMembersCount <= startUp.StartUpOfUser.Count + startUp.StartUpOfTeam.Count;
+
+            if (isMaxMembersCount)
             {
                 return;
             }
@@ -152,12 +161,16 @@ namespace StartUpWebAPI
         {
             string errors = "";
 
-            if (string.IsNullOrWhiteSpace(CommentBox.Text))
+            bool noCommentPresented = string.IsNullOrWhiteSpace(CommentBox.Text);
+
+            if (noCommentPresented)
             {
                 errors += "Пожалуйста, введите непустой комментарий";
             }
 
-            if (errors.Length > 0)
+            bool hasAnyErrors = errors.Length > 0;
+
+            if (hasAnyErrors)
             {
                 Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
                       + HttpUtility.UrlEncode(errors));
@@ -172,7 +185,9 @@ namespace StartUpWebAPI
                 .FirstOrDefault()?
                 .DateTime;
 
-            if (lastComment != null)
+            bool hasLastComment = lastComment != null;
+
+            if (hasLastComment)
             {
                 if (AntiSpamChecker.IsLastCommentRecentThat(5, lastComment.Value))
                 {
@@ -352,73 +367,80 @@ namespace StartUpWebAPI
 
             if (e.CommandName.Equals("BanUserByCommentId"))
             {
-                StartUpComment comment = AppData
-                    .Context
+                StartUpComment comment = AppData.Context
                     .StartUpComment
                     .Find(Convert.ToInt32(e.CommandArgument));
                 User user = comment.User;
-                StartUpOfUser tuple = AppData
-                    .Context
-                    .Entry(startUp)
-                    .Entity
-                    .StartUpOfUser
-                    .FirstOrDefault(s => s.User.Login.Equals(user.Login));
-                StartUpOfUser bannedUserOfStartUp = new StartUpOfUser();
 
-                if (tuple != null)
+                StartUpOfUser bannedOrNotUserOfStartUp = new StartUpOfUser();
+
+                bool isTryingToUnbanUser = AppData.Context.StartUpOfUser
+                                        .Any(t => t.UserId == user.Id
+                                    && t.StartUpId == comment.StartUp.Id
+                                    && t.RoleType.Name.Equals("Забанен"));
+
+                if (isTryingToUnbanUser)
                 {
-                    AppData.Context.Entry(tuple).State = System.Data.Entity.EntityState.Deleted;
-                    AppData.Context.SaveChanges();
+                    StartUpOfUser bannedOfUser = AppData.Context.StartUpOfUser.First(s => s.UserId == user.Id
+                    && s.StartUpId == comment.StartUpId
+                    && s.RoleType.Name.Equals("Забанен"));
 
-                    if (AppData.Context.RoleType.Find(tuple.RoleTypeId).Name.Equals("Забанен"))
+                    AppData.Context.StartUpOfUser.Remove(bannedOfUser);
+
+                    bannedOrNotUserOfStartUp = new StartUpOfUser
                     {
-                        bannedUserOfStartUp = new StartUpOfUser
-                        {
-                            RoleType = AppData
-                            .Context
-                            .RoleType
-                            .First(r => r.Name.Equals("Участник")),
-                            User = user,
-                            StartUp = startUp,
-                        };
-                    }
-                    else
-                    {
-                        bannedUserOfStartUp = new StartUpOfUser
-                        {
-                            RoleType = AppData.Context.RoleType.First(r => r.Name.Equals("Забанен")),
-                            User = user,
-                            StartUp = startUp
-                        };
-                    }
+                        RoleType = AppData.Context
+                        .RoleType
+                        .First(r => r.Name.Equals("Участник")),
+                        User = user,
+                        StartUp = startUp,
+                    };
                 }
                 else
                 {
-                    bannedUserOfStartUp = new StartUpOfUser
+                    bannedOrNotUserOfStartUp = new StartUpOfUser
                     {
-                        RoleTypeId = AppData.Context.RoleType.First(r => r.Name.Equals("Забанен")).Id,
-                        UserId = user.Id,
-                        StartUpId = startUp.Id
+                        RoleType = AppData.Context.RoleType.First(r => r.Name.Equals("Забанен")),
+                        User = user,
+                        StartUp = startUp
                     };
+
+                    bool userIsNotBanned(StartUpOfUser s) => s.User.Login.Equals(user.Login)
+                                     && s.StartUpId == comment.StartUp.Id
+                                     && !s.RoleType.Name.Equals("Забанен");
+
+                    List<StartUpOfUser> tuples = AppData.Context
+                  .Entry(startUp)
+                  .Entity
+                  .StartUpOfUser
+                  .Where(userIsNotBanned)
+                  .ToList();
+
+                    bool hasAnyTuples = tuples.Count != 0;
+
+                    if (hasAnyTuples)
+                    {
+                        AppData.Context.StartUpOfUser.RemoveRange(tuples);
+                    }
                 }
 
-                AppData.Context.StartUpOfUser.Add(bannedUserOfStartUp);
+                AppData.Context.StartUpOfUser.Add(bannedOrNotUserOfStartUp);
+            }
 
-                try
-                {
-                    AppData.Context.SaveChanges();
-                    AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
+            try
+            {
+                AppData.Context.SaveChanges();
+                AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
 
-                    Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
-                        + HttpUtility.UrlEncode("Роль комментатора успешно изменена!"), false);
-                }
-                catch (Exception ex)
-                {
-                    Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
-                       + HttpUtility.UrlEncode("Роль комментатора не изменена! Пожалуйста, попробуйте ещё раз"));
+                Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
+                    + HttpUtility.UrlEncode("Роль комментатора успешно изменена!"), false);
+            }
+            catch (Exception ex)
+            {
+                Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
+                   + HttpUtility.UrlEncode("Роль комментатора не изменена! Пожалуйста, попробуйте ещё раз"));
 
-                    System.Diagnostics.Debug.WriteLine(ex.StackTrace);
-                }
+                System.Diagnostics.Debug.WriteLine(ex.StackTrace);
             }
 
             if (e.CommandName.Equals("ChangeUserRoleType"))

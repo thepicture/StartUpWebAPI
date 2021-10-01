@@ -28,7 +28,9 @@ namespace StartUpWebAPI
                 {
                     int id = int.Parse(idString);
 
-                    if (id != 0)
+                    bool teamIsNotNew = id != 0;
+
+                    if (teamIsNotNew)
                     {
                         Team nullableTeam = AppData.Context.Team.Find(id);
 
@@ -36,7 +38,9 @@ namespace StartUpWebAPI
                         {
                             ViewState["currentTeam"] = nullableTeam;
 
-                            if (nullableTeam.Image != null)
+                            bool isTeamHasImage = nullableTeam.Image != null;
+
+                            if (isTeamHasImage)
                             {
                                 ViewState["image"] = nullableTeam.Image;
                             }
@@ -57,7 +61,9 @@ namespace StartUpWebAPI
         /// </summary>
         private void InsertImageIntoTeam()
         {
-            if ((byte[])ViewState["image"] != null)
+            bool isImage = (byte[])ViewState["image"] != null;
+
+            if (isImage)
             {
                 TeamImage.ImageUrl = NativeImageUtils.ConvertFromBytes((byte[])ViewState["image"]);
                 BtnRemoveImage.Visible = true;
@@ -79,7 +85,9 @@ namespace StartUpWebAPI
         {
             var input = FileUploadImage.PostedFile;
 
-            if (input.ContentLength == 0)
+            bool imageIsEmpty = input.ContentLength == 0;
+
+            if (imageIsEmpty)
             {
                 return;
             }
@@ -115,12 +123,16 @@ namespace StartUpWebAPI
         {
             string errors = "";
 
-            if (string.IsNullOrWhiteSpace(TBoxName.Text))
+            bool badTeamName = string.IsNullOrWhiteSpace(TBoxName.Text);
+
+            if (badTeamName)
             {
                 errors += "Имя не должно быть пустым; ";
             }
 
-            if (int.TryParse(TBoxMaxMembers.Text, out _))
+            bool badMembersCountFormat = int.TryParse(TBoxMaxMembers.Text, out _);
+
+            if (badMembersCountFormat)
             {
                 if (int.Parse(TBoxMaxMembers.Text) < 0
                 || string.IsNullOrWhiteSpace(TBoxMaxMembers.Text) || TBoxMaxMembers.Text.Length > 4)
@@ -133,7 +145,9 @@ namespace StartUpWebAPI
                 errors += "Количество участников должно быть положительным числом, а не буквенным представлением.";
             }
 
-            if (errors.Length > 0)
+            bool hasAnyErrors = errors.Length > 0;
+
+            if (hasAnyErrors)
             {
                 Response.Redirect("~/AddTeam?id="
                     + ((Team)ViewState["currentTeam"]).Id
@@ -145,7 +159,8 @@ namespace StartUpWebAPI
             ((Team)ViewState["currentTeam"]).Description = TBoxDescription.Text;
             ((Team)ViewState["currentTeam"]).MaxMembersCount = int.Parse(TBoxMaxMembers.Text);
 
-            if (((Team)ViewState["currentTeam"]).Id == 0)
+            bool teamIsNew = ((Team)ViewState["currentTeam"]).Id == 0;
+            if (teamIsNew)
             {
                 ((Team)ViewState["currentTeam"]).CreationDate = DateTime.Now;
                 ((Team)ViewState["currentTeam"]).TeamOfUser.Add(new TeamOfUser
@@ -190,7 +205,9 @@ namespace StartUpWebAPI
 
             var image = ViewState["image"] as byte[];
 
-            if ((bool)ViewState["imageDelete"] == true)
+            bool isImageInDeleteState = (bool)ViewState["imageDelete"] == true;
+
+            if (isImageInDeleteState)
             {
                 AppData.Context.Entry(addedTeam).Entity.Image = null;
                 ViewState["image"] = null;

@@ -17,7 +17,10 @@ namespace StartUpWebAPI
             {
                 LoadBackgroundImage();
             }
-            if (!User.Identity.IsAuthenticated)
+
+            bool isAuthenticated = !User.Identity.IsAuthenticated;
+
+            if (isAuthenticated)
             {
                 Response.Redirect("~/Default.aspx?reason=" + HttpUtility.UrlEncode("Вы не авторизованы. Пожалуйста, войдите в систему"));
             }
@@ -44,7 +47,9 @@ namespace StartUpWebAPI
         /// <param name="user">Who is user.</param>
         private void ReloadUserImage(User user)
         {
-            if (user.UserImage != null)
+            bool isUserHasImage = user.UserImage != null;
+
+            if (isUserHasImage)
             {
                 UserImage.ImageUrl = NativeImageUtils.ConvertFromBytes(user.UserImage);
             }
