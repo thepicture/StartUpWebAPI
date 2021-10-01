@@ -207,7 +207,7 @@
                                             CommandArgument='<%# Eval("Id") %>'>
                                              <span class="vertical-align-text"><%# Eval("BanUserText") %></span>
                                         </asp:LinkButton>
-                                        <asp:LinkButton Visible='<%# Eval("IsNotSelfAndIAmOrganizer") %>'
+                                        <asp:LinkButton Visible='<%# Eval("IsNotSelfAndIAmOrganizerAndUserIsMember") %>'
                                             CssClass="button-style-for-page about-like-cloud-button-for-page inline-button"
                                             runat="server"
                                             CommandName="ChangeUserRoleType"

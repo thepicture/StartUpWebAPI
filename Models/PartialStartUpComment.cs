@@ -12,7 +12,9 @@ namespace StartUpWebAPI.Entities
         {
             get
             {
-                bool isMember = StartUp.StartUpOfUser.Select(s => s.User).Contains(User);
+                bool isMember = AppData.Context.StartUpOfUser.Any(s => s.UserId == User.Id
+                && s.RoleType.Name.Equals("Участник")
+                && s.StartUpId == StartUp.Id);
                 bool isNotBanned = !AppData.Context.StartUpOfUser.Any(s => s.UserId == User.Id && s.RoleType.Name.Equals("Забанен"));
 
                 return isMember && isNotBanned ? "Участник" : "Гость";
@@ -32,7 +34,7 @@ namespace StartUpWebAPI.Entities
                 }
             }
         }
-        public bool IsNotSelfAndIAmOrganizer
+        public bool IsNotSelfAndIAmOrganizerAndUserIsMember
         {
             get
             {
@@ -40,8 +42,11 @@ namespace StartUpWebAPI.Entities
                 bool iAmAOrganizer = StartUp
                     .StartUpOfUser.Any(s => s.User.Login.Equals(HttpContext.Current.User.Identity.Name)
                     && (s.RoleType.Name.Equals("Организатор")));
+                bool userIsMember = AppData.Context.StartUpOfUser.Any(s => s.UserId == User.Id
+                && s.RoleType.Name.Equals("Участник")
+                && s.StartUpId == StartUp.Id);
 
-                return isNotSelf && iAmAOrganizer;
+                return isNotSelf && iAmAOrganizer && userIsMember;
             }
         }
         public bool IsNotSelfCommentAndICanChange

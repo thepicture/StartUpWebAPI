@@ -422,6 +422,41 @@ namespace StartUpWebAPI
                 StartUpComment comment = AppData.Context.StartUpComment.Find(Convert.ToInt32(e.CommandArgument));
 
                 User user = comment.User;
+
+                StartUpOfUser nullableStartUp = startUp.StartUpOfUser.FirstOrDefault(s => s.UserId == user.Id
+                && s.RoleType.Name.Equals("Помощник"));
+                bool isStartUpOfUserExists = nullableStartUp != null && nullableStartUp.UserId != 0;
+
+                if (isStartUpOfUserExists)
+                {
+                    AppData.Context.Entry(nullableStartUp).State = System.Data.Entity.EntityState.Deleted;
+                }
+                else
+                {
+                    StartUpOfUser helperOfUser = new StartUpOfUser
+                    {
+                        RoleTypeId = AppData.Context.RoleType.First(r => r.Name.Equals("Помощник")).Id,
+                        UserId = user.Id,
+                        StartUpId = comment.StartUp.Id
+                    };
+                    AppData.Context.StartUpOfUser.Add(helperOfUser);
+                }
+
+                try
+                {
+                    AppData.Context.SaveChanges();
+                    AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
+
+                    Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
+                        + HttpUtility.UrlEncode("Роль помощника у участника изменена!"), false);
+                }
+                catch (Exception ex)
+                {
+                    Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
+                       + HttpUtility.UrlEncode("Роль помощника комментатора не изменена! Пожалуйста, попробуйте ещё раз"));
+
+                    System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                }
             }
 
             MaintainScrollPositionOnPostBack = true;
