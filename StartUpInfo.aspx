@@ -21,56 +21,59 @@
             <asp:Panel Style="display: block" ID="PanelMyStartups" runat="server">
 
 
-                <div style="margin-top: 70px !important; margin-left: 240px !important; overflow-y: auto !important; margin-top: 90px !important; height: 150px !important;">
-                    <asp:Label Style="margin-top: 90px !important; font-size: x-large; text-wrap: normal !important;" ID="Description" runat="server" ForeColor="Black"></asp:Label>
+                <div style="margin-top: 70px !important; margin-left: 240px !important; overflow-y: auto !important; overflow-wrap: break-word ; margin-top: 90px !important; height: 150px !important;">
+                    <asp:Label Style="margin-top: 90px !important; font-size: x-large; text-wrap: normal !important;"
+                        ID="Description"
+                        runat="server"
+                        ForeColor="Black"></asp:Label>
                 </div>
 
                 <table align="center" runat="server" cellpadding="5" style="border-spacing: 30px !important;" cellspacing="9">
                     <tr cellspacing="9" runat="server">
 
-                        <th runat="server" style="margin-right: 20px;">
+                        <td runat="server" style="margin-right: 20px;">
                             <label style="display: block; font-size: 17px; color: darkslateblue">Название:</label>
                             <asp:Label ID="Name" runat="server" ForeColor="Black"></asp:Label>
-                        </th>
+                        </td>
 
-                        <th>
+                        <td>
                             <label style="display: block; font-size: 17px; color: darkslateblue">Максимум участников:</label>
                             <asp:Label ID="MaxMembersCount" runat="server" ForeColor="Black"></asp:Label>
-                        </th>
+                        </td>
 
-                        <th>
+                        <td>
                             <label style="display: block; font-size: 17px; color: darkslateblue">Участников:</label>
                             <asp:Label ID="CountOfMembers" runat="server" ForeColor="Black"></asp:Label>
-                        </th>
+                        </td>
 
-                        <th>
+                        <td>
                             <label style="display: block; font-size: 17px; color: darkslateblue">Команд:</label>
                             <asp:Label ID="CountOfTeams" runat="server" ForeColor="Black"></asp:Label>
-                        </th>
+                        </td>
 
                     </tr>
 
                     <tr>
 
-                        <th>
+                        <td>
                             <label style="display: block; font-size: 17px; color: darkslateblue">Стартапер:</label>
                             <asp:Label ID="Creator" runat="server" ForeColor="Black"></asp:Label>
-                        </th>
+                        </td>
 
-                        <th>
+                        <td>
                             <label style="display: block; font-size: 17px; color: darkslateblue">Дата создания:</label>
                             <asp:Label ID="DateOfCreation" runat="server" ForeColor="Black"></asp:Label>
-                        </th>
+                        </td>
 
-                        <th>
+                        <td>
                             <label style="display: block; font-size: 17px; color: darkslateblue">Категория:</label>
                             <asp:Label ID="Category" runat="server" ForeColor="Black"></asp:Label>
-                        </th>
+                        </td>
 
-                        <th>
+                        <td>
                             <label style="display: block; font-size: 17px; color: darkslateblue">Проект:</label>
                             <asp:Label ID="IsActual" runat="server" ForeColor="Black"></asp:Label>
-                        </th>
+                        </td>
 
                     </tr>
 
