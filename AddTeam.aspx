@@ -14,8 +14,17 @@
             <asp:TextBox runat="server" ID="TBoxMaxMembers" Style="color: black !important; width: 330px !important;" CssClass="nice-text-box prevent-selection textbox-style-setting" Width="50" TextMode="Number" MaxLength="10" AutoCompleteType="Disabled"></asp:TextBox>
             <br />
             <br />
-            <asp:Label runat="server" Style="font-size: 20px; margin-left: 70px; margin-right: 20px;" Text="Описание"></asp:Label>
-            <asp:TextBox runat="server" ID="TBoxDescription" Style="color: black !important; width: 457px !important;" CssClass="nice-text-box prevent-selection textbox-style-setting" Width="200" Height="80"></asp:TextBox>
+            <asp:Label runat="server"
+                Style="font-size: 20px; margin-left: 70px; margin-right: 20px;"
+                Text="Описание"
+                CssClass="request-vertical-top"></asp:Label>
+            <asp:TextBox runat="server"
+                ID="TBoxDescription"
+                ForeColor="Black"
+                CssClass="nice-text-box prevent-selection textbox-style-setting request-overflow-y"
+                Width="457"
+                TextMode="MultiLine"
+                Height="80"></asp:TextBox>
             <br />
             <br />
 

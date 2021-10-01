@@ -594,7 +594,7 @@ input[type="select"] {
 .textbox-style-setting {
     border: 1px solid #c4c4c4;
     height: 40px;
-    width: 375px !important;
+    width: 375px;
     font-size: 13px;
     padding: 4px 4px 4px 4px;
     font-size: 20px;
@@ -1106,10 +1106,14 @@ table {
     font-size: 30px !important;
 }
 
-    .about-like-cloud-button-three:hover {
-        color: white !important;
-        background-color: #6174C8 !important;
-    }
+.request-vertical-top {
+    vertical-align: top;
+}
+
+.about-like-cloud-button-three:hover {
+    color: white !important;
+    background-color: #6174C8 !important;
+}
 
 .about-like-cloud-button-for-page-four {
     color: #181219 !important;
@@ -1146,6 +1150,8 @@ table {
 .request-overflow-y {
     overflow-y: scroll;
     height: 40px;
+    overflow-wrap: break-word;
+    resize: none;
 }
 
 .about-like-cloud-button-for-page-five {
