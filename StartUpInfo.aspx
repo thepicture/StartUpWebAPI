@@ -176,8 +176,13 @@
                                         </p>
 
                                         <p style="float: right; padding: 3px 2px 4px;">
-                                            <asp:Label runat="server" Style="font-size: 13px;" Text='<%# Eval("DateTime") %>'></asp:Label>
+                                            <asp:Label runat="server" Style="font-size: 13px;" Text='<%# Eval("IsMemberText") %>'></asp:Label>
                                         </p>
+                                        <div>
+                                            <p style="float: right; padding: 3px 2px 4px;">
+                                                <asp:Label runat="server" Style="font-size: 13px;" Text='<%# Eval("DateTime") %>'></asp:Label>
+                                            </p>
+                                        </div>
                                         <div class="clear"></div>
 
 

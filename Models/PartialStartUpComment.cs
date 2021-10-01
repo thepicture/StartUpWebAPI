@@ -8,6 +8,16 @@ namespace StartUpWebAPI.Entities
 {
     public partial class StartUpComment
     {
+        public string IsMemberText
+        {
+            get
+            {
+                bool isMember = StartUp.StartUpOfUser.Select(s => s.User).Contains(User);
+                bool isNotBanned = !AppData.Context.StartUpOfUser.Any(s => s.UserId == User.Id && s.RoleType.Name.Equals("Забанен"));
+
+                return isMember && isNotBanned ? "Участник" : "Гость";
+            }
+        }
         public string ChangeUserRoleTypeText
         {
             get
