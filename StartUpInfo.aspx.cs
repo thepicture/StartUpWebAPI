@@ -372,59 +372,39 @@ namespace StartUpWebAPI
                     .Find(Convert.ToInt32(e.CommandArgument));
                 User user = comment.User;
 
-                StartUpOfUser bannedOrNotUserOfStartUp = new StartUpOfUser();
+                List<StartUpOfUser> startUpsOfUser = AppData.Context.StartUpOfUser
+                    .Where(s => s.User.Login.Equals(user.Login)
+                                && s.StartUpId == comment.StartUp.Id).ToList();
 
-                bool isTryingToUnbanUser = AppData.Context.StartUpOfUser
-                                        .Any(t => t.UserId == user.Id
-                                    && t.StartUpId == comment.StartUp.Id
-                                    && t.RoleType.Name.Equals("Забанен"));
+                bool isTryingToUnbanUser = startUpsOfUser.Select(s => s.RoleType.Name).Contains("Забанен");
+
+                List<StartUpOfUser> startUpsWhereIsNotBanned = startUpsOfUser
+                    .Where(s => !s.RoleType.Name.Equals("Забанен")).ToList();
 
                 if (isTryingToUnbanUser)
                 {
-                    StartUpOfUser bannedOfUser = AppData.Context.StartUpOfUser.First(s => s.UserId == user.Id
-                    && s.StartUpId == comment.StartUpId
-                    && s.RoleType.Name.Equals("Забанен"));
-
-                    AppData.Context.StartUpOfUser.Remove(bannedOfUser);
-
-                    bannedOrNotUserOfStartUp = new StartUpOfUser
-                    {
-                        RoleType = AppData.Context
-                        .RoleType
-                        .First(r => r.Name.Equals("Участник")),
-                        User = user,
-                        StartUp = startUp,
-                    };
+                    AppData.Context.StartUpOfUser.RemoveRange(startUpsOfUser);
                 }
                 else
                 {
-                    bannedOrNotUserOfStartUp = new StartUpOfUser
+                    StartUpOfUser bannedOfStartUp = new StartUpOfUser();
+
+                    bannedOfStartUp = new StartUpOfUser
                     {
-                        RoleType = AppData.Context.RoleType.First(r => r.Name.Equals("Забанен")),
-                        User = user,
-                        StartUp = startUp
+                        RoleTypeId = AppData.Context.RoleType.First(r => r.Name.Equals("Забанен")).Id,
+                        UserId = user.Id,
+                        StartUpId = startUp.Id
                     };
 
-                    bool userIsNotBanned(StartUpOfUser s) => s.User.Login.Equals(user.Login)
-                                     && s.StartUpId == comment.StartUp.Id
-                                     && !s.RoleType.Name.Equals("Забанен");
+                    comment.StartUp.StartUpOfUser.Add(bannedOfStartUp);
 
-                    List<StartUpOfUser> tuples = AppData.Context
-                  .Entry(startUp)
-                  .Entity
-                  .StartUpOfUser
-                  .Where(userIsNotBanned)
-                  .ToList();
-
-                    bool hasAnyTuples = tuples.Count != 0;
+                    bool hasAnyTuples = startUpsWhereIsNotBanned.Count != 0;
 
                     if (hasAnyTuples)
                     {
-                        AppData.Context.StartUpOfUser.RemoveRange(tuples);
+                        AppData.Context.StartUpOfUser.RemoveRange(startUpsWhereIsNotBanned);
                     }
                 }
-
-                AppData.Context.StartUpOfUser.Add(bannedOrNotUserOfStartUp);
             }
 
             try
