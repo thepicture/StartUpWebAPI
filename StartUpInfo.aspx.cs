@@ -372,55 +372,25 @@ namespace StartUpWebAPI
                     .Find(Convert.ToInt32(e.CommandArgument));
                 User user = comment.User;
 
-                List<StartUpOfUser> startUpsOfUser = AppData.Context.StartUpOfUser
-                    .Where(s => s.User.Login.Equals(user.Login)
-                                && s.StartUpId == comment.StartUp.Id).ToList();
+                BanUtils.BanOrUnban(user, comment.StartUp);
 
-                bool isTryingToUnbanUser = startUpsOfUser.Select(s => s.RoleType.Name).Contains("Забанен");
-
-                List<StartUpOfUser> startUpsWhereIsNotBanned = startUpsOfUser
-                    .Where(s => !s.RoleType.Name.Equals("Забанен")).ToList();
-
-                if (isTryingToUnbanUser)
+                try
                 {
-                    AppData.Context.StartUpOfUser.RemoveRange(startUpsOfUser);
+                    AppData.Context.SaveChanges();
+                    AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
+
+                    Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
+                                + HttpUtility.UrlEncode("Роль комментатора успешно изменена!"), false);
                 }
-                else
+                catch (Exception ex)
                 {
-                    StartUpOfUser bannedOfStartUp = new StartUpOfUser();
+                    Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
+                       + HttpUtility.UrlEncode("Роль комментатора не изменена! Пожалуйста, попробуйте ещё раз"));
 
-                    bannedOfStartUp = new StartUpOfUser
-                    {
-                        RoleTypeId = AppData.Context.RoleType.First(r => r.Name.Equals("Забанен")).Id,
-                        UserId = user.Id,
-                        StartUpId = startUp.Id
-                    };
-
-                    comment.StartUp.StartUpOfUser.Add(bannedOfStartUp);
-
-                    bool hasAnyTuples = startUpsWhereIsNotBanned.Count != 0;
-
-                    if (hasAnyTuples)
-                    {
-                        AppData.Context.StartUpOfUser.RemoveRange(startUpsWhereIsNotBanned);
-                    }
+                    System.Diagnostics.Debug.WriteLine(ex.StackTrace);
                 }
-            }
 
-            try
-            {
-                AppData.Context.SaveChanges();
-                AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
-
-                Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
-                    + HttpUtility.UrlEncode("Роль комментатора успешно изменена!"), false);
-            }
-            catch (Exception ex)
-            {
-                Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
-                   + HttpUtility.UrlEncode("Роль комментатора не изменена! Пожалуйста, попробуйте ещё раз"));
-
-                System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                return;
             }
 
             if (e.CommandName.Equals("ChangeUserRoleType"))

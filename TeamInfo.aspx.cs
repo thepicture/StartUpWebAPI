@@ -349,52 +349,8 @@ namespace StartUpWebAPI
                     .TeamComment
                     .Find(Convert.ToInt32(e.CommandArgument));
                 User user = comment.User;
-                TeamOfUser tuple = AppData
-                    .Context
-                    .Entry(team)
-                    .Entity
-                    .TeamOfUser
-                    .FirstOrDefault(s => s.User.Login.Equals(user.Login));
-                TeamOfUser bannedUserOfTeam = new TeamOfUser();
 
-                if (tuple != null)
-                {
-                    AppData.Context.Entry(tuple).State = System.Data.Entity.EntityState.Deleted;
-                    AppData.Context.SaveChanges();
-
-                    if (AppData.Context.RoleType.Find(tuple.RoleTypeId).Name.Equals("Забанен"))
-                    {
-                        bannedUserOfTeam = new TeamOfUser
-                        {
-                            RoleType = AppData
-                            .Context
-                            .RoleType
-                            .First(r => r.Name.Equals("Участник")),
-                            User = user,
-                            Team = team,
-                        };
-                    }
-                    else
-                    {
-                        bannedUserOfTeam = new TeamOfUser
-                        {
-                            RoleType = AppData.Context.RoleType.First(r => r.Name.Equals("Забанен")),
-                            User = user,
-                            Team = team
-                        };
-                    }
-                }
-                else
-                {
-                    bannedUserOfTeam = new TeamOfUser
-                    {
-                        RoleTypeId = AppData.Context.RoleType.First(r => r.Name.Equals("Забанен")).Id,
-                        UserId = user.Id,
-                        TeamId = team.Id
-                    };
-                }
-
-                AppData.Context.TeamOfUser.Add(bannedUserOfTeam);
+                BanUtils.BanOrUnban(user, comment.Team);
 
                 try
                 {

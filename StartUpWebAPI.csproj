@@ -375,6 +375,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AntiSpamChecker.cs" />
+    <Compile Include="Models\BanUtils.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\NativeImageUtils.cs" />
     <Compile Include="Models\PartialStartUp.cs" />
