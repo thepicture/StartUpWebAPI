@@ -51,6 +51,15 @@ namespace StartUpWebAPI
         protected global::System.Web.UI.WebControls.CheckBoxList ComboCountries;
 
         /// <summary>
+        /// RegionBox элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl RegionBox;
+
+        /// <summary>
         /// BtnSearch элемент управления.
         /// </summary>
         /// <remarks>

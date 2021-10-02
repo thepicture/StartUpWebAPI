@@ -91,5 +91,7 @@
     <script src='<%=ResolveUrl("~/Scripts/descriptor-presenter.js") %>'
         type="text/javascript">
     </script>
+    <script src='<%=ResolveUrl("~/Scripts/jquery-3.4.1.min.js") %>'
+        type="text/javascript"></script>
     <asp:Image runat="server" ID="BgImage" CssClass="bg-image"></asp:Image>
 </asp:Content>

@@ -24,13 +24,28 @@
                                 ForeColor="Black" Height="60"
                                 BackColor="Transparent">
                             </asp:CheckBoxList>
-                              <asp:CheckBoxList ID="ComboCountries"
+                            <asp:CheckBoxList ID="ComboCountries"
                                 class="form-control"
                                 Style="height: 40px; width: max-content; margin-left: 5px; margin-right: 10px; float: left !important; vertical-align: middle;"
                                 runat="server"
                                 ForeColor="Black" Height="60"
                                 BackColor="Transparent">
                             </asp:CheckBoxList>
+
+                        </div>
+                        <div class="instructions">(Click to expand and select states to filter)</div>
+                        <div class="dropdown-container">
+                            <div class="dropdown-button noselect">
+                                <div class="dropdown-label">States</div>
+                                <div class="dropdown-quantity">(<span class="quantity">Any</span>)</div>
+                                <i class="fa fa-filter"></i>
+                            </div>
+                            <div class="dropdown-list"
+                                style="display: none !important;">
+                                <input type="search" placeholder="Search states"
+                                    class="dropdown-search request-static-height" />
+                                <ul class="ul-stylebox" runat="server" id="RegionBox"></ul>
+                            </div>
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
@@ -65,7 +80,13 @@
             </asp:ListView>
         </asp:Panel>
     </asp:Panel>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js'
+        type="text/javascript">
+    </script>
     <script src='<%=ResolveUrl("~/Scripts/descriptor-presenter.js") %>'
+        type="text/javascript">
+    </script>
+    <script src='<%=ResolveUrl("~/Scripts/region-presenter.js") %>'
         type="text/javascript">
     </script>
 </asp:Content>

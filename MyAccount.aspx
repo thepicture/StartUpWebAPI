@@ -27,7 +27,7 @@
                                     <asp:Label ID="LabelRole" runat="server" Style="font-size: 13px; font-size: 20px !important;" Text='Роль'></asp:Label>
                                 </p>
                                 <asp:FileUpload runat="server"
-                                    Style="margin-bottom: 0px !important; color: white !important; margin-left: 5px !important; font-size: 17px;"
+                                    Style="margin-bottom: 0px !important; color: white !important; margin-left: 5px !important; font-size: 17px; display: inline-block;"
                                     AllowMultiple="false"
                                     Visible="false"
                                     ID="FileUploadImage" />

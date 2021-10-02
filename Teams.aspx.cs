@@ -1,4 +1,5 @@
 ﻿using StartUpWebAPI.Entities;
+using StartUpWebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,13 @@ namespace StartUpWebAPI
             {
                 InsertComboMaxMembers();
                 InsertComboCountries();
+                FillRegionBox();
             }
+        }
+
+        private void FillRegionBox()
+        {
+            RegionBox.InnerHtml = RegionTemplateBuilder.GetTemplate();
         }
 
         /// <summary>
@@ -59,9 +66,9 @@ namespace StartUpWebAPI
                 "6-10",
                 "11-15",
                 "15-20",
-                 "21-100",
-                  "101-1000",
-                  "1000-и больше"
+                "21-100",
+                "101-1000",
+                "1000-и больше"
             };
 
             ComboMaxMembers.DataSource = values;
@@ -77,9 +84,16 @@ namespace StartUpWebAPI
             var currentTeams = AppData.Context.Team.ToList();
 
             currentTeams
-                .RemoveAll(s => s.TeamOfUser.Any(e => e.User.Login.Equals(User.Identity.Name) && e.RoleType.Name.Equals("Забанен")));
+                .RemoveAll(s => s.TeamOfUser
+                .Any(e => e.User.Login.Equals(User.Identity.Name)
+                && e.RoleType.Name.Equals("Забанен")));
 
-            if (ComboMaxMembers.SelectedIndex != 0)
+            bool notAllIndexIsSelected = ComboMaxMembers.SelectedIndex != 0;
+
+            List<Control> inputs = RecursiveControlFinder
+                .FindControlRecursiveAll(this, "region-input");
+
+            if (notAllIndexIsSelected)
             {
                 List<string> selectedValues = ComboMaxMembers
                     .Items
@@ -88,7 +102,9 @@ namespace StartUpWebAPI
                     .Select(i => i.Value)
                     .ToList();
 
+
                 List<Team> teamsToUnion = new List<Team>();
+
                 foreach (string value in selectedValues)
                 {
                     string[] values = value.Split('-');
@@ -96,7 +112,8 @@ namespace StartUpWebAPI
                     int to = int.Parse(values[1].Replace("и больше", int.MaxValue.ToString()));
 
                     teamsToUnion
-                        .AddRange(currentTeams.Where(s => s.MaxMembersCount > from && s.MaxMembersCount < to)
+                        .AddRange(currentTeams.Where(s => s.MaxMembersCount > from
+                        && s.MaxMembersCount < to)
                         .ToList());
                 }
 
