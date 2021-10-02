@@ -84,8 +84,8 @@
                                               style=" background-color: deepskyblue;height: 15px;width: max-content;font-size: 1.05em;padding-left: 5px;padding-right: 5px;margin-bottom: 20px;margin-left: 120px;z-index:127;"
                                               runat="server"
                                               visible='<%# ((HashSet<StartUpWebAPI.Entities.StartUpOfUser>)Eval("StartUpOfUser")).Any(s => s.User.Login.Equals(User.Identity.Name) && !s.RoleType.Name.Equals("Участник"))%>'><%# Eval("MyRole") %></h1>
-                                    <%-- The startup is ended sign. --%>
-                                      <div class="tag-item startup-end-block"
+                        <%-- The startup is ended sign. --%>
+                        <div class="tag-item startup-end-block"
                                           runat="server"
                                           visible='<%# Convert.ToBoolean(Eval("IsDone")) %>'>
                                           <div class="tag-item transparent-blue"></div>

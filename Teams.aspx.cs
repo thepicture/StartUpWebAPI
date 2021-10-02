@@ -32,7 +32,7 @@ namespace StartUpWebAPI
             if (!IsPostBack)
             {
                 InsertComboMaxMembers();
-                InsertComboCountries();
+                //InsertComboCountries();
                 FillRegionBox();
             }
         }
@@ -48,11 +48,11 @@ namespace StartUpWebAPI
         /// </summary>
         private void InsertComboCountries()
         {
-            var countries = AppData.Context.Region.Select(c => c.Name).ToList();
-            countries.Insert(0, "Все регионы");
-            ComboCountries.DataSource = countries;
-            ComboCountries.DataBind();
-            ComboCountries.SelectedIndex = 0;
+            //var countries = AppData.Context.Region.Select(c => c.Name).ToList();
+            //countries.Insert(0, "Все регионы");
+            //ComboCountries.DataSource = countries;
+            //ComboCountries.DataBind();
+            //ComboCountries.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -91,9 +91,6 @@ namespace StartUpWebAPI
 
             bool notAllIndexIsSelected = ComboMaxMembers.SelectedIndex != 0;
 
-            List<Control> inputs = RecursiveControlFinder
-                .FindControlRecursiveAll(this, "region-input");
-
             if (notAllIndexIsSelected)
             {
                 List<string> selectedValues = ComboMaxMembers
@@ -102,7 +99,6 @@ namespace StartUpWebAPI
                     .Where(i => i.Selected)
                     .Select(i => i.Value)
                     .ToList();
-
 
                 List<Team> teamsToUnion = new List<Team>();
 
@@ -121,18 +117,18 @@ namespace StartUpWebAPI
                 currentTeams = teamsToUnion.Distinct().ToList();
             }
 
-            if (ComboCountries.SelectedIndex != 0)
-            {
-                List<string> selectedValues = ComboCountries
-                    .Items
-                    .Cast<ListItem>()
-                    .Where(i => i.Selected)
-                    .Select(i => i.Value)
-                    .ToList();
-                currentTeams = currentTeams
-                    .Where(s => selectedValues.Contains(s.Region.Name))
-                    .ToList();
-            }
+            //if (ComboCountries.SelectedIndex != 0)
+            //{
+            //    List<string> selectedValues = ComboCountries
+            //        .Items
+            //        .Cast<ListItem>()
+            //        .Where(i => i.Selected)
+            //        .Select(i => i.Value)
+            //        .ToList();
+            //    currentTeams = currentTeams
+            //        .Where(s => selectedValues.Contains(s.Region.Name))
+            //        .ToList();
+            //}
 
             if (!string.IsNullOrWhiteSpace(NameBox.Text))
             {
