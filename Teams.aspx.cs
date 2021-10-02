@@ -32,7 +32,7 @@ namespace StartUpWebAPI
             if (!IsPostBack)
             {
                 InsertComboMaxMembers();
-                InsertComboCountries();
+              
                 FillRegionBox();
             }
         }
@@ -46,14 +46,7 @@ namespace StartUpWebAPI
         /// <summary>
         /// Inserts regions into the combobox.
         /// </summary>
-        private void InsertComboCountries()
-        {
-            var countries = AppData.Context.Region.Select(c => c.Name).ToList();
-            countries.Insert(0, "Все регионы");
-            ComboCountries.DataSource = countries;
-            ComboCountries.DataBind();
-            ComboCountries.SelectedIndex = 0;
-        }
+   
 
         /// <summary>
         /// Inserts max members count into the ComboBox.
@@ -121,18 +114,7 @@ namespace StartUpWebAPI
                 currentTeams = teamsToUnion.Distinct().ToList();
             }
 
-            if (ComboCountries.SelectedIndex != 0)
-            {
-                List<string> selectedValues = ComboCountries
-                    .Items
-                    .Cast<ListItem>()
-                    .Where(i => i.Selected)
-                    .Select(i => i.Value)
-                    .ToList();
-                currentTeams = currentTeams
-                    .Where(s => selectedValues.Contains(s.Region.Name))
-                    .ToList();
-            }
+           
 
             if (!string.IsNullOrWhiteSpace(NameBox.Text))
             {
