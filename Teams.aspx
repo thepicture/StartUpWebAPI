@@ -9,46 +9,59 @@
     <div style="display: flex;">
         <div class="navbar navbar-inverse navbar-fixed-top request-white-bg" style="top: inherit;">
             <div style="display: flex; width: 100%; justify-content: center;">
-                <asp:UpdatePanel runat="server" ID="UpdateFiltration" UpdateMode="Conditional" style="margin-left: 10px;">
-                    <ContentTemplate>
-                        <asp:TextBox ID="NameBox"
-                            Style="height: 30px; width: 200px !important; float: left !important; margin-right: 6px"
-                            TextMode="SingleLine" CssClass="search-box" runat="server"
-                            ForeColor="Black" Height="60" BorderColor="#808080" BorderStyle="NotSet"
-                            BackColor="Transparent"> </asp:TextBox>
-                        <div class="inline-button request-overflow-y">
-                            <asp:CheckBoxList ID="ComboMaxMembers"
-                                class="form-control"
-                                Style="height: 40px; width: max-content; margin-right: 6px; vertical-align: middle; float: left !important;"
-                                runat="server"
-                                ForeColor="Black" Height="60"
-                                BackColor="Transparent">
-                            </asp:CheckBoxList>
-                            <asp:CheckBoxList ID="ComboCountries"
-                                class="form-control"
-                                Style="height: 40px; width: max-content; margin-left: 5px; margin-right: 10px; float: left !important; vertical-align: middle;"
-                                runat="server"
-                                ForeColor="Black" Height="60"
-                                BackColor="Transparent">
-                            </asp:CheckBoxList>
-
+                <asp:TextBox ID="NameBox"
+                    Style="height: 30px; width: 200px !important; float: left !important; margin-right: 6px"
+                    TextMode="SingleLine" CssClass="search-box" runat="server"
+                    ForeColor="Black" Height="60" BorderColor="#808080" BorderStyle="NotSet"
+                    BackColor="Transparent"> </asp:TextBox>
+                <div class="request-overflow-y">
+                    <asp:CheckBoxList ID="ComboMaxMembers"
+                        class="form-control"
+                        Style="width: max-content; margin-right: 6px; vertical-align: middle; float: left !important;"
+                        runat="server"
+                        ForeColor="Black"
+                        Height="60"
+                        BackColor="Transparent">
+                    </asp:CheckBoxList>
+                </div>
+                <div class="request-overflow-y">
+                    <asp:CheckBoxList ID="ComboCountries"
+                        class="form-control"
+                        Style="width: max-content; height: 100px; margin-left: 5px; margin-right: 10px; float: left !important; vertical-align: middle;"
+                        runat="server"
+                        ForeColor="Black"
+                        Height="60"
+                        BackColor="Transparent">
+                    </asp:CheckBoxList>
+                </div>
+                <div>
+                    <div class="dropdown-container" style="position: absolute;">
+                        <div class="dropdown-button noselect">
+                            <div class="dropdown-label">Регион</div>
+                            <div class="dropdown-quantity">(<span class="quantity">Любой регион</span>)</div>
+                            <i class="fa fa-filter"></i>
                         </div>
-                        <div class="instructions">(Click to expand and select states to filter)</div>
-                        <div class="dropdown-container">
-                            <div class="dropdown-button noselect">
-                                <div class="dropdown-label">States</div>
-                                <div class="dropdown-quantity">(<span class="quantity">Any</span>)</div>
-                                <i class="fa fa-filter"></i>
-                            </div>
-                            <div class="dropdown-list"
-                                style="display: none !important;">
-                                <input type="search" placeholder="Search states"
+                        <div class="dropdown-list"
+                            style="display: none !important; height: 500px;">
+                            <div>
+                                <input type="search" placeholder="Поиск по региону"
                                     class="dropdown-search request-static-height" />
-                                <ul class="ul-stylebox" runat="server" id="RegionBox"></ul>
+                            </div>
+                            <div style="background-color: white;">
+                                <ul class="ul-stylebox" runat="server" id="RegionBox">
+                                    <asp:ListView runat="server" ID="RegionsView">
+                                        <ItemTemplate>
+                                            <li>
+                                                <input name='<%#Eval("Name") %>' type='checkbox' runat='server' />
+                                                <label class="region-contents" runat="server" for='<%#Eval("Name") %>'><%#Eval("Name") %></label>
+                                            </li>
+                                        </ItemTemplate>
+                                    </asp:ListView>
+                                </ul>
                             </div>
                         </div>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
+                    </div>
+                </div>
                 <asp:Button Text="Искать" Style="width: 120px !important;"
                     CssClass="button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                     runat="server" ID="BtnSearch" OnClick="BtnSearch_Click" />

@@ -1242,14 +1242,14 @@ table {
 .dropdown-list {
     float: left;
     width: 100%;
-    border: 1px solid lightgray;
     border-top: none;
     box-sizing: border-box;
-    padding: 10px 12px;
+    height: 500px;
 }
 
 input[type="search"] {
     padding: 5px 0;
+    width: 100%;
 }
 
 ul-stylebox {
@@ -1266,4 +1266,8 @@ input[type="checkbox"] {
 .request-static-height {
     height: 40px;
     overflow-y: auto;
+}
+
+.region-contents {
+    display: contents;
 }

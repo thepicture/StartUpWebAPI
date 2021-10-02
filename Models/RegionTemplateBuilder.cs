@@ -23,7 +23,7 @@ namespace StartUpWebAPI.Models
             foreach (Region region in AppData.Context.Region.ToList())
             {
                 template.Append("<li>" +
-                    "<input name='" + region.Id + "' type='checkbox' id='region-input' runat='server'" +
+                    "<input name='" + region.Id + "' type='checkbox' id='region-input'" +
                     "<label for='" + region.Id + "'>" + region.Name + "</label>" +
                     "</li>");
             }

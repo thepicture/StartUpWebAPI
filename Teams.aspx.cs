@@ -39,7 +39,8 @@ namespace StartUpWebAPI
 
         private void FillRegionBox()
         {
-            RegionBox.InnerHtml = RegionTemplateBuilder.GetTemplate();
+            RegionsView.DataSource = AppData.Context.Region.ToList();
+            RegionsView.DataBind();
         }
 
         /// <summary>
