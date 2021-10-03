@@ -8,14 +8,14 @@ using System.Web.UI.WebControls;
 namespace StartUpWebAPI.Models
 {
     /// <summary>
-    /// Class for getting tuples from an list view with checkboxes and labels in the item template.
+    /// Class for getting tuples from a list view with checkboxes and labels in the item template.
     /// </summary>
     public class ListViewTupleGetter
     {
         /// <summary>
-        /// Gets the tuples with list view item template key-value pairs.
+        /// Gets the tuples with list view's item template key-value pairs.
         /// </summary>
-        /// <returns>A tuple with list view item template key-value pairs.</returns>
+        /// <returns>A tuple with list view's item template key-value pairs.</returns>
         public static IEnumerable<Tuple<Label, HtmlInputCheckBox>> Get(ListView listView)
         {
             return listView.Items
