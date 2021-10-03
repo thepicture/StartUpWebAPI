@@ -20,6 +20,7 @@
                     BackColor="Transparent"> </asp:TextBox>
             </div>
 
+            <%-- The members dropdownbox. --%>
             <div class="dropdown-box-additions">
                 <div class="dropdown-container dropdown no-margin"
                     id="members-container">
@@ -63,12 +64,13 @@
                 </div>
             </div>
 
+            <%-- The regions dropdownbox. --%>
             <div class="dropdown-box-additions">
                 <div class="dropdown-container dropdown no-margin"
                     id="regions-container">
                     <div class="dropdown-button noselect">
                         <div class="dropdown-label">Регион</div>
-                        <div class="dropdown-quantity">(<span class="quantity">Любой регион</span>)</div>
+                        <div class="dropdown-quantity">(<span class="quantity">Любой</span>)</div>
                         <i class="fa fa-filter"></i>
                     </div>
                     <div class="dropdown-list static-height-dropdown" hidden>
@@ -76,7 +78,7 @@
                             <asp:Button runat="server"
                                 OnClientClick="flushDropDownBox(`#regions-container`)"
                                 ID="BtnClearRegions"
-                                Text="Очистить"/>
+                                Text="Очистить" />
                             <input type="search" placeholder="Поиск по региону"
                                 class="dropdown-search request-static-height" />
                         </div>
@@ -141,10 +143,10 @@
             </asp:ListView>
         </asp:Panel>
     </asp:Panel>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js'
+    <script src='<%=ResolveUrl("~/Scripts/descriptor-presenter.js") %>'
         type="text/javascript">
     </script>
-    <script src='<%=ResolveUrl("~/Scripts/descriptor-presenter.js") %>'
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js'
         type="text/javascript">
     </script>
     <script src='<%=ResolveUrl("~/Scripts/dropdown-list-presenter.js") %>'

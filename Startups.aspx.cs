@@ -1,4 +1,5 @@
 ﻿using StartUpWebAPI.Entities;
+using StartUpWebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,76 +18,90 @@ namespace StartUpWebAPI
             }
             else
             {
-                CheckOrSetCategories();
-                CheckOrSetMaxMembers();
+                CheckOrSetDropDownBoxes();
                 UpdateLView();
             }
         }
 
         /// <summary>
-        /// Check if the page was not reloaded, otherwise loads member parameter values into ComboBox.
+        /// Check if the page was not reloaded, otherwise loads parameter values into dropdown boxes.
         /// </summary>
-        private void CheckOrSetMaxMembers()
+        private void CheckOrSetDropDownBoxes()
         {
             if (!IsPostBack)
             {
-                InsertComboMaxMembers();
+                FillMembersBox();
+                FillRegionsBox();
+                FillCategoriesBox();
             }
+        }
+
+        /// <summary>
+        /// Inserts the categories into dropdown list.
+        /// </summary>
+        private void FillCategoriesBox()
+        {
+            CategoriesView.DataSource = AppData.Context.Category.ToList();
+            CategoriesView.DataBind();
+
+            AssignAnyValueForCategories();
+        }
+
+        /// <summary>
+        /// Sets the checkbox state of items to false in CategoriesView.
+        /// </summary>
+        private void AssignAnyValueForCategories()
+        {
+            ListViewTupleGetter.Get(CategoriesView).ToList().ForEach(t => t.Item2.Checked = false);
+        }
+
+        /// <summary>
+        /// Inserts the regions into dropdown list.
+        /// </summary>
+        private void FillRegionsBox()
+        {
+            RegionsView.DataSource = AppData.Context.Region.ToList();
+            RegionsView.DataBind();
+
+            AssignAnyValueForRegions();
+        }
+
+        /// <summary>
+        /// Sets the checkbox state of items to false in RegionsView.
+        /// </summary>
+        private void AssignAnyValueForRegions()
+        {
+            ListViewTupleGetter.Get(RegionsView).ToList().ForEach(t => t.Item2.Checked = false);
         }
 
         /// <summary>
         /// Inserts members parameters into the ComboBox.
         /// </summary>
-        private void InsertComboMaxMembers()
+        private void FillMembersBox()
         {
             List<string> values = new List<string>
             {
-                "Любое кол-во участников",
                 "1-5",
                 "6-10",
                 "11-15",
-                "15-20"
+                "15-20",
+                "21-100",
+                "101-1000",
+                "1000-и больше"
             };
 
-            ComboMaxMembers.DataSource = values;
-            ComboMaxMembers.DataBind();
-            ComboMaxMembers.SelectedIndex = 0;
+            MembersView.DataSource = values;
+            MembersView.DataBind();
+
+            AssignAnyValueForMembers();
         }
 
         /// <summary>
-        /// Checks if the page loaded for the first time, otherwise inserts categories.
+        /// Sets the checkbox state of items to false in MembersView.
         /// </summary>
-        private void CheckOrSetCategories()
+        private void AssignAnyValueForMembers()
         {
-            if (!IsPostBack)
-            {
-                InsertComboCategories();
-                InsertComboCountries();
-            }
-        }
-
-        /// <summary>
-        /// Inserts the regions into the combobox.
-        /// </summary>
-        private void InsertComboCountries()
-        {
-            var countries = AppData.Context.Region.Select(c => c.Name).ToList();
-            countries.Insert(0, "Все регионы");
-            ComboCountries.DataSource = countries;
-            ComboCountries.DataBind();
-            ComboCountries.SelectedIndex = 0;
-        }
-
-        /// <summary>
-        /// Inserts categories into DropDownList.
-        /// </summary>
-        private void InsertComboCategories()
-        {
-            var categories = AppData.Context.Category.Select(c => c.Name).ToList();
-            categories.Insert(0, "Все категории");
-            ComboCategories.DataSource = categories;
-            ComboCategories.DataBind();
-            ComboCategories.SelectedIndex = 0;
+            ListViewTupleGetter.Get(MembersView).ToList().ForEach(t => t.Item2.Checked = false);
         }
 
         /// <summary>
@@ -112,57 +127,66 @@ namespace StartUpWebAPI
                 currentStartups = currentStartups.Where(s => s.IsDone == false).ToList();
             }
 
-            UpdateFiltration.Update();
+            #region WorkWithDropDownBoxes
+            List<string> membersSelectedValues = TupleValueGetter.GetValues(
+                                                    TupleToTextAndBoolConverter.ConvertToTextAndBoolTuple(
+                                                        ListViewTupleGetter.Get(MembersView)
+                                                        )
+                                                    )
+                .ToList();
 
-            if (ComboCategories.SelectedIndex != 0)
+            List<string> regionsSelectedValues = TupleValueGetter.GetValues(
+                                                    TupleToTextAndBoolConverter.ConvertToTextAndBoolTuple(
+                                                        ListViewTupleGetter.Get(RegionsView)
+                                                        )
+                                                    )
+              .ToList();
+
+            List<string> categoriesSelectedValues = TupleValueGetter.GetValues(
+                                                  TupleToTextAndBoolConverter.ConvertToTextAndBoolTuple(
+                                                      ListViewTupleGetter.Get(CategoriesView)
+                                                      )
+                                                  )
+            .ToList();
+
+            bool memberSelectedValueIsNonStandard = membersSelectedValues.Count != 0;
+            bool regionSelectedValueIsNonStandard = regionsSelectedValues.Count != 0;
+            bool categorySelectedValueIsNonStandard = categoriesSelectedValues.Count != 0;
+
+            if (memberSelectedValueIsNonStandard)
             {
-                List<string> selectedValues = ComboCategories
-                    .Items
-                    .Cast<ListItem>()
-                    .Where(i => i.Selected)
-                    .Select(i => i.Value)
-                    .ToList();
-                currentStartups = currentStartups
-                    .Where(s => selectedValues.Contains(s.Category.Name))
-                    .ToList();
-            }
+                List<StartUp> startupsToUnion = new List<StartUp>();
 
-            if (ComboCountries.SelectedIndex != 0)
-            {
-                List<string> selectedValues = ComboCountries
-                    .Items
-                    .Cast<ListItem>()
-                    .Where(i => i.Selected)
-                    .Select(i => i.Value)
-                    .ToList();
-                currentStartups = currentStartups
-                    .Where(s => selectedValues.Contains(s.Region.Name))
-                    .ToList();
-            }
-
-            if (ComboMaxMembers.SelectedIndex != 0)
-            {
-                List<string> selectedValues = ComboMaxMembers
-                   .Items
-                   .Cast<ListItem>()
-                   .Where(i => i.Selected)
-                   .Select(i => i.Value)
-                   .ToList();
-
-                List<StartUp> startUpsToUnion = new List<StartUp>();
-                foreach (string value in selectedValues)
+                foreach (string value in membersSelectedValues)
                 {
                     string[] values = value.Split('-');
                     int from = int.Parse(values[0]);
-                    int to = int.Parse(values[1]);
+                    int to = int.Parse(values[1].Replace("и больше", int.MaxValue.ToString()));
 
-                    startUpsToUnion
-                        .AddRange(currentStartups.Where(s => s.MaxMembersCount > from && s.MaxMembersCount < to)
-                        .ToList());
+                    startupsToUnion
+                        .AddRange(currentStartups.Where(s => s.MaxMembersCount > from
+                                    && s.MaxMembersCount < to)
+                                    .ToList());
                 }
-
-                currentStartups = startUpsToUnion.Distinct().ToList();
+                currentStartups = startupsToUnion.Distinct().ToList();
             }
+
+            if (regionSelectedValueIsNonStandard)
+            {
+                currentStartups = currentStartups
+                    .Where(s => regionsSelectedValues.Contains(s.Region.Name))
+                    .ToList();
+            }
+
+            if (categorySelectedValueIsNonStandard)
+            {
+                currentStartups = currentStartups
+                    .Where(s => categoriesSelectedValues.Contains(s.Category.Name))
+                    .ToList();
+            }
+            #endregion
+
+            UpdateFiltration.Update();
 
             if (!string.IsNullOrWhiteSpace(NameBox.Text))
             {
@@ -198,8 +222,9 @@ namespace StartUpWebAPI
             NameBox.Text = null;
             ActualBox.Checked = true;
             DoneBox.Checked = false;
-            ComboCategories.SelectedIndex = 0;
-            ComboMaxMembers.SelectedIndex = 0;
+            AssignAnyValueForCategories();
+            AssignAnyValueForMembers();
+            AssignAnyValueForRegions();
         }
     }
 }

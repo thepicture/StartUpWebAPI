@@ -1,12 +1,11 @@
 ﻿using StartUpWebAPI.Entities;
+using StartUpWebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Security;
 using System.Web.UI;
-using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-using StartUpWebAPI.Models;
 
 namespace StartUpWebAPI
 {
@@ -20,19 +19,19 @@ namespace StartUpWebAPI
             }
             else
             {
-                CheckOrSetMaxMembers();
+                CheckOrSetDropDownBoxes();
                 UpdateTeamsView();
             }
         }
 
         /// <summary>
-        /// Checks if the page was reloaded, if not then it inserts max members values into ComboBox.
+        /// Check if the page was not reloaded, otherwise loads parameter values into dropdown boxes.
         /// </summary>
-        private void CheckOrSetMaxMembers()
+        private void CheckOrSetDropDownBoxes()
         {
             if (!IsPostBack)
             {
-                InsertComboMaxMembers();
+                FillMembersBox();
                 FillRegionBox();
             }
         }
@@ -59,7 +58,7 @@ namespace StartUpWebAPI
         /// <summary>
         /// Inserts max members count into the ComboBox.
         /// </summary>
-        private void InsertComboMaxMembers()
+        private void FillMembersBox()
         {
             List<string> values = new List<string>
             {
@@ -98,6 +97,7 @@ namespace StartUpWebAPI
                 .Any(e => e.User.Login.Equals(User.Identity.Name)
                 && e.RoleType.Name.Equals("Забанен")));
 
+            #region Work with dropdown boxes
             List<string> membersSelectedValues = TupleValueGetter.GetValues(
                                                     TupleToTextAndBoolConverter.ConvertToTextAndBoolTuple(
                                                         ListViewTupleGetter.Get(MembersView)
@@ -112,10 +112,10 @@ namespace StartUpWebAPI
                                                     )
               .ToList();
 
-            bool comboMaxMembersIsNonStandard = membersSelectedValues.Count != 0;
-            bool RegionSelectedValueIsNonStandard = regionsSelectedValues.Count != 0;
+            bool memberSelectedValueIsNonStandard = membersSelectedValues.Count != 0;
+            bool regionSelectedValueIsNonStandard = regionsSelectedValues.Count != 0;
 
-            if (comboMaxMembersIsNonStandard)
+            if (memberSelectedValueIsNonStandard)
             {
                 List<Team> teamsToUnion = new List<Team>();
 
@@ -133,12 +133,13 @@ namespace StartUpWebAPI
                 currentTeams = teamsToUnion.Distinct().ToList();
             }
 
-            if (RegionSelectedValueIsNonStandard)
+            if (regionSelectedValueIsNonStandard)
             {
                 currentTeams = currentTeams
                     .Where(s => regionsSelectedValues.Contains(s.Region.Name))
                     .ToList();
             }
+            #endregion
 
             if (!string.IsNullOrWhiteSpace(NameBox.Text))
             {

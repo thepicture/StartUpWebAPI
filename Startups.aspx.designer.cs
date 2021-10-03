@@ -33,31 +33,58 @@ namespace StartUpWebAPI
         protected global::System.Web.UI.WebControls.TextBox NameBox;
 
         /// <summary>
-        /// ComboCategories control.
+        /// BtnClearMembers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList ComboCategories;
+        protected global::System.Web.UI.WebControls.Button BtnClearMembers;
 
         /// <summary>
-        /// ComboCountries control.
+        /// MembersView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList ComboCountries;
+        protected global::System.Web.UI.WebControls.ListView MembersView;
 
         /// <summary>
-        /// ComboMaxMembers control.
+        /// BtnClearRegions control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList ComboMaxMembers;
+        protected global::System.Web.UI.WebControls.Button BtnClearRegions;
+
+        /// <summary>
+        /// RegionsView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListView RegionsView;
+
+        /// <summary>
+        /// BtnCleanCategories control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnCleanCategories;
+
+        /// <summary>
+        /// CategoriesView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListView CategoriesView;
 
         /// <summary>
         /// ActualBox control.

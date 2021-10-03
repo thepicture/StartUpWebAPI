@@ -11,7 +11,6 @@
         <div class="navbar navbar-inverse navbar-fixed-top request-white-bg" style="top: inherit;">
             <div style="display: flex; width: 100%; justify-content: center;">
 
-
                 <asp:UpdatePanel runat="server" ID="UpdateFiltration" UpdateMode="Conditional" style="margin-left: 10px;">
                     <ContentTemplate>
 
@@ -20,33 +19,133 @@
                             TextMode="SingleLine" CssClass="search-box" runat="server"
                             ForeColor="Black" Height="60" BorderColor="#808080" BorderStyle="NotSet"
                             BackColor="Transparent"> </asp:TextBox>
-                        <div class="inline-button request-overflow-y">
-                            <asp:CheckBoxList ID="ComboCategories"
-                                class="form-control"
-                                Style="height: 40px; width: max-content; margin-left: 5px; margin-right: 10px; float: left !important; vertical-align: middle;"
-                                runat="server"
-                                ForeColor="Black" Height="60"
-                                BackColor="Transparent">
-                            </asp:CheckBoxList>
+
+                        <%-- The members dropdownbox. --%>
+                        <div class="dropdown-box-additions">
+                            <div class="dropdown-container dropdown no-margin"
+                                id="members-container">
+                                <div class="dropdown-button noselect">
+                                    <div class="dropdown-label">Число участников</div>
+                                    <div class="dropdown-quantity">(<span class="quantity">Любое</span>)</div>
+                                    <i class="fa fa-filter"></i>
+                                </div>
+                                <div class="dropdown-list static-height-dropdown" hidden>
+                                    <div>
+                                        <asp:Button runat="server"
+                                            OnClientClick="flushDropDownBox(`#members-container`)"
+                                            ID="BtnClearMembers"
+                                            Text="Очистить" />
+                                        <input type="search" placeholder="Поиск по кол-ву"
+                                            class="dropdown-search request-static-height" />
+                                    </div>
+                                    <div class="request-white-bg">
+                                        <ul class="ul-stylebox">
+                                            <asp:ListView runat="server"
+                                                ID="MembersView"
+                                                ItemType="System.String">
+                                                <ItemTemplate>
+                                                    <li>
+                                                        <input name='<%# Item %>'
+                                                            type='checkbox'
+                                                            runat='server'
+                                                            id="checkBoxTemplate" />
+                                                        <asp:Label class="element-contents"
+                                                            runat="server"
+                                                            for='<%# Item %>'
+                                                            ID='labelTemplate'
+                                                            Text='<%# Item %>'>
+                                                        </asp:Label>
+                                                    </li>
+                                                </ItemTemplate>
+                                            </asp:ListView>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="inline-button request-overflow-y">
-                            <asp:CheckBoxList ID="ComboCountries"
-                                class="form-control"
-                                Style="height: 40px; width: max-content; margin-left: 5px; margin-right: 10px; float: left !important; vertical-align: middle;"
-                                runat="server"
-                                ForeColor="Black" Height="60"
-                                BackColor="Transparent">
-                            </asp:CheckBoxList>
+
+                        <%-- The regions dropdownbox. --%>
+                        <div class="dropdown-box-additions">
+                            <div class="dropdown-container dropdown no-margin"
+                                id="regions-container">
+                                <div class="dropdown-button noselect">
+                                    <div class="dropdown-label">Регион</div>
+                                    <div class="dropdown-quantity">(<span class="quantity">Любой</span>)</div>
+                                    <i class="fa fa-filter"></i>
+                                </div>
+                                <div class="dropdown-list static-height-dropdown" hidden>
+                                    <div>
+                                        <asp:Button runat="server"
+                                            OnClientClick="flushDropDownBox(`#regions-container`)"
+                                            ID="BtnClearRegions"
+                                            Text="Очистить" />
+                                        <input type="search" placeholder="Поиск по региону"
+                                            class="dropdown-search request-static-height" />
+                                    </div>
+                                    <div class="request-white-bg">
+                                        <ul class="ul-stylebox">
+                                            <asp:ListView runat="server" ID="RegionsView">
+                                                <ItemTemplate>
+                                                    <li>
+                                                        <input name='<%# Eval("Name") %>'
+                                                            type='checkbox'
+                                                            runat='server'
+                                                            id="checkBoxTemplate" />
+                                                        <asp:Label class="element-contents"
+                                                            runat="server"
+                                                            for='<%# Eval("Name")%>'
+                                                            ID="labelTemplate"
+                                                            Text='<%# Eval("Name") %>'></asp:Label>
+                                                    </li>
+                                                </ItemTemplate>
+                                            </asp:ListView>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="inline-button request-overflow-y">
-                            <asp:CheckBoxList ID="ComboMaxMembers"
-                                class="form-control"
-                                Style="height: 40px; width: max-content; margin-right: 6px; vertical-align: middle; float: left !important;"
-                                runat="server"
-                                ForeColor="Black" Height="60"
-                                BackColor="Transparent">
-                            </asp:CheckBoxList>
+
+                        <%-- The categories dropdownbox. --%>
+                        <div class="dropdown-box-additions">
+                            <div class="dropdown-container dropdown no-margin"
+                                id="categories-container">
+                                <div class="dropdown-button noselect">
+                                    <div class="dropdown-label">Категории</div>
+                                    <div class="dropdown-quantity">(<span class="quantity">Любые</span>)</div>
+                                    <i class="fa fa-filter"></i>
+                                </div>
+                                <div class="dropdown-list static-height-dropdown" hidden>
+                                    <div>
+                                        <asp:Button runat="server"
+                                            OnClientClick="flushDropDownBox(`#categories-container`)"
+                                            ID="BtnCleanCategories"
+                                            Text="Очистить" />
+                                        <input type="search" placeholder="Поиск по категории"
+                                            class="dropdown-search request-static-height" />
+                                    </div>
+                                    <div class="request-white-bg">
+                                        <ul class="ul-stylebox">
+                                            <asp:ListView runat="server" ID="CategoriesView">
+                                                <ItemTemplate>
+                                                    <li>
+                                                        <input name='<%# Eval("Name") %>'
+                                                            type='checkbox'
+                                                            runat='server'
+                                                            id="checkBoxTemplate" />
+                                                        <asp:Label class="element-contents"
+                                                            runat="server"
+                                                            for='<%# Eval("Name")%>'
+                                                            ID="labelTemplate"
+                                                            Text='<%# Eval("Name") %>'></asp:Label>
+                                                    </li>
+                                                </ItemTemplate>
+                                            </asp:ListView>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
                         <div class="inline-button centerized-div">
                             <asp:CheckBox runat="server"
                                 Text="Показывать актуальные"
@@ -97,7 +196,14 @@
     <script src='<%=ResolveUrl("~/Scripts/descriptor-presenter.js") %>'
         type="text/javascript">
     </script>
-    <script src='<%=ResolveUrl("~/Scripts/jquery-3.4.1.min.js") %>'
-        type="text/javascript"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js'
+        type="text/javascript">
+    </script>
+    <script src='<%=ResolveUrl("~/Scripts/dropdown-list-presenter.js") %>'
+        type="text/javascript">
+    </script>
+    <script src='<%=ResolveUrl("~/Scripts/dropdown-list-flusher.js") %>'
+        type="text/javascript">
+    </script>
     <asp:Image runat="server" ID="BgImage" CssClass="bg-image"></asp:Image>
 </asp:Content>
