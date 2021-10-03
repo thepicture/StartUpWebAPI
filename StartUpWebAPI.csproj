@@ -388,6 +388,7 @@
     <Compile Include="Models\RecursiveControlFinder.cs" />
     <Compile Include="Models\StreamToBytesConverter.cs" />
     <Compile Include="Models\TupleToTextAndBoolConverter.cs" />
+    <Compile Include="Models\TupleValueGetter.cs" />
     <Compile Include="Models\UserAuthorizer.cs" />
     <Compile Include="Models\UserBuilder.cs" />
     <Compile Include="MyAccount.aspx.cs">

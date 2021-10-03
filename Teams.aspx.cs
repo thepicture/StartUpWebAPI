@@ -98,14 +98,18 @@ namespace StartUpWebAPI
                 .Any(e => e.User.Login.Equals(User.Identity.Name)
                 && e.RoleType.Name.Equals("Забанен")));
 
-            List<string> membersSelectedValues = TupleToTextAndBoolConverter.ConvertToTextAndBoolTuple(ListViewTupleGetter.Get(MembersView))
-                .Where(t => t.Item2)
-                .Select(t => t.Item1)
+            List<string> membersSelectedValues = TupleValueGetter.GetValues(
+                                                    TupleToTextAndBoolConverter.ConvertToTextAndBoolTuple(
+                                                        ListViewTupleGetter.Get(MembersView)
+                                                        )
+                                                    )
                 .ToList();
 
-            List<string> regionsSelectedValues = TupleToTextAndBoolConverter.ConvertToTextAndBoolTuple(ListViewTupleGetter.Get(RegionsView))
-              .Where(t => t.Item2)
-              .Select(t => t.Item1)
+            List<string> regionsSelectedValues = TupleValueGetter.GetValues(
+                                                    TupleToTextAndBoolConverter.ConvertToTextAndBoolTuple(
+                                                        ListViewTupleGetter.Get(RegionsView)
+                                                        )
+                                                    )
               .ToList();
 
             bool comboMaxMembersIsNonStandard = membersSelectedValues.Count != 0;
