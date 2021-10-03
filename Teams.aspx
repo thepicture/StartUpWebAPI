@@ -8,11 +8,11 @@
 
     <div>
         <div class=" container navbar-fixed-top request-white-bg"
-            style="top: inherit; width: 100%; flex-wrap: wrap; display: flex !important; justify-content: center;">
+            style="top: inherit; width: 100%;  display: flex !important; justify-content: center;">
 
             <%--style="display: flex; width: 100%; justify-content: center;--%>
 
-            <div style="margin-left: 20px !important; height: 30px; width: 300px !important; float: left !important; margin-right: 15px">
+            <div style="margin-left: 20px !important; height: 30px; width: 300px !important; float: left !important; margin-right: 30px">
                 <asp:TextBox ID="NameBox"
                     Style="height: 40px; width: 300px !important; float: left !important; margin-right: 6px"
                     TextMode="SingleLine" CssClass="search-box" runat="server"
@@ -21,7 +21,7 @@
             </div>
 
             <%-- The members dropdownbox. --%>
-            <div class="dropdown-box-additions">
+            <div style="margin-right:30px;" class="dropdown-box-additions">
                 <div class="dropdown-container dropdown no-margin"
                     id="members-container">
                     <div class="dropdown-button noselect">
@@ -65,7 +65,7 @@
             </div>
 
             <%-- The regions dropdownbox. --%>
-            <div class="dropdown-box-additions">
+            <div style="margin-right:20px;" class="dropdown-box-additions">
                 <div class="dropdown-container dropdown no-margin"
                     id="regions-container">
                     <div class="dropdown-button noselect">
@@ -105,7 +105,7 @@
                 </div>
             </div>
 
-            <div style="float: left !important;">
+            <div  float: left !important;">
                 <asp:Button Text="Искать" Style="width: 120px !important;"
                     CssClass="button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                     runat="server" ID="BtnSearch" OnClick="BtnSearch_Click" />

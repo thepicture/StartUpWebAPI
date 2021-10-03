@@ -15,13 +15,13 @@
                     <ContentTemplate>
 
                         <asp:TextBox ID="NameBox"
-                            Style="height: 30px; width: 200px !important; float: left !important; margin-right: 6px;"
+                            Style="height: 42px; width: 200px !important; float: left !important; margin-right: 6px;"
                             TextMode="SingleLine" CssClass="search-box" runat="server"
                             ForeColor="Black" Height="60" BorderColor="#808080" BorderStyle="NotSet"
                             BackColor="Transparent"> </asp:TextBox>
 
                         <%-- The members dropdownbox. --%>
-                        <div class="dropdown-box-additions">
+                        <div  class="dropdown-box-additions">
                             <div class="dropdown-container dropdown no-margin"
                                 id="members-container">
                                 <div class="dropdown-button noselect">
@@ -66,7 +66,7 @@
 
                         <%-- The regions dropdownbox. --%>
                         <div class="dropdown-box-additions">
-                            <div class="dropdown-container dropdown no-margin"
+                            <div style="width:160px;" class="dropdown-container dropdown no-margin"
                                 id="regions-container">
                                 <div class="dropdown-button noselect">
                                     <div class="dropdown-label">Регион</div>
@@ -146,7 +146,13 @@
                             </div>
                         </div>
 
-                        <div class="inline-button centerized-div">
+                        
+
+                        <div style="margin-left:2px;" class="mt-3"> <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" class="advanced"> Дополнительные параметры <i class="fa fa-angle-down"></i> </a>
+                    <div class="collapse" id="collapseExample">
+                        <div class="card card-body">
+                            <div class="row">
+                             <div class=" centerized-div" style="margin-left:10px;">
                             <asp:CheckBox runat="server"
                                 Text="Показывать актуальные"
                                 CssClass="search-text-box"
@@ -159,6 +165,12 @@
                                 Checked="true"
                                 ID="DoneBox" />
                         </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
                     </ContentTemplate>
                 </asp:UpdatePanel>
                 <asp:Button Text="Искать" Style="width: 120px !important;"
