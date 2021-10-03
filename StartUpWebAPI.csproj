@@ -378,6 +378,7 @@
     <Compile Include="Models\AntiSpamChecker.cs" />
     <Compile Include="Models\BanUtils.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ListViewTupleGetter.cs" />
     <Compile Include="Models\NativeImageUtils.cs" />
     <Compile Include="Models\PartialStartUp.cs" />
     <Compile Include="Models\PartialStartUpComment.cs" />

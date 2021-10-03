@@ -98,12 +98,12 @@ namespace StartUpWebAPI
                 .Any(e => e.User.Login.Equals(User.Identity.Name)
                 && e.RoleType.Name.Equals("Забанен")));
 
-            List<string> membersSelectedValues = TupleToTextAndBoolConverter.ConvertToTextAndBoolTuple(GetMembersTuples())
+            List<string> membersSelectedValues = TupleToTextAndBoolConverter.ConvertToTextAndBoolTuple(ListViewTupleGetter.Get(MembersView))
                 .Where(t => t.Item2)
                 .Select(t => t.Item1)
                 .ToList();
 
-            List<string> regionsSelectedValues = TupleToTextAndBoolConverter.ConvertToTextAndBoolTuple(GetRegionsTuples())
+            List<string> regionsSelectedValues = TupleToTextAndBoolConverter.ConvertToTextAndBoolTuple(ListViewTupleGetter.Get(RegionsView))
               .Where(t => t.Item2)
               .Select(t => t.Item1)
               .ToList();
@@ -143,38 +143,6 @@ namespace StartUpWebAPI
 
             TeamsView.DataSource = currentTeams;
             TeamsView.DataBind();
-        }
-
-        /// <summary>
-        /// Gets the tuples with regions key-value pairs.
-        /// </summary>
-        /// <returns>A tuple with regions key-value pairs.</returns>
-        private IEnumerable<Tuple<Label, HtmlInputCheckBox>> GetRegionsTuples()
-        {
-            return RegionsView.Items
-                          .Select(i =>
-                          {
-                              Label label = (Label)i.FindControl("labelTemplate");
-                              HtmlInputCheckBox checkBox = (HtmlInputCheckBox)i.FindControl("checkBoxTemplate");
-
-                              return Tuple.Create(label, checkBox);
-                          });
-        }
-
-        /// <summary>
-        /// Gets the tuples with members key-value pairs.
-        /// </summary>
-        /// <returns>A tuple with members key-value pairs.</returns>
-        private IEnumerable<Tuple<Label, HtmlInputCheckBox>> GetMembersTuples()
-        {
-            return MembersView.Items
-                            .Select(i =>
-                            {
-                                Label label = (Label)i.FindControl("labelTemplate");
-                                HtmlInputCheckBox checkBox = (HtmlInputCheckBox)i.FindControl("checkBoxTemplate");
-
-                                return Tuple.Create(label, checkBox);
-                            });
         }
 
         /// <summary>

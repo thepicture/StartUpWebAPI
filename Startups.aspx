@@ -1,4 +1,10 @@
-﻿<%@ Page Language="C#" Title="Стартапы" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="Startups.aspx.cs" Inherits="StartUpWebAPI.Startups" EnableEventValidation="false" %>
+﻿<%@ Page Language="C#"
+    Title="Стартапы"
+    AutoEventWireup="true"
+    MasterPageFile="~/Site.Master"
+    CodeBehind="Startups.aspx.cs"
+    Inherits="StartUpWebAPI.Startups"
+    EnableEventValidation="false" %>
 
 <asp:Content ID="SearchContent" ContentPlaceHolderID="MainContent" runat="server">
     <div style="display: flex;">
