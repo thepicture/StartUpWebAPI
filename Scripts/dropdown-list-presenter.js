@@ -20,11 +20,7 @@ $('#members-container')
             $(this).toggle(match);
         });
     })
-    .on('change', '[type="checkbox"]', function () {
-        var container = $(this).closest('#members-container');
-        var numChecked = container.find('[type="checkbox"]:checked').length;
-        container.find('.quantity').text(numChecked || 'Любое');
-    });
+    .on('change', '[type="checkbox"]', insertMembersNumber);
 
 $('#regions-container')
     .on('click', '.dropdown-button', function () {
@@ -46,8 +42,19 @@ $('#regions-container')
             $(this).toggle(match);
         });
     })
-    .on('change', '[type="checkbox"]', function () {
-        var container = $(this).closest('#regions-container');
-        var numChecked = container.find('[type="checkbox"]:checked').length;
-        container.find('.quantity').text(numChecked || 'Любой регион');
-    });
+    .on('change', '[type="checkbox"]', insertRegionsNumber);
+
+function insertMembersNumber() {
+    var container = $(this).closest('#members-container');
+    var numChecked = container.find('[type="checkbox"]:checked').length;
+    container.find('.quantity').text(numChecked || 'Любое');
+}
+
+function insertRegionsNumber() {
+    var container = $(this).closest('#regions-container');
+    var numChecked = container.find('[type="checkbox"]:checked').length;
+    container.find('.quantity').text(numChecked || 'Любой регион');
+}
+
+$('#members-container').ready(insertMembersNumber.bind($('#members-container')));
+$('#regions-container').ready(insertRegionsNumber.bind($('#regions-container')));

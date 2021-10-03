@@ -53,7 +53,7 @@ namespace StartUpWebAPI
         /// </summary>
         private void AssignAnyValueForRegions()
         {
-            ListViewTupleGetter.Get(MembersView).ToList().ForEach(t => t.Item2.Checked = false);
+            ListViewTupleGetter.Get(RegionsView).ToList().ForEach(t => t.Item2.Checked = false);
         }
 
         /// <summary>
