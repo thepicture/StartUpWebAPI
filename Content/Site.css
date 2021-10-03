@@ -1268,6 +1268,25 @@ input[type="checkbox"] {
     overflow-y: auto;
 }
 
-.region-contents {
+.element-contents {
     display: contents;
+}
+
+.dropdown-box-additions {
+    height: 50px !important;
+    align-content: center;
+    width: max-content;
+    height: 100px;
+    margin-left: 5px;
+    margin-right: 10px;
+    float: left !important;
+    vertical-align: middle;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.dropdown-static-height {
+    height: 500px;
 }

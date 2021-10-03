@@ -24,22 +24,13 @@ namespace StartUpWebAPI
         protected global::System.Web.UI.WebControls.TextBox NameBox;
 
         /// <summary>
-        /// ComboMaxMembers control.
+        /// MembersView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList ComboMaxMembers;
-
-        /// <summary>
-        /// RegionBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl RegionBox;
+        protected global::System.Web.UI.WebControls.ListView MembersView;
 
         /// <summary>
         /// RegionsView control.

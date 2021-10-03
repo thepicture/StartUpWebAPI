@@ -1,11 +1,12 @@
 ﻿using StartUpWebAPI.Entities;
-using StartUpWebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Security;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using StartUpWebAPI.Models;
 
 namespace StartUpWebAPI
 {
@@ -32,27 +33,27 @@ namespace StartUpWebAPI
             if (!IsPostBack)
             {
                 InsertComboMaxMembers();
-                //InsertComboCountries();
                 FillRegionBox();
             }
         }
 
+        /// <summary>
+        /// Inserts the regions into dropdown list.
+        /// </summary>
         private void FillRegionBox()
         {
             RegionsView.DataSource = AppData.Context.Region.ToList();
             RegionsView.DataBind();
+
+            AssignAnyValueForRegions();
         }
 
         /// <summary>
-        /// Inserts regions into the combobox.
+        /// Sets the checkbox state of items to false in RegionsView.
         /// </summary>
-        private void InsertComboCountries()
+        private void AssignAnyValueForRegions()
         {
-            //var countries = AppData.Context.Region.Select(c => c.Name).ToList();
-            //countries.Insert(0, "Все регионы");
-            //ComboCountries.DataSource = countries;
-            //ComboCountries.DataBind();
-            //ComboCountries.SelectedIndex = 0;
+            GetRegionsTuples().ToList().ForEach(t => t.Item2.Checked = false);
         }
 
         /// <summary>
@@ -62,7 +63,6 @@ namespace StartUpWebAPI
         {
             List<string> values = new List<string>
             {
-                "Любое кол-во участников",
                 "1-5",
                 "6-10",
                 "11-15",
@@ -72,9 +72,18 @@ namespace StartUpWebAPI
                 "1000-и больше"
             };
 
-            ComboMaxMembers.DataSource = values;
-            ComboMaxMembers.DataBind();
-            ComboMaxMembers.SelectedIndex = 0;
+            MembersView.DataSource = values;
+            MembersView.DataBind();
+
+            AssignAnyValueForMembers();
+        }
+
+        /// <summary>
+        /// Sets the checkbox state of items to false in MembersView.
+        /// </summary>
+        private void AssignAnyValueForMembers()
+        {
+            GetMembersTuples().ToList().ForEach(t => t.Item2.Checked = false);
         }
 
         /// <summary>
@@ -89,20 +98,24 @@ namespace StartUpWebAPI
                 .Any(e => e.User.Login.Equals(User.Identity.Name)
                 && e.RoleType.Name.Equals("Забанен")));
 
-            bool notAllIndexIsSelected = ComboMaxMembers.SelectedIndex != 0;
+            List<string> membersSelectedValues = TupleToTextAndBoolConverter.ConvertToTextAndBoolTuple(GetMembersTuples())
+                .Where(t => t.Item2)
+                .Select(t => t.Item1)
+                .ToList();
 
-            if (notAllIndexIsSelected)
+            List<string> regionsSelectedValues = TupleToTextAndBoolConverter.ConvertToTextAndBoolTuple(GetRegionsTuples())
+              .Where(t => t.Item2)
+              .Select(t => t.Item1)
+              .ToList();
+
+            bool comboMaxMembersIsNonStandard = membersSelectedValues.Count != 0;
+            bool RegionSelectedValueIsNonStandard = regionsSelectedValues.Count != 0;
+
+            if (comboMaxMembersIsNonStandard)
             {
-                List<string> selectedValues = ComboMaxMembers
-                    .Items
-                    .Cast<ListItem>()
-                    .Where(i => i.Selected)
-                    .Select(i => i.Value)
-                    .ToList();
-
                 List<Team> teamsToUnion = new List<Team>();
 
-                foreach (string value in selectedValues)
+                foreach (string value in membersSelectedValues)
                 {
                     string[] values = value.Split('-');
                     int from = int.Parse(values[0]);
@@ -110,25 +123,18 @@ namespace StartUpWebAPI
 
                     teamsToUnion
                         .AddRange(currentTeams.Where(s => s.MaxMembersCount > from
-                        && s.MaxMembersCount < to)
-                        .ToList());
+                                    && s.MaxMembersCount < to)
+                                    .ToList());
                 }
-
                 currentTeams = teamsToUnion.Distinct().ToList();
             }
 
-            //if (ComboCountries.SelectedIndex != 0)
-            //{
-            //    List<string> selectedValues = ComboCountries
-            //        .Items
-            //        .Cast<ListItem>()
-            //        .Where(i => i.Selected)
-            //        .Select(i => i.Value)
-            //        .ToList();
-            //    currentTeams = currentTeams
-            //        .Where(s => selectedValues.Contains(s.Region.Name))
-            //        .ToList();
-            //}
+            if (RegionSelectedValueIsNonStandard)
+            {
+                currentTeams = currentTeams
+                    .Where(s => regionsSelectedValues.Contains(s.Region.Name))
+                    .ToList();
+            }
 
             if (!string.IsNullOrWhiteSpace(NameBox.Text))
             {
@@ -137,6 +143,38 @@ namespace StartUpWebAPI
 
             TeamsView.DataSource = currentTeams;
             TeamsView.DataBind();
+        }
+
+        /// <summary>
+        /// Gets the tuples with regions key-value pairs.
+        /// </summary>
+        /// <returns>A tuple with regions key-value pairs.</returns>
+        private IEnumerable<Tuple<Label, HtmlInputCheckBox>> GetRegionsTuples()
+        {
+            return RegionsView.Items
+                          .Select(i =>
+                          {
+                              Label label = (Label)i.FindControl("labelTemplate");
+                              HtmlInputCheckBox checkBox = (HtmlInputCheckBox)i.FindControl("checkBoxTemplate");
+
+                              return Tuple.Create(label, checkBox);
+                          });
+        }
+
+        /// <summary>
+        /// Gets the tuples with members key-value pairs.
+        /// </summary>
+        /// <returns>A tuple with members key-value pairs.</returns>
+        private IEnumerable<Tuple<Label, HtmlInputCheckBox>> GetMembersTuples()
+        {
+            return MembersView.Items
+                            .Select(i =>
+                            {
+                                Label label = (Label)i.FindControl("labelTemplate");
+                                HtmlInputCheckBox checkBox = (HtmlInputCheckBox)i.FindControl("checkBoxTemplate");
+
+                                return Tuple.Create(label, checkBox);
+                            });
         }
 
         /// <summary>
@@ -162,7 +200,8 @@ namespace StartUpWebAPI
         private void ClearElements()
         {
             NameBox.Text = null;
-            ComboMaxMembers.SelectedIndex = 0;
+            AssignAnyValueForMembers();
+            AssignAnyValueForRegions();
         }
     }
 }

@@ -224,7 +224,7 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\reason-remover.js" />
-    <Content Include="Scripts\region-presenter.js" />
+    <Content Include="Scripts\dropdown-list-presenter.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
     <Content Include="Scripts\WebForms\GridView.js" />
@@ -385,6 +385,7 @@
     <Compile Include="Models\PartialTeamComment.cs" />
     <Compile Include="Models\RecursiveControlFinder.cs" />
     <Compile Include="Models\StreamToBytesConverter.cs" />
+    <Compile Include="Models\TupleToTextAndBoolConverter.cs" />
     <Compile Include="Models\UserAuthorizer.cs" />
     <Compile Include="Models\UserBuilder.cs" />
     <Compile Include="MyAccount.aspx.cs">
