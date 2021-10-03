@@ -30,7 +30,11 @@
                     </div>
                     <div class="dropdown-list static-height-dropdown" hidden>
                         <div>
-                            <input type="search" placeholder="Поиск кол-ва участников"
+                            <asp:Button runat="server"
+                                OnClientClick="flushDropDownBox(`#members-container`)"
+                                ID="BtnClearMembers"
+                                Text="Очистить" />
+                            <input type="search" placeholder="Поиск по кол-ву"
                                 class="dropdown-search request-static-height" />
                         </div>
                         <div class="request-white-bg">
@@ -69,6 +73,10 @@
                     </div>
                     <div class="dropdown-list static-height-dropdown" hidden>
                         <div>
+                            <asp:Button runat="server"
+                                OnClientClick="flushDropDownBox(`#regions-container`)"
+                                ID="BtnClearRegions"
+                                Text="Очистить"/>
                             <input type="search" placeholder="Поиск по региону"
                                 class="dropdown-search request-static-height" />
                         </div>
@@ -79,8 +87,8 @@
                                         <li>
                                             <input name='<%# Eval("Name") %>'
                                                 type='checkbox'
-                                                runat='server' 
-                                                id="checkBoxTemplate"/>
+                                                runat='server'
+                                                id="checkBoxTemplate" />
                                             <asp:Label class="element-contents"
                                                 runat="server"
                                                 for='<%# Eval("Name")%>'
@@ -140,6 +148,9 @@
         type="text/javascript">
     </script>
     <script src='<%=ResolveUrl("~/Scripts/dropdown-list-presenter.js") %>'
+        type="text/javascript">
+    </script>
+    <script src='<%=ResolveUrl("~/Scripts/dropdown-list-flusher.js") %>'
         type="text/javascript">
     </script>
 </asp:Content>

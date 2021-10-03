@@ -24,6 +24,15 @@ namespace StartUpWebAPI
         protected global::System.Web.UI.WebControls.TextBox NameBox;
 
         /// <summary>
+        /// BtnClearMembers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnClearMembers;
+
+        /// <summary>
         /// MembersView control.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,15 @@ namespace StartUpWebAPI
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListView MembersView;
+
+        /// <summary>
+        /// BtnClearRegions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnClearRegions;
 
         /// <summary>
         /// RegionsView control.
