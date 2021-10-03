@@ -428,7 +428,7 @@ input[type="select"] {
     height: 100%;
     color: white;
     z-index: 9999;
-    display: flex;
+   
     align-items: flex-end !important;
     font-family: 'Cormorant', serif;
     font-size: 1.45em;

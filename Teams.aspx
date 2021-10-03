@@ -7,13 +7,15 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <div>
-        <div class=" container  navbar-fixed-top request-white-bg"  style="top: inherit; width: 100%; flex-wrap:wrap;  display:flex !important; justify-content: center;" >
+        <div class=" container  navbar-fixed-top request-white-bg">
            
          <%--style="display: flex; width: 100%; justify-content: center;--%>
            
-            
+            <div class="row">
 
-            <div   Style=" margin-left:20px !important; height: 30px; width: 300px !important; float: left !important; margin-right: 15px">
+          
+
+            <div class="col-sm">
                   <asp:TextBox ID="NameBox"
                     Style="height: 40px; width: 300px !important; float: left !important; margin-right: 6px"
                     TextMode="SingleLine" CssClass="search-box" runat="server"
@@ -22,7 +24,7 @@
             </div>
                       
                     
-                        <div  Style=" width: max-content; height:30px; margin-right: 15px; vertical-align: middle; float: left !important;"  class="request-overflow-y">
+                        <div class="col-sm" >
                     <asp:CheckBoxList ID="ComboMaxMembers"
                         class="form-control"
                         Style="width: max-content; margin-right: 6px; vertical-align: middle; float: left !important;"
@@ -33,7 +35,7 @@
                     </asp:CheckBoxList>
                 </div>
                     
-                              <div Style= "height:50px !important; align-content:center; width: max-content; height: 100px; margin-left: 5px; margin-right: 10px; float: left !important; vertical-align: middle;"  >
+                              <div Style= "height:50px !important;" class="col-sm">
                     <div class="dropdown-container" Style =" margin: 0 0 0 0" >
                         <div  class="dropdown-button noselect">
                             <div  class="dropdown-label">Регион</div>
@@ -62,14 +64,14 @@
                     </div>
                 </div>
                  
-            <div  Style="float:left !important;">
+            <div class="col-sm" >
    <asp:Button Text="Искать" Style="width: 120px !important;"
                     CssClass="button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                     runat="server" ID="BtnSearch" OnClick="BtnSearch_Click" />
 
             </div>
                       
-                    <div >
+                    <div class="col-sm" >
  <asp:Button Text="Очистить фильтры" Style="margin-left: 2px;"
                     CssClass="button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                     runat="server" ID="BtnClear" OnClick="BtnClear_Click" />    
@@ -84,7 +86,7 @@
           
                
                 
-           
+             </div>
         </div>
     </div>
 
