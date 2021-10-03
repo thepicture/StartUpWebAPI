@@ -98,7 +98,7 @@
                     <br />
                 </asp:Panel>
 
-                <table style="margin-left: 150px; margin-top: -30px;" class="inline-button">
+                <table style="margin-left: 250px; margin-top: -30px;" class="inline-button">
                     <tr>
                         <td>
 
