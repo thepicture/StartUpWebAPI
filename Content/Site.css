@@ -428,10 +428,10 @@ input[type="select"] {
     height: 100%;
     color: white;
     z-index: 9999;
-    display: flex;
     align-items: flex-end !important;
     font-family: 'Cormorant', serif;
     font-size: 1.45em;
+    display: flex;
 }
 
 .startup-image {
@@ -1289,4 +1289,25 @@ input[type="checkbox"] {
 
 .dropdown-static-height {
     height: 500px;
+}
+
+/* Search style additions. */
+.advanced {
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    color: #00838f !important;
+}
+
+.btn-secondary,
+.btn-secondary:focus,
+.btn-secondary:active {
+    color: #fff;
+    background-color: #00838f !important;
+    border-color: #00838f !important;
+    box-shadow: none
+}
+
+.form-control:focus {
+    box-shadow: none;
 }
