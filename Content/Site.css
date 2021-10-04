@@ -430,7 +430,7 @@ input[type="select"] {
     z-index: 9999;
     align-items: flex-end !important;
     font-family: 'Cormorant', serif;
-    font-size: 1.45em;
+    font-size: 1.35em;
     display: flex;
 }
 
@@ -516,6 +516,36 @@ input[type="select"] {
     font-size: 16px;
     font-weight: 300;
     line-height: 1.4;
+}
+
+.inherit-font-size {
+    font-size: inherit;
+}
+
+.marginated-tag-item {
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.blue-sign {
+    background-color: deepskyblue;
+    height: 15px;
+    width: max-content;
+    font-size: 1.05em;
+    padding-left: 5px;
+    padding-right: 5px;
+    z-index: 127;
+    position: relative;
+    margin-left: 5px;
+}
+
+.category-element {
+    z-index: 128;
+    color: #d4d4dd;
+    font-size: 1.15em;
+    width: max-content;
+    height: max-content;
+    position: relative;
 }
 
 /* Sets the blue background with transparency. */

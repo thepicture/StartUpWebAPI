@@ -14,7 +14,6 @@
                 &nbsp;
             </div>
 
-
             <div class="container-fluid fade-in" style="margin-left: -50px;">
                 <br />
 
@@ -58,11 +57,6 @@
                 </div>
             </div>
 
-
-
-
-
-
         </AnonymousTemplate>
         <LoggedInTemplate>
             <h1 style="text-align: center;">Привет, <%: User.Identity.Name %>. </h1>
@@ -78,12 +72,14 @@
                                          src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
                                     <h1 class="tag-item"
                                         style="margin-left: 20px; margin-bottom: 45px; z-index:128"><%# Eval("Name") %></h1>
-                                          <h1 class="tag-item"
-                                        style="margin-left: 20px; margin-bottom: 20px; z-index:128; color: #d4d4dd; font-size: 1.15em;"><%# Eval("SplittedCategory") %></h1>
+                                    <%-- Div gets tag-item class to be in the container item. --%>
+                                    <div class="tag-item inherit-font-size marginated-tag-item">
+                                          <h1 class="tag-item category-element"><%# Eval("SplittedCategory") %></h1>
+
                                           <h1 class="tag-item blue-sign"
-                                              style=" background-color: deepskyblue;height: 15px;width: max-content;font-size: 1.05em;padding-left: 5px;padding-right: 5px;margin-bottom: 20px;margin-left: 120px;z-index:127;"
                                               runat="server"
                                               visible='<%# ((HashSet<StartUpWebAPI.Entities.StartUpOfUser>)Eval("StartUpOfUser")).Any(s => s.User.Login.Equals(User.Identity.Name) && !s.RoleType.Name.Equals("Участник"))%>'><%# Eval("MyRole") %></h1>
+                                    </div>
                         <%-- The startup is ended sign. --%>
                         <div class="tag-item startup-end-block"
                                           runat="server"
