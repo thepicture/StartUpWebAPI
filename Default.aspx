@@ -147,7 +147,6 @@
                                     </div>
                                 </div>
                         </asp:LinkButton>
-
                     </ItemTemplate>
                 </asp:ListView>
                 <asp:Panel runat="server" ID="EmptyTeamsPanel" Visible="false">

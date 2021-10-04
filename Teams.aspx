@@ -122,18 +122,35 @@
         <asp:Panel HorizontalAlign="Center" runat="server">
             <asp:ListView ID="TeamsView" runat='server'>
                 <ItemTemplate>
-                    <asp:LinkButton runat="server"
-                        href='<%#"/TeamInfo?id=" + Eval("Id") %>'
-                        onmouseenter='<%# "showDescription(`team-" + Eval("Id")  + "`, `" + Eval("SafeDescription") + "`)"%>'
-                        onmouseleave="hideDescription()"
-                        class='<%# "team-" + Eval("Id") %>'>
-                    <div class="startup-panel radius-like container-item ">
-                            <img class="startup-image radius-like image-cover-auto" src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
-                        <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 45px; z-index:600;"><%# Eval("Name") %></h1>
-                        <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 20px;color:#d4d4dd; font-size:1.15em; z-index:129;"><%# (string) Eval("CountOfMembers") + " участников" %></h1>
-                        <div class="tag-item gray-gradient radius-like" style="z-index:127;opacity:.8"></div>
-                    </div>
-                    </asp:LinkButton>
+                      <%-- New design --%>
+                        <asp:LinkButton runat="server"
+                            ID="BtnStartUpInfo"
+                            href='<%#"/TeamInfo?id=" + Eval("Id") %>'
+                            onmouseenter='<%# "showDescription(`team-" + Eval("Id")  + "`, `" + Eval("SafeDescription") + "`)"%>'
+                            onmouseleave="hideDescription()"
+                            class='<%# "team-" + Eval("Id") %>'>
+                                <div class="startup-panel radius-like container-item">
+                                    <img class="startup-image radius-like image-cover-auto"
+                                         src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
+                                    <h1 class="tag-item item-name"><%# Eval("Name") %></h1>
+                                    <%-- Div gets tag-item class to be in the container item. --%>
+                                    <div class="tag-item inherit-font-size marginated-tag-item not-on-top">
+                                          <h1 class="tag-item category-element"><%# "Участников: " + Eval("CountOfMembers") %></h1>
+                                          <h1 class="tag-item blue-sign"
+                                              runat="server"
+                                              visible='<%# ((HashSet<StartUpWebAPI.Entities.TeamOfUser>)Eval("TeamOfUser")).Any(s => s.User.Login.Equals(User.Identity.Name) && !s.RoleType.Name.Equals("Участник"))%>'><%# Eval("MyRole") %></h1>
+                                    </div>
+                        <%-- The team is ended sign. --%>
+                                    <div class="tag-item gray-gradient radius-like"></div>
+                                    <div class="sign-my-startup tag-item align-right"
+                                        runat="server"
+                                        Visible='<%#((HashSet<StartUpWebAPI.Entities.TeamOfUser>)Eval("TeamOfUser"))
+                                            .Count >= Convert.ToInt32(Eval("MaxMembersCount")) %>'>
+                                        <asp:Label runat="server"
+                                            class="rotated-text">MAX</asp:Label>
+                                    </div>
+                                </div>
+                        </asp:LinkButton>
                 </ItemTemplate>
             </asp:ListView>
         </asp:Panel>
