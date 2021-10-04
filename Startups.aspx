@@ -187,21 +187,43 @@
             Style="margin-top: 100px; z-index: 0;">
             <asp:ListView ID="StartupsView" runat='server'>
                 <ItemTemplate>
-                    <asp:LinkButton runat="server"
-                        href='<%#"/StartUpInfo?id=" + Eval("Id") %>'
-                        onmouseenter='<%# "showDescription(`start-up-" + Eval("Id")  + "`, `" + Eval("SafeDescription") + "`)"%>'
-                        onmouseleave="hideDescription()"
-                        class='<%# "start-up-" + Eval("Id") %>'>
-                        <div class="startup-panel radius-like container-item">
-                            <img class="startup-image radius-like image-cover-auto"
-                                src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
-                            <h1 class="tag-item"
-                                style="margin-left: 20px;margin-bottom: 45px;"><%# Eval("Name") %></h1>
-                            <h1 class="tag-item"
-                                style="margin-left: 20px;margin-bottom: 20px;color:#d4d4dd; font-size:1.15em;"><%# Eval("SplittedCategory") %></h1>
-                        <div class="tag-item gray-gradient radius-like" style="z-index:64;opacity:.8;"></div>
-                        </div>
-                    </asp:LinkButton>
+                  <asp:LinkButton runat="server"
+                            ID="BtnStartUpInfo"
+                            href='<%#"/StartUpInfo?id=" + Eval("Id") %>'
+                            onmouseenter='<%# "showDescription(`start-up-" + Eval("Id")  + "`, `" + Eval("SafeDescription") + "`)"%>'
+                            onmouseleave="hideDescription()"
+                            class='<%# "start-up-" + Eval("Id") %>'>
+                                <div class="startup-panel radius-like container-item">
+                                    <img class="startup-image radius-like image-cover-auto"
+                                         src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
+                                    <h1 class="tag-item item-name"><%# Eval("Name") %></h1>
+                                    <%-- Div gets tag-item class to be in the container item. --%>
+                                    <div class="tag-item inherit-font-size marginated-tag-item not-on-top">
+                                          <h1 class="tag-item category-element"><%# Eval("SplittedCategory") %></h1>
+                                          <h1 class="tag-item blue-sign"
+                                              runat="server"
+                                              visible='<%# ((HashSet<StartUpWebAPI.Entities.StartUpOfUser>)Eval("StartUpOfUser")).Any(s => s.User.Login.Equals(User.Identity.Name) && !s.RoleType.Name.Equals("Участник"))%>'><%# Eval("MyRole") %></h1>
+                                    </div>
+                        <%-- The startup is ended sign. --%>
+                        <div class="tag-item startup-end-block"
+                                          runat="server"
+                                          visible='<%# Convert.ToBoolean(Eval("IsDone")) %>'>
+                                            <div class="tag-item not-on-top">
+                                          <div class="tag-item transparent-blue not-on-top-bg"></div>
+                                          <span class="tag-item request-solid-color done-text not-on-top-text">Завершён</span>
+                                            </div>
+                                      </div>
+                                    <div class="tag-item gray-gradient radius-like"></div>
+                                    <div class="sign-my-startup tag-item align-right"
+                                        runat="server"
+                                        Visible='<%#((HashSet<StartUpWebAPI.Entities.StartUpOfUser>)Eval("StartUpOfUser"))
+                                            .Count >= Convert.ToInt32(Eval("MaxMembersCount")) 
+                                            && !Convert.ToBoolean(Eval("IsDone")) %>'>
+                                        <asp:Label runat="server"
+                                            class="rotated-text">MAX</asp:Label>
+                                    </div>
+                                </div>
+                        </asp:LinkButton>
                 </ItemTemplate>
             </asp:ListView>
         </asp:Panel>
