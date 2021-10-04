@@ -59,9 +59,9 @@
 
         </AnonymousTemplate>
         <LoggedInTemplate>
-            <h1 style="text-align: center;">Привет, <%: User.Identity.Name %>. </h1>
+            <h1 class="centerized-title">Привет, <%: User.Identity.Name %>. </h1>
             <div class="marginaled center-align">
-                <h1 style="color: black; font-size: 5em; margin-block-end: 30px; text-align: center;">Мои стартапы</h1>
+                <h1 class="items-title">Мои стартапы</h1>
                 <asp:ListView runat="server" ID="LViewMyStartups">
                     <ItemTemplate>
                         <asp:LinkButton runat="server"
@@ -70,12 +70,10 @@
                                 <div class="startup-panel radius-like container-item">
                                     <img class="startup-image radius-like image-cover-auto"
                                          src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
-                                    <h1 class="tag-item"
-                                        style="margin-left: 20px; margin-bottom: 45px; z-index:128"><%# Eval("Name") %></h1>
+                                    <h1 class="tag-item item-name"><%# Eval("Name") %></h1>
                                     <%-- Div gets tag-item class to be in the container item. --%>
                                     <div class="tag-item inherit-font-size marginated-tag-item">
                                           <h1 class="tag-item category-element"><%# Eval("SplittedCategory") %></h1>
-
                                           <h1 class="tag-item blue-sign"
                                               runat="server"
                                               visible='<%# ((HashSet<StartUpWebAPI.Entities.StartUpOfUser>)Eval("StartUpOfUser")).Any(s => s.User.Login.Equals(User.Identity.Name) && !s.RoleType.Name.Equals("Участник"))%>'><%# Eval("MyRole") %></h1>
@@ -87,10 +85,8 @@
                                           <div class="tag-item transparent-blue"></div>
                                           <span class="tag-item request-solid-color done-text">Завершён</span>
                                       </div>
-                                    <div class="tag-item gray-gradient radius-like"
-                                        style="z-index: 64; opacity: .8;"></div>
-                                    <div class="sign-my-startup tag-item"
-                                        style="left: auto;"
+                                    <div class="tag-item gray-gradient radius-like"></div>
+                                    <div class="sign-my-startup tag-item align-right"
                                         runat="server"
                                         Visible='<%#((HashSet<StartUpWebAPI.Entities.StartUpOfUser>)Eval("StartUpOfUser"))
                                             .Count >= Convert.ToInt32(Eval("MaxMembersCount")) 
@@ -103,7 +99,7 @@
                     </ItemTemplate>
                 </asp:ListView>
                 <asp:Panel runat="server" ID="EmptyStartupsPanel" Visible="false">
-                    <p class="default-lead" style="font-size: 3em;">Стартапов пока нет :(</p>
+                    <p class="default-lead empty-items-font-size">Стартапов пока нет :(</p>
                 </asp:Panel>
                 <asp:Button ID="BtnCreateStartUp"
                     OnClick="BtnCreateStartUp_Click"
@@ -114,24 +110,40 @@
                 &nbsp;
             </div>
             <div class="marginaled center-align">
-                <h1 style="color: black; font-size: 5em; margin-block-end: 30px; text-align: center;">Мои команды</h1>
+                <h1 class="items-title">Мои команды</h1>
                 <asp:ListView runat="server" ID="LViewMyTeams">
                     <ItemTemplate>
+                        <%-- New design --%>
                         <asp:LinkButton runat="server"
-                            ID="BtnTeamInfo"
+                            ID="BtnStartUpInfo"
                             href='<%#"/TeamInfo?id=" + Eval("Id") %>'>
-                            <div class="startup-panel radius-like container-item ">
-                                <img class="startup-image radius-like image-cover-auto" src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
-                                <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 45px; z-index:128;"><%# Eval("Name") %></h1>
-                                <h1 class="tag-item" style="margin-left: 20px;margin-bottom: 20px;color:#d4d4dd; z-index:128; font-size:1.15em;"><%# (string) Eval("CountOfMembers") + " участников" %></h1>
-                                <div class="tag-item gray-gradient radius-like" style="z-index:64;opacity:.8;"></div>
-                                <asp:Label class="sign-my-startup tag-item" style="left: auto;" Visible='<%# ((HashSet<StartUpWebAPI.Entities.TeamOfUser>)Eval("TeamOfUser")).Any(s => s.User.Login.Equals(User.Identity.Name) && !s.RoleType.Name.Equals("Участник"))%>' runat="server"><%# Eval("MyRole") %></asp:Label>
-                    </div>
+                                <div class="startup-panel radius-like container-item">
+                                    <img class="startup-image radius-like image-cover-auto"
+                                         src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
+                                    <h1 class="tag-item item-name"><%# Eval("Name") %></h1>
+                                    <%-- Div gets tag-item class to be in the container item. --%>
+                                    <div class="tag-item inherit-font-size marginated-tag-item">
+                                          <h1 class="tag-item category-element"><%# "Участников: " + Eval("CountOfMembers") %></h1>
+                                          <h1 class="tag-item blue-sign"
+                                              runat="server"
+                                              visible='<%# ((HashSet<StartUpWebAPI.Entities.TeamOfUser>)Eval("TeamOfUser")).Any(s => s.User.Login.Equals(User.Identity.Name) && !s.RoleType.Name.Equals("Участник"))%>'><%# Eval("MyRole") %></h1>
+                                    </div>
+                        <%-- The team is ended sign. --%>
+                                    <div class="tag-item gray-gradient radius-like"></div>
+                                    <div class="sign-my-startup tag-item align-right"
+                                        runat="server"
+                                        Visible='<%#((HashSet<StartUpWebAPI.Entities.TeamOfUser>)Eval("TeamOfUser"))
+                                            .Count >= Convert.ToInt32(Eval("MaxMembersCount")) %>'>
+                                        <asp:Label runat="server"
+                                            class="rotated-text">MAX</asp:Label>
+                                    </div>
+                                </div>
                         </asp:LinkButton>
+
                     </ItemTemplate>
                 </asp:ListView>
                 <asp:Panel runat="server" ID="EmptyTeamsPanel" Visible="false">
-                    <p class="default-lead" style="font-size: 3em;">Команд пока нет :(</p>
+                    <p class="default-lead empty-items-font-size">Команд пока нет :(</p>
                 </asp:Panel>
                 <div class="center-align">
                     <asp:Button Style="height: 40px; margin-block-start: 30px; width: 250px;"

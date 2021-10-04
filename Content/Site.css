@@ -444,6 +444,16 @@ input[type="select"] {
     margin-bottom: 0px !important;
 }
 
+.item-name {
+    margin-left: 20px;
+    margin-bottom: 45px;
+    z-index: 128;
+}
+
+.align-right {
+    left: auto;
+}
+
 /* Styles for panel in Startups. */
 .startup-panel {
     margin: 10px;
@@ -461,6 +471,8 @@ input[type="select"] {
 .gray-gradient {
     background: rgb(255,255,255);
     background: linear-gradient(180deg, rgba(255,255,255,0) 19%, rgba(106,106,106,0.4) 33%, rgba(0,0,0,1) 89%);
+    z-index: 64;
+    opacity: .8;
 }
 
 /* Styles for register. */
@@ -546,6 +558,21 @@ input[type="select"] {
     width: max-content;
     height: max-content;
     position: relative;
+}
+
+.centerized-title {
+    text-align: center;
+}
+
+.items-title {
+    color: black;
+    font-size: 5em;
+    margin-block-end: 30px;
+    text-align: center;
+}
+
+.empty-items-font-size {
+    font-size: 3em;
 }
 
 /* Sets the blue background with transparency. */
