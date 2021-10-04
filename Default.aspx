@@ -66,7 +66,10 @@
                     <ItemTemplate>
                         <asp:LinkButton runat="server"
                             ID="BtnStartUpInfo"
-                            href='<%#"/StartUpInfo?id=" + Eval("Id") %>'>
+                            href='<%#"/StartUpInfo?id=" + Eval("Id") %>'
+                            onmouseenter='<%# "showDescription(`start-up-" + Eval("Id")  + "`, `" + Eval("SafeDescription") + "`)"%>'
+                            onmouseleave="hideDescription()"
+                            class='<%# "start-up-" + Eval("Id") %>'>
                                 <div class="startup-panel radius-like container-item">
                                     <img class="startup-image radius-like image-cover-auto"
                                          src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
@@ -116,7 +119,10 @@
                         <%-- New design --%>
                         <asp:LinkButton runat="server"
                             ID="BtnStartUpInfo"
-                            href='<%#"/TeamInfo?id=" + Eval("Id") %>'>
+                            href='<%#"/TeamInfo?id=" + Eval("Id") %>'
+                            onmouseenter='<%# "showDescription(`team-" + Eval("Id")  + "`, `" + Eval("SafeDescription") + "`)"%>'
+                            onmouseleave="hideDescription()"
+                            class='<%# "team-" + Eval("Id") %>'>
                                 <div class="startup-panel radius-like container-item">
                                     <img class="startup-image radius-like image-cover-auto"
                                          src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
@@ -157,4 +163,7 @@
             </div>
         </LoggedInTemplate>
     </asp:LoginView>
+    <script src='<%=ResolveUrl("~/Scripts/descriptor-presenter.js") %>'
+        type="text/javascript">
+    </script>
 </asp:Content>

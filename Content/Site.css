@@ -579,6 +579,7 @@ input[type="select"] {
 .transparent-blue {
     background-color: deepskyblue;
     opacity: .5;
+    z-index:127;
 }
 
 /* Sets white font color. */
@@ -814,7 +815,7 @@ title-setting-register-like {
     margin: 10px;
     border-radius: 20px;
     animation: fade-in-description 1s ease-in-out 1s forwards;
-    z-index: 9999;
+    z-index: 129;
     pointer-events: none;
 }
 
