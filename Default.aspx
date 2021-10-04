@@ -75,7 +75,7 @@
                                          src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
                                     <h1 class="tag-item item-name"><%# Eval("Name") %></h1>
                                     <%-- Div gets tag-item class to be in the container item. --%>
-                                    <div class="tag-item inherit-font-size marginated-tag-item">
+                                    <div class="tag-item inherit-font-size marginated-tag-item not-on-top">
                                           <h1 class="tag-item category-element"><%# Eval("SplittedCategory") %></h1>
                                           <h1 class="tag-item blue-sign"
                                               runat="server"
@@ -85,8 +85,10 @@
                         <div class="tag-item startup-end-block"
                                           runat="server"
                                           visible='<%# Convert.ToBoolean(Eval("IsDone")) %>'>
-                                          <div class="tag-item transparent-blue"></div>
-                                          <span class="tag-item request-solid-color done-text">Завершён</span>
+                                            <div class="tag-item not-on-top">
+                                          <div class="tag-item transparent-blue not-on-top-bg"></div>
+                                          <span class="tag-item request-solid-color done-text not-on-top-text">Завершён</span>
+                                            </div>
                                       </div>
                                     <div class="tag-item gray-gradient radius-like"></div>
                                     <div class="sign-my-startup tag-item align-right"
@@ -128,7 +130,7 @@
                                          src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
                                     <h1 class="tag-item item-name"><%# Eval("Name") %></h1>
                                     <%-- Div gets tag-item class to be in the container item. --%>
-                                    <div class="tag-item inherit-font-size marginated-tag-item">
+                                    <div class="tag-item inherit-font-size marginated-tag-item not-on-top">
                                           <h1 class="tag-item category-element"><%# "Участников: " + Eval("CountOfMembers") %></h1>
                                           <h1 class="tag-item blue-sign"
                                               runat="server"

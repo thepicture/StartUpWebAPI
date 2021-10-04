@@ -427,7 +427,6 @@ input[type="select"] {
     width: 100%;
     height: 100%;
     color: white;
-    z-index: 9999;
     align-items: flex-end !important;
     font-family: 'Cormorant', serif;
     font-size: 1.35em;
@@ -575,11 +574,22 @@ input[type="select"] {
     font-size: 3em;
 }
 
+.not-on-top {
+    z-index: auto;
+}
+
+.not-on-top-bg {
+    z-index: 125;
+}
+
+.not-on-top-text {
+    z-index: 126;
+}
+
 /* Sets the blue background with transparency. */
 .transparent-blue {
     background-color: deepskyblue;
     opacity: .5;
-    z-index:127;
 }
 
 /* Sets white font color. */
@@ -797,7 +807,6 @@ title-setting-register-like {
     margin: 20px;
     border-radius: 20px;
     animation: fade-out-reason 5s ease-in-out 3s forwards;
-    z-index: 9999;
     color: white;
     text-align: center;
     pointer-events: none;
