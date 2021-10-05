@@ -11,7 +11,7 @@ namespace StartUpWebAPI.Entities
 {
     using System;
     using System.Collections.Generic;
-    
+    [Serializable]
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,14 +22,14 @@ namespace StartUpWebAPI.Entities
             this.TeamComment = new HashSet<TeamComment>();
             this.TeamOfUser = new HashSet<TeamOfUser>();
         }
-    
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
         public byte[] UserImage { get; set; }
         public int TypeOfUserId { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StartUpComment> StartUpComment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

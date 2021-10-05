@@ -307,7 +307,7 @@ input[type="select"] {
 
 .round-div-block-specified-about {
     border-radius: 10px;
-    height: 50px !important;
+    height: 50px;
     font-family: 'Cormorant', serif;
     padding: 10px;
     background: white;
@@ -1177,7 +1177,7 @@ table {
     padding-right: 5px;
     text-align: center;
     width: auto;
-    font-size: 30px !important;
+    font-size: 30px;
 }
 
 .request-vertical-top {
@@ -1383,4 +1383,105 @@ input[type="checkbox"] {
 
 .form-control:focus {
     box-shadow: none;
+}
+
+/* Search styles */
+
+.search-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.search-items {
+    width: 740px;
+    animation: none;
+    display: inline-block;
+}
+
+.search-label {
+    font-size: 20px;
+    margin-left: 70px;
+    margin-right: 20px;
+}
+
+.search-startup-text-box {
+    width: 515px;
+    max-width: 700px;
+    color: black;
+}
+
+.category-dropdown {
+    color: black !important;
+    width: 455px !important;
+    display: inline-block;
+}
+
+.max-members-textbox {
+    color: black !important;
+    width: 330px;
+}
+
+.description-startup-label {
+    font-size: 20px;
+    margin-left: 70px;
+    margin-right: 20px;
+}
+
+.main-startup-image-container {
+    margin-left: 70px;
+    width: 250px;
+    height: 150px;
+}
+
+.startup-image-header {
+    margin-bottom: 60px;
+    height: 50px;
+    justify-content: center;
+}
+
+.remove-image-button {
+    width: 90%;
+    height: max-content;
+}
+
+.upload-image-input {
+    margin-bottom: 0px;
+    font-size: 17px;
+    margin-left: 70px;
+    margin-right: 20px;
+}
+
+.add-images-startup-button {
+    margin-bottom: 10px;
+    font-size: 17px;
+    margin-left: 70px;
+    height: 35px;
+    border-radius: 5px;
+    color: black;
+}
+
+.add-startup-documents-button {
+    margin-bottom: 10px;
+    margin-bottom: 0px;
+    font-size: 17px;
+    margin-left: 70px;
+    height: 35px;
+}
+
+.startup-save-button {
+    margin-bottom: 0px;
+    float: left;
+    margin-right: 40px;
+    font-size: 17px;
+    margin-left: 70px;
+    height: 35px;
+}
+
+.startup-cancel-button {
+    width: 170px;
+    font-size: 17px;
+    margin-left: 70px;
+    height: 35px;
 }

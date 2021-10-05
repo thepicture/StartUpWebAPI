@@ -2,26 +2,40 @@
 
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContent" ID="BindingStartupsContent">
-    <div style="display: flex; justify-content: center; align-items: center; vertical-align: middle;">
-        <div class="round-div-block semi-transparent-register-like-two request-auto-height"
-            style="width: 740px; animation: none !important; display: inline-block;">
+    <div class="search-panel">
+        <div class="round-div-block semi-transparent-register-like-two request-auto-height search-items">
             <br />
 
-            <asp:Label runat="server" Style="font-size: 20px; margin-left: 70px; margin-right: 20px;" Text="Имя"></asp:Label>
-            <asp:TextBox runat="server" ID="TBoxName" Style="width: 515px !important; max-width: 700px; color: black !important;" CssClass="nice-text-box prevent-selection textbox-style-setting" TextMode="SingleLine" Wrap="true"></asp:TextBox>
+            <asp:Label runat="server" CssClass="search-label" Text="Имя"></asp:Label>
+            <asp:TextBox runat="server"
+                ID="TBoxName"
+                CssClass="nice-text-box prevent-selection textbox-style-setting search-startup-text-box"
+                TextMode="SingleLine"
+                Wrap="true"></asp:TextBox>
             <br />
             <br />
-            <asp:Label runat="server" Style="font-size: 20px; margin-left: 70px; margin-right: 20px; float: left !important;" Text="Категория"></asp:Label>
-            <asp:DropDownList AutoPostBack="true" runat="server" class="form-control" Style="color: black !important; width: 455px !important; float: unset !important;" ID="ComboCategories" Width="200"></asp:DropDownList>
+            <asp:Label runat="server" CssClass="search-label" Text="Категория"></asp:Label>
+            <asp:DropDownList AutoPostBack="true"
+                runat="server"
+                class="form-control category-dropdown"
+                ID="ComboCategories"
+                Width="200">
+            </asp:DropDownList>
             <br />
-            <asp:Label runat="server" Style="font-size: 20px; margin-left: 70px; margin-right: 20px;" Text="Максимум участников"></asp:Label>
-            <asp:TextBox runat="server" ID="TBoxMaxMembers" Style="color: black !important; width: 330px !important;" CssClass="nice-text-box prevent-selection textbox-style-setting" Width="50" TextMode="Number" MaxLength="10" AutoCompleteType="Disabled"></asp:TextBox>
+            <br />
+            <asp:Label runat="server" CssClass="search-label" Text="Максимум участников"></asp:Label>
+            <asp:TextBox runat="server"
+                ID="TBoxMaxMembers"
+                CssClass="nice-text-box prevent-selection textbox-style-setting max-members-textbox"
+                Width="50"
+                TextMode="Number"
+                MaxLength="10"
+                AutoCompleteType="Disabled"></asp:TextBox>
             <br />
             <br />
             <asp:Label runat="server"
-                Style="font-size: 20px; margin-left: 70px; margin-right: 20px;"
                 Text="Описание"
-                CssClass="request-vertical-top"></asp:Label>
+                CssClass="request-vertical-top description-startup-label"></asp:Label>
             <asp:TextBox runat="server"
                 ID="TBoxDescription"
                 ForeColor="Black"
@@ -33,7 +47,7 @@
             <br />
             <br />
 
-            <asp:Label runat="server" Style="font-size: 20px; margin-left: 70px; margin-right: 20px;" Text="Изображения стартапа"></asp:Label>
+            <asp:Label runat="server" CssClass="search-label" Text="Изображения стартапа"></asp:Label>
             <br />
             <asp:CheckBox runat="server" Text="Завершён" ID="CheckBoxDone" Checked='<%# Bind("IsDone") %>' Visible="false"
                 AutoPostBack="true"></asp:CheckBox>
@@ -41,14 +55,13 @@
             <%-- ListView for demonstrating attached images if any. --%>
             <asp:ListView runat="server" ID="LViewImages" OnItemCommand="LViewImages_ItemCommand">
                 <ItemTemplate>
-                    <div class="container-item startup-panel radius-like" style="margin-left: 70px !important; width: 250px !important; height: 150px !important;">
+                    <div class="container-item startup-panel radius-like main-startup-image-container">
                         <img class="startup-image radius-like image-cover-auto" src='<%# Eval("ImageInBase64") %>' alt='<%# Eval("Name") %>' />
 
-                        <h1 class="tag-item" style="margin-bottom: 100px; margin-left: 60px; width: 150px; height: 50px;"><%# Eval("Name") %></h1>
+                        <h1 class="tag-item startup-image-header"><%# Eval("Name") %></h1>
 
                         <asp:Button runat="server"
-                            CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page-four margin-bottom-top-as-usual"
-                            Style="width: 90%; height: max-content;"
+                            CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page-four margin-bottom-top-as-usual remove-image-button"
                             Text="Удалить"
                             CommandName="RemoveImage"
                             CommandArgument='<%# Bind("Name") %>' ID="BtnRemoveImage"></asp:Button>
@@ -58,31 +71,27 @@
             </asp:ListView>
 
             <asp:FileUpload runat="server"
-                Style="margin-bottom: 0px !important; font-size: 17px; margin-left: 70px; margin-right: 20px;"
+                CssClass="upload-image-input"
                 AllowMultiple="true"
                 ID="FileUploadImages" />
 
             <asp:Button runat="server"
-                Style="margin-bottom: 10px !important; font-size: 17px !important; margin-left: 70px; height: 35px !important; border-radius: 5px !important; color: black !important;"
-                CssClass="round-div-block-specified-about about-like-cloud-button-three"
+                CssClass="round-div-block-specified-about about-like-cloud-button-three add-images-startup-button"
                 Text="Добавить изображения"
                 ID="BtnAddImages"
                 OnClick="BtnAddImages_Click" />
 
-            <asp:Label runat="server" Style="font-size: 20px; margin-bottom: 10px !important; margin-left: 70px; margin-right: 20px;" Text="Документы (до 5Мб)"></asp:Label>
+            <asp:Label runat="server"
+                Text="Документы (до 5Мб)"
+                CssClass="search-label"></asp:Label>
             <br />
             <%-- ListView for demonstrating attached documents if any. --%>
             <asp:ListView runat="server" ID="LViewDocuments" OnItemCommand="LViewDocuments_ItemCommand">
                 <ItemTemplate>
-                    <div class="container-item startup-panel radius-like" style="margin-left: 70px !important; width: 250px !important; height: 150px !important;">
-                        <%-- <div class="radius-like">
-                    <asp:CheckBox runat="server" Text='Приватный' ID="PublicBox"
-                        Checked='<%# Eval("IsPublic") %>'></asp:CheckBox>
-                </div>--%>
-                        <h1 class="tag-item" style="margin-bottom: 100px; margin-left: 60px; width: 150px; height: 50px;"><%# Eval("FileName") %></h1>
+                    <div class="container-item startup-panel radius-like main-startup-image-container">
+                        <h1 class="tag-item startup-image-header"><%# Eval("FileName") %></h1>
                         <asp:Button runat="server"
-                            CssClass="tag-item round-div-block button-style-for-page about-like-cloud-button-for-page-four margin-bottom-top-as-usual"
-                            Style="width: 90%; height: max-content;"
+                            CssClass="tag-item round-div-block button-style-for-page about-like-cloud-button-for-page-four margin-bottom-top-as-usual remove-image-button"
                             Text="Удалить"
                             CommandName="RemoveDocument"
                             CommandArgument='<%# Bind("FileName") %>' ID="BtnRemoveDocument"></asp:Button>
@@ -91,24 +100,26 @@
                 </ItemTemplate>
             </asp:ListView>
             <br />
-            <asp:FileUpload Style="margin-bottom: 10px !important; font-size: 17px; margin-left: 70px; margin-right: 20px;"
+            <asp:FileUpload
+                CssClass="upload-image-input"
                 runat="server"
                 AllowMultiple="true"
                 ID="DocumentUpload" />
 
-            <asp:Button Style="margin-bottom: 10px !important; margin-bottom: 0px !important; font-size: 17px !important; margin-left: 70px; height: 35px !important;" CssClass="round-div-block-specified-about about-like-cloud-button-three" runat="server" Text="Добавить документы" ID="BtnAddDocuments"
+            <asp:Button CssClass="round-div-block-specified-about about-like-cloud-button-three add-startup-documents-button"
+                runat="server"
+                Text="Добавить документы"
+                ID="BtnAddDocuments"
                 OnClick="BtnAddDocuments_Click" />
 
             <asp:Button runat="server"
-                Style="margin-bottom: 0px !important; float: left; margin-right: 40px !important; font-size: 17px !important; margin-left: 70px; height: 35px !important;"
-                CssClass="round-div-block-specified-about about-like-cloud-button-three"
+                CssClass="round-div-block-specified-about about-like-cloud-button-three startup-save-button"
                 OnClick="BtnSave_Click"
                 ID="BtnSave"
                 Text="Сохранить изменения" />
 
             <asp:Button runat="server"
-                Style="width: 170px !important; font-size: 17px !important; margin-left: 70px; height: 35px !important;"
-                CssClass="round-div-block-specified-about about-like-cloud-button-three"
+                CssClass="round-div-block-specified-about about-like-cloud-button-three startup-cancel-button"
                 OnClick="BtnCancel_Click"
                 ID="BtnCancel"
                 Text="Отмена" />
