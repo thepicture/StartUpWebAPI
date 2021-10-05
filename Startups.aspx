@@ -24,18 +24,18 @@
                         <div class="dropdown-box-additions">
                             <div class="dropdown-container dropdown no-margin"
                                 id="members-container">
-                                <div class="dropdown-button noselect">
+                                <div class="dropdown-button border-radius noselect">
                                     <div class="dropdown-label">Число участников</div>
                                     <div class="dropdown-quantity">(<span class="quantity">Любое</span>)</div>
                                     <i class="fa fa-filter"></i>
                                 </div>
                                 <div class="dropdown-list static-height-dropdown" hidden>
                                     <div>
-                                        <asp:Button runat="server"
+                                        <asp:Button runat="server" CssClass="border-radius-btn"
                                             OnClientClick="flushDropDownBox(`#members-container`)"
                                             ID="BtnClearMembers"
                                             Text="Очистить" />
-                                        <input type="search" placeholder="Поиск по кол-ву"
+                                        <input type="search" style="border: 1px solid" placeholder="Поиск по кол-ву"
                                             class="dropdown-search request-static-height" />
                                     </div>
                                     <div class="request-white-bg">
@@ -68,18 +68,18 @@
                         <div class="dropdown-box-additions">
                             <div style="width: 160px;" class="dropdown-container dropdown no-margin"
                                 id="regions-container">
-                                <div class="dropdown-button noselect">
+                                <div class="dropdown-button border-radius noselect">
                                     <div class="dropdown-label">Регион</div>
                                     <div class="dropdown-quantity">(<span class="quantity">Любой</span>)</div>
                                     <i class="fa fa-filter"></i>
                                 </div>
                                 <div class="dropdown-list static-height-dropdown" hidden>
                                     <div>
-                                        <asp:Button runat="server"
+                                        <asp:Button runat="server" CssClass="border-radius-btn"
                                             OnClientClick="flushDropDownBox(`#regions-container`)"
                                             ID="BtnClearRegions"
                                             Text="Очистить" />
-                                        <input type="search" placeholder="Поиск по региону"
+                                        <input type="search" style="border: 1px solid" placeholder="Поиск по региону"
                                             class="dropdown-search request-static-height" />
                                     </div>
                                     <div class="request-white-bg">
@@ -109,18 +109,18 @@
                         <div class="dropdown-box-additions">
                             <div class="dropdown-container dropdown no-margin"
                                 id="categories-container">
-                                <div class="dropdown-button noselect">
+                                <div class="dropdown-button border-radius noselect">
                                     <div class="dropdown-label">Категории</div>
                                     <div class="dropdown-quantity">(<span class="quantity">Любые</span>)</div>
                                     <i class="fa fa-filter"></i>
                                 </div>
                                 <div class="dropdown-list static-height-dropdown" hidden>
                                     <div>
-                                        <asp:Button runat="server"
+                                        <asp:Button runat="server" CssClass="border-radius-btn"
                                             OnClientClick="flushDropDownBox(`#categories-container`)"
                                             ID="BtnCleanCategories"
                                             Text="Очистить" />
-                                        <input type="search" placeholder="Поиск по категории"
+                                        <input type="search " style="border: 1px solid" placeholder="Поиск по категории"
                                             class="dropdown-search request-static-height" />
                                     </div>
                                     <div class="request-white-bg">
@@ -174,10 +174,10 @@
 
                     </ContentTemplate>
                 </asp:UpdatePanel>
-                <asp:Button Text="Искать" Style="width: 120px !important;"
+                <asp:Button Text="Искать" Style="width: 120px !important; margin-top: 5px !important;"
                     CssClass="button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                     runat="server" ID="BtnSearch" OnClick="BtnSearch_Click" />
-                <asp:Button Text="Очистить фильтры" Style="margin-left: -2px;"
+                <asp:Button Text="Очистить фильтры" Style="margin-left: -2px; margin-top: 5px !important;"
                     CssClass="button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                     runat="server" ID="BtnClear" OnClick="BtnClear_Click" />
             </div>
@@ -187,12 +187,12 @@
             Style="margin-top: 100px; z-index: 0;">
             <asp:ListView ID="StartupsView" runat='server'>
                 <ItemTemplate>
-                  <asp:LinkButton runat="server"
-                            ID="BtnStartUpInfo"
-                            href='<%#"/StartUpInfo?id=" + Eval("Id") %>'
-                            onmouseenter='<%# "showDescription(`start-up-" + Eval("Id")  + "`, `" + Eval("SafeDescription") + "`)"%>'
-                            onmouseleave="hideDescription()"
-                            class='<%# "start-up-" + Eval("Id") %>'>
+                    <asp:LinkButton runat="server"
+                        ID="BtnStartUpInfo"
+                        href='<%#"/StartUpInfo?id=" + Eval("Id") %>'
+                        onmouseenter='<%# "showDescription(`start-up-" + Eval("Id")  + "`, `" + Eval("SafeDescription") + "`)"%>'
+                        onmouseleave="hideDescription()"
+                        class='<%# "start-up-" + Eval("Id") %>'>
                                 <div class="startup-panel radius-like container-item">
                                     <img class="startup-image radius-like image-cover-auto"
                                          src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
@@ -223,7 +223,7 @@
                                             class="rotated-text">MAX</asp:Label>
                                     </div>
                                 </div>
-                        </asp:LinkButton>
+                    </asp:LinkButton>
                 </ItemTemplate>
             </asp:ListView>
         </asp:Panel>
