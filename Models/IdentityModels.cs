@@ -10,7 +10,6 @@ using StartUpWebAPI.Models;
 
 namespace StartUpWebAPI.Models
 {
-    // You can add User data for the user by adding more properties to your User class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
         public string FullName { get; internal set; }
@@ -19,7 +18,6 @@ namespace StartUpWebAPI.Models
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = manager.CreateIdentity(this, DefaultAuthenticationTypes.ApplicationCookie);
-            // Add custom user claims here
             return userIdentity;
         }
 
