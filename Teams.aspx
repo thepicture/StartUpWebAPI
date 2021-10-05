@@ -24,18 +24,18 @@
             <div style="margin-right: 30px;" class="dropdown-box-additions">
                 <div class="dropdown-container dropdown no-margin"
                     id="members-container">
-                    <div class="dropdown-button noselect">
+                    <div class="dropdown-button border-radius noselect">
                         <div class="dropdown-label">Число участников</div>
                         <div class="dropdown-quantity">(<span class="quantity">Любое</span>)</div>
                         <i class="fa fa-filter"></i>
                     </div>
                     <div class="dropdown-list static-height-dropdown" hidden>
                         <div>
-                            <asp:Button runat="server"
+                            <asp:Button runat="server" CssClass="border-radius-btn"
                                 OnClientClick="flushDropDownBox(`#members-container`)"
                                 ID="BtnClearMembers"
                                 Text="Очистить" />
-                            <input type="search" placeholder="Поиск по кол-ву"
+                            <input type="search" style="border: 1px solid" placeholder="Поиск по кол-ву"
                                 class="dropdown-search request-static-height" />
                         </div>
                         <div class="request-white-bg">
@@ -68,18 +68,18 @@
             <div style="margin-right: 20px;" class="dropdown-box-additions">
                 <div class="dropdown-container dropdown no-margin"
                     id="regions-container">
-                    <div class="dropdown-button noselect">
+                    <div class="dropdown-button border-radius noselect">
                         <div class="dropdown-label">Регион</div>
                         <div class="dropdown-quantity">(<span class="quantity">Любой</span>)</div>
                         <i class="fa fa-filter"></i>
                     </div>
                     <div class="dropdown-list static-height-dropdown" hidden>
                         <div>
-                            <asp:Button runat="server"
+                            <asp:Button runat="server" CssClass="border-radius-btn"
                                 OnClientClick="flushDropDownBox(`#regions-container`)"
                                 ID="BtnClearRegions"
                                 Text="Очистить" />
-                            <input type="search" placeholder="Поиск по региону"
+                            <input type="search" style="border: 1px solid" placeholder="Поиск по региону"
                                 class="dropdown-search request-static-height" />
                         </div>
                         <div class="request-white-bg">
@@ -105,13 +105,13 @@
                 </div>
             </div>
 
-            <div style="float: left !important;">
+            <div style="float: left !important; margin-top:5px;">
                 <asp:Button Text="Искать" Style="width: 120px !important;"
                     CssClass="button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                     runat="server" ID="BtnSearch" OnClick="BtnSearch_Click" />
             </div>
             <div>
-                <asp:Button Text="Очистить фильтры" Style="margin-left: 2px;"
+                <asp:Button Text="Очистить фильтры" Style="margin-left: 2px; margin-top:5px !important;"
                     CssClass="button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                     runat="server" ID="BtnClear" OnClick="BtnClear_Click" />
             </div>
