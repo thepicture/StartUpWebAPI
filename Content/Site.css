@@ -663,6 +663,24 @@ input[type="select"] {
     font-size: 42px;
 }
 
+.contact-main-div {
+    display: flex;
+    justify-content: left;
+    vertical-align: middle;
+}
+
+.contact-sub-main-div {
+    width: 600px;
+    height: 300px;
+    animation: none;
+    display: inline-block;
+}
+
+.contact-article {
+    font-size: 20px;
+    margin: 0 0 0 30px;
+}
+
 /* Styles for register and login. */
 
 .textbox-style-setting {

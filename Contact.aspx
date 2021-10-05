@@ -1,23 +1,30 @@
-﻿<%@ Page Title="Контактные данные" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Contact.aspx.cs" Inherits="StartUpWebAPI.Contact" %>
+﻿<%@ Page Title="Контактные данные"
+    Language="C#"
+    MasterPageFile="~/Site.Master"
+    AutoEventWireup="true"
+    CodeBehind="Contact.aspx.cs"
+    Inherits="StartUpWebAPI.Contact" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <br />
     <br />
     <br />
     <br />
-    <div style="display: flex; justify-content: left; vertical-align: middle;">
+    <div class="contact-main-div">
 
-        <div class="round-div-block semi-transparent" style="width: 600px; height: 300px; animation: none !important; display: inline-block;">
+        <div class="round-div-block semi-transparent contact-sub-main-div">
 
-            <h2 class="title-setting-contact title-page-margin" style="text-align: center;"><%: Title %></h2>
+            <h2 class="title-setting-contact title-page-margin centerized-title"><%: Title %></h2>
             <br />
 
-            <article style="font-size: 20px; margin: 0 0 0 30px" class="title-page-margin">
+            <article class="title-page-margin contact-article">
                 Проект создан командой программистов из многопрофильного колледжа ТИУ
             </article>
             <br />
             <address>
-                <strong style="font-size: 20px; margin: 0 0 0 30px" class="title-page-margin">Поддержка:</strong>   <a href="mailto:start.up.entertainment.company@gmail.com" target="_blank">start.up.entertainment.company@gmail.com</a><br />
+                <strong class="title-page-margin contact-article">Поддержка:</strong>
+                <a href="mailto:start.up.entertainment.company@gmail.com" target="_blank">start.up.entertainment.company@gmail.com</a>
+                <br />
             </address>
         </div>
     </div>
