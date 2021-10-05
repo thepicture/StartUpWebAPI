@@ -1485,3 +1485,100 @@ input[type="checkbox"] {
     margin-left: 70px;
     height: 35px;
 }
+
+.add-teams-main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.add-teams-sub-main-container {
+    width: 740px;
+    animation: none;
+    display: inline-block;
+}
+
+.add-teams-name-box {
+    width: 515px;
+    max-width: 700px;
+    color: black;
+}
+
+.add-teams-name-label {
+    font-size: 20px;
+    margin-left: 70px;
+    margin-right: 20px;
+}
+
+.add-teams-members-label {
+    font-size: 20px;
+    margin-left: 70px;
+    margin-right: 20px;
+}
+
+.add-teams-member-box {
+    color: black;
+    width: 330px;
+}
+
+.add-teams-description-label {
+    font-size: 20px;
+    margin-left: 70px;
+    margin-right: 20px;
+}
+
+.add-teams-logo-label {
+    font-size: 20px;
+    margin-left: 70px;
+    margin-right: 20px;
+}
+
+.add-teams-panel {
+    margin-left: 70px;
+    width: 250px;
+    height: 150px;
+}
+
+.add-teams-remove-image-button {
+    width: 90%;
+    height: max-content;
+    bottom: 0;
+    position: absolute;
+}
+
+.add-teams-upload-image {
+    margin-bottom: 0px;
+    font-size: 17px;
+    margin-left: 70px;
+    margin-right: 20px;
+}
+
+.add-teams-add-image {
+    margin-bottom: 10px;
+    font-size: 17px;
+    margin-left: 70px;
+    height: 35px;
+    border-radius: 5px;
+    color: black;
+}
+
+.add-teams-inline-block {
+    display: inline-block;
+}
+
+.add-teams-save {
+    margin-bottom: 0px;
+    float: left;
+    margin-right: 40px;
+    font-size: 17px;
+    margin-left: 70px;
+    height: 35px;
+}
+
+.add-teams-discard {
+    width: 170px;
+    font-size: 17px;
+    margin-left: 70px;
+    height: 35px;
+}
