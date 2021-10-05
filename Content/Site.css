@@ -317,12 +317,6 @@ input[type="select"] {
     margin: 20px 0px 30px 0px;
 }
 
-/* .round-div-block-specified-about:focus {
-        animation-name: blick;
-        animation-iteration-count: infinite;
-        animation-duration: 1s;
-    }*/
-
 .about-like-cloud-button {
     color: #181219 !important;
     border: 0px;
@@ -365,6 +359,18 @@ input[type="select"] {
     100% {
         opacity: 1;
     }
+}
+
+.main-about-title {
+    font-size: 4em;
+}
+
+.sub-main-about-title {
+    font-size: 1.5em;
+}
+
+.top-margin-about {
+    margin-top: 10%;
 }
 
 /* Styles for startups page. */
