@@ -753,6 +753,20 @@ title-setting-register-like {
     font-size: 42px;
 }
 
+.green-and-blue-button {
+    border: 1px solid black;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    color: #00838f;
+    background-color: white;
+}
+
+.request-max-width {
+    width: 100%;
+}
+
 @charset "UTF-8";
 
 .multi-steps > li.is-active ~ li:before, .multi-steps > li.is-active:before {

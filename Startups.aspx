@@ -31,12 +31,13 @@
                                 </div>
                                 <div class="dropdown-list static-height-dropdown" hidden>
                                     <div>
-                                        <asp:Button runat="server" CssClass="border-radius-btn"
+                                        <asp:Button runat="server"
+                                            CssClass="green-and-blue-button"
                                             OnClientClick="flushDropDownBox(`#members-container`)"
                                             ID="BtnClearMembers"
                                             Text="Очистить" />
                                         <input type="search" style="border: 1px solid" placeholder="Поиск по кол-ву"
-                                            class="dropdown-search request-static-height" />
+                                            class="dropdown-search request-static-height request-max-width" />
                                     </div>
                                     <div class="request-white-bg">
                                         <ul class="ul-stylebox">
@@ -75,12 +76,12 @@
                                 </div>
                                 <div class="dropdown-list static-height-dropdown" hidden>
                                     <div>
-                                        <asp:Button runat="server" CssClass="border-radius-btn"
+                                        <asp:Button runat="server" CssClass="green-and-blue-button"
                                             OnClientClick="flushDropDownBox(`#regions-container`)"
                                             ID="BtnClearRegions"
                                             Text="Очистить" />
                                         <input type="search" style="border: 1px solid" placeholder="Поиск по региону"
-                                            class="dropdown-search request-static-height" />
+                                            class="dropdown-search request-static-height request-max-width" />
                                     </div>
                                     <div class="request-white-bg">
                                         <ul class="ul-stylebox">
@@ -116,12 +117,13 @@
                                 </div>
                                 <div class="dropdown-list static-height-dropdown" hidden>
                                     <div>
-                                        <asp:Button runat="server" CssClass="border-radius-btn"
+                                        <asp:Button runat="server"
+                                            CssClass="green-and-blue-button"
                                             OnClientClick="flushDropDownBox(`#categories-container`)"
                                             ID="BtnCleanCategories"
                                             Text="Очистить" />
                                         <input type="search " style="border: 1px solid" placeholder="Поиск по категории"
-                                            class="dropdown-search request-static-height" />
+                                            class="dropdown-search request-static-height request-max-width" />
                                     </div>
                                     <div class="request-white-bg">
                                         <ul class="ul-stylebox">
