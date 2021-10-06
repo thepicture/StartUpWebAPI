@@ -31,7 +31,7 @@
                     </div>
                     <div class="dropdown-list static-height-dropdown" hidden>
                         <div>
-                            <asp:Button runat="server" CssClass="border-radius-btn"
+                            <asp:Button runat="server" CssClass="green-and-blue-button"
                                 OnClientClick="flushDropDownBox(`#members-container`)"
                                 ID="BtnClearMembers"
                                 Text="Очистить" />
@@ -75,7 +75,7 @@
                     </div>
                     <div class="dropdown-list static-height-dropdown" hidden>
                         <div>
-                            <asp:Button runat="server" CssClass="border-radius-btn"
+                            <asp:Button runat="server" CssClass="green-and-blue-button"
                                 OnClientClick="flushDropDownBox(`#regions-container`)"
                                 ID="BtnClearRegions"
                                 Text="Очистить" />
