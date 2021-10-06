@@ -12,7 +12,12 @@ namespace StartUpWebAPI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            LoadBgImage();
+            if (!Page.IsPostBack)
+            {
+                LoadBgImage();
+                Control footer = Master.FindControl("FooterIdentity");
+                footer.Visible = false;
+            }
         }
 
         /// <summary>

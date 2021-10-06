@@ -12,8 +12,11 @@ namespace StartUpWebAPI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Control footer = Master.FindControl("FooterIdentity");
-            footer.Visible = false;
+            if (!Page.IsPostBack)
+            {
+                Control footer = Master.FindControl("FooterIdentity");
+                footer.Visible = false;
+            }
         }
 
         /// <summary>
