@@ -482,6 +482,16 @@ input[type="select"] {
 
 /* Styles for register. */
 
+text-danger-additional {
+    color: white;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.grid-like {
+    display: grid;
+}
+
 /* Smooth div cloud-like block. */
 .round-div-block {
     border-radius: 30px;
@@ -707,8 +717,10 @@ input[type="select"] {
     }
 
 .text-danger-register-like {
-    color: white !important;
+    color: white;
     font-size: 18px;
+    width: 100%;
+    text-align: center;
 }
 
 .style-background-for-div {
