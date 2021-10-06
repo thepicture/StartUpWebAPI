@@ -1,6 +1,6 @@
 ﻿"use strict"
 
-const MILLISECONDS_TO_WAIT = 1000; // Timeout in ms to show a description of the startup.
+const MILLISECONDS_TO_WAIT = 50; // Timeout in ms to show a description of the startup.
 let isNeededToShow = false; // Checks if it is needed to show a description.
 let currentTimeout;
 
