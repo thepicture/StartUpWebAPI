@@ -41,10 +41,13 @@ namespace StartUpWebAPI
         /// </summary>
         private void FillRegionBox()
         {
-            RegionsView.DataSource = AppData.Context.Region.ToList();
-            RegionsView.DataBind();
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
+            {
+                RegionsView.DataSource = context.Region.ToList();
+                RegionsView.DataBind();
 
-            AssignAnyValueForRegions();
+                AssignAnyValueForRegions();
+            }
         }
 
         /// <summary>
@@ -90,64 +93,68 @@ namespace StartUpWebAPI
         /// </summary>
         private void UpdateTeamsView()
         {
-            var currentTeams = AppData.Context.Team.ToList();
-
-            currentTeams
-                .RemoveAll(s => s.TeamOfUser
-                .Any(e => e.User.Login.Equals(User.Identity.Name)
-                && e.RoleType.Name.Equals("Забанен")));
-
-            #region Work with dropdown boxes
-            List<string> membersSelectedValues = TupleValueGetter.GetValues(
-                                                    TupleToTextAndBoolConverter.ConvertToTextAndBoolTuple(
-                                                        ListViewTupleGetter.Get(MembersView)
-                                                        )
-                                                    )
-                .ToList();
-
-            List<string> regionsSelectedValues = TupleValueGetter.GetValues(
-                                                    TupleToTextAndBoolConverter.ConvertToTextAndBoolTuple(
-                                                        ListViewTupleGetter.Get(RegionsView)
-                                                        )
-                                                    )
-              .ToList();
-
-            bool memberSelectedValueIsNonStandard = membersSelectedValues.Count != 0;
-            bool regionSelectedValueIsNonStandard = regionsSelectedValues.Count != 0;
-
-            if (memberSelectedValueIsNonStandard)
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-                List<Team> teamsToUnion = new List<Team>();
 
-                foreach (string value in membersSelectedValues)
-                {
-                    string[] values = value.Split('-');
-                    int from = int.Parse(values[0]);
-                    int to = int.Parse(values[1].Replace("и больше", int.MaxValue.ToString()));
+                var currentTeams = context.Team.ToList();
 
-                    teamsToUnion
-                        .AddRange(currentTeams.Where(s => s.MaxMembersCount > from
-                                    && s.MaxMembersCount < to)
-                                    .ToList());
-                }
-                currentTeams = teamsToUnion.Distinct().ToList();
-            }
+                currentTeams
+                    .RemoveAll(s => s.TeamOfUser
+                    .Any(e => e.User.Login.Equals(User.Identity.Name)
+                    && e.RoleType.Name.Equals("Забанен")));
 
-            if (regionSelectedValueIsNonStandard)
-            {
-                currentTeams = currentTeams
-                    .Where(s => regionsSelectedValues.Contains(s.Region.Name))
+                #region Work with dropdown boxes
+                List<string> membersSelectedValues = TupleValueGetter.GetValues(
+                                                        TupleToTextAndBoolConverter.ConvertToTextAndBoolTuple(
+                                                            ListViewTupleGetter.Get(MembersView)
+                                                            )
+                                                        )
                     .ToList();
-            }
-            #endregion
 
-            if (!string.IsNullOrWhiteSpace(NameBox.Text))
-            {
-                currentTeams = currentTeams.Where(s => s.Name.ToLower().Contains(NameBox.Text.ToLower())).ToList();
-            }
+                List<string> regionsSelectedValues = TupleValueGetter.GetValues(
+                                                        TupleToTextAndBoolConverter.ConvertToTextAndBoolTuple(
+                                                            ListViewTupleGetter.Get(RegionsView)
+                                                            )
+                                                        )
+                  .ToList();
 
-            TeamsView.DataSource = currentTeams;
-            TeamsView.DataBind();
+                bool memberSelectedValueIsNonStandard = membersSelectedValues.Count != 0;
+                bool regionSelectedValueIsNonStandard = regionsSelectedValues.Count != 0;
+
+                if (memberSelectedValueIsNonStandard)
+                {
+                    List<Team> teamsToUnion = new List<Team>();
+
+                    foreach (string value in membersSelectedValues)
+                    {
+                        string[] values = value.Split('-');
+                        int from = int.Parse(values[0]);
+                        int to = int.Parse(values[1].Replace("и больше", int.MaxValue.ToString()));
+
+                        teamsToUnion
+                            .AddRange(currentTeams.Where(s => s.MaxMembersCount > from
+                                        && s.MaxMembersCount < to)
+                                        .ToList());
+                    }
+                    currentTeams = teamsToUnion.Distinct().ToList();
+                }
+
+                if (regionSelectedValueIsNonStandard)
+                {
+                    currentTeams = currentTeams
+                        .Where(s => regionsSelectedValues.Contains(s.Region.Name))
+                        .ToList();
+                }
+                #endregion
+
+                if (!string.IsNullOrWhiteSpace(NameBox.Text))
+                {
+                    currentTeams = currentTeams.Where(s => s.Name.ToLower().Contains(NameBox.Text.ToLower())).ToList();
+                }
+
+                TeamsView.DataSource = currentTeams;
+                TeamsView.DataBind();
+            }
         }
 
         /// <summary>

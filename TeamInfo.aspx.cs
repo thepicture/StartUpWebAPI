@@ -1,6 +1,7 @@
 ﻿using StartUpWebAPI.Entities;
 using StartUpWebAPI.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
@@ -359,7 +360,41 @@ namespace StartUpWebAPI
                         .Find(Convert.ToInt32(e.CommandArgument));
                     User user = comment.User;
 
-                    BanUtils.BanOrUnban(user, comment.Team);
+                    #region Ban
+                    List<TeamOfUser> teamsOfUser = context.TeamOfUser
+                .Where(s => s.User.Login.Equals(user.Login)
+                            && s.TeamId == team.Id).ToList();
+
+                    bool isTryingToUnbanUser = teamsOfUser.Select(s => s.RoleType.Name).Contains("Забанен");
+
+                    List<TeamOfUser> teamsWhereIsNotBanned = teamsOfUser
+                        .Where(s => !s.RoleType.Name.Equals("Забанен")).ToList();
+
+                    if (isTryingToUnbanUser)
+                    {
+                        context.TeamOfUser.RemoveRange(teamsOfUser);
+                    }
+                    else
+                    {
+                        TeamOfUser bannedOfTeam = new TeamOfUser();
+
+                        bannedOfTeam = new TeamOfUser
+                        {
+                            RoleTypeId = context.RoleType.First(r => r.Name.Equals("Забанен")).Id,
+                            UserId = user.Id,
+                            TeamId = team.Id
+                        };
+
+                        context.Team.Find(team.Id).TeamOfUser.Add(bannedOfTeam);
+
+                        bool hasAnyTuples = teamsWhereIsNotBanned.Count != 0;
+
+                        if (hasAnyTuples)
+                        {
+                            context.TeamOfUser.RemoveRange(teamsWhereIsNotBanned);
+                        }
+                    }
+                    #endregion
 
                     try
                     {
