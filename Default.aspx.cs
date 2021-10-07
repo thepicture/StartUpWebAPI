@@ -27,29 +27,42 @@ namespace StartUpWebAPI
         /// </summary>
         private void LoadStartups()
         {
-            List<StartUp> startUps = AppData.Context.StartUp.ToList();
-
-            bool noAnyStartups = startUps == null;
-
-            if (noAnyStartups)
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-                return;
+
+                List<StartUp> startUps = context.StartUp.ToList();
+
+                bool noAnyStartups = (startUps == null);
+
+                if (noAnyStartups)
+                {
+                    return;
+                }
+
+                startUps
+                    .RemoveAll(s => s.StartUpOfUser
+                    .Any(e => e.User.Login.Equals(User.Identity.Name)
+                && e.RoleType.Name.Equals("Забанен")));
+                startUps
+                    .RemoveAll(s => !s.StartUpOfUser
+                    .Select(i => i.User.Login)
+                    .Contains(User.Identity.Name));
+
+                bool startupsAreEmpty = startUps.Count == 0;
+
+                if (startupsAreEmpty)
+                {
+                    (RecursiveControlFinder.FindControlRecursive(this, "EmptyStartupsPanel") as Panel)
+                        .Visible = true;
+                    return;
+                }
+
+                (RecursiveControlFinder.FindControlRecursive(this, "LViewMyStartups") as ListView)
+                    .DataSource = startUps;
+                (RecursiveControlFinder.FindControlRecursive(this, "LViewMyStartups") as ListView)
+                    .DataBind();
+
             }
-
-
-            startUps.RemoveAll(s => s.StartUpOfUser.Any(e => e.User.Login.Equals(User.Identity.Name) && e.RoleType.Name.Equals("Забанен")));
-            startUps.RemoveAll(s => !s.StartUpOfUser.Select(i => i.User.Login).Contains(User.Identity.Name));
-
-            bool startupsAreEmpty = startUps.Count == 0;
-
-            if (startupsAreEmpty)
-            {
-                (RecursiveControlFinder.FindControlRecursive(this, "EmptyStartupsPanel") as Panel).Visible = true;
-                return;
-            }
-
-            (RecursiveControlFinder.FindControlRecursive(this, "LViewMyStartups") as ListView).DataSource = startUps;
-            (RecursiveControlFinder.FindControlRecursive(this, "LViewMyStartups") as ListView).DataBind();
         }
 
         /// <summary>
@@ -57,28 +70,37 @@ namespace StartUpWebAPI
         /// </summary>
         private void LoadTeams()
         {
-            List<Team> teams = AppData.Context.Team.ToList();
-
-            bool teamsAreEmpty = teams == null;
-            if (teamsAreEmpty)
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-                return;
+
+                List<Team> teams = context.Team.ToList();
+
+                bool teamsAreEmpty = teams == null;
+                if (teamsAreEmpty)
+                {
+                    return;
+                }
+
+
+                teams.RemoveAll(s => s.TeamOfUser.Any(e => e.User.Login.Equals(User.Identity.Name)
+                && e.RoleType.Name.Equals("Забанен")));
+                teams.RemoveAll(t => !t.TeamOfUser.Select(i => i.User.Login)
+                .Contains(User.Identity.Name));
+
+                bool teamsCountIsZero = teams.Count == 0;
+
+                if (teamsCountIsZero)
+                {
+                    (RecursiveControlFinder.FindControlRecursive(this, "EmptyTeamsPanel") as Panel)
+                        .Visible = true;
+                    return;
+                }
+
+                (RecursiveControlFinder.FindControlRecursive(this, "LViewMyTeams") as ListView)
+                .DataSource = teams;
+                (RecursiveControlFinder.FindControlRecursive(this, "LViewMyTeams") as ListView)
+                    .DataBind();
             }
-
-
-            teams.RemoveAll(s => s.TeamOfUser.Any(e => e.User.Login.Equals(User.Identity.Name) && e.RoleType.Name.Equals("Забанен")));
-            teams.RemoveAll(t => !t.TeamOfUser.Select(i => i.User.Login).Contains(User.Identity.Name));
-
-            bool teamsCountIsZero = teams.Count == 0;
-
-            if (teamsCountIsZero)
-            {
-                (RecursiveControlFinder.FindControlRecursive(this, "EmptyTeamsPanel") as Panel).Visible = true;
-                return;
-            }
-
-            (RecursiveControlFinder.FindControlRecursive(this, "LViewMyTeams") as ListView).DataSource = teams;
-            (RecursiveControlFinder.FindControlRecursive(this, "LViewMyTeams") as ListView).DataBind();
         }
 
         /// <summary>
