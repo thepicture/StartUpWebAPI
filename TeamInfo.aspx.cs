@@ -1,11 +1,8 @@
 ﻿using StartUpWebAPI.Entities;
 using StartUpWebAPI.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace StartUpWebAPI
@@ -16,11 +13,6 @@ namespace StartUpWebAPI
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
-            {
-                LoadBackgroundImage();
-            }
-
             int id = Convert.ToInt32(Request.QueryString.Get("id"));
 
             bool isTeam = id != 0;
@@ -63,14 +55,6 @@ namespace StartUpWebAPI
         protected void LinkButtonModifyTeam_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/AddTeam?id=" + team.Id, false);
-        }
-
-        /// <summary>
-        /// Loads background image.
-        /// </summary>
-        private void LoadBackgroundImage()
-        {
-            BgImage.ImageUrl = NativeImageUtils.ConvertFromBitmap(Properties.Resources.myAccountBg);
         }
 
         /// <summary>

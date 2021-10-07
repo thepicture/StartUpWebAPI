@@ -7,7 +7,13 @@
     EnableEventValidation="false" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContent" Style="padding-left: 50px; padding-right: 50px;">
+   
     <asp:Panel runat="server">
+       
+        <div class="white-shadow-block radius-like">
+
+        
+
         <div class="jumbotron  " style="padding-bottom: 0px !important; margin-bottom: -30px !important;">
             <h1>
                 <asp:Label runat="server" ID="MainName" Style="color: black;" CssClass="centerized-text"></asp:Label></h1>
@@ -138,6 +144,10 @@
 
             <br />
         </div>
+            </div>
+        <br />
+        <br />
+        <div class="white-shadow-block radius-like">
         <div class="jumbotron ">
             <p style="margin-left: 10px; color: black;" class="lead">
                 <asp:Label runat="server" ID="CommentsCount"></asp:Label>
@@ -161,6 +171,9 @@
 
 
         <asp:Panel runat="server" ID="CommentsPanel">
+            
+
+            
             <asp:ListView runat="server" ID="LViewStartUpComments" OnItemCommand="LViewStartUpComments_ItemCommand">
                 <ItemTemplate>
                     <table>
@@ -221,9 +234,11 @@
                     </table>
                 </ItemTemplate>
             </asp:ListView>
+               
         </asp:Panel>
+             </div>
     </asp:Panel>
-    <asp:Image runat="server" ID="BgImage" CssClass="bg-image"></asp:Image>
+   
     <script src='<%=ResolveUrl("~/Scripts/delete-confirmer.js") %>'
         type="text/javascript">
     </script>

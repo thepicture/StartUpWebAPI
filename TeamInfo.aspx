@@ -4,8 +4,9 @@
 
     <asp:Panel runat="server">
 
-        <div class="jumbotron  " style="padding-bottom: 0px !important; margin-bottom: -30px !important;">
+        <div class="white-shadow-block radius-like">
 
+        <div class="jumbotron" style="padding-bottom: 0px !important; margin-bottom: -30px !important;">
 
             <h1>
                 <asp:Label runat="server" ID="MainName" Style="color: black;" CssClass="centerized-text"></asp:Label></h1>
@@ -131,9 +132,13 @@
             </asp:Panel>
             <br />
         </div>
+            </div>
+        <br />
+        <br />
 
+        <div class="white-shadow-block radius-like">
 
-
+        
         <div class="jumbotron ">
             <p style="margin-left: 10px; color: black;" class="lead">
                 <asp:Label runat="server" ID="CommentsCount"></asp:Label>
@@ -225,9 +230,9 @@
             </asp:ListView>
 
         </asp:Panel>
-
+            </div>
     </asp:Panel>
-    <asp:Image runat="server" ID="BgImage" CssClass="bg-image"></asp:Image>
+   
     <script src='<%=ResolveUrl("~/Scripts/delete-confirmer.js") %>'
         type="text/javascript">
     </script>

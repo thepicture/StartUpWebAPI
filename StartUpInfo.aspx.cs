@@ -14,11 +14,6 @@ namespace StartUpWebAPI
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
-            {
-                LoadBackgroundImage();
-            }
-
             int id = Convert.ToInt32(Request.QueryString.Get("id"));
 
             using (StartUpBaseEntities context = new StartUpBaseEntities())
@@ -84,14 +79,6 @@ namespace StartUpWebAPI
         protected void LinkButtonModifyStartUp_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/AddStartUp?id=" + startUp.Id, false);
-        }
-
-        /// <summary>
-        /// Loads the background image.
-        /// </summary>
-        private void LoadBackgroundImage()
-        {
-            BgImage.ImageUrl = NativeImageUtils.ConvertFromBitmap(Properties.Resources.myAccountBg);
         }
 
         /// <summary>
