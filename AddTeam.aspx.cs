@@ -32,23 +32,25 @@ namespace StartUpWebAPI
 
                     if (teamIsNotNew)
                     {
-                        Team nullableTeam = AppData.Context.Team.Find(id);
-
-                        if (nullableTeam != null)
+                        using (StartUpBaseEntities context = new StartUpBaseEntities())
                         {
-                            ViewState["currentTeam"] = nullableTeam;
+                            Team nullableTeam = context.Team.Find(id);
 
-                            bool isTeamHasImage = nullableTeam.Image != null;
-
-                            if (isTeamHasImage)
+                            if (nullableTeam != null)
                             {
-                                ViewState["image"] = nullableTeam.Image;
+                                ViewState["currentTeam"] = nullableTeam;
+
+                                bool isTeamHasImage = nullableTeam.Image != null;
+
+                                if (isTeamHasImage)
+                                {
+                                    ViewState["image"] = nullableTeam.Image;
+                                }
+
+                                TBoxName.Text = ((Team)ViewState["currentTeam"]).Name;
+                                TBoxDescription.Text = ((Team)ViewState["currentTeam"]).Description;
+                                TBoxMaxMembers.Text = ((Team)ViewState["currentTeam"]).MaxMembersCount.ToString();
                             }
-
-                            TBoxName.Text = ((Team)ViewState["currentTeam"]).Name;
-                            TBoxDescription.Text = ((Team)ViewState["currentTeam"]).Description;
-                            TBoxMaxMembers.Text = ((Team)ViewState["currentTeam"]).MaxMembersCount.ToString();
-
                         }
                     }
                 }
@@ -155,79 +157,84 @@ namespace StartUpWebAPI
                 return;
             }
 
-            ((Team)ViewState["currentTeam"]).Name = TBoxName.Text;
-            ((Team)ViewState["currentTeam"]).Description = TBoxDescription.Text;
-            ((Team)ViewState["currentTeam"]).MaxMembersCount = int.Parse(TBoxMaxMembers.Text);
-
-            bool teamIsNew = ((Team)ViewState["currentTeam"]).Id == 0;
-            if (teamIsNew)
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-                ((Team)ViewState["currentTeam"]).CreationDate = DateTime.Now;
-                ((Team)ViewState["currentTeam"]).TeamOfUser.Add(new TeamOfUser
+
+
+                ((Team)ViewState["currentTeam"]).Name = TBoxName.Text;
+                ((Team)ViewState["currentTeam"]).Description = TBoxDescription.Text;
+                ((Team)ViewState["currentTeam"]).MaxMembersCount = int.Parse(TBoxMaxMembers.Text);
+
+                bool teamIsNew = ((Team)ViewState["currentTeam"]).Id == 0;
+                if (teamIsNew)
                 {
-                    User = AppData.Context.User.First(u => u.Login.Equals(User.Identity.Name)),
-                    RoleType = AppData.Context.RoleType.First(r => r.Name.Equals("Организатор"))
-                });
+                    ((Team)ViewState["currentTeam"]).CreationDate = DateTime.Now;
+                    ((Team)ViewState["currentTeam"]).TeamOfUser.Add(new TeamOfUser
+                    {
+                        User = context.User.First(u => u.Login.Equals(User.Identity.Name)),
+                        RoleType = context.RoleType.First(r => r.Name.Equals("Организатор"))
+                    });
 
-                AppData.Context.Team.Add((Team)ViewState["currentTeam"]);
-            }
-            else
-            {
-                int teamId = ((Team)ViewState["currentTeam"]).Id;
-                Team updatingTeam = AppData.Context.Team.Find(teamId);
+                    context.Team.Add((Team)ViewState["currentTeam"]);
+                }
+                else
+                {
+                    int teamId = ((Team)ViewState["currentTeam"]).Id;
+                    Team updatingTeam = context.Team.Find(teamId);
 
-                Team insertingTeam = (Team)ViewState["currentTeam"];
-                AppData.Context.Entry(updatingTeam).CurrentValues.SetValues(insertingTeam);
-            }
+                    Team insertingTeam = (Team)ViewState["currentTeam"];
+                    context.Entry(updatingTeam).CurrentValues.SetValues(insertingTeam);
+                }
 
-            Team addedTeam = null;
-            int id;
+                Team addedTeam = null;
+                int id;
 
-            try
-            {
-                AppData.Context.SaveChanges();
+                try
+                {
+                    context.SaveChanges();
 
-                id = ((Team)ViewState["currentTeam"]).Id;
+                    id = ((Team)ViewState["currentTeam"]).Id;
 
-                addedTeam = AppData.Context.Team.First(s => s.Id == id);
+                    addedTeam = context.Team.First(s => s.Id == id);
 
-                string reason = HttpUtility.UrlEncode("Команда успешно изменена!");
+                    string reason = HttpUtility.UrlEncode("Команда успешно изменена!");
 
-                Response.Redirect("~/TeamInfo?id=" + ((Team)ViewState["currentTeam"]).Id + "&reason=" + reason, false);
-            }
-            catch (Exception)
-            {
-                string reason = HttpUtility.UrlEncode("Команда не была изменена или добавлена." +
-                    "Пожалуйста, попробуйте изменить команду ещё раз. ");
+                    Response.Redirect("~/TeamInfo?id=" + ((Team)ViewState["currentTeam"]).Id + "&reason=" + reason, false);
+                }
+                catch (Exception)
+                {
+                    string reason = HttpUtility.UrlEncode("Команда не была изменена или добавлена." +
+                        "Пожалуйста, попробуйте изменить команду ещё раз. ");
 
-                Response.Redirect("~/TeamInfo?id=" + ((Team)ViewState["currentTeam"]).Id + "&reason=" + reason);
-            }
+                    Response.Redirect("~/TeamInfo?id=" + ((Team)ViewState["currentTeam"]).Id + "&reason=" + reason);
+                }
 
-            var image = ViewState["image"] as byte[];
+                var image = ViewState["image"] as byte[];
 
-            bool isImageInDeleteState = (bool)ViewState["imageDelete"] == true;
+                bool isImageInDeleteState = (bool)ViewState["imageDelete"] == true;
 
-            if (isImageInDeleteState)
-            {
-                AppData.Context.Entry(addedTeam).Entity.Image = null;
-                ViewState["image"] = null;
-                ViewState["imageDelete"] = false;
-            }
-            else
-            {
-                addedTeam.Image = (byte[])ViewState["image"];
-            }
+                if (isImageInDeleteState)
+                {
+                    context.Entry(addedTeam).Entity.Image = null;
+                    ViewState["image"] = null;
+                    ViewState["imageDelete"] = false;
+                }
+                else
+                {
+                    addedTeam.Image = (byte[])ViewState["image"];
+                }
 
-            try
-            {
-                AppData.Context.SaveChanges();
-            }
-            catch (Exception)
-            {
-                Response
-                    .Redirect(Request.RawUrl + "&reason=" + HttpUtility.UrlEncode(
-                    "Не удалось добавить изображения в команду. " +
-                    "Попробуйте ещё раз"));
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    Response
+                        .Redirect(Request.RawUrl + "&reason=" + HttpUtility.UrlEncode(
+                        "Не удалось добавить изображения в команду. " +
+                        "Попробуйте ещё раз"));
+                }
             }
         }
 
