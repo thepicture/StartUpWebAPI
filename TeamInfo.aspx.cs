@@ -13,41 +13,45 @@ namespace StartUpWebAPI
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(Request.QueryString.Get("id"));
-
-            bool isTeam = id != 0;
-
-            if (!isTeam)
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-                string reason = HttpUtility.UrlEncode("Команда не существует или была удалена. Пожалуйста, найдите другую команду.");
 
-                Response.Redirect("~/Default.aspx?reason=" + reason);
+                int id = Convert.ToInt32(Request.QueryString.Get("id"));
+
+                bool isTeam = id != 0;
+
+                if (!isTeam)
+                {
+                    string reason = HttpUtility.UrlEncode("Команда не существует или была удалена. Пожалуйста, найдите другую команду.");
+
+                    Response.Redirect("~/Default.aspx?reason=" + reason);
+                }
+
+                team = context.Team.Find(id);
+
+                if (team.TeamOfUser.Any(t => t.User.Login.Equals(User.Identity.Name) && t.RoleType.Name.Equals("Забанен")))
+                {
+                    Response.Redirect("~/Default.aspx?reason=" +
+                        HttpUtility.UrlEncode("К сожалению, доступ к данному сообществу для вас ограничен. " +
+                        "Пожалуйста, найдите другие сообщества."));
+                    return;
+                }
+
+                bool userIsCreator = team.TeamOfUser.Any(u => u.User.Login.ToLower().Equals(User.Identity.Name.ToLower())
+                    && u.RoleType.Name.Equals("Организатор"));
+
+                if (userIsCreator)
+                {
+                    PTeamEdit.Visible = true;
+                }
+                else
+                {
+                    ShowNeedyButtonsForMember();
+                }
+
+                InsertComments();
+                InsertTeams();
             }
-
-            team = AppData.Context.Team.Find(id);
-
-            if (team.TeamOfUser.Any(t => t.User.Login.Equals(User.Identity.Name) && t.RoleType.Name.Equals("Забанен")))
-            {
-                Response.Redirect("~/Default.aspx?reason=" +
-                    HttpUtility.UrlEncode("К сожалению, доступ к данному сообществу для вас ограничен. " +
-                    "Пожалуйста, найдите другие сообщества."));
-                return;
-            }
-
-            bool userIsCreator = team.TeamOfUser.Any(u => u.User.Login.ToLower().Equals(User.Identity.Name.ToLower())
-                && u.RoleType.Name.Equals("Организатор"));
-
-            if (userIsCreator)
-            {
-                PTeamEdit.Visible = true;
-            }
-            else
-            {
-                ShowNeedyButtonsForMember();
-            }
-
-            InsertComments();
-            InsertTeams();
         }
         /// <summary>
         /// Redirects to the edit team page.
@@ -159,45 +163,49 @@ namespace StartUpWebAPI
                 }
             }
 
-            User currentUser = AppData.Context.User.First(u => u.Login.Equals(username));
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
+            {
 
-            SendComment(currentUser);
+                User currentUser = context.User.First(u => u.Login.Equals(username));
+
+                SendUserComment(currentUser);
+            }
         }
 
-        /// <summary>
-        /// Sends the user's comment.
-        /// </summary>
         /// <param name="currentUser">Who is sending the comment.</param>
-        private void SendComment(User currentUser)
+        private void SendUserComment(User currentUser)
         {
-            TeamComment comment = new TeamComment
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-                CommentText = CommentBox.Text,
-                CreationDate = DateTime.Now,
-                User = currentUser,
-                Team = team,
-            };
+                TeamComment comment = new TeamComment
+                {
+                    CommentText = CommentBox.Text,
+                    CreationDate = DateTime.Now,
+                    User = currentUser,
+                    Team = team,
+                };
 
-            team.TeamComment.Add(comment);
+                team.TeamComment.Add(comment);
 
-            try
-            {
-                AppData.Context.SaveChanges();
+                try
+                {
+                    context.SaveChanges();
 
-                AppData.Context.ChangeTracker.Entries().ToList().ForEach(e => e.Reload());
+                    context.ChangeTracker.Entries().ToList().ForEach(e => e.Reload());
 
-                Response.Redirect("~/TeamInfo.aspx?id=" + team.Id + "&reason="
-                    + HttpUtility.UrlEncode("Комментарий успешно добавлен!"), false);
+                    Response.Redirect("~/TeamInfo.aspx?id=" + team.Id + "&reason="
+                        + HttpUtility.UrlEncode("Комментарий успешно добавлен!"), false);
 
-                CommentBox.Text = null;
-                InsertComments();
-                UpdateCommentsCount();
-            }
-            catch (Exception ex)
-            {
-                string reason = HttpUtility.UrlEncode("Не удалось написать комментарий. Попробуйте, пожалуйста, ещё раз.");
-                Response.Redirect("~/TeamInfo?id=" + team.Id + "&reason=" + reason);
-                System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                    CommentBox.Text = null;
+                    InsertComments();
+                    UpdateCommentsCount();
+                }
+                catch (Exception ex)
+                {
+                    string reason = HttpUtility.UrlEncode("Не удалось написать комментарий. Попробуйте, пожалуйста, ещё раз.");
+                    Response.Redirect("~/TeamInfo?id=" + team.Id + "&reason=" + reason);
+                    System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                }
             }
 
             MaintainScrollPositionOnPostBack = true;
@@ -208,34 +216,37 @@ namespace StartUpWebAPI
         /// </summary>
         protected void BtnUnsubscribe_Click(object sender, EventArgs e)
         {
-            string reason;
-            TeamOfUser currentTeamOfUser = FindStartUp();
-            AppData.Context.TeamOfUser.Remove(currentTeamOfUser);
-
-            try
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-                AppData.Context.SaveChanges();
-                reason = HttpUtility.UrlEncode("Вы успешно покинули команду");
-                Response.Redirect("~/TeamInfo?id=" + team.Id + "&reason=" + reason, false);
-            }
-            catch (Exception ex)
-            {
-                reason = HttpUtility.UrlEncode("Не удалось покинуть команду. Попробуйте, пожалуйста, ещё раз.");
-                Response.Redirect("~/TeamInfo?id=" + team.Id + "&reason=" + reason);
-                System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                string reason;
+                TeamOfUser currentTeamOfUser = FindStartUp();
+                context.Entry(currentTeamOfUser).State = System.Data.Entity.EntityState.Deleted;
 
-                return;
+                try
+                {
+                    context.SaveChanges();
+                    reason = HttpUtility.UrlEncode("Вы успешно покинули команду");
+                    Response.Redirect("~/TeamInfo?id=" + team.Id + "&reason=" + reason, false);
+                }
+                catch (Exception ex)
+                {
+                    reason = HttpUtility.UrlEncode("Не удалось покинуть команду. Попробуйте, пожалуйста, ещё раз.");
+                    Response.Redirect("~/TeamInfo?id=" + team.Id + "&reason=" + reason);
+                    System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+
+                    return;
+                }
             }
         }
 
-        /// <summary>
-        /// Finds the start up and returns it.
-        /// </summary>
         /// <returns>The found startup.</returns>
         private TeamOfUser FindStartUp()
         {
-            return AppData.Context.TeamOfUser.First(s => s.User.Login.Equals(User.Identity.Name)
-                        && s.TeamId == team.Id);
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
+            {
+                return context.TeamOfUser.First(s => s.User.Login.Equals(User.Identity.Name)
+                            && s.TeamId == team.Id);
+            }
         }
 
         /// <summary>
@@ -243,30 +254,33 @@ namespace StartUpWebAPI
         /// </summary>
         protected void BtnSubscribe_Click(object sender, EventArgs e)
         {
-            string reason;
-
-            TeamOfUser teamOfUser = new TeamOfUser
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-                Team = team,
-                User = AppData.Context.User.First(u => u.Login.Equals(User.Identity.Name)),
-                RoleType = AppData.Context.RoleType.First(r => r.Name.Equals("Участник"))
-            };
+                string reason;
 
-            AppData.Context.Team.Find(team.Id).TeamOfUser.Add(teamOfUser);
+                TeamOfUser teamOfUser = new TeamOfUser
+                {
+                    TeamId = team.Id,
+                    UserId = context.User.First(u => u.Login.Equals(User.Identity.Name)).Id,
+                    RoleTypeId = context.RoleType.First(r => r.Name.Equals("Участник")).Id
+                };
 
-            try
-            {
-                AppData.Context.SaveChanges();
-                reason = HttpUtility.UrlEncode("Вы успешно вступили в команду");
-                Response.Redirect("~/TeamInfo?id=" + team.Id + "&reason=" + reason, false);
-            }
-            catch (Exception ex)
-            {
-                reason = HttpUtility.UrlEncode("Не удалось вступить в команлу. Попробуйте, пожалуйста, ещё раз.");
-                Response.Redirect("~/TeamInfo?id=" + team.Id + "&reason=" + reason, false);
-                System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                context.Team.Find(team.Id).TeamOfUser.Add(teamOfUser);
 
-                return;
+                try
+                {
+                    context.SaveChanges();
+                    reason = HttpUtility.UrlEncode("Вы успешно вступили в команду");
+                    Response.Redirect("~/TeamInfo?id=" + team.Id + "&reason=" + reason, false);
+                }
+                catch (Exception ex)
+                {
+                    reason = HttpUtility.UrlEncode("Не удалось вступить в команду. Попробуйте, пожалуйста, ещё раз.");
+                    Response.Redirect("~/TeamInfo?id=" + team.Id + "&reason=" + reason, false);
+                    System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+
+                    return;
+                }
             }
         }
 
@@ -275,24 +289,28 @@ namespace StartUpWebAPI
         /// </summary>
         protected void BtnDeleteTeam_Click(object sender, EventArgs e)
         {
-            AppData.Context.TeamComment.RemoveRange(team.TeamComment);
-            AppData.Context.TeamOfUser.RemoveRange(team.TeamOfUser);
-            AppData.Context.StartUpOfTeam.RemoveRange(team.StartUpOfTeam);
-
-            AppData.Context.Team.Remove(team);
-
-            try
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-                AppData.Context.SaveChanges();
+                context.TeamComment.RemoveRange(team.TeamComment);
+                context.TeamOfUser.RemoveRange(team.TeamOfUser);
+                context.StartUpOfTeam.RemoveRange(team.StartUpOfTeam);
 
-                Response.Redirect("~/Default.aspx?reason=" + HttpUtility.UrlEncode("Команда успешно удалена!"), false);
-            }
-            catch (Exception ex)
-            {
-                Response.Redirect("~/TeamInfo.aspx?id=" + team.Id + "&reason="
-                    + HttpUtility.UrlEncode("Стартап не был удалён! "
-                    + "\nПожалуйста, попробуйте удалить стартап ещё раз"));
-                System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                context.Team.Remove(team);
+
+                try
+                {
+                    context.SaveChanges();
+
+                    Response.Redirect("~/Default.aspx?reason=" + HttpUtility
+                        .UrlEncode("Команда успешно удалена!"), false);
+                }
+                catch (Exception ex)
+                {
+                    Response.Redirect("~/TeamInfo.aspx?id=" + team.Id + "&reason="
+                        + HttpUtility.UrlEncode("Стартап не был удалён! "
+                        + "\nПожалуйста, попробуйте удалить стартап ещё раз"));
+                    System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                }
             }
         }
 
@@ -303,96 +321,109 @@ namespace StartUpWebAPI
         {
             if (e.CommandName.Equals("DeleteCommentById"))
             {
-                TeamComment comment = AppData.Context.TeamComment.Find(Convert.ToInt32(e.CommandArgument));
-
-                AppData.Context.TeamComment.Remove(comment);
-
-                try
+                using (StartUpBaseEntities context = new StartUpBaseEntities())
                 {
-                    AppData.Context.SaveChanges();
+                    TeamComment comment = context.TeamComment
+                        .Find(Convert.ToInt32(e.CommandArgument));
 
-                    AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
+                    context.TeamComment.Remove(comment);
 
-                    Response.Redirect("~/TeamInfo.aspx?id=" + team.Id + "&reason="
-                        + HttpUtility.UrlEncode("Комментарий успешно удалён!"), false);
+                    try
+                    {
+                        context.SaveChanges();
+
+                        context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
+
+                        Response.Redirect("~/TeamInfo.aspx?id=" + team.Id + "&reason="
+                            + HttpUtility
+                            .UrlEncode("Комментарий успешно удалён!"), false);
+                    }
+                    catch (Exception ex)
+                    {
+                        Response.Redirect("~/TeamInfo.aspx?id=" + team.Id + "&reason="
+                           + HttpUtility.UrlEncode("Комментарий не удалён! " +
+                           "Пожалуйста, попробуйте ещё раз"));
+
+                        System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                    }
+                    return;
                 }
-                catch (Exception ex)
-                {
-                    Response.Redirect("~/TeamInfo.aspx?id=" + team.Id + "&reason="
-                       + HttpUtility.UrlEncode("Комментарий не удалён! Пожалуйста, попробуйте ещё раз"));
-
-                    System.Diagnostics.Debug.WriteLine(ex.StackTrace);
-                }
-                return;
             }
 
             if (e.CommandName.Equals("BanUserByCommentId"))
             {
-                TeamComment comment = AppData
-                    .Context
-                    .TeamComment
-                    .Find(Convert.ToInt32(e.CommandArgument));
-                User user = comment.User;
-
-                BanUtils.BanOrUnban(user, comment.Team);
-
-                try
+                using (StartUpBaseEntities context = new StartUpBaseEntities())
                 {
-                    AppData.Context.SaveChanges();
-                    AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
+                    TeamComment comment = context
+                        .TeamComment
+                        .Find(Convert.ToInt32(e.CommandArgument));
+                    User user = comment.User;
 
-                    Response.Redirect("~/TeamInfo.aspx?id=" + team.Id + "&reason="
-                        + HttpUtility.UrlEncode("Роль комментатора успешно изменена!"), false);
-                }
-                catch (Exception ex)
-                {
-                    Response.Redirect("~/TeamInfo.aspx?id=" + team.Id + "&reason="
-                       + HttpUtility.UrlEncode("Роль комментатора не изменена! Пожалуйста, попробуйте ещё раз"));
+                    BanUtils.BanOrUnban(user, comment.Team);
 
-                    System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                    try
+                    {
+                        context.SaveChanges();
+                        context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
+
+                        Response.Redirect("~/TeamInfo.aspx?id=" + team.Id + "&reason="
+                            + HttpUtility
+                            .UrlEncode("Роль комментатора успешно изменена!"), false);
+                    }
+                    catch (Exception ex)
+                    {
+                        Response.Redirect("~/TeamInfo.aspx?id=" + team.Id + "&reason="
+                           + HttpUtility.UrlEncode("Роль комментатора не изменена! " +
+                           "Пожалуйста, попробуйте ещё раз"));
+
+                        System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                    }
+                    return;
                 }
-                return;
             }
 
             if (e.CommandName.Equals("ChangeUserRoleType"))
             {
-                TeamComment comment = AppData.Context.TeamComment.Find(Convert.ToInt32(e.CommandArgument));
-
-                User user = comment.User;
-
-                TeamOfUser nullableTeam = team.TeamOfUser.FirstOrDefault(s => s.UserId == user.Id
-                && s.RoleType.Name.Equals("Помощник"));
-                bool isTeamOfUserExists = nullableTeam != null && nullableTeam.UserId != 0;
-
-                if (isTeamOfUserExists)
+                using (StartUpBaseEntities context = new StartUpBaseEntities())
                 {
-                    AppData.Context.Entry(nullableTeam).State = System.Data.Entity.EntityState.Deleted;
-                }
-                else
-                {
-                    TeamOfUser helperOfUser = new TeamOfUser
+                    TeamComment comment = context.TeamComment.Find(Convert.ToInt32(e.CommandArgument));
+
+                    User user = comment.User;
+
+                    TeamOfUser nullableTeam = team.TeamOfUser.FirstOrDefault(s => s.UserId == user.Id
+                    && s.RoleType.Name.Equals("Помощник"));
+                    bool isTeamOfUserExists = nullableTeam != null && nullableTeam.UserId != 0;
+
+                    if (isTeamOfUserExists)
                     {
-                        RoleTypeId = AppData.Context.RoleType.First(r => r.Name.Equals("Помощник")).Id,
-                        UserId = user.Id,
-                        TeamId = comment.Team.Id
-                    };
-                    AppData.Context.TeamOfUser.Add(helperOfUser);
-                }
+                        context.Entry(nullableTeam).State = System.Data.Entity.EntityState.Deleted;
+                    }
+                    else
+                    {
+                        TeamOfUser helperOfUser = new TeamOfUser
+                        {
+                            RoleTypeId = context.RoleType.First(r => r.Name.Equals("Помощник")).Id,
+                            UserId = user.Id,
+                            TeamId = comment.Team.Id
+                        };
+                        context.TeamOfUser.Add(helperOfUser);
+                    }
 
-                try
-                {
-                    AppData.Context.SaveChanges();
-                    AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
+                    try
+                    {
+                        context.SaveChanges();
+                        context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
 
-                    Response.Redirect("~/TeamInfo.aspx?id=" + team.Id + "&reason="
-                        + HttpUtility.UrlEncode("Роль помощника у участника изменена!"), false);
-                }
-                catch (Exception ex)
-                {
-                    Response.Redirect("~/TeamInfo.aspx?id=" + team.Id + "&reason="
-                       + HttpUtility.UrlEncode("Роль помощника комментатора не изменена! Пожалуйста, попробуйте ещё раз"));
+                        Response.Redirect("~/TeamInfo.aspx?id=" + team.Id + "&reason="
+                            + HttpUtility.UrlEncode("Роль помощника у участника изменена!"), false);
+                    }
+                    catch (Exception ex)
+                    {
+                        Response.Redirect("~/TeamInfo.aspx?id=" + team.Id + "&reason="
+                           + HttpUtility.UrlEncode("Роль помощника комментатора не изменена! Пожалуйста, попробуйте ещё раз"));
 
-                    System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                        System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                    }
                 }
             }
         }

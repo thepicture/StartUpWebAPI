@@ -268,7 +268,7 @@ namespace StartUpWebAPI
             {
                 string reason;
                 StartUpOfUser currentStartup = FindStartUp();
-                context.StartUpOfUser.Remove(currentStartup);
+                context.Entry(currentStartup).State = EntityState.Deleted;
 
                 try
                 {
@@ -307,14 +307,13 @@ namespace StartUpWebAPI
         {
             using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-
                 string reason;
 
                 StartUpOfUser startUpOfUser = new StartUpOfUser
                 {
-                    StartUp = startUp,
-                    User = context.User.First(u => u.Login.Equals(User.Identity.Name)),
-                    RoleType = context.RoleType.First(r => r.Name.Equals("Участник"))
+                    StartUpId = startUp.Id,
+                    UserId = context.User.First(u => u.Login.Equals(User.Identity.Name)).Id,
+                    RoleTypeId = context.RoleType.First(r => r.Name.Equals("Участник")).Id
                 };
 
                 context.StartUp.Find(startUp.Id).StartUpOfUser.Add(startUpOfUser);
@@ -325,10 +324,11 @@ namespace StartUpWebAPI
                     reason = HttpUtility.UrlEncode("Вы успешно вступили в стартап");
                     Response.Redirect("~/StartUpInfo?id=" + startUp.Id + "&reason=" + reason, false);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     reason = HttpUtility.UrlEncode("Не удалось вступить в стартап. Попробуйте, пожалуйста, ещё раз.");
                     Response.Redirect("~/StartUpInfo?id=" + startUp.Id + "&reason=" + reason, false);
+                    System.Diagnostics.Debug.WriteLine(ex.StackTrace);
 
                     return;
                 }
