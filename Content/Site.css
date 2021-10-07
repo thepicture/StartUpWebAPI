@@ -465,8 +465,8 @@ input[type="select"] {
 /* Styles for panel in Startups. */
 .startup-panel {
     margin: 10px;
-    width: 290px;
-    height: 290px;
+    width: 310px;
+    height: 310px;
     transition: transform ease-in-out 300ms;
 }
 
@@ -872,19 +872,20 @@ title-setting-register-like {
 }
 
 .description {
-    padding-top: 0px;
+    padding-top: 10px;
     background-color: rgba(194, 194, 194, 0.9);
     display: flex;
     justify-content: center;
     opacity: 0;
     align-items: center;
-    width: 290px;
-    height: 290px;
+    width: 310px;
+    height: 310px;
     margin: 10px;
     border-radius: 20px;
     animation: fade-in-description 1s ease-in-out 200ms forwards;
     z-index: 129;
     pointer-events: none;
+    transform: translateY(-10px);
 }
 
 @keyframes fade-out-reason {

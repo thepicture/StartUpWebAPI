@@ -41,10 +41,12 @@ namespace StartUpWebAPI
         /// </summary>
         private void FillCategoriesBox()
         {
-            CategoriesView.DataSource = AppData.Context.Category.ToList();
-            CategoriesView.DataBind();
-
-            AssignAnyValueForCategories();
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
+            {
+                CategoriesView.DataSource = context.Category.ToList();
+                CategoriesView.DataBind();
+                AssignAnyValueForCategories();
+            }
         }
 
         /// <summary>
@@ -60,10 +62,12 @@ namespace StartUpWebAPI
         /// </summary>
         private void FillRegionsBox()
         {
-            RegionsView.DataSource = AppData.Context.Region.ToList();
-            RegionsView.DataBind();
-
-            AssignAnyValueForRegions();
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
+            {
+                RegionsView.DataSource = context.Region.ToList();
+                RegionsView.DataBind();
+                AssignAnyValueForRegions();
+            }
         }
 
         /// <summary>
@@ -109,92 +113,96 @@ namespace StartUpWebAPI
         /// </summary>
         public void UpdateLView()
         {
-            var currentStartups = AppData.Context.StartUp.ToList();
-
-            currentStartups.RemoveAll(s => s.StartUpOfUser.Any(e => e.User.Name.Equals(User.Identity.Name) && e.RoleType.Name.Equals("Забанен")));
-
-            if (ActualBox.Checked && !DoneBox.Checked)
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-                currentStartups = currentStartups.Where(s => s.IsDone == false).ToList();
-            }
-            else if (!ActualBox.Checked && DoneBox.Checked)
-            {
-                currentStartups = currentStartups.Where(s => s.IsDone == true).ToList();
-            }
-            else if (!DoneBox.Checked && !ActualBox.Checked)
-            {
-                ActualBox.Checked = true;
-                currentStartups = currentStartups.Where(s => s.IsDone == false).ToList();
-            }
 
-            #region WorkWithDropDownBoxes
-            List<string> membersSelectedValues = TupleValueGetter.GetValues(
-                                                    TupleToTextAndBoolConverter.ConvertToTextAndBoolTuple(
-                                                        ListViewTupleGetter.Get(MembersView)
+                var currentStartups = AppData.Context.StartUp.ToList();
+
+                currentStartups.RemoveAll(s => s.StartUpOfUser.Any(e => e.User.Name.Equals(User.Identity.Name) && e.RoleType.Name.Equals("Забанен")));
+
+                if (ActualBox.Checked && !DoneBox.Checked)
+                {
+                    currentStartups = currentStartups.Where(s => s.IsDone == false).ToList();
+                }
+                else if (!ActualBox.Checked && DoneBox.Checked)
+                {
+                    currentStartups = currentStartups.Where(s => s.IsDone == true).ToList();
+                }
+                else if (!DoneBox.Checked && !ActualBox.Checked)
+                {
+                    ActualBox.Checked = true;
+                    currentStartups = currentStartups.Where(s => s.IsDone == false).ToList();
+                }
+
+                #region WorkWithDropDownBoxes
+                List<string> membersSelectedValues = TupleValueGetter.GetValues(
+                                                        TupleToTextAndBoolConverter.ConvertToTextAndBoolTuple(
+                                                            ListViewTupleGetter.Get(MembersView)
+                                                            )
                                                         )
-                                                    )
+                    .ToList();
+
+                List<string> regionsSelectedValues = TupleValueGetter.GetValues(
+                                                        TupleToTextAndBoolConverter.ConvertToTextAndBoolTuple(
+                                                            ListViewTupleGetter.Get(RegionsView)
+                                                            )
+                                                        )
+                  .ToList();
+
+                List<string> categoriesSelectedValues = TupleValueGetter.GetValues(
+                                                      TupleToTextAndBoolConverter.ConvertToTextAndBoolTuple(
+                                                          ListViewTupleGetter.Get(CategoriesView)
+                                                          )
+                                                      )
                 .ToList();
 
-            List<string> regionsSelectedValues = TupleValueGetter.GetValues(
-                                                    TupleToTextAndBoolConverter.ConvertToTextAndBoolTuple(
-                                                        ListViewTupleGetter.Get(RegionsView)
-                                                        )
-                                                    )
-              .ToList();
+                bool memberSelectedValueIsNonStandard = membersSelectedValues.Count != 0;
+                bool regionSelectedValueIsNonStandard = regionsSelectedValues.Count != 0;
+                bool categorySelectedValueIsNonStandard = categoriesSelectedValues.Count != 0;
 
-            List<string> categoriesSelectedValues = TupleValueGetter.GetValues(
-                                                  TupleToTextAndBoolConverter.ConvertToTextAndBoolTuple(
-                                                      ListViewTupleGetter.Get(CategoriesView)
-                                                      )
-                                                  )
-            .ToList();
-
-            bool memberSelectedValueIsNonStandard = membersSelectedValues.Count != 0;
-            bool regionSelectedValueIsNonStandard = regionsSelectedValues.Count != 0;
-            bool categorySelectedValueIsNonStandard = categoriesSelectedValues.Count != 0;
-
-            if (memberSelectedValueIsNonStandard)
-            {
-                List<StartUp> startupsToUnion = new List<StartUp>();
-
-                foreach (string value in membersSelectedValues)
+                if (memberSelectedValueIsNonStandard)
                 {
-                    string[] values = value.Split('-');
-                    int from = int.Parse(values[0]);
-                    int to = int.Parse(values[1].Replace("и больше", int.MaxValue.ToString()));
+                    List<StartUp> startupsToUnion = new List<StartUp>();
 
-                    startupsToUnion
-                        .AddRange(currentStartups.Where(s => s.MaxMembersCount > from
-                                    && s.MaxMembersCount < to)
-                                    .ToList());
+                    foreach (string value in membersSelectedValues)
+                    {
+                        string[] values = value.Split('-');
+                        int from = int.Parse(values[0]);
+                        int to = int.Parse(values[1].Replace("и больше", int.MaxValue.ToString()));
+
+                        startupsToUnion
+                            .AddRange(currentStartups.Where(s => s.MaxMembersCount > from
+                                        && s.MaxMembersCount < to)
+                                        .ToList());
+                    }
+                    currentStartups = startupsToUnion.Distinct().ToList();
                 }
-                currentStartups = startupsToUnion.Distinct().ToList();
+
+                if (regionSelectedValueIsNonStandard)
+                {
+                    currentStartups = currentStartups
+                        .Where(s => regionsSelectedValues.Contains(s.Region.Name))
+                        .ToList();
+                }
+
+                if (categorySelectedValueIsNonStandard)
+                {
+                    currentStartups = currentStartups
+                        .Where(s => categoriesSelectedValues.Contains(s.Category.Name))
+                        .ToList();
+                }
+                #endregion
+
+                UpdateFiltration.Update();
+
+                if (!string.IsNullOrWhiteSpace(NameBox.Text))
+                {
+                    currentStartups = currentStartups.Where(s => s.Name.ToLower().Contains(NameBox.Text.ToLower())).ToList();
+                }
+
+                StartupsView.DataSource = currentStartups;
+                StartupsView.DataBind();
             }
-
-            if (regionSelectedValueIsNonStandard)
-            {
-                currentStartups = currentStartups
-                    .Where(s => regionsSelectedValues.Contains(s.Region.Name))
-                    .ToList();
-            }
-
-            if (categorySelectedValueIsNonStandard)
-            {
-                currentStartups = currentStartups
-                    .Where(s => categoriesSelectedValues.Contains(s.Category.Name))
-                    .ToList();
-            }
-            #endregion
-
-            UpdateFiltration.Update();
-
-            if (!string.IsNullOrWhiteSpace(NameBox.Text))
-            {
-                currentStartups = currentStartups.Where(s => s.Name.ToLower().Contains(NameBox.Text.ToLower())).ToList();
-            }
-
-            StartupsView.DataSource = currentStartups;
-            StartupsView.DataBind();
         }
 
         /// <summary>
