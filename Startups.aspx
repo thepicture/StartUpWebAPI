@@ -228,6 +228,22 @@
                     </asp:LinkButton>
                 </ItemTemplate>
             </asp:ListView>
+            <div class="description-two">
+
+                <div class= "text-description">
+                    <h2 style="margin-top:5px !important;">
+                        Описание
+                    </h2>
+                    dweqweqeqweqweqweqeeqe
+                    sdsdsdsdsdsdsdsdsdsdsd
+                    sdsdsdsdsdssssdsdsdssd
+                    wewerwwrwerwwrwrwewwrr
+                    ioagfouagogawgawurgwur
+                    agwruogwruiawgriurwara
+                    gaworugawurgawuigiugg
+                    awrarkharlakwrhawlakhl...
+                </div>
+            </div>
         </asp:Panel>
     </div>
     <script src='<%=ResolveUrl("~/Scripts/descriptor-presenter.js") %>'
