@@ -116,6 +116,9 @@ body {
 .request-white-bg {
     background-color: white !important;
     border: 0px !important;
+    -webkit-box-shadow: 0px 6px 12px -8px rgba(141, 141, 141, 0.43);
+    -moz-box-shadow: 0px 6px 12px -8px rgba(141, 141, 141, 0.43);
+    box-shadow: 0px 6px 12px -8px rgba(141, 141, 141, 0.43);
 }
 
 /* Adds margin to elements with it. */
@@ -664,6 +667,12 @@ text-danger-additional {
 .title-and-size {
     font-family: 'Cormorant', serif;
     font-size: 22px !important;
+}
+
+.header-shadow {
+    -webkit-box-shadow: 0px 6px 12px -8px rgba(141, 141, 141, 0.43);
+    -moz-box-shadow: 0px 6px 12px -8px rgba(141, 141, 141, 0.43);
+    box-shadow: 0px 6px 12px -8px rgba(141, 141, 141, 0.43);
 }
 
 /* Styles for contact page. */
