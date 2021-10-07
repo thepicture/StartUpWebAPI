@@ -2,7 +2,6 @@
 using StartUpWebAPI.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -41,21 +40,25 @@ namespace StartUpWebAPI
 
                     if (isStartUpExists)
                     {
-                        StartUp nullableStartUp = AppData.Context.StartUp.Find(id);
-
-                        if (nullableStartUp != null)
+                        using (StartUpBaseEntities context = new StartUpBaseEntities())
                         {
-                            ViewState["currentStartUp"] = nullableStartUp;
+                            StartUp nullableStartUp = null;
+                            nullableStartUp = context.StartUp.Find(id);
 
-                            TBoxName.Text = ((StartUp)ViewState["currentStartUp"]).Name;
-                            TBoxDescription.Text = ((StartUp)ViewState["currentStartUp"]).Description;
-                            TBoxMaxMembers.Text = ((StartUp)ViewState["currentStartUp"]).MaxMembersCount.ToString();
-                            CheckBoxDone.Checked = ((StartUp)ViewState["currentStartUp"]).IsDone;
-                            ((List<StartUpImage>)ViewState["images"]).AddRange(nullableStartUp.StartUpImage.ToList());
-                            ((List<DocumentOfStartUp>)ViewState["documents"]).AddRange(nullableStartUp.DocumentOfStartUp.ToList());
-                            InsertCategory();
-                            InsertDocumentsIntoStartUp();
-                            InsertImagesIntoStartUp();
+                            if (nullableStartUp != null)
+                            {
+                                ViewState["currentStartUp"] = nullableStartUp;
+
+                                TBoxName.Text = ((StartUp)ViewState["currentStartUp"]).Name;
+                                TBoxDescription.Text = ((StartUp)ViewState["currentStartUp"]).Description;
+                                TBoxMaxMembers.Text = ((StartUp)ViewState["currentStartUp"]).MaxMembersCount.ToString();
+                                CheckBoxDone.Checked = ((StartUp)ViewState["currentStartUp"]).IsDone;
+                                ((List<StartUpImage>)ViewState["images"]).AddRange(nullableStartUp.StartUpImage.ToList());
+                                ((List<DocumentOfStartUp>)ViewState["documents"]).AddRange(nullableStartUp.DocumentOfStartUp.ToList());
+                                InsertCategory();
+                                InsertDocumentsIntoStartUp();
+                                InsertImagesIntoStartUp();
+                            }
                         }
                     }
                 }
@@ -102,9 +105,12 @@ namespace StartUpWebAPI
         /// </summary>
         private void InsertCategoriesBox()
         {
-            var categories = AppData.Context.Category.Select(c => c.Name).ToList();
-            ComboCategories.DataSource = categories;
-            ComboCategories.DataBind();
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
+            {
+                var categories = context.Category.Select(c => c.Name).ToList();
+                ComboCategories.DataSource = categories;
+                ComboCategories.DataBind();
+            }
         }
 
         /// <summary>
@@ -155,122 +161,128 @@ namespace StartUpWebAPI
                 return;
             }
 
-            ((StartUp)ViewState["currentStartUp"]).Name = TBoxName.Text;
-            ((StartUp)ViewState["currentStartUp"]).Description = TBoxDescription.Text;
-            ((StartUp)ViewState["currentStartUp"]).MaxMembersCount = int.Parse(TBoxMaxMembers.Text);
-            ((StartUp)ViewState["currentStartUp"]).CategoryId = AppData.Context.Category.First(c => c.Name.Equals(ComboCategories.SelectedValue)).Id;
-            ((StartUp)ViewState["currentStartUp"]).IsDone = CheckBoxDone.Checked;
-
-            bool startUpIsNew = ((StartUp)ViewState["currentStartUp"]).Id == 0;
-
-            if (startUpIsNew)
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-                ((StartUp)ViewState["currentStartUp"]).CreationDate = DateTime.Now;
-                ((StartUp)ViewState["currentStartUp"]).StartUpOfUser.Add(new StartUpOfUser
+
+                ((StartUp)ViewState["currentStartUp"]).Name = TBoxName.Text;
+                ((StartUp)ViewState["currentStartUp"]).Description = TBoxDescription.Text;
+                ((StartUp)ViewState["currentStartUp"]).MaxMembersCount = int.Parse(TBoxMaxMembers.Text);
+
+                ((StartUp)ViewState["currentStartUp"]).CategoryId = context
+                    .Category
+                    .First(c => c.Name.Equals(ComboCategories.SelectedValue))
+                    .Id;
+
+                ((StartUp)ViewState["currentStartUp"]).IsDone = CheckBoxDone.Checked;
+
+                bool startUpIsNew = ((StartUp)ViewState["currentStartUp"]).Id == 0;
+
+                if (startUpIsNew)
                 {
-                    User = AppData.Context.User.First(u => u.Login.Equals(User.Identity.Name)),
-                    RoleType = AppData.Context.RoleType.First(r => r.Name.Equals("Организатор"))
-                });
+                    ((StartUp)ViewState["currentStartUp"]).CreationDate = DateTime.Now;
+                    ((StartUp)ViewState["currentStartUp"]).StartUpOfUser.Add(new StartUpOfUser
+                    {
+                        User = context.User.First(u => u.Login.Equals(User.Identity.Name)),
+                        RoleType = context.RoleType.First(r => r.Name.Equals("Организатор"))
+                    });
 
-                AppData.Context.StartUp.Add((StartUp)ViewState["currentStartUp"]);
-            }
-            else
-            {
-                int startUpId = ((StartUp)ViewState["currentStartUp"]).Id;
-                StartUp updatingStartUp = AppData.Context.StartUp.Find(startUpId);
-
-                StartUp insertingStartUp = (StartUp)ViewState["currentStartUp"];
-                AppData.Context.Entry(updatingStartUp).CurrentValues.SetValues(insertingStartUp);
-            }
-
-            StartUp addedStartUp = null;
-            int id;
-
-            try
-            {
-                AppData.Context.SaveChanges();
-
-                id = ((StartUp)ViewState["currentStartUp"]).Id;
-
-                addedStartUp = AppData.Context.StartUp.First(s => s.Id == id);
-
-                string reason = HttpUtility.UrlEncode("Стартап успешно изменён!");
-
-                Response.Redirect("~/StartUpInfo?id=" + ((StartUp)ViewState["currentStartUp"]).Id + "&reason=" + reason, false);
-            }
-            catch (Exception)
-            {
-                string reason = HttpUtility.UrlEncode("Стартап не был изменен или добавлен. " +
-                    "Пожалуйста, попробуйте изменить стартап ещё раз. ");
-
-                Response.Redirect("~/StartUpInfo?id=" + ((StartUp)ViewState["currentStartUp"]).Id + "&reason=" + reason);
-            }
-
-            foreach (var image in (List<StartUpImage>)ViewState["images"])
-            {
-                image.StartUpId = addedStartUp.Id;
-
-                bool anyImages = !(image.Id < 0 || addedStartUp.StartUpImage.Any(i => i.Name.Equals(image.Name)));
-
-                bool anyImagesInDeleteState = image.Id < 0 && addedStartUp.StartUpImage.Any(i => i.Name.Equals(image.Name));
-
-                if (anyImages)
-                {
-                    AppData.Context.StartUpImage.Add(image);
+                    context.StartUp.Add((StartUp)ViewState["currentStartUp"]);
                 }
-                else if (anyImagesInDeleteState)
+                else
                 {
-                    AppData.Context.StartUpImage.Remove(AppData.Context.StartUpImage.First(i => i.Name.Equals(image.Name)));
-                    addedStartUp.StartUpImage.Remove(AppData.Context.StartUpImage.First(i => i.Name.Equals(image.Name)));
+                    int startUpId = ((StartUp)ViewState["currentStartUp"]).Id;
+                    StartUp updatingStartUp = context.StartUp.Find(startUpId);
+
+                    StartUp insertingStartUp = (StartUp)ViewState["currentStartUp"];
+                    context.Entry(updatingStartUp).CurrentValues.SetValues(insertingStartUp);
                 }
 
+                StartUp addedStartUp = null;
+                int id;
 
                 try
                 {
-                    AppData.Context.SaveChanges();
+                    context.SaveChanges();
+                    id = ((StartUp)ViewState["currentStartUp"]).Id;
+                    addedStartUp = context.StartUp.First(s => s.Id == id);
+
+                    string reason = HttpUtility.UrlEncode("Стартап успешно изменён!");
+
+                    Response.Redirect("~/StartUpInfo?id=" + ((StartUp)ViewState["currentStartUp"]).Id + "&reason=" + reason, false);
                 }
                 catch (Exception)
                 {
-                    Response
-                        .Redirect(Request.RawUrl + "&reason=" + HttpUtility.UrlEncode(
-                        "Не удалось добавить изображения в стартап. " +
-                        "Попробуйте ещё раз"));
+                    string reason = HttpUtility.UrlEncode("Стартап не был изменен или добавлен. " +
+                        "Пожалуйста, попробуйте изменить стартап ещё раз. ");
+
+                    Response.Redirect("~/StartUpInfo?id=" + ((StartUp)ViewState["currentStartUp"]).Id + "&reason=" + reason);
                 }
+
+                foreach (var image in (List<StartUpImage>)ViewState["images"])
+                {
+                    image.StartUpId = addedStartUp.Id;
+
+                    bool anyImages = !(image.Id < 0 || addedStartUp.StartUpImage.Any(i => i.Name.Equals(image.Name)));
+
+                    bool anyImagesInDeleteState = image.Id < 0 && addedStartUp.StartUpImage.Any(i => i.Name.Equals(image.Name));
+
+                    if (anyImages)
+                    {
+                        context.StartUpImage.Add(image);
+                    }
+                    else if (anyImagesInDeleteState)
+                    {
+                        context.StartUpImage.Remove(context.StartUpImage.First(i => i.Name.Equals(image.Name)));
+                        addedStartUp.StartUpImage.Remove(context.StartUpImage.First(i => i.Name.Equals(image.Name)));
+                    }
+
+                    try
+                    {
+                        context.SaveChanges();
+                    }
+                    catch (Exception)
+                    {
+                        Response
+                            .Redirect(Request.RawUrl + "&reason=" + HttpUtility.UrlEncode(
+                            "Не удалось добавить изображения в стартап. " +
+                            "Попробуйте ещё раз"));
+                    }
+                }
+
+                foreach (var doc in (List<DocumentOfStartUp>)ViewState["documents"])
+                {
+                    doc.StartUpId = addedStartUp.Id;
+
+                    bool anyDocs = doc.Id >= 0 && !addedStartUp.DocumentOfStartUp.Any(i => i.FileName.Equals(doc.FileName));
+                    bool anyDocsInDeleteState = doc.Id < 0 && context.DocumentOfStartUp.Any(i => i.FileName.Equals(doc.FileName));
+
+                    if (anyDocs)
+                    {
+                        context.DocumentOfStartUp.Add(doc);
+                    }
+                    else if (anyDocsInDeleteState)
+                    {
+                        context.DocumentOfStartUp.Remove(context.DocumentOfStartUp.First(i => i.FileName.Equals(doc.FileName)));
+                        addedStartUp.DocumentOfStartUp.Remove(context.DocumentOfStartUp.First(i => i.FileName.Equals(doc.FileName)));
+                    }
+
+                    try
+                    {
+                        context.SaveChanges();
+                    }
+                    catch (Exception)
+                    {
+                        Response
+                             .Redirect(Request.RawUrl + "&reason=" + HttpUtility.UrlEncode(
+                             "Не удалось добавить документы в стартап. " +
+                             "Попробуйте ещё раз"));
+                        return;
+                    }
+                }
+
+                // Will uncomment if it does not crash the web form.
+                context.ChangeTracker.Entries().ToList().ForEach(s => s.Reload());
             }
-
-            foreach (var doc in (List<DocumentOfStartUp>)ViewState["documents"])
-            {
-                doc.StartUpId = addedStartUp.Id;
-
-                bool anyDocs = doc.Id >= 0 && !addedStartUp.DocumentOfStartUp.Any(i => i.FileName.Equals(doc.FileName));
-                bool anyDocsInDeleteState = doc.Id < 0 && AppData.Context.DocumentOfStartUp.Any(i => i.FileName.Equals(doc.FileName));
-
-                if (anyDocs)
-                {
-                    AppData.Context.DocumentOfStartUp.Add(doc);
-                }
-                else if (anyDocsInDeleteState)
-                {
-                    AppData.Context.DocumentOfStartUp.Remove(AppData.Context.DocumentOfStartUp.First(i => i.FileName.Equals(doc.FileName)));
-                    addedStartUp.DocumentOfStartUp.Remove(AppData.Context.DocumentOfStartUp.First(i => i.FileName.Equals(doc.FileName)));
-                }
-
-
-                try
-                {
-                    AppData.Context.SaveChanges();
-                }
-                catch (Exception)
-                {
-                    Response
-                         .Redirect(Request.RawUrl + "&reason=" + HttpUtility.UrlEncode(
-                         "Не удалось добавить документы в стартап. " +
-                         "Попробуйте ещё раз"));
-                    return;
-                }
-            }
-
-            AppData.Context.ChangeTracker.Entries().ToList().ForEach(s => s.Reload());
 
             RemoveSession();
         }
