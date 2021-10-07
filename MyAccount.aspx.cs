@@ -1,7 +1,6 @@
 ﻿using StartUpWebAPI.Entities;
 using StartUpWebAPI.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -9,7 +8,7 @@ using System.Web.UI.WebControls;
 
 namespace StartUpWebAPI
 {
-    public partial class MyAccount : System.Web.UI.Page
+    public partial class MyAccount : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -25,12 +24,15 @@ namespace StartUpWebAPI
                 Response.Redirect("~/Default.aspx?reason=" + HttpUtility.UrlEncode("Вы не авторизованы. Пожалуйста, войдите в систему"));
             }
 
-            User user = AppData.Context.User.First(u => u.Login.Equals(User.Identity.Name));
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
+            {
+                User user = context.User.First(u => u.Login.Equals(User.Identity.Name));
 
-            ReloadUserImage(user);
+                ReloadUserImage(user);
 
-            LabelName.Text = user.Name;
-            LabelRole.Text = user.TypeOfUser.Name;
+                LabelName.Text = user.Name;
+                LabelRole.Text = user.TypeOfUser.Name;
+            }
         }
 
         /// <summary>
@@ -44,7 +46,7 @@ namespace StartUpWebAPI
         /// <summary>
         /// Reloads the user's image.
         /// </summary>
-        /// <param name="user">Who is user.</param>
+        /// <param name="user">Who is the user.</param>
         private void ReloadUserImage(User user)
         {
             bool isUserHasImage = user.UserImage != null;
@@ -88,29 +90,32 @@ namespace StartUpWebAPI
                     return;
                 }
 
-                System.IO.Stream stream = file.InputStream;
-
-                System.Drawing.Image image = NativeImageUtils.ConvertFromStream(stream);
-
-                User user = AppData.Context.User.First(u => u.Login.Equals(User.Identity.Name));
-
-                user.UserImage = NativeImageUtils.ConvertImageToBytes(image);
-
-                try
+                using (StartUpBaseEntities context = new StartUpBaseEntities())
                 {
-                    AppData.Context.SaveChanges();
+                    System.IO.Stream stream = file.InputStream;
 
-                    AppData.Context.ChangeTracker.Entries().ToList().ForEach(e => e.Reload());
+                    System.Drawing.Image image = NativeImageUtils.ConvertFromStream(stream);
 
-                    Response.Redirect("~/MyAccount?reason=" + HttpUtility.UrlEncode("Изображение успешно изменено!"), false);
+                    User user = context.User.First(u => u.Login.Equals(User.Identity.Name));
 
-                    ReloadUserImage(user);
-                }
-                catch (Exception ex)
-                {
-                    Response.Redirect("~/MyAccount?reason=" + HttpUtility.UrlEncode("Не удалось изменить изображение. " +
-                        "Пожалуйста, попробуйте ещё раз"));
-                    System.Diagnostics.Debug.Write(ex.StackTrace);
+                    user.UserImage = NativeImageUtils.ConvertImageToBytes(image);
+
+                    try
+                    {
+                        context.SaveChanges();
+
+                        context.ChangeTracker.Entries().ToList().ForEach(e => e.Reload());
+
+                        Response.Redirect("~/MyAccount?reason=" + HttpUtility.UrlEncode("Изображение успешно изменено!"), false);
+
+                        ReloadUserImage(user);
+                    }
+                    catch (Exception ex)
+                    {
+                        Response.Redirect("~/MyAccount?reason=" + HttpUtility.UrlEncode("Не удалось изменить изображение. " +
+                            "Пожалуйста, попробуйте ещё раз"));
+                        System.Diagnostics.Debug.Write(ex.StackTrace);
+                    }
                 }
             }
         }
