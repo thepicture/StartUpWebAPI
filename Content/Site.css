@@ -776,6 +776,41 @@ title-setting-register-like {
     width: 100%;
 }
 
+.description-two {
+    padding-top: 0px;
+    background: rgb(57,57,57);
+    background: linear-gradient( 0deg, rgba(57,57,57,1) 0%, rgba(43,43,84,1) 49%, rgba(57,57,57,1) 100%);
+    display: none;
+    justify-content: center;
+    opacity: 0;
+    align-items: center;
+    width: 310px;
+    height: 310px;
+    align-content: start;
+    font-size: 17px !important;
+    border: 1px solid black;
+    margin: 10px;
+    border-radius: 20px;
+    animation: fade-in-description 1s ease-in-out 200ms forwards;
+    z-index: 129;
+    pointer-events: none;
+    position: absolute;
+    transform: translateY(-155px);
+}
+
+.text-description {
+    color: white;
+    font-size: 17px;
+    vertical-align: top;
+    text-align: start;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 250px;
+    width: 260px;
+    display: inline-block;
+}
+
+
 @charset "UTF-8";
 
 .multi-steps > li.is-active ~ li:before, .multi-steps > li.is-active:before {
@@ -1655,4 +1690,8 @@ input[type="checkbox"] {
     -webkit-box-shadow: 0px 0px 4px 2px rgba(34, 60, 80, 0.26);
     -moz-box-shadow: 0px 0px 4px 2px rgba(34, 60, 80, 0.26);
     box-shadow: 0px 0px 4px 2px rgba(34, 60, 80, 0.26);
+}
+
+.hidden-description {
+    display: none;
 }

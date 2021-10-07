@@ -19,21 +19,23 @@ function showDescription(className, descriptionText) {
 }
 
 function hideDescription() {
-    const boxes = document.querySelectorAll('.description');
+    const boxes = document.querySelectorAll('.template-live');
 
     for (let box of boxes) {
         box.remove();
     }
+
     isNeededToShowDescription = false;
 }
 
 function drawDescription(className, descriptionText) {
     const startUp = document.querySelector("." + className);
 
-    const description = document.createElement('div');
-    description.classList.add('tag-item', 'description');
-    description.innerText = descriptionText;
+    const description = document.querySelector('#description-template').cloneNode(true);
+    description.querySelector('#description-text').innerText = descriptionText;
+    description.classList.add('template-live');
+    description.style = "display:flex;";
     description.style.left = startUp.offsetLeft + "px";
-    description.style.top = startUp.offsetTop - 100 - 45 + "px";
+    description.style.top = startUp.offsetTop + "px";
     startUp.append(description);
 }
