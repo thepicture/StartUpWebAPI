@@ -1,35 +1,32 @@
 ﻿"use strict"
 
-const MILLISECONDS_TO_WAIT = 50; // Timeout in ms to show a description of the startup.
-let isNeededToShow = false; // Checks if it is needed to show a description.
+const MILLISECONDS_TO_WAIT = 50;
+let isNeededToShowDescription = false;
 let currentTimeout;
 
-// Shows the description.
 function showDescription(className, descriptionText) {
     if (!descriptionText) return;
 
-    isNeededToShow = true;
+    isNeededToShowDescription = true;
 
     if (currentTimeout) clearTimeout(currentTimeout);
 
     currentTimeout = setTimeout(() => {
-        if (isNeededToShow) {
+        if (isNeededToShowDescription) {
             drawDescription(className, descriptionText);
         }
     }, MILLISECONDS_TO_WAIT);
 }
 
-// Hides the description.
 function hideDescription() {
     const boxes = document.querySelectorAll('.description');
 
     for (let box of boxes) {
         box.remove();
     }
-    isNeededToShow = false;
+    isNeededToShowDescription = false;
 }
 
-// Draws the description.
 function drawDescription(className, descriptionText) {
     const startUp = document.querySelector("." + className);
 
