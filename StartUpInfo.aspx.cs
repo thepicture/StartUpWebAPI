@@ -2,6 +2,7 @@
 using StartUpWebAPI.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -20,51 +21,61 @@ namespace StartUpWebAPI
 
             int id = Convert.ToInt32(Request.QueryString.Get("id"));
 
-            bool isStartUp = AppData.Context.StartUp.Any(s => s.Id == id);
-
-            if (!isStartUp)
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-                string reason = HttpUtility.UrlEncode("Стартап не существует или был удалён. Пожалуйста, найдите другой стартап.");
-                Response.Redirect("~/Default.aspx?reason=" + reason, false);
-                return;
+                bool isStartUp = context.StartUp.Any(s => s.Id == id);
+
+                if (!isStartUp)
+                {
+                    string reason = HttpUtility
+                        .UrlEncode("Стартап не существует или был удалён. " +
+                        "Пожалуйста, найдите другой стартап.");
+                    Response.Redirect("~/Default.aspx?reason=" + reason, false);
+                    return;
+                }
+
+                startUp = context.StartUp.Find(id);
+
+                bool userIsBanned = startUp.StartUpOfUser
+                    .Any(s => s.User.Login.Equals(User.Identity.Name)
+                               && s.RoleType.Name.Equals("Забанен")
+                               && s.StartUpId == startUp.Id);
+
+                if (userIsBanned)
+                {
+                    Response
+                        .Redirect("~/Default.aspx?reason="
+                        + HttpUtility
+                        .UrlEncode("К сожалению, доступ к данному сообществу " +
+                        "для вас ограничен. "
+                        + "Пожалуйста, найдите другие сообщества."), false);
+                    return;
+                }
+
+                bool userIsCreator = false;
+                bool isStartUpExists = startUp != null;
+
+                if (isStartUpExists)
+                {
+                    userIsCreator = startUp
+                        .StartUpOfUser
+                        .Any(u => u.User.Login.Equals(User.Identity.Name)
+                        && (u.RoleType.Name.Equals("Организатор")
+                        || u.RoleType.Name.Equals("Помощник")));
+                }
+
+                if (userIsCreator)
+                {
+                    PStartupEdit.Visible = true;
+                }
+                else
+                {
+                    ShowNeedyButtonsForMember();
+                }
+
+                InsertComments();
+                InsertStartUp();
             }
-
-            startUp = AppData.Context.StartUp.Find(id);
-
-            bool userIsBanned = startUp.StartUpOfUser.Any(s => s.User.Login.Equals(User.Identity.Name)
-                           && s.RoleType.Name.Equals("Забанен")
-                           && s.StartUpId == startUp.Id);
-
-            if (userIsBanned)
-            {
-                Response.Redirect("~/Default.aspx?reason=" + HttpUtility.UrlEncode("К сожалению, доступ к данному сообществу для вас ограничен. " +
-                    "Пожалуйста, найдите другие сообщества."), false);
-                return;
-            }
-
-            bool userIsCreator = false;
-            bool isStartUpExists = startUp != null;
-
-            if (isStartUpExists)
-            {
-                userIsCreator = startUp
-                    .StartUpOfUser
-                    .Any(u => u.User.Login.Equals(User.Identity.Name)
-                    && (u.RoleType.Name.Equals("Организатор")
-                    || u.RoleType.Name.Equals("Помощник")));
-            }
-
-            if (userIsCreator)
-            {
-                PStartupEdit.Visible = true;
-            }
-            else
-            {
-                ShowNeedyButtonsForMember();
-            }
-
-            InsertComments();
-            InsertStartUp();
         }
 
         /// <summary>
@@ -88,7 +99,8 @@ namespace StartUpWebAPI
         /// </summary>
         private void ShowNeedyButtonsForMember()
         {
-            bool userInStartUp = startUp.StartUpOfUser.Any(u => u.User.Login.ToLower().Equals(User.Identity.Name.ToLower()));
+            bool userInStartUp = startUp.StartUpOfUser
+                .Any(u => u.User.Login.ToLower().Equals(User.Identity.Name.ToLower()));
 
             if (userInStartUp)
             {
@@ -105,7 +117,8 @@ namespace StartUpWebAPI
         /// </summary>
         private void ShowSubscribeButtonIfNotMaxMembersCount()
         {
-            bool isMaxMembersCount = startUp.MaxMembersCount <= startUp.StartUpOfUser.Count + startUp.StartUpOfTeam.Count;
+            bool isMaxMembersCount = startUp.MaxMembersCount <= startUp.StartUpOfUser.Count
+                + startUp.StartUpOfTeam.Count;
 
             if (isMaxMembersCount)
             {
@@ -120,7 +133,9 @@ namespace StartUpWebAPI
         /// </summary>
         private void InsertComments()
         {
-            LViewStartUpComments.DataSource = startUp.StartUpComment.OrderByDescending(c => c.DateTime).ToList();
+            LViewStartUpComments.DataSource = startUp.StartUpComment
+                .OrderByDescending(c => c.DateTime)
+                .ToList();
             LViewStartUpComments.DataBind();
         }
 
@@ -133,7 +148,9 @@ namespace StartUpWebAPI
             CountOfMembers.Text = startUp.StartUpOfUser.Count.ToString();
             CountOfTeams.Text = startUp.StartUpOfTeam.Count.ToString();
 
-            string creator = startUp.StartUpOfUser.FirstOrDefault(u => u.RoleType.Name == "Организатор")?.User.Name;
+            string creator = startUp.StartUpOfUser
+                .FirstOrDefault(u => u.RoleType.Name == "Организатор")?
+                .User.Name;
 
             Creator.Text = (string.IsNullOrWhiteSpace(creator)) ? "Неизвестен" : creator;
             IsActual.Text = startUp.IsDoneText;
@@ -197,44 +214,59 @@ namespace StartUpWebAPI
                 }
             }
 
-            User currentUser = AppData.Context.User.First(u => u.Login.Equals(username));
+            User currentUser = null;
 
-            SendComment(currentUser);
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
+            {
+                currentUser = context.User.First(u => u.Login.Equals(username));
+            }
+
+            if (UserExists(currentUser))
+            {
+                SendUserComment(currentUser);
+            }
         }
 
-        /// <summary>
-        /// Sends the user's comment.
-        /// </summary>
-        /// <param name="currentUser">Who is sending the comment.</param>
-        private void SendComment(User currentUser)
+        private static bool UserExists(User currentUser)
         {
-            StartUpComment comment = new StartUpComment
+            return currentUser != null;
+        }
+
+        /// <param name="currentUser">Who is sending the comment.</param>
+        private void SendUserComment(User currentUser)
+        {
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-                CommentText = CommentBox.Text,
-                DateTime = DateTime.Now,
-                User = currentUser,
-                StartUp = startUp,
-            };
+                StartUpComment comment = new StartUpComment
+                {
+                    CommentText = CommentBox.Text,
+                    DateTime = DateTime.Now,
+                    UserId = currentUser.Id,
+                    StartUpId = startUp.Id,
+                };
 
-            startUp.StartUpComment.Add(comment);
+                context.StartUp.Find(startUp.Id).StartUpComment.Add(comment);
 
-            try
-            {
-                AppData.Context.SaveChanges();
+                try
+                {
+                    context.SaveChanges();
 
-                AppData.Context.ChangeTracker.Entries().ToList().ForEach(e => e.Reload());
+                    context.ChangeTracker.Entries().ToList().ForEach(e => e.Reload());
 
-                Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
-                    + HttpUtility.UrlEncode("Комментарий успешно добавлен!"), false);
+                    Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
+                        + HttpUtility.UrlEncode("Комментарий успешно добавлен!"), false);
 
-                CommentBox.Text = null;
-                InsertComments();
-                UpdateCommentsCount();
-            }
-            catch (Exception)
-            {
-                string reason = HttpUtility.UrlEncode("Не удалось написать комментарий. Попробуйте, пожалуйста, ещё раз.");
-                Response.Redirect("~/StartUpInfo?id=" + startUp.Id + "&reason=" + reason);
+                    CommentBox.Text = null;
+                    InsertComments();
+                    UpdateCommentsCount();
+                }
+                catch (Exception ex)
+                {
+                    string reason = HttpUtility.UrlEncode("Не удалось написать комментарий. " +
+                        "Попробуйте, пожалуйста, ещё раз.");
+                    System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                    Response.Redirect("~/StartUpInfo?id=" + startUp.Id + "&reason=" + reason);
+                }
             }
 
             MaintainScrollPositionOnPostBack = true;
@@ -245,22 +277,25 @@ namespace StartUpWebAPI
         /// </summary>
         protected void BtnUnsubscribe_Click(object sender, EventArgs e)
         {
-            string reason;
-            StartUpOfUser currentStartup = FindStartUp();
-            AppData.Context.StartUpOfUser.Remove(currentStartup);
-
-            try
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-                AppData.Context.SaveChanges();
-                reason = HttpUtility.UrlEncode("Вы успешно покинули стартап");
-                Response.Redirect("~/StartUpInfo?id=" + startUp.Id + "&reason=" + reason, false);
-            }
-            catch (Exception)
-            {
-                reason = HttpUtility.UrlEncode("Не удалось покинуть стартап. Попробуйте, пожалуйста, ещё раз.");
-                Response.Redirect("~/StartUpInfo?id=" + startUp.Id + "&reason=" + reason, false);
+                string reason;
+                StartUpOfUser currentStartup = FindStartUp();
+                context.StartUpOfUser.Remove(currentStartup);
 
-                return;
+                try
+                {
+                    context.SaveChanges();
+                    reason = HttpUtility.UrlEncode("Вы успешно покинули стартап");
+                    Response.Redirect("~/StartUpInfo?id=" + startUp.Id + "&reason=" + reason, false);
+                }
+                catch (Exception)
+                {
+                    reason = HttpUtility.UrlEncode("Не удалось покинуть стартап. Попробуйте, пожалуйста, ещё раз.");
+                    Response.Redirect("~/StartUpInfo?id=" + startUp.Id + "&reason=" + reason, false);
+
+                    return;
+                }
             }
         }
 
@@ -270,8 +305,12 @@ namespace StartUpWebAPI
         /// <returns>The found startup.</returns>
         private StartUpOfUser FindStartUp()
         {
-            return AppData.Context.StartUpOfUser.First(s => s.User.Login.Equals(User.Identity.Name)
-                         && s.StartUpId == startUp.Id);
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
+            {
+                return context.StartUpOfUser
+                    .First(s => s.User.Login.Equals(User.Identity.Name)
+                             && s.StartUpId == startUp.Id);
+            }
         }
 
         /// <summary>
@@ -279,29 +318,33 @@ namespace StartUpWebAPI
         /// </summary>
         protected void BtnSubscribe_Click(object sender, EventArgs e)
         {
-            string reason;
-
-            StartUpOfUser startUpOfUser = new StartUpOfUser
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-                StartUp = startUp,
-                User = AppData.Context.User.First(u => u.Login.Equals(User.Identity.Name)),
-                RoleType = AppData.Context.RoleType.First(r => r.Name.Equals("Участник"))
-            };
 
-            AppData.Context.StartUp.Find(startUp.Id).StartUpOfUser.Add(startUpOfUser);
+                string reason;
 
-            try
-            {
-                AppData.Context.SaveChanges();
-                reason = HttpUtility.UrlEncode("Вы успешно вступили в стартап");
-                Response.Redirect("~/StartUpInfo?id=" + startUp.Id + "&reason=" + reason, false);
-            }
-            catch (Exception)
-            {
-                reason = HttpUtility.UrlEncode("Не удалось вступить в стартап. Попробуйте, пожалуйста, ещё раз.");
-                Response.Redirect("~/StartUpInfo?id=" + startUp.Id + "&reason=" + reason, false);
+                StartUpOfUser startUpOfUser = new StartUpOfUser
+                {
+                    StartUp = startUp,
+                    User = context.User.First(u => u.Login.Equals(User.Identity.Name)),
+                    RoleType = context.RoleType.First(r => r.Name.Equals("Участник"))
+                };
 
-                return;
+                context.StartUp.Find(startUp.Id).StartUpOfUser.Add(startUpOfUser);
+
+                try
+                {
+                    context.SaveChanges();
+                    reason = HttpUtility.UrlEncode("Вы успешно вступили в стартап");
+                    Response.Redirect("~/StartUpInfo?id=" + startUp.Id + "&reason=" + reason, false);
+                }
+                catch (Exception)
+                {
+                    reason = HttpUtility.UrlEncode("Не удалось вступить в стартап. Попробуйте, пожалуйста, ещё раз.");
+                    Response.Redirect("~/StartUpInfo?id=" + startUp.Id + "&reason=" + reason, false);
+
+                    return;
+                }
             }
         }
 
@@ -310,28 +353,31 @@ namespace StartUpWebAPI
         /// </summary>
         protected void BtnDeleteStartUp_Click(object sender, EventArgs e)
         {
-            AppData.Context.StartUpImage.RemoveRange(startUp.StartUpImage);
-            AppData.Context.DocumentOfStartUp.RemoveRange(startUp.DocumentOfStartUp);
-            AppData.Context.StartUpComment.RemoveRange(startUp.StartUpComment);
-            AppData.Context.StartUpOfUser.RemoveRange(startUp.StartUpOfUser);
-            AppData.Context.StartUpOfTeam.RemoveRange(startUp.StartUpOfTeam);
-
-            AppData.Context.StartUp.Remove(startUp);
-
-            try
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-                AppData.Context.SaveChanges();
-                Response
-                    .Redirect("~/Default.aspx?reason=" + HttpUtility.UrlEncode("Стартап успешно удалён!"), false);
-            }
-            catch (Exception ex)
-            {
-                Response.Redirect("~/StartUpInfo.aspx?id="
-                    + startUp.Id
-                    + "&reason="
-                    + HttpUtility.UrlEncode("Стартап не был удалён! Ошибка: "
-                    + ex.Message + "."
-                    + "\nПожалуйста, попробуйте удалить стартап ещё раз"));
+                context.StartUpImage.RemoveRange(startUp.StartUpImage);
+                context.DocumentOfStartUp.RemoveRange(startUp.DocumentOfStartUp);
+                context.StartUpComment.RemoveRange(startUp.StartUpComment);
+                context.StartUpOfUser.RemoveRange(startUp.StartUpOfUser);
+                context.StartUpOfTeam.RemoveRange(startUp.StartUpOfTeam);
+
+                context.StartUp.Remove(startUp);
+
+                try
+                {
+                    context.SaveChanges();
+                    Response
+                        .Redirect("~/Default.aspx?reason=" + HttpUtility.UrlEncode("Стартап успешно удалён!"), false);
+                }
+                catch (Exception ex)
+                {
+                    Response.Redirect("~/StartUpInfo.aspx?id="
+                        + startUp.Id
+                        + "&reason="
+                        + HttpUtility.UrlEncode("Стартап не был удалён! Ошибка: "
+                        + ex.Message + "."
+                        + "\nПожалуйста, попробуйте удалить стартап ещё раз"));
+                }
             }
         }
 
@@ -342,96 +388,144 @@ namespace StartUpWebAPI
         {
             if (e.CommandName.Equals("DeleteCommentById"))
             {
-                StartUpComment comment = AppData.Context.StartUpComment.Find(Convert.ToInt32(e.CommandArgument));
-
-                AppData.Context.StartUpComment.Remove(comment);
-
-                try
+                using (StartUpBaseEntities context = new StartUpBaseEntities())
                 {
-                    AppData.Context.SaveChanges();
+                    StartUpComment comment = context.StartUpComment.Find(Convert.ToInt32(e.CommandArgument));
 
-                    AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
+                    context.StartUpComment.Remove(comment);
 
-                    Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
-                        + HttpUtility.UrlEncode("Комментарий успешно удалён!"), false);
+                    try
+                    {
+                        context.SaveChanges();
+
+                        context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
+
+                        Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
+                            + HttpUtility.UrlEncode("Комментарий успешно удалён!"), false);
+                    }
+                    catch (Exception ex)
+                    {
+                        Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
+                           + HttpUtility.UrlEncode("Комментарий не удалён! Пожалуйста, попробуйте ещё раз"));
+
+                        System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                    }
+                    return;
                 }
-                catch (Exception ex)
-                {
-                    Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
-                       + HttpUtility.UrlEncode("Комментарий не удалён! Пожалуйста, попробуйте ещё раз"));
-
-                    System.Diagnostics.Debug.WriteLine(ex.StackTrace);
-                }
-                return;
             }
 
             if (e.CommandName.Equals("BanUserByCommentId"))
             {
-                StartUpComment comment = AppData.Context
-                    .StartUpComment
-                    .Find(Convert.ToInt32(e.CommandArgument));
-                User user = comment.User;
-
-                BanUtils.BanOrUnban(user, comment.StartUp);
-
-                try
+                using (StartUpBaseEntities context = new StartUpBaseEntities())
                 {
-                    AppData.Context.SaveChanges();
-                    AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
+                    StartUpComment comment = context
+                        .StartUpComment
+                        .Find(Convert.ToInt32(e.CommandArgument));
+                    User user = context.StartUpComment.Find(comment.Id).User;
 
-                    Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
-                                + HttpUtility.UrlEncode("Роль комментатора успешно изменена!"), false);
+                    #region Ban
+
+                    StartUp startUpOfBan = context.StartUp.Find(startUp.Id);
+
+                    List<StartUpOfUser> startUpsOfUser = context.StartUpOfUser
+                            .Where(s => s.User.Login.Equals(user.Login)
+                                        && s.StartUpId == startUpOfBan.Id).ToList();
+
+                    bool isTryingToUnbanUser = startUpsOfUser.Select(s => s.RoleType.Name).Contains("Забанен");
+
+                    List<StartUpOfUser> startUpsWhereIsNotBanned = startUpsOfUser
+                        .Where(s => !s.RoleType.Name.Equals("Забанен")).ToList();
+
+                    if (isTryingToUnbanUser)
+                    {
+                        context.StartUpOfUser.RemoveRange(startUpsOfUser);
+                    }
+                    else
+                    {
+                        StartUpOfUser bannedOfStartUp = new StartUpOfUser();
+
+                        bannedOfStartUp = new StartUpOfUser
+                        {
+                            RoleTypeId = context.RoleType.First(r => r.Name.Equals("Забанен")).Id,
+                            UserId = user.Id,
+                            StartUpId = startUpOfBan.Id
+                        };
+
+                        startUpOfBan.StartUpOfUser.Add(bannedOfStartUp);
+
+                        bool hasAnyTuples = startUpsWhereIsNotBanned.Count != 0;
+
+                        if (hasAnyTuples)
+                        {
+                            context.StartUpOfUser.RemoveRange(startUpsWhereIsNotBanned);
+                        }
+                    }
+
+                    #endregion
+
+                    try
+                    {
+                        context.SaveChanges();
+                        context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
+
+                        Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
+                                    + HttpUtility.UrlEncode("Роль комментатора успешно изменена!"), false);
+                    }
+                    catch (Exception ex)
+                    {
+                        Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
+                           + HttpUtility.UrlEncode("Роль комментатора не изменена! Пожалуйста, попробуйте ещё раз"));
+
+                        System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                    }
+
+                    return;
                 }
-                catch (Exception ex)
-                {
-                    Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
-                       + HttpUtility.UrlEncode("Роль комментатора не изменена! Пожалуйста, попробуйте ещё раз"));
-
-                    System.Diagnostics.Debug.WriteLine(ex.StackTrace);
-                }
-
-                return;
             }
 
             if (e.CommandName.Equals("ChangeUserRoleType"))
             {
-                StartUpComment comment = AppData.Context.StartUpComment.Find(Convert.ToInt32(e.CommandArgument));
-
-                User user = comment.User;
-
-                StartUpOfUser nullableStartUp = startUp.StartUpOfUser.FirstOrDefault(s => s.UserId == user.Id
-                && s.RoleType.Name.Equals("Помощник"));
-                bool isStartUpOfUserExists = nullableStartUp != null && nullableStartUp.UserId != 0;
-
-                if (isStartUpOfUserExists)
+                using (StartUpBaseEntities context = new StartUpBaseEntities())
                 {
-                    AppData.Context.Entry(nullableStartUp).State = System.Data.Entity.EntityState.Deleted;
-                }
-                else
-                {
-                    StartUpOfUser helperOfUser = new StartUpOfUser
+                    StartUpComment comment = context.StartUpComment.Find(Convert.ToInt32(e.CommandArgument));
+
+                    User user = comment.User;
+
+                    StartUpOfUser nullableStartUp = context.StartUpOfUser.FirstOrDefault(s => s.UserId == user.Id
+                    && s.RoleType.Name.Equals("Помощник")
+                    && s.StartUpId == startUp.Id);
+                    bool isStartUpOfUserExists = nullableStartUp != null && nullableStartUp.UserId != 0;
+
+                    if (isStartUpOfUserExists)
                     {
-                        RoleTypeId = AppData.Context.RoleType.First(r => r.Name.Equals("Помощник")).Id,
-                        UserId = user.Id,
-                        StartUpId = comment.StartUp.Id
-                    };
-                    AppData.Context.StartUpOfUser.Add(helperOfUser);
-                }
+                        context.Entry(nullableStartUp).State = System.Data.Entity.EntityState.Deleted;
+                    }
+                    else
+                    {
+                        StartUpOfUser helperOfUser = new StartUpOfUser
+                        {
+                            RoleTypeId = context.RoleType.First(r => r.Name.Equals("Помощник")).Id,
+                            UserId = user.Id,
+                            StartUpId = comment.StartUp.Id
+                        };
+                        context.StartUpOfUser.Add(helperOfUser);
+                    }
 
-                try
-                {
-                    AppData.Context.SaveChanges();
-                    AppData.Context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
+                    try
+                    {
+                        context.SaveChanges();
+                        context.ChangeTracker.Entries().ToList().ForEach(i => i.Reload());
 
-                    Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
-                        + HttpUtility.UrlEncode("Роль помощника у участника изменена!"), false);
-                }
-                catch (Exception ex)
-                {
-                    Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
-                       + HttpUtility.UrlEncode("Роль помощника комментатора не изменена! Пожалуйста, попробуйте ещё раз"));
+                        Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
+                            + HttpUtility.UrlEncode("Роль помощника у участника изменена!"), false);
+                    }
+                    catch (Exception ex)
+                    {
+                        Response.Redirect("~/StartUpInfo.aspx?id=" + startUp.Id + "&reason="
+                           + HttpUtility.UrlEncode("Роль помощника комментатора не изменена! Пожалуйста, попробуйте ещё раз"));
 
-                    System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                        System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                    }
                 }
             }
 

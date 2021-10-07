@@ -108,7 +108,7 @@ namespace StartUpWebAPI.Entities
             {
                 string result = "data:image/jpg;base64,";
 
-                if (User.UserImage != null)
+                if (User?.UserImage != null)
                 {
                     result += Convert.ToBase64String(User.UserImage);
                 }

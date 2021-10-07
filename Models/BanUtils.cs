@@ -1,28 +1,27 @@
 ﻿using StartUpWebAPI.Entities;
-using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Web;
 
 namespace StartUpWebAPI.Models
 {
     public class BanUtils
     {
-        /// <summary>
-        /// Bans or unbans the user.
-        /// </summary>
-        /// <param name="user">What user will be banned or unbanned.</param>
+        /// <param name="user">Which user will be banned or unbanned.</param>
         /// <param name="entity">Entity from DbContext with members.</param>
-        public static void BanOrUnban(User user, object entity)
+        public static DbContext BanOrUnban(User user, object entity)
         {
             if (entity is Team)
             {
                 BanOrUnban(user, entity as Team);
+                return null;
             }
             else if (entity is StartUp)
             {
-                BanOrUnban(user, entity as StartUp);
+                return BanOrUnban(user, entity as StartUp);
             }
+
+            return null;
         }
 
         private static void BanOrUnban(User user, Team team)
@@ -61,40 +60,47 @@ namespace StartUpWebAPI.Models
                 }
             }
         }
-        private static void BanOrUnban(User user, StartUp startUp)
+        private static DbContext BanOrUnban(User user, StartUp startUp)
         {
-            List<StartUpOfUser> startUpsOfUser = AppData.Context.StartUpOfUser
-                    .Where(s => s.User.Login.Equals(user.Login)
-                                && s.StartUpId == startUp.Id).ToList();
-
-            bool isTryingToUnbanUser = startUpsOfUser.Select(s => s.RoleType.Name).Contains("Забанен");
-
-            List<StartUpOfUser> startUpsWhereIsNotBanned = startUpsOfUser
-                .Where(s => !s.RoleType.Name.Equals("Забанен")).ToList();
-
-            if (isTryingToUnbanUser)
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-                AppData.Context.StartUpOfUser.RemoveRange(startUpsOfUser);
-            }
-            else
-            {
-                StartUpOfUser bannedOfStartUp = new StartUpOfUser();
+                startUp = context.StartUp.Find(startUp.Id);
 
-                bannedOfStartUp = new StartUpOfUser
+                List<StartUpOfUser> startUpsOfUser = context.StartUpOfUser
+                        .Where(s => s.User.Login.Equals(user.Login)
+                                    && s.StartUpId == startUp.Id).ToList();
+
+                bool isTryingToUnbanUser = startUpsOfUser.Select(s => s.RoleType.Name).Contains("Забанен");
+
+                List<StartUpOfUser> startUpsWhereIsNotBanned = startUpsOfUser
+                    .Where(s => !s.RoleType.Name.Equals("Забанен")).ToList();
+
+                if (isTryingToUnbanUser)
                 {
-                    RoleTypeId = AppData.Context.RoleType.First(r => r.Name.Equals("Забанен")).Id,
-                    UserId = user.Id,
-                    StartUpId = startUp.Id
-                };
-
-                startUp.StartUpOfUser.Add(bannedOfStartUp);
-
-                bool hasAnyTuples = startUpsWhereIsNotBanned.Count != 0;
-
-                if (hasAnyTuples)
-                {
-                    AppData.Context.StartUpOfUser.RemoveRange(startUpsWhereIsNotBanned);
+                    context.StartUpOfUser.RemoveRange(startUpsOfUser);
                 }
+                else
+                {
+                    StartUpOfUser bannedOfStartUp = new StartUpOfUser();
+
+                    bannedOfStartUp = new StartUpOfUser
+                    {
+                        RoleTypeId = context.RoleType.First(r => r.Name.Equals("Забанен")).Id,
+                        UserId = user.Id,
+                        StartUpId = startUp.Id
+                    };
+
+                    startUp.StartUpOfUser.Add(bannedOfStartUp);
+
+                    bool hasAnyTuples = startUpsWhereIsNotBanned.Count != 0;
+
+                    if (hasAnyTuples)
+                    {
+                        context.StartUpOfUser.RemoveRange(startUpsWhereIsNotBanned);
+                    }
+                }
+
+                return context;
             }
         }
     }
