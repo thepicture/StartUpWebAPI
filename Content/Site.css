@@ -661,6 +661,52 @@ text-danger-additional {
     vertical-align: middle;
 }
 
+.image-flow {
+    width: 400px;
+    height: 240px;
+    float: left;
+    position: relative;
+}
+
+.arrow {
+    display: block;
+    position: absolute;
+    top: 100px;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+.images {
+    width: 9999px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    transition: margin-left 250ms;
+}
+
+.image {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.visible-gallery {
+    overflow: hidden;
+    width: 200px;
+    margin-left: 100px;
+    margin-top: 20px;
+}
+
 /* Styles for master web form. */
 
 /* The title and size for master page. */
@@ -962,7 +1008,6 @@ title-setting-register-like {
     padding-left: 5px;
     padding-right: 5px;
     text-align: center;
-    width: 210px;
     font-size: 15px !important;
 }
 

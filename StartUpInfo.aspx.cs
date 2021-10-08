@@ -145,7 +145,8 @@ namespace StartUpWebAPI
             Category.Text = startUp.Category.Name;
             Description.Text = startUp.SafeDescription;
             UpdateCommentsCount();
-            MainImage.ImageUrl = startUp.ImagePreview;
+            LViewStartUpImages.DataSource = startUp.StartUpImage.ToList();
+            LViewStartUpImages.DataBind();
             MaxMembersCount.Text = startUp.MaxMembersCount.ToString();
             Region.Text = startUp.RegionText;
         }

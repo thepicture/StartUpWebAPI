@@ -24,13 +24,13 @@ namespace StartUpWebAPI
         protected global::System.Web.UI.WebControls.Label MainName;
 
         /// <summary>
-        /// MainImage control.
+        /// LViewStartUpImages control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image MainImage;
+        protected global::System.Web.UI.WebControls.ListView LViewStartUpImages;
 
         /// <summary>
         /// PanelMyStartups control.
