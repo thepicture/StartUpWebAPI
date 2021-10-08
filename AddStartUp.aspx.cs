@@ -14,55 +14,123 @@ namespace StartUpWebAPI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
+            if (PageIsLoadedForTheFirstTime())
             {
-                bool noIdIsPresented = !Request.RawUrl.Contains("id=");
-
-                if (noIdIsPresented)
-                {
-                    Response.Redirect(Request.RawUrl + "?id=0");
-                }
-                LoadBgImage();
-                ViewState["images"] = new List<StartUpImage>();
-                ViewState["documents"] = new List<DocumentOfStartUp>();
-                ViewState["currentStartUp"] = new StartUp();
-                string idString = Request.QueryString.Get("id");
-
-                InsertCategoriesBox();
-
-                bool idIsNotNull = idString != null;
-
-                if (idIsNotNull)
-                {
-                    int id = int.Parse(idString);
-
-                    bool isStartUpExists = id != 0;
-
-                    if (isStartUpExists)
-                    {
-                        using (StartUpBaseEntities context = new StartUpBaseEntities())
-                        {
-                            StartUp nullableStartUp = null;
-                            nullableStartUp = context.StartUp.Find(id);
-
-                            if (nullableStartUp != null)
-                            {
-                                ViewState["currentStartUp"] = nullableStartUp;
-
-                                TBoxName.Text = ((StartUp)ViewState["currentStartUp"]).Name;
-                                TBoxDescription.Text = ((StartUp)ViewState["currentStartUp"]).Description;
-                                TBoxMaxMembers.Text = ((StartUp)ViewState["currentStartUp"]).MaxMembersCount.ToString();
-                                CheckBoxDone.Checked = ((StartUp)ViewState["currentStartUp"]).IsDone;
-                                ((List<StartUpImage>)ViewState["images"]).AddRange(nullableStartUp.StartUpImage.ToList());
-                                ((List<DocumentOfStartUp>)ViewState["documents"]).AddRange(nullableStartUp.DocumentOfStartUp.ToList());
-                                InsertCategory();
-                                InsertDocumentsIntoStartUp();
-                                InsertImagesIntoStartUp();
-                            }
-                        }
-                    }
-                }
+                GetWebFormThingsDone();
             }
+        }
+
+        private void GetWebFormThingsDone()
+        {
+            bool isNoIdPresented = !Request.RawUrl.Contains("id=");
+
+            CheckIfNoIdIsPresented(isNoIdPresented);
+
+            DoPrepareActions();
+
+            string idString = Request.QueryString.Get("id");
+
+            if (IdDoesNotExist(idString))
+            {
+                CheckIfStartUpIsNewAndPrepareIt(idString);
+            }
+        }
+
+        private static bool IdDoesNotExist(string idString)
+        {
+            return idString != null;
+        }
+
+        private void CheckIfNoIdIsPresented(bool noIdIsPresented)
+        {
+            if (noIdIsPresented)
+            {
+                Response.Redirect(Request.RawUrl + "?id=0");
+            }
+        }
+
+        private void DoPrepareActions()
+        {
+            LoadBgImage();
+            PrepareViewState();
+            InsertCategoriesBox();
+        }
+
+        private void CheckIfStartUpIsNewAndPrepareIt(string idString)
+        {
+            int id = int.Parse(idString);
+
+            bool isStartUpExists = id != 0;
+
+            if (isStartUpExists)
+            {
+                CreateContextForStartUpAndPrepareStartUp(id);
+            }
+        }
+
+        private void CreateContextForStartUpAndPrepareStartUp(int id)
+        {
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
+            {
+                DoActionsForPreparingStartUp(id, context);
+            }
+        }
+
+        private void DoActionsForPreparingStartUp(int id, StartUpBaseEntities context)
+        {
+            StartUp nullableStartUp = context.StartUp.Find(id);
+            TryToPrepareStartUp(nullableStartUp);
+        }
+
+        private void TryToPrepareStartUp(StartUp nullableStartUp)
+        {
+            if (HasStartUp(nullableStartUp))
+            {
+                PrepareStartUp(nullableStartUp);
+            }
+        }
+
+        private static bool HasStartUp(StartUp nullableStartUp)
+        {
+            return nullableStartUp != null;
+        }
+
+        private void PrepareStartUp(StartUp nullableStartUp)
+        {
+            ViewState["currentStartUp"] = nullableStartUp;
+
+            FillStartUpAttributes(nullableStartUp);
+
+            InsertObjectsInStartUp();
+        }
+
+        private void FillStartUpAttributes(StartUp nullableStartUp)
+        {
+            TBoxName.Text = ((StartUp)ViewState["currentStartUp"]).Name;
+            TBoxDescription.Text = ((StartUp)ViewState["currentStartUp"]).Description;
+            TBoxMaxMembers.Text = ((StartUp)ViewState["currentStartUp"]).MaxMembersCount.ToString();
+            CheckBoxDone.Checked = ((StartUp)ViewState["currentStartUp"]).IsDone;
+            ((List<StartUpImage>)ViewState["images"]).AddRange(nullableStartUp.StartUpImage.ToList());
+            ((List<DocumentOfStartUp>)ViewState["documents"]).AddRange(nullableStartUp.DocumentOfStartUp.ToList());
+        }
+
+        private void InsertObjectsInStartUp()
+        {
+            InsertCategory();
+            InsertDocumentsIntoStartUp();
+            InsertImagesIntoStartUp();
+        }
+
+        private void PrepareViewState()
+        {
+            ViewState["images"] = new List<StartUpImage>();
+            ViewState["documents"] = new List<DocumentOfStartUp>();
+            ViewState["currentStartUp"] = new StartUp();
+        }
+
+        private bool PageIsLoadedForTheFirstTime()
+        {
+            return !Page.IsPostBack;
         }
 
         /// <summary>
@@ -127,29 +195,8 @@ namespace StartUpWebAPI
         private void UpdateStartUp()
         {
             string errors = "";
-
-            bool badName = string.IsNullOrWhiteSpace(TBoxName.Text);
-
-            if (badName)
-            {
-                errors += "Имя не должно быть пустым; \n";
-            }
-
-            bool badMembersCountFormat = int.TryParse(TBoxMaxMembers.Text, out _);
-
-            if (badMembersCountFormat)
-            {
-                bool badMembersCountNumber = int.Parse(TBoxMaxMembers.Text) < 0
-                                || string.IsNullOrWhiteSpace(TBoxMaxMembers.Text) || TBoxMaxMembers.Text.Length > 4;
-                if (badMembersCountNumber)
-                {
-                    errors += "Количество участников - положительное число длиной от 1 до 4 цифр; \n";
-                }
-            }
-            else
-            {
-                errors += "Количество участников должно быть положительным числом, а не буквенным представлением; \n";
-            }
+            errors = CheckIfNameIsBad(errors);
+            errors = CheckIsMemberCountIsBad(errors);
 
             bool hasAnyErrors = errors.Length > 0;
 
@@ -163,7 +210,6 @@ namespace StartUpWebAPI
 
             using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-
                 ((StartUp)ViewState["currentStartUp"]).Name = TBoxName.Text;
                 ((StartUp)ViewState["currentStartUp"]).Description = TBoxDescription.Text;
                 ((StartUp)ViewState["currentStartUp"]).MaxMembersCount = int.Parse(TBoxMaxMembers.Text);
@@ -285,6 +331,39 @@ namespace StartUpWebAPI
             }
 
             RemoveSession();
+        }
+
+        private string CheckIsMemberCountIsBad(string errors)
+        {
+            bool badMembersCountFormat = int.TryParse(TBoxMaxMembers.Text, out _);
+
+            if (badMembersCountFormat)
+            {
+                bool badMembersCountNumber = int.Parse(TBoxMaxMembers.Text) < 0
+                                || string.IsNullOrWhiteSpace(TBoxMaxMembers.Text) || TBoxMaxMembers.Text.Length > 4;
+                if (badMembersCountNumber)
+                {
+                    errors += "Количество участников - положительное число длиной от 1 до 4 цифр; \n";
+                }
+            }
+            else
+            {
+                errors += "Количество участников должно быть положительным числом, а не буквенным представлением; \n";
+            }
+
+            return errors;
+        }
+
+        private string CheckIfNameIsBad(string errors)
+        {
+            bool badName = string.IsNullOrWhiteSpace(TBoxName.Text);
+
+            if (badName)
+            {
+                errors += "Имя не должно быть пустым; \n";
+            }
+
+            return errors;
         }
 
         /// <summary>
