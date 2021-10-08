@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
 
 namespace StartUpWebAPI
 {
@@ -12,17 +7,29 @@ namespace StartUpWebAPI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
+            if (PageLoadedForTheFirstTime())
             {
-                Control footer = Master.FindControl("FooterIdentity");
-                footer.Visible = false;
+                HideFooter();
             }
         }
 
-        /// <summary>
-        /// Redirects the user to the register page.
-        /// </summary>
+        private bool PageLoadedForTheFirstTime()
+        {
+            return !Page.IsPostBack;
+        }
+
+        private void HideFooter()
+        {
+            Control footer = Master.FindControl("FooterIdentity");
+            footer.Visible = false;
+        }
+
         protected void BtnRegister_Click(object sender, EventArgs e)
+        {
+            RedirectUserToRegisterPage();
+        }
+
+        private void RedirectUserToRegisterPage()
         {
             Response.Redirect("~/Account/Register.aspx");
         }
