@@ -683,11 +683,12 @@ text-danger-additional {
 }
 
 .images {
-    width: 9999px;
+    width: max-content;
     margin: 0;
     padding: 0;
     list-style: none;
-    transition: margin-left 250ms;
+    transition: all 200ms ease-in-out;
+    font-size: 0;
 }
 
 .image {

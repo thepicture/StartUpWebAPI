@@ -220,6 +220,7 @@
     <Content Include="Scripts\delete-confirmer.js" />
     <Content Include="Scripts\descriptor-presenter.js" />
     <Content Include="Scripts\dropdown-list-flusher.js" />
+    <Content Include="Scripts\image-scroller.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />

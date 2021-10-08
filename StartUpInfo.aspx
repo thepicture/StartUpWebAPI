@@ -20,10 +20,12 @@
 
                 <div class="white-shadow-block image-flow">
                     <button class="arrow prev button-style-for-page about-like-cloud-button-for-page"
-                        onclick="return false;">
+                        onclick="return false;"
+                        id="btnGoLeft">
                         &lt</button>
                     <div class="visible-gallery">
-                        <ul class="images">
+                        <ul class="images"
+                            id="imageBoard">
                             <asp:ListView runat="server"
                                 ID="LViewStartUpImages">
                                 <ItemTemplate>
@@ -37,7 +39,8 @@
                         </ul>
                     </div>
                     <button class="arrow next button-style-for-page about-like-cloud-button-for-page"
-                        onclick="return false;">
+                        onclick="return false;"
+                        id="btnGoRight">
                         &gt</button>
                 </div>
 
@@ -257,6 +260,9 @@
     </asp:Panel>
 
     <script src='<%=ResolveUrl("~/Scripts/delete-confirmer.js") %>'
+        type="text/javascript">
+    </script>
+      <script src='<%=ResolveUrl("~/Scripts/image-scroller.js") %>'
         type="text/javascript">
     </script>
 </asp:Content>
