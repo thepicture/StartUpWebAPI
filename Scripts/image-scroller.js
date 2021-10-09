@@ -1,9 +1,13 @@
 ﻿"use strict"
 
-btnGoLeft.addEventListener('mousedown', scrollPicturesToLeft);
+const SCROLL_INTERVAL_MS = 5 * 1000;
+let interval;
+
+    btnGoLeft.addEventListener('mousedown', scrollPicturesToLeft);
 btnGoRight.addEventListener('mousedown', scrollPicturesToRight);
 
 function scrollPicturesToLeft() {
+    resetIntervalToPreventNonIntendedScroll();
     imageBoard.style.transform = `translateX(${(getCurrentTransform() + 200) % imageBoard.clientWidth}px)`;
 
     if (getCurrentTransform() > 0) {
@@ -12,6 +16,7 @@ function scrollPicturesToLeft() {
 }
 
 function scrollPicturesToRight() {
+    resetIntervalToPreventNonIntendedScroll();
     let transform = getCurrentTransform();
 
     imageBoard.style.transform = `translateX(${(transform - 200) % imageBoard.clientWidth}px)`;
@@ -32,4 +37,9 @@ function getCurrentTransform() {
     return result;
 }
 
-setInterval(scrollPicturesToRight, 5 * 1000);
+function resetIntervalToPreventNonIntendedScroll() {
+    clearInterval(interval);
+    interval = setInterval(scrollPicturesToRight, SCROLL_INTERVAL_MS);
+}
+
+interval = setInterval(scrollPicturesToRight, SCROLL_INTERVAL_MS);

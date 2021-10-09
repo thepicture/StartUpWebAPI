@@ -268,7 +268,7 @@
     <script src='<%=ResolveUrl("~/Scripts/image-scroller.js") %>'
         type="text/javascript">
     </script>
-    <script src='<%=ResolveUrl("~/Scripts/button-popuper.js") %>'
+    <script src='<%=ResolveUrl("~/Scripts/image-flow-buttons-presenter.js") %>'
         type="text/javascript">
     </script>
 </asp:Content>
