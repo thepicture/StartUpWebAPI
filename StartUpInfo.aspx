@@ -18,7 +18,7 @@
                 <p class="lead">
                 </p>
 
-                <div class="white-shadow-block image-flow">
+                <div class="no-image-select image-flow">
                     <button class="arrow prev button-style-for-page about-like-cloud-button-for-page"
                         onclick="return false;"
                         id="btnGoLeft">
@@ -262,7 +262,7 @@
     <script src='<%=ResolveUrl("~/Scripts/delete-confirmer.js") %>'
         type="text/javascript">
     </script>
-      <script src='<%=ResolveUrl("~/Scripts/image-scroller.js") %>'
+    <script src='<%=ResolveUrl("~/Scripts/image-scroller.js") %>'
         type="text/javascript">
     </script>
 </asp:Content>

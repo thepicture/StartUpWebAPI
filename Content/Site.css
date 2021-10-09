@@ -1,4 +1,4 @@
-﻿/* Move down content because we have a fixed navbar that is 50px tall */
+﻿arrow /* Move down content because we have a fixed navbar that is 50px tall */
 body {
     padding-top: 50px;
     padding-bottom: 20px;
@@ -1740,4 +1740,18 @@ input[type="checkbox"] {
 
 .hidden-description {
     display: none;
+}
+
+.no-image-select {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.request-top {
+    top: 50px;
 }

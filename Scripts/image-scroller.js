@@ -31,3 +31,5 @@ function getCurrentTransform() {
 
     return result;
 }
+
+setInterval(scrollPicturesToRight, 5 * 1000);

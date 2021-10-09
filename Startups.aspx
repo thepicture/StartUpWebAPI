@@ -8,7 +8,7 @@
 
 <asp:Content ID="SearchContent" ContentPlaceHolderID="MainContent" runat="server">
     <div style="display: flex;">
-        <div class="navbar navbar-inverse navbar-fixed-top request-white-bg" style="top: inherit;">
+        <div class="navbar navbar-inverse navbar-fixed-top request-white-bg request-top">
             <div style="display: flex; width: 100%; justify-content: center;">
 
                 <asp:UpdatePanel runat="server" ID="UpdateFiltration" UpdateMode="Conditional" style="margin-left: 10px;">

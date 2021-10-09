@@ -7,8 +7,8 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <div>
-        <div class=" container navbar-fixed-top request-white-bg"
-            style="top: inherit; width: 100%; display: flex !important; justify-content: center;">
+        <div class="container navbar-fixed-top request-white-bg request-top"
+            style="width: 100%; display: flex !important; justify-content: center;">
 
             <%--style="display: flex; width: 100%; justify-content: center;--%>
 
