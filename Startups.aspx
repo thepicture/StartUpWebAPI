@@ -195,7 +195,7 @@
                         onmouseenter='<%# "showDescription(`start-up-" + Eval("Id")  + "`, `" + Eval("RestrictedDescription") + "`)"%>'
                         onmouseleave="hideDescription()"
                         class='<%# "start-up-" + Eval("Id") %>'>
-                                <div class="startup-panel radius-like container-item">
+                                <div class="startup-panel radius-like container-item transparent-bg">
                                     <img class="startup-image radius-like image-cover-auto"
                                          src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
                                     <h1 class="tag-item item-name"><%# Eval("Name") %></h1>

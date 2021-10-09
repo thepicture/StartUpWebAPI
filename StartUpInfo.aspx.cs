@@ -78,18 +78,30 @@ namespace StartUpWebAPI
         {
             using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-                LViewUsersFlow.DataSource = GetUsersOfStartUp();
+                List<User> users = PrepareAndGetInfiniteUsers();
+
+                LViewUsersFlow.DataSource = users;
                 LViewUsersFlow.DataBind();
             }
         }
 
+        private List<User> PrepareAndGetInfiniteUsers()
+        {
+            List<User> users = GetUsersOfStartUp();
+            users = users.Take(3).ToList();
+            users.AddRange(users);
+            return users;
+        }
+
         private List<User> GetUsersOfStartUp()
         {
-            return startUp
+            List<User> users = startUp
                 .StartUpOfUser
                 .Select(s => s.User)
                 .Distinct()
                 .ToList();
+
+            return users;
         }
 
         /// <summary>

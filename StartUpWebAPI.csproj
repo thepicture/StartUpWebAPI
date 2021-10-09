@@ -199,7 +199,6 @@
     <Content Include="Entities\BaseModel.edmx.diagram">
       <DependentUpon>BaseModel.edmx</DependentUpon>
     </Content>
-    <None Include="Properties\PublishProfiles\StartUpWebAPI20211008154753 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Resource Include="Resources\AeOf3UMV9WA-removebg-preview.png" />
     <Resource Include="Resources\Logo.png" />

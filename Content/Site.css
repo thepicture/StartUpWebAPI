@@ -725,7 +725,6 @@ text-danger-additional {
 
 .images {
     width: max-content;
-    margin: 0;
     padding: 0;
     list-style: none;
     transition: all 200ms ease-in-out;
@@ -747,6 +746,32 @@ text-danger-additional {
     width: 200px;
     margin-left: 100px;
     margin-top: 20px;
+}
+
+.three-images-in-a-row {
+    width: 600px;
+}
+
+.users-sliding {
+    animation: slide-users-frames 8s linear infinite;
+}
+
+.not-absolute {
+    position: inherit;
+}
+
+.transparent-container {
+    background-color: transparent;
+}
+
+@keyframes slide-users-frames {
+    from {
+        transform: translateX(0px);
+    }
+
+    to {
+        transform: translateX(-600px);
+    }
 }
 
 /* Styles for master web form. */

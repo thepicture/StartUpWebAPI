@@ -164,17 +164,28 @@
                 <p style="margin-left: 10px; color: black;" class="lead">
                     <asp:Label runat="server" ID="UsersCount"></asp:Label>
                 </p>
-                <asp:ListView runat="server"
-                    ID="LViewUsersFlow">
-                    <ItemTemplate>
-                        <div><%# Eval("Name") %></div>
-                        <asp:Image Width="100"
-                            Height="100"
-                            runat="server"
-                            CssClass="startup-image-radius radius-like marginaled image-cover-auto"
-                            ImageUrl='<%# Eval("UserImageOrDefault") %>'></asp:Image>
-                    </ItemTemplate>
-                </asp:ListView>
+                <%-- User images template. --%>
+                <div class="visible-gallery three-images-in-a-row">
+                    <ul class="images users-sliding">
+                        <asp:ListView runat="server"
+                            ID="LViewUsersFlow">
+                            <ItemTemplate>
+                                <li class="image">
+                                    <div class="container-item transparent-container">
+                                        <asp:Image Width="200"
+                                            Height="200"
+                                            runat="server"
+                                            CssClass="startup-image-radius radius-like marginaled image-cover-auto inline-block tag-item not-absolute"
+                                            ImageUrl='<%# Eval("UserImageOrDefault") %>'></asp:Image>
+                                        <asp:Label runat="server"
+                                            CssClass="tag-item"
+                                            Text='<%# Eval("Name") %>'></asp:Label>
+                                    </div>
+                                </li>
+                            </ItemTemplate>
+                        </asp:ListView>
+                    </ul>
+                </div>
             </div>
         </div>
         <br />
