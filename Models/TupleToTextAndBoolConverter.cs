@@ -6,14 +6,8 @@ using System.Web.UI.WebControls;
 
 namespace StartUpWebAPI.Models
 {
-    /// <summary>
-    /// Class for converting tuples to new representation.
-    /// </summary>
     public class TupleToTextAndBoolConverter
     {
-        /// <summary>
-        /// Convert the tuples to text and bool representation.
-        /// </summary>
         /// <param name="tuples">The tuples to convert.</param>
         /// <returns>A new representation of tuple in a string and bool format.</returns>
         public static IEnumerable<Tuple<string, bool>> ConvertToTextAndBoolTuple(IEnumerable<Tuple<Label, HtmlInputCheckBox>> tuples)

@@ -51,7 +51,7 @@ namespace StartUpWebAPI.Account
             string login = LoginBox.Text;
             string password = PasswordBox.Text;
 
-            User user = UserAuthorizer.Authorize(login, password);
+            User user = UserAuthorizer.GetUserFromDbContextAndAuthorize(login, password);
 
             bool isUserFound = user != null;
 

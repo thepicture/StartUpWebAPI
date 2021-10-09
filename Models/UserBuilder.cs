@@ -11,10 +11,6 @@ namespace StartUpWebAPI.Models
     {
         private User user;
 
-        /// <summary>
-        /// Creates a new instance of a user.
-        /// </summary>
-        /// <returns></returns>
         public UserBuilder NewInstance()
         {
             user = new User();
@@ -22,11 +18,6 @@ namespace StartUpWebAPI.Models
             return this;
         }
 
-        /// <summary>
-        /// Appends the login.
-        /// </summary>
-        /// <param name="login">The login.</param>
-        /// <returns></returns>
         public UserBuilder WithLogin(string login)
         {
             user.Login = login;
@@ -34,11 +25,6 @@ namespace StartUpWebAPI.Models
             return this;
         }
 
-        /// <summary>
-        /// Appends the full name.
-        /// </summary>
-        /// <param name="fullName">The full name.</param>
-        /// <returns></returns>
         public UserBuilder WithFullName(string fullName)
         {
             user.Name = fullName;
@@ -46,11 +32,6 @@ namespace StartUpWebAPI.Models
             return this;
         }
 
-        /// <summary>
-        /// Appends the password.
-        /// </summary>
-        /// <param name="password">The password.</param>
-        /// <returns></returns>
         public UserBuilder WithPassword(string password)
         {
             user.Password = password;
@@ -58,22 +39,22 @@ namespace StartUpWebAPI.Models
             return this;
         }
 
-        /// <summary>
-        /// Saves the builded user into DbContext.
-        /// </summary>
-        public void Save()
+        public void SaveTheUserInDbContext()
         {
-            user.TypeOfUser = AppData.Context.TypeOfUser.First(t => t.Name.Equals("Пользователь"));
-
-            AppData.Context.User.Add(user);
-
-            try
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-                AppData.Context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex.Message);
+                user.TypeOfUser = context.TypeOfUser.First(t => t.Name.Equals("Пользователь"));
+
+                context.User.Add(user);
+
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine(ex.Message);
+                }
             }
         }
     }

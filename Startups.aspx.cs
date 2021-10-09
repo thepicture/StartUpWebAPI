@@ -115,8 +115,7 @@ namespace StartUpWebAPI
         {
             using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-
-                var currentStartups = AppData.Context.StartUp.ToList();
+                var currentStartups = context.StartUp.ToList();
 
                 currentStartups.RemoveAll(s => s.StartUpOfUser.Any(e => e.User.Name.Equals(User.Identity.Name) && e.RoleType.Name.Equals("Забанен")));
 

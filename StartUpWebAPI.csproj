@@ -314,7 +314,6 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="App_Data\AppData.cs" />
     <Compile Include="Entities\BaseModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -379,7 +378,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AntiSpamChecker.cs" />
-    <Compile Include="Models\BanUtils.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ListViewTupleGetter.cs" />
     <Compile Include="Models\NativeImageUtils.cs" />

@@ -3,13 +3,10 @@
 namespace StartUpWebAPI.Models
 {
     /// <summary>
-    /// Finds the controls in asp: elements by id.
+    /// Finds the controls in asp: elements by id recursively.
     /// </summary>
     public class RecursiveControlFinder
     {
-        /// <summary>
-        /// Finds control recursively.
-        /// </summary>
         /// <param name="rootControl">The ancestor.</param>
         /// <param name="controlID">The id of the control to look.</param>
         /// <returns></returns>

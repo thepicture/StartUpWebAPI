@@ -2,7 +2,6 @@
 using StartUpWebAPI.Models;
 using System;
 using System.Linq;
-using System.Web.Security;
 using System.Web.UI;
 
 namespace StartUpWebAPI.Account
@@ -30,14 +29,7 @@ namespace StartUpWebAPI.Account
         {
             if (IsValid && IsNoSimilarUsernames())
             {
-                UserBuilder uBuilder = new UserBuilder();
-                uBuilder
-                    .NewInstance()
-                    .WithFullName(FullNameBox.Text)
-                    .WithLogin(LoginBox.Text)
-                    .WithPassword(PasswordBox.Text)
-                    .Save();
-
+                BuildUser();
                 Response.Redirect("~/Account/Login.aspx?isregistered=true");
             }
             else
@@ -46,11 +38,25 @@ namespace StartUpWebAPI.Account
             }
         }
 
+        private void BuildUser()
+        {
+            UserBuilder uBuilder = new UserBuilder();
+            uBuilder
+                .NewInstance()
+                .WithFullName(FullNameBox.Text)
+                .WithLogin(LoginBox.Text)
+                .WithPassword(PasswordBox.Text)
+                .SaveTheUserInDbContext();
+        }
+
         private bool IsNoSimilarUsernames()
         {
             string username = LoginBox.Text;
 
-            return !AppData.Context.User.Any(u => u.Login.Equals(username));
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
+            {
+                return !context.User.Any(u => u.Login.Equals(username));
+            }
         }
     }
 }
