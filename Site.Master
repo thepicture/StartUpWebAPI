@@ -114,15 +114,7 @@
             <div class="text-description">
                 <h2 style="margin-top: 5px !important;">Описание
                 </h2>
-                <span id="description-text">dweqweqeqweqweqweqeeqe
-                    sdsdsdsdsdsdsdsdsdsdsd
-                    sdsdsdsdsdssssdsdsdssd
-                    wewerwwrwerwwrwrwewwrr
-                    ioagfouagogawgawurgwur
-                    agwruogwruiawgriurwara
-                    gaworugawurgawuigiugg
-                    awrarkharlakwrhawlakhl...
-                </span>
+                <span id="description-text"></span>
             </div>
         </div>
 

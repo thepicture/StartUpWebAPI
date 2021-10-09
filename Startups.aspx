@@ -192,7 +192,7 @@
                     <asp:LinkButton runat="server"
                         ID="BtnStartUpInfo"
                         href='<%#"/StartUpInfo?id=" + Eval("Id") %>'
-                        onmouseenter='<%# "showDescription(`start-up-" + Eval("Id")  + "`, `" + Eval("SafeDescription") + "`)"%>'
+                        onmouseenter='<%# "showDescription(`start-up-" + Eval("Id")  + "`, `" + Eval("RestrictedDescription") + "`)"%>'
                         onmouseleave="hideDescription()"
                         class='<%# "start-up-" + Eval("Id") %>'>
                                 <div class="startup-panel radius-like container-item">

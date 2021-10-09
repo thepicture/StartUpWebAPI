@@ -22,6 +22,36 @@ namespace StartUpWebAPI.Entities
                 return string.IsNullOrEmpty(Description) ? "Организатор не предоставил описание. Можете подать ему идею!" : Description;
             }
         }
+
+        public string RestrictedDescription
+        {
+            get
+            {
+                int descLength = 128;
+
+                if (TeamHasDescription())
+                {
+                    if (DescriptionIsTooLong(descLength))
+                    {
+                        return string.Concat(Description.Take(descLength)) + "...";
+                    }
+                    return Description;
+                }
+                return "Организатор не предоставил описание. Можете подать ему идею!";
+            }
+        }
+
+        private bool DescriptionIsTooLong(int descLength)
+        {
+            return Description.Length > descLength;
+        }
+
+        private bool TeamHasDescription()
+        {
+            return Description != null;
+        }
+
+
         public string MyRole
         {
             get
