@@ -102,30 +102,30 @@ namespace StartUpWebAPI.Entities
         {
             get
             {
-                string[] words = Category?.Name.Split(' ');
-
-                if (words == null)
+                if (CategoryIsUnknown())
                 {
                     return "Неизвестно";
                 }
 
-                if (words.Length > 2)
+                if (CategoryNameIsTooLong())
                 {
-                    return words[0] + " " + words[1] + "...";
+                    return string.Concat(Category.Name.Take(20)) + "...";
                 }
-                else
-                {
-                    StringBuilder result = new StringBuilder();
 
-                    foreach (var word in words)
-                    {
-                        result.Append(word + " ");
-                    }
-
-                    return result.ToString();
-                }
+                return Category.Name;
             }
         }
+
+        private bool CategoryNameIsTooLong()
+        {
+            return Category.Name.Length > 20;
+        }
+
+        private bool CategoryIsUnknown()
+        {
+            return Category == null;
+        }
+
         public string ImagePreview
         {
             get
