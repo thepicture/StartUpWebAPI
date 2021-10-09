@@ -18,7 +18,7 @@
                 <p class="lead">
                 </p>
 
-                <div class="no-image-select image-flow"
+                <div class="no-image-select image-flow no-margin-left"
                     onmouseover="showButtons()"
                     onmouseout="hideButtons()">
                     <button class="arrow prev button-style-for-page-info about-like-cloud-button-for-page-info popup-button"
@@ -47,32 +47,32 @@
                     </button>
                 </div>
                 <asp:Panel Style="display: block" ID="PanelMyStartups" runat="server">
-                    <div style="margin-top: 70px !important; margin-left: 240px !important; overflow-y: auto !important; overflow-wrap: break-word; margin-top: 90px !important; height: 150px !important;">
+                    <div style="margin-top: 40px !important; margin-left: 240px !important; overflow-y: auto !important; overflow-wrap: break-word; height: 150px !important;">
                         <asp:Label Style="margin-top: 90px !important; font-size: x-large; text-wrap: normal !important;"
                             ID="Description"
                             runat="server"
                             ForeColor="Black"></asp:Label>
                     </div>
 
-                    <table align="center" runat="server" cellpadding="5" style="border-spacing: 30px !important;" cellspacing="9">
+                    <table align="center" runat="server" class="table table-borderless" style=" border-collapse:collapse;">
                         <tr cellspacing="9" runat="server">
 
-                            <td runat="server" style="margin-right: 20px;">
+                            <td scope="col" runat="server" style="margin-right: 20px;">
                                 <label style="display: block; font-size: 17px; color: darkslateblue">Название:</label>
                                 <asp:Label ID="Name" runat="server" ForeColor="Black"></asp:Label>
                             </td>
 
-                            <td>
+                            <td scope="col">
                                 <label style="display: block; font-size: 17px; color: darkslateblue">Максимум участников:</label>
                                 <asp:Label ID="MaxMembersCount" runat="server" ForeColor="Black"></asp:Label>
                             </td>
 
-                            <td>
+                            <td scope="col">
                                 <label style="display: block; font-size: 17px; color: darkslateblue">Участников:</label>
                                 <asp:Label ID="CountOfMembers" runat="server" ForeColor="Black"></asp:Label>
                             </td>
 
-                            <td>
+                            <td scope="col">
                                 <label style="display: block; font-size: 17px; color: darkslateblue">Команд:</label>
                                 <asp:Label ID="CountOfTeams" runat="server" ForeColor="Black"></asp:Label>
                             </td>
@@ -81,7 +81,7 @@
 
                         <tr>
 
-                            <td>
+                            <td scope="row">
                                 <label style="display: block; font-size: 17px; color: darkslateblue">Стартапер:</label>
                                 <asp:Label ID="Creator" runat="server" ForeColor="Black"></asp:Label>
                             </td>
@@ -108,8 +108,10 @@
                         <tr>
                         </tr>
                     </table>
+                    <br />
+
                     <asp:Panel Style="display: block;" runat="server" ID="PStartupEdit" Visible="false">
-                        <table style="margin-left: -10px; margin-top: -20px;">
+                        <table  style="margin-left: -160px; margin-top: -20px;">
                             <tr>
                                 <td>
                                     <asp:LinkButton runat="server" Style="float: left; margin-left: 170px !important;"
@@ -124,15 +126,14 @@
                                         CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                                         ForeColor="White"
                                         ID="BtnDeleteStartUp"
+
                                         OnClick="BtnDeleteStartUp_Click"
                                         OnClientClick="return getDeleteItemState(`стартап`);"></asp:LinkButton>
                                 </td>
-                            </tr>
-                        </table>
-                        <br />
-                    </asp:Panel>
-                    <table style="margin-left: 150px; margin-top: -30px;" class="inline-button">
-                        <tr>
+                            
+                    
+                 
+                       
                             <td>
                                 <asp:Button ID="BtnSubscribe"
                                     OnClick="BtnSubscribe_Click"
@@ -153,6 +154,7 @@
                             </td>
                         </tr>
                     </table>
+                        </asp:Panel>
                 </asp:Panel>
                 <br />
             </div>
@@ -199,14 +201,14 @@
 
                 <asp:TextBox TextMode="SingleLine"
                     CssClass="search-box" BorderColor="#808080"
-                    Style="margin-bottom: 20px; border-style: inset; height: 70px; margin-left: 10px; max-width: 1300px; width: 1030px !important; margin-right: 6px;"
+                    Style="margin-bottom: 20px; border-style: inset; height: 70px; margin-left: 10px; max-width: -webkit-fill-available; width: 1000px !important; margin-right: 6px;"
                     placeholder="Введите комментарий для отправки"
                     runat="server" ID="CommentBox"
                     ForeColor="Black" Height="60"
                     BorderStyle="None"
                     BackColor="Transparent"></asp:TextBox>
 
-                <div style="width: 1030px !important" class="round-div-block about-like-cloud-button-for-page-five button-style-for-page margin-bottom-top-as-usual">
+                <div style="width: 1000px !important; max-width: -webkit-fill-available;" class="round-div-block about-like-cloud-button-for-page-five button-style-for-page margin-bottom-top-as-usual">
                     <asp:LinkButton runat="server" ForeColor="White" Text='Отправить' ID="BtnSendComment" OnClick="BtnSendComment_Click"></asp:LinkButton>
                 </div>
             </div>
