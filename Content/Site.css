@@ -748,12 +748,13 @@ text-danger-additional {
     margin-top: 20px;
 }
 
-.three-images-in-a-row {
-    width: 600px;
+.users-gallery {
+    margin-left: 0px;
+    width: inherit;
 }
 
 .users-sliding {
-    animation: slide-users-frames 8s linear infinite;
+    animation: slide-users-frames 16s linear infinite;
 }
 
 .not-absolute {
@@ -770,8 +771,12 @@ text-danger-additional {
     }
 
     to {
-        transform: translateX(-600px);
+        transform: translateX(-1200px);
     }
+}
+
+.user-image-padding {
+    padding-right: 10px;
 }
 
 /* Styles for master web form. */

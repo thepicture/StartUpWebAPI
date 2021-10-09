@@ -165,7 +165,7 @@
                     <asp:Label runat="server" ID="UsersCount"></asp:Label>
                 </p>
                 <%-- User images template. --%>
-                <div class="visible-gallery three-images-in-a-row">
+                <div class="visible-gallery users-gallery">
                     <ul class="images users-sliding">
                         <asp:ListView runat="server"
                             ID="LViewUsersFlow">
@@ -175,7 +175,7 @@
                                         <asp:Image Width="200"
                                             Height="200"
                                             runat="server"
-                                            CssClass="startup-image-radius radius-like marginaled image-cover-auto inline-block tag-item not-absolute"
+                                            CssClass="startup-image-radius radius-like marginaled image-cover-auto inline-block tag-item not-absolute user-image-padding"
                                             ImageUrl='<%# Eval("UserImageOrDefault") %>'></asp:Image>
                                         <asp:Label runat="server"
                                             CssClass="tag-item"
@@ -188,15 +188,11 @@
                 </div>
             </div>
         </div>
-        <br />
-        <br />
         <div class="white-shadow-block radius-like">
             <div class="jumbotron">
                 <p style="margin-left: 10px; color: black;" class="lead">
                     <asp:Label runat="server" ID="CommentsCount"></asp:Label>
                 </p>
-
-
                 <asp:TextBox TextMode="SingleLine"
                     CssClass="search-box" BorderColor="#808080"
                     Style="margin-bottom: 20px; border-style: inset; height: 70px; margin-left: 10px; max-width: 1300px; width: 1030px !important; margin-right: 6px;"

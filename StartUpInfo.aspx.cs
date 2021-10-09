@@ -88,8 +88,11 @@ namespace StartUpWebAPI
         private List<User> PrepareAndGetInfiniteUsers()
         {
             List<User> users = GetUsersOfStartUp();
-            users = users.Take(3).ToList();
-            users.AddRange(users);
+            users = users.Take(6).ToList();
+            for (int i = 0; i < 6; i++)
+            {
+                users.AddRange(users);
+            }
             return users;
         }
 
