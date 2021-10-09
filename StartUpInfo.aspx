@@ -177,6 +177,7 @@
                                             runat="server"
                                             CssClass="startup-image-radius radius-like marginaled image-cover-auto inline-block tag-item not-absolute user-image-padding"
                                             ImageUrl='<%# Eval("UserImageOrDefault") %>'></asp:Image>
+                                        <%-- The label is not showing any info. Template is for contributors. --%>
                                         <asp:Label runat="server"
                                             CssClass="tag-item"
                                             Text='<%# Eval("Name") %>'></asp:Label>

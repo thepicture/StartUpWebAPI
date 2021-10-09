@@ -88,12 +88,39 @@ namespace StartUpWebAPI
         private List<User> PrepareAndGetInfiniteUsers()
         {
             List<User> users = GetUsersOfStartUp();
-            users = users.Take(6).ToList();
-            for (int i = 0; i < 6; i++)
+            List<User> result;
+
+            result = users.Take(3).ToList();
+
+            if (IsExistsAtLeastOneUser(users))
             {
-                users.AddRange(users);
+                List<User> additonalUsers = new List<User>();
+                for (int i = 0; i < 6 / users.Count; i++)
+                {
+                    additonalUsers.AddRange(result);
+                }
+
+                result.AddRange(additonalUsers);
+
+                if (users.Count < 4)
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        result.Add(users.FirstOrDefault());
+                    }
+                }
+                else
+                {
+                    result.AddRange(users.Take(3));
+                }
             }
-            return users;
+
+            return result;
+        }
+
+        private static bool IsExistsAtLeastOneUser(List<User> users)
+        {
+            return users.Count != 0;
         }
 
         private List<User> GetUsersOfStartUp()

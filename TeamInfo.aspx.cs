@@ -52,8 +52,43 @@ namespace StartUpWebAPI
 
                 InsertComments();
                 InsertTeams();
+                InsertUsersFlow();
             }
         }
+
+        private void InsertUsersFlow()
+        {
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
+            {
+                List<User> users = PrepareAndGetInfiniteUsers();
+
+                LViewUsersFlow.DataSource = users;
+                LViewUsersFlow.DataBind();
+            }
+        }
+
+        private List<User> PrepareAndGetInfiniteUsers()
+        {
+            List<User> users = GetUsersOfStartUp();
+            users = users.Take(6).ToList();
+            for (int i = 0; i < 6; i++)
+            {
+                users.AddRange(users);
+            }
+            return users;
+        }
+
+        private List<User> GetUsersOfStartUp()
+        {
+            List<User> users = team
+                .TeamOfUser
+                .Select(s => s.User)
+                .Distinct()
+                .ToList();
+
+            return users;
+        }
+
         /// <summary>
         /// Redirects to the edit team page.
         /// </summary>

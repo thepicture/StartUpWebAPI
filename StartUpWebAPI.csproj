@@ -387,6 +387,7 @@
     <Compile Include="Models\PartialTeamComment.cs" />
     <Compile Include="Models\PartialUser.cs" />
     <Compile Include="Models\RecursiveControlFinder.cs" />
+    <Compile Include="Models\ResizingNativeImageUtils.cs" />
     <Compile Include="Models\StreamToBytesConverter.cs" />
     <Compile Include="Models\TupleToTextAndBoolConverter.cs" />
     <Compile Include="Models\TupleValueGetter.cs" />
