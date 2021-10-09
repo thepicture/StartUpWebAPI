@@ -12,19 +12,22 @@ namespace StartUpWebAPI.Entities
         {
             get
             {
-                bool isMember = AppData.Context.StartUpOfUser.Any(s => s.UserId == User.Id
-                && s.RoleType.Name.Equals("Участник")
-                && s.StartUpId == StartUp.Id);
-                bool isNotBanned = !AppData.Context.StartUpOfUser.Any(s => s.UserId == User.Id
-                && s.RoleType.Name.Equals("Забанен")
-                && s.StartUpId == StartUp.Id);
-
-                if (!isNotBanned)
+                using (StartUpBaseEntities context = new StartUpBaseEntities())
                 {
-                    return "Забанен";
-                }
+                    bool isMember = context.StartUpOfUser.Any(s => s.UserId == User.Id
+                    && s.RoleType.Name.Equals("Участник")
+                    && s.StartUpId == StartUp.Id);
+                    bool isNotBanned = !context.StartUpOfUser.Any(s => s.UserId == User.Id
+                    && s.RoleType.Name.Equals("Забанен")
+                    && s.StartUpId == StartUp.Id);
 
-                return isMember && isNotBanned ? "Участник" : "Гость";
+                    if (!isNotBanned)
+                    {
+                        return "Забанен";
+                    }
+
+                    return isMember && isNotBanned ? "Участник" : "Гость";
+                }
             }
         }
         public string ChangeUserRoleTypeText
@@ -48,16 +51,19 @@ namespace StartUpWebAPI.Entities
         {
             get
             {
-                bool isNotSelf = !User.Login.Equals(HttpContext.Current.User.Identity.Name);
-                bool iAmAOrganizer = StartUp
-                    .StartUpOfUser.Any(s => s.User.Login.Equals(HttpContext.Current.User.Identity.Name)
-                    && s.RoleType.Name.Equals("Организатор")
+                using (StartUpBaseEntities context = new StartUpBaseEntities())
+                {
+                    bool isNotSelf = !User.Login.Equals(HttpContext.Current.User.Identity.Name);
+                    bool iAmAOrganizer = StartUp
+                        .StartUpOfUser.Any(s => s.User.Login.Equals(HttpContext.Current.User.Identity.Name)
+                        && s.RoleType.Name.Equals("Организатор")
+                        && s.StartUpId == StartUp.Id);
+                    bool userIsMember = context.StartUpOfUser.Any(s => s.UserId == User.Id
+                    && s.RoleType.Name.Equals("Участник")
                     && s.StartUpId == StartUp.Id);
-                bool userIsMember = AppData.Context.StartUpOfUser.Any(s => s.UserId == User.Id
-                && s.RoleType.Name.Equals("Участник")
-                && s.StartUpId == StartUp.Id);
 
-                return isNotSelf && iAmAOrganizer && userIsMember;
+                    return isNotSelf && iAmAOrganizer && userIsMember;
+                }
             }
         }
         public bool IsNotSelfCommentAndICanChange
