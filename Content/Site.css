@@ -662,8 +662,7 @@ text-danger-additional {
 }
 
 .image-flow {
-    width: 400px;
-    height: 240px;
+    width: 330px;
     float: left;
     position: relative;
 }
@@ -675,11 +674,52 @@ text-danger-additional {
 }
 
 .prev {
-    left: 10px;
+    left: 95px;
+    z-index: 999;
 }
 
 .next {
-    right: 10px;
+    right: 25px;
+}
+
+.button-style-for-page-info {
+    text-align: center !important;
+    border-radius: 30px;
+    margin: 10px;
+    justify-content: center;
+    font-family: 'IBM Plex Serif', serif;
+    height: 30px;
+    width: 30px;
+}
+
+.about-like-cloud-button-for-page-info {
+    color: white !important;
+    border: 0px;
+    padding: 0;
+    opacity: 0.7;
+    background-color: #7C7C7C;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+    font-size: 15px !important;
+}
+
+    .about-like-cloud-button-for-page-info:hover {
+        background-color: #434244 !important;
+        color: white !important;
+    }
+
+.popup-button {
+    opacity: 0;
+    transform: scale(.8);
+    transition-property: all;
+    transition-timing-function: ease-in-out;
+    transition-duration: 250ms;
+}
+
+.popup-button-on {
+    opacity: 1;
+    transform: scale(1);
 }
 
 .images {

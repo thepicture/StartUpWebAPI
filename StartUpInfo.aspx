@@ -18,8 +18,10 @@
                 <p class="lead">
                 </p>
 
-                <div class="no-image-select image-flow">
-                    <button class="arrow prev button-style-for-page about-like-cloud-button-for-page"
+                <div class="no-image-select image-flow"
+                    onmouseover="showButtons()"
+                    onmouseout="hideButtons()">
+                    <button class="arrow prev button-style-for-page-info about-like-cloud-button-for-page-info popup-button"
                         onclick="return false;"
                         id="btnGoLeft">
                         &lt</button>
@@ -38,10 +40,11 @@
                             </asp:ListView>
                         </ul>
                     </div>
-                    <button class="arrow next button-style-for-page about-like-cloud-button-for-page"
+                    <button class="arrow next button-style-for-page-info about-like-cloud-button-for-page-info popup-button"
                         onclick="return false;"
                         id="btnGoRight">
-                        &gt</button>
+                        &gt
+                    </button>
                 </div>
 
                 <asp:Panel Style="display: block" ID="PanelMyStartups" runat="server">
@@ -263,6 +266,9 @@
         type="text/javascript">
     </script>
     <script src='<%=ResolveUrl("~/Scripts/image-scroller.js") %>'
+        type="text/javascript">
+    </script>
+    <script src='<%=ResolveUrl("~/Scripts/button-popuper.js") %>'
         type="text/javascript">
     </script>
 </asp:Content>
