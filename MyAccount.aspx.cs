@@ -49,16 +49,7 @@ namespace StartUpWebAPI
         /// <param name="user">Who is the user.</param>
         private void ReloadUserImage(User user)
         {
-            bool isUserHasImage = user.UserImage != null;
-
-            if (isUserHasImage)
-            {
-                UserImage.ImageUrl = NativeImageUtils.ConvertFromBytes(user.UserImage);
-            }
-            else
-            {
-                UserImage.ImageUrl = NativeImageUtils.ConvertFromBitmap(Properties.Resources.noPicture);
-            }
+            UserImage.ImageUrl = user.UserImageOrDefault;
         }
 
         /// <summary>

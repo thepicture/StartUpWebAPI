@@ -177,6 +177,24 @@ namespace StartUpWebAPI
         protected global::System.Web.UI.WebControls.Button BtnUnsubscribe;
 
         /// <summary>
+        /// UsersCount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label UsersCount;
+
+        /// <summary>
+        /// LViewUsersFlow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListView LViewUsersFlow;
+
+        /// <summary>
         /// CommentsCount control.
         /// </summary>
         /// <remarks>

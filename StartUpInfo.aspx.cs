@@ -70,7 +70,26 @@ namespace StartUpWebAPI
 
                 InsertComments();
                 InsertStartUp();
+                InsertUsersFlow();
             }
+        }
+
+        private void InsertUsersFlow()
+        {
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
+            {
+                LViewUsersFlow.DataSource = GetUsersOfStartUp();
+                LViewUsersFlow.DataBind();
+            }
+        }
+
+        private List<User> GetUsersOfStartUp()
+        {
+            return startUp
+                .StartUpOfUser
+                .Select(s => s.User)
+                .Distinct()
+                .ToList();
         }
 
         /// <summary>
@@ -145,10 +164,18 @@ namespace StartUpWebAPI
             Category.Text = startUp.Category.Name;
             Description.Text = startUp.SafeDescription;
             UpdateCommentsCount();
+            UpdateUsersCount();
             LViewStartUpImages.DataSource = startUp.StartUpImage.ToList();
             LViewStartUpImages.DataBind();
             MaxMembersCount.Text = startUp.MaxMembersCount.ToString();
             Region.Text = startUp.RegionText;
+        }
+
+        private void UpdateUsersCount()
+        {
+            UsersCount.Text = "Участники ("
+                + GetUsersOfStartUp()
+                .Count() + "):";
         }
 
         /// <summary>

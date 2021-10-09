@@ -46,10 +46,7 @@
                         &gt
                     </button>
                 </div>
-
                 <asp:Panel Style="display: block" ID="PanelMyStartups" runat="server">
-
-
                     <div style="margin-top: 70px !important; margin-left: 240px !important; overflow-y: auto !important; overflow-wrap: break-word; margin-top: 90px !important; height: 150px !important;">
                         <asp:Label Style="margin-top: 90px !important; font-size: x-large; text-wrap: normal !important;"
                             ID="Description"
@@ -107,16 +104,10 @@
                                 <label style="display: block; font-size: 17px; color: darkslateblue">Регион:</label>
                                 <asp:Label ID="Region" runat="server" ForeColor="Black"></asp:Label>
                             </td>
-
                         </tr>
-
                         <tr>
                         </tr>
-
                     </table>
-
-
-
                     <asp:Panel Style="display: block;" runat="server" ID="PStartupEdit" Visible="false">
                         <table style="margin-left: -10px; margin-top: -20px;">
                             <tr>
@@ -138,7 +129,6 @@
                                 </td>
                             </tr>
                         </table>
-
                         <br />
                     </asp:Panel>
                     <table style="margin-left: 150px; margin-top: -30px;" class="inline-button">
@@ -164,14 +154,33 @@
                         </tr>
                     </table>
                 </asp:Panel>
-
                 <br />
             </div>
         </div>
         <br />
         <br />
         <div class="white-shadow-block radius-like">
-            <div class="jumbotron ">
+            <div class="jumbotron">
+                <p style="margin-left: 10px; color: black;" class="lead">
+                    <asp:Label runat="server" ID="UsersCount"></asp:Label>
+                </p>
+                <asp:ListView runat="server"
+                    ID="LViewUsersFlow">
+                    <ItemTemplate>
+                        <div><%# Eval("Name") %></div>
+                        <asp:Image Width="100"
+                            Height="100"
+                            runat="server"
+                            CssClass="startup-image-radius radius-like marginaled image-cover-auto"
+                            ImageUrl='<%# Eval("UserImageOrDefault") %>'></asp:Image>
+                    </ItemTemplate>
+                </asp:ListView>
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="white-shadow-block radius-like">
+            <div class="jumbotron">
                 <p style="margin-left: 10px; color: black;" class="lead">
                     <asp:Label runat="server" ID="CommentsCount"></asp:Label>
                 </p>
@@ -203,7 +212,11 @@
                             <tr>
                                 <td class="poster_info td1 hide-for-print">
                                     <p>
-                                        <asp:Image Width="100" Height="100" runat="server" CssClass="startup-image-radius radius-like marginaled image-cover-auto" ImageUrl='<%# Eval("GetCommentImage") %>'></asp:Image>
+                                        <asp:Image Width="100"
+                                            Height="100"
+                                            runat="server"
+                                            CssClass="startup-image-radius radius-like marginaled image-cover-auto"
+                                            ImageUrl='<%# Eval("GetCommentImage") %>'></asp:Image>
                                     </p>
                                     <td class="message td2" rowspan="2">
                                         <div class="post_head">
