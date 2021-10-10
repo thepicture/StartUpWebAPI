@@ -78,7 +78,7 @@ namespace StartUpWebAPI
         {
             using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-                IEnumerable<User> usersInput = GetUsersOfStartUp();
+                IEnumerable<User> usersInput = new StartUpUserGetter().Get(startUp);
 
                 List<User> users = UsersFlowPreparator
                     .PrepareAndGetInfiniteUsers(usersInput);
@@ -170,15 +170,8 @@ namespace StartUpWebAPI
         private void UpdateUsersCount()
         {
             UsersCount.Text = "Участники ("
-                + GetUsersOfStartUp()
+                + UserDistinctor.GetDistinctUsers(new StartUpUserGetter().Get(startUp))
                 .Count() + "):";
-        }
-
-        private IEnumerable<User> GetUsersOfStartUp()
-        {
-            return startUp
-                   .StartUpOfUser
-                   .Select(s => s.User);
         }
 
         /// <summary>

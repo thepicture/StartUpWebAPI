@@ -60,7 +60,7 @@ namespace StartUpWebAPI
         {
             using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-                IEnumerable<User> usersInput = GetUsersOfTeam();
+                IEnumerable<User> usersInput = new TeamUserGetter().Get(team);
 
                 List<User> users = UsersFlowPreparator
                     .PrepareAndGetInfiniteUsers(usersInput);
@@ -68,13 +68,6 @@ namespace StartUpWebAPI
                 LViewUsersFlow.DataSource = users;
                 LViewUsersFlow.DataBind();
             }
-        }
-
-        private IEnumerable<User> GetUsersOfTeam()
-        {
-            return team
-                   .TeamOfUser
-                   .Select(s => s.User);
         }
 
         /// <summary>

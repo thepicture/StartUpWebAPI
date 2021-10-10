@@ -378,6 +378,7 @@
     </Compile>
     <Compile Include="Models\AntiSpamChecker.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\IUserGetter.cs" />
     <Compile Include="Models\ListViewTupleGetter.cs" />
     <Compile Include="Models\NativeImageUtils.cs" />
     <Compile Include="Models\PartialStartUp.cs" />
@@ -390,7 +391,9 @@
     <Compile Include="Models\RawNativeImageUtils.cs" />
     <Compile Include="Models\RecursiveControlFinder.cs" />
     <Compile Include="Models\ResizingNativeImageUtils.cs" />
+    <Compile Include="Models\StartUpUserGetter.cs" />
     <Compile Include="Models\StreamToBytesConverter.cs" />
+    <Compile Include="Models\TeamUserGetter.cs" />
     <Compile Include="Models\TupleToTextAndBoolConverter.cs" />
     <Compile Include="Models\TupleValueGetter.cs" />
     <Compile Include="Models\UserAuthorizer.cs" />
