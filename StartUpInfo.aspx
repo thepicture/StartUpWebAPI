@@ -120,6 +120,7 @@
                                 </td>
                                 <td>
                                     <asp:LinkButton runat="server"
+                                        Visible="false"
                                         Text='Удалить стартап'
                                         CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                                         ForeColor="White"

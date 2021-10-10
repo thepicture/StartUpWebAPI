@@ -88,7 +88,7 @@
                                         CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                                         ForeColor="White"
                                         ID="BtnDeleteTeam"
-                                        Visible="true"
+                                        Visible="false"
                                         OnClick="BtnDeleteTeam_Click"
                                         OnClientClick="return getDeleteItemState(`команду`);"></asp:LinkButton>
                                 </td>

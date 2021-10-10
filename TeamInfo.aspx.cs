@@ -39,10 +39,10 @@ namespace StartUpWebAPI
                     return;
                 }
 
-                bool userIsCreator = team.TeamOfUser.Any(u => u.User.Login.ToLower().Equals(User.Identity.Name.ToLower())
-                    && u.RoleType.Name.Equals("Организатор"));
+                bool userIsHelperOrOrganizer = team.TeamOfUser.Any(u => u.User.Login.ToLower().Equals(User.Identity.Name.ToLower())
+                    && (u.RoleType.Name.Equals("Организатор") || u.RoleType.Name.Equals("Помощник")));
 
-                if (userIsCreator)
+                if (userIsHelperOrOrganizer)
                 {
                     PTeamEdit.Visible = true;
                 }
@@ -54,7 +54,15 @@ namespace StartUpWebAPI
                 InsertComments();
                 InsertTeams();
                 InsertUsersFlow();
+                ShowDeleteTeamButtonIfOrganizer();
             }
+        }
+
+        private void ShowDeleteTeamButtonIfOrganizer()
+        {
+            BtnDeleteTeam.Visible = team.TeamOfUser.Any(s => s.TeamId == team.Id
+                           && s.User.Login == User.Identity.Name
+                           && s.RoleType.Name.Equals("Организатор"));
         }
 
         private void InsertUsersFlow()

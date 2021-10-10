@@ -159,13 +159,13 @@
                                             <asp:CheckBox runat="server"
                                                 Text="Показывать актуальные"
                                                 CssClass="search-text-box"
-                                                Checked="false"
+                                                Checked="true"
                                                 ID="ActualBox" />
                                             <br />
                                             <asp:CheckBox runat="server"
                                                 Text="Показывать завершенные"
                                                 CssClass="search-text-box"
-                                                Checked="true"
+                                                Checked="false"
                                                 ID="DoneBox" />
                                         </div>
                                     </div>

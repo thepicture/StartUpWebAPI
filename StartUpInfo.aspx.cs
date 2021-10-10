@@ -48,19 +48,19 @@ namespace StartUpWebAPI
                     return;
                 }
 
-                bool userIsCreator = false;
+                bool userIsHelperOrOrganizer = false;
                 bool isStartUpExists = startUp != null;
 
                 if (isStartUpExists)
                 {
-                    userIsCreator = startUp
+                    userIsHelperOrOrganizer = startUp
                         .StartUpOfUser
                         .Any(u => u.User.Login.Equals(User.Identity.Name)
                         && (u.RoleType.Name.Equals("Организатор")
                         || u.RoleType.Name.Equals("Помощник")));
                 }
 
-                if (userIsCreator)
+                if (userIsHelperOrOrganizer)
                 {
                     PStartupEdit.Visible = true;
                 }
@@ -72,12 +72,20 @@ namespace StartUpWebAPI
                 InsertComments();
                 InsertStartUp();
                 InsertUsersFlow();
+                ShowDeleteStartUpButtonIfOrganizer();
 
                 if (UserIsNotInTeamAndValueOfTeamWasChanged())
                 {
                     InsertTeams();
                 }
             }
+        }
+
+        private void ShowDeleteStartUpButtonIfOrganizer()
+        {
+            BtnDeleteStartUp.Visible = startUp.StartUpOfUser.Any(s => s.StartUpId == startUp.Id
+                            && s.User.Login == User.Identity.Name
+                            && s.RoleType.Name.Equals("Организатор"));
         }
 
         private bool UserIsNotInTeamAndValueOfTeamWasChanged()
