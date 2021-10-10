@@ -12,6 +12,21 @@ namespace StartUpWebAPI.Entities
     /// </summary>
     public partial class StartUp
     {
+        public string CroppedName
+        {
+            get
+            {
+                if (Name.Length > 25)
+                {
+                    return string.Concat(Name.Take(25)) + "...";
+                }
+                else
+                {
+                    return Name;
+                }
+            }
+        }
+
         public string RegionText
         {
             get

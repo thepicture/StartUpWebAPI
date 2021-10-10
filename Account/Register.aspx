@@ -75,6 +75,7 @@
             <br />
             <div style="display: flex; justify-content: center;">
                 <asp:TextBox Style="margin: -30px 0px 0px 0px;" runat="server" ID="ConfirmPasswordBox"
+                    TextMode="Password"
                     BorderStyle="None"
                     CssClass="nice-text-box prevent-selection textbox-style-setting" placeholder="Повтор пароля"></asp:TextBox>
             </div>

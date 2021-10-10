@@ -81,7 +81,7 @@
                                 <div class="startup-panel radius-like container-item">
                                     <img class="startup-image radius-like image-cover-auto"
                                          src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
-                                    <h1 class="tag-item item-name"><%# Eval("Name") %></h1>
+                                    <h1 class="tag-item item-name"><%# Eval("CroppedName") %></h1>
                                     <%-- Div gets tag-item class to be in the container item. --%>
                                     <div class="tag-item inherit-font-size marginated-tag-item not-on-top">
                                           <h1 class="tag-item category-element"><%# Eval("SplittedCategory") %></h1>
@@ -136,7 +136,7 @@
                                 <div class="startup-panel radius-like container-item">
                                     <img class="startup-image radius-like image-cover-auto"
                                          src='<%# Eval("ImagePreview") %>' alt='<%# Eval("Name") %>' />
-                                    <h1 class="tag-item item-name"><%# Eval("Name") %></h1>
+                                    <h1 class="tag-item item-name"><%# Eval("CroppedName") %></h1>
                                     <%-- Div gets tag-item class to be in the container item. --%>
                                     <div class="tag-item inherit-font-size marginated-tag-item not-on-top">
                                           <h1 class="tag-item category-element"><%# "Участников: " + Eval("CountOfMembers") %></h1>

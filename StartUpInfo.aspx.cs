@@ -62,7 +62,7 @@ namespace StartUpWebAPI
 
                 if (userIsHelperOrOrganizer)
                 {
-                    PStartupEdit.Visible = true;
+                    LinkButtonModifyStartUp.Visible = true;
                 }
                 else
                 {

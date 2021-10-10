@@ -108,57 +108,57 @@
                         </tr>
                     </table>
                     <br />
-                    <asp:Panel Style="display: block;" runat="server" ID="PStartupEdit" Visible="false">
-                        <table style="margin-left: -160px; margin-top: -20px;">
-                            <tr>
-                                <td>
-                                    <asp:LinkButton runat="server" Style="float: left; margin-left: 170px !important;"
-                                        Text="Изменить информацию"
-                                        CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual request-solid-color"
-                                        ID="LinkButtonModifyStartUp"
-                                        OnClick="LinkButtonModifyStartUp_Click"></asp:LinkButton>
-                                </td>
-                                <td>
-                                    <asp:LinkButton runat="server"
-                                        Visible="false"
-                                        Text='Удалить стартап'
-                                        CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
-                                        ForeColor="White"
-                                        ID="BtnDeleteStartUp"
-                                        OnClick="BtnDeleteStartUp_Click"
-                                        OnClientClick="return getDeleteItemState(`стартап`);"></asp:LinkButton>
-                                </td>
-                            </tr>
-                        </table>
-                    </asp:Panel>
+                    <table style="margin-left: -160px; margin-top: -20px;">
+                        <tr>
+                            <td>
+                                <asp:LinkButton runat="server" Style="float: left; margin-left: 170px !important;"
+                                    Text="Изменить информацию"
+                                    Visible="false"
+                                    CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual request-solid-color"
+                                    ID="LinkButtonModifyStartUp"
+                                    OnClick="LinkButtonModifyStartUp_Click"></asp:LinkButton>
+                            </td>
+                            <td>
+                                <asp:LinkButton runat="server"
+                                    Text='Удалить стартап'
+                                    CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
+                                    ForeColor="White"
+                                    Visible="false"
+                                    ID="BtnDeleteStartUp"
+                                    OnClick="BtnDeleteStartUp_Click"
+                                    OnClientClick="return getDeleteItemState(`стартап`);"></asp:LinkButton>
+                            </td>
+
+                            <td>
+                                <asp:Button ID="BtnSubscribe"
+                                    OnClick="BtnSubscribe_Click"
+                                    runat="server"
+                                    Style="float: left; width: 170px !important;"
+                                    CssClass="button-style-for-page about-like-cloud-button-for-page inline-button"
+                                    Text="Вступить в стартап"
+                                    Visible="false"
+                                    ClientIDMode="Static"></asp:Button>
+
+                            </td>
+                            <td>
+                                <asp:DropDownList class=" dropdownliist dropdown-button border-radius noselect" runat="server"
+                                    ID="DropDownTeams"
+                                    Visible="false">
+                                </asp:DropDownList>
+                            </td>
+                            <td>
+                                <asp:Button ID="BtnUnsubscribe"
+                                    OnClick="BtnUnsubscribe_Click"
+                                    runat="server"
+                                    Style="float: left;"
+                                    CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
+                                    Text="Покинуть стартап"
+                                    Visible="false"></asp:Button>
+                            </td>
+                        </tr>
+
+                    </table>
                 </asp:Panel>
-                <table style="margin-left: 150px; margin-top: -30px;" class="inline-button">
-                    <tr>
-                        <td>
-                            <asp:Button ID="BtnSubscribe"
-                                OnClick="BtnSubscribe_Click"
-                                runat="server"
-                                Style="float: left; width: 170px !important;"
-                                CssClass="button-style-for-page about-like-cloud-button-for-page inline-button"
-                                Text="Вступить в стартап"
-                                Visible="false"
-                                ClientIDMode="Static"></asp:Button>
-                            <asp:DropDownList runat="server"
-                                ID="DropDownTeams"
-                                Visible="false">
-                            </asp:DropDownList>
-                        </td>
-                        <td>
-                            <asp:Button ID="BtnUnsubscribe"
-                                OnClick="BtnUnsubscribe_Click"
-                                runat="server"
-                                Style="float: left;"
-                                CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
-                                Text="Покинуть стартап"
-                                Visible="false"></asp:Button>
-                        </td>
-                    </tr>
-                </table>
             </div>
         </div>
     </asp:Panel>
