@@ -60,33 +60,21 @@ namespace StartUpWebAPI
         {
             using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-                List<User> users = PrepareAndGetInfiniteUsers();
+                IEnumerable<User> usersInput = GetUsersOfTeam();
+
+                List<User> users = UsersFlowPreparator
+                    .PrepareAndGetInfiniteUsers(usersInput);
 
                 LViewUsersFlow.DataSource = users;
                 LViewUsersFlow.DataBind();
             }
         }
 
-        private List<User> PrepareAndGetInfiniteUsers()
+        private IEnumerable<User> GetUsersOfTeam()
         {
-            List<User> users = GetUsersOfStartUp();
-            users = users.Take(6).ToList();
-            for (int i = 0; i < 6; i++)
-            {
-                users.AddRange(users);
-            }
-            return users;
-        }
-
-        private List<User> GetUsersOfStartUp()
-        {
-            List<User> users = team
-                .TeamOfUser
-                .Select(s => s.User)
-                .Distinct()
-                .ToList();
-
-            return users;
+            return team
+                   .TeamOfUser
+                   .Select(s => s.User);
         }
 
         /// <summary>
