@@ -1,4 +1,5 @@
 ﻿using StartUpWebAPI.Models;
+using System.Drawing;
 
 namespace StartUpWebAPI.Entities
 {
@@ -29,7 +30,10 @@ namespace StartUpWebAPI.Entities
 
                 if (isUserHasImage)
                 {
-                    return ResizingNativeImageUtils.CropImageAndGiveItAsBase64String(UserImage, 100, 100);
+                    Image image = RawNativeImageUtils.ConvertBytesToImage(UserImage);
+                    Image thumbnailImage = ProportionalNativeImageUtils.ResizeImageProportionally(image, 100);
+
+                    return NativeImageUtils.ConvertFromBitmap(new Bitmap(thumbnailImage));
                 }
                 else
                 {

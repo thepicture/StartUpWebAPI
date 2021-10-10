@@ -89,18 +89,14 @@ namespace StartUpWebAPI.Entities
         {
             get
             {
-                string result = "data:image/jpg;base64,";
-
                 if (Image != null)
                 {
-                    result += Convert.ToBase64String(Image);
+                    return ResizingNativeImageUtils.CropImageAndGiveItAsBase64String(Image, 310, 310);
                 }
                 else
                 {
-                    result = NativeImageUtils.ConvertFromBitmap(Properties.Resources.noPicture);
+                    return NativeImageUtils.ConvertFromBitmap(Properties.Resources.noPicture);
                 }
-
-                return result;
             }
         }
 

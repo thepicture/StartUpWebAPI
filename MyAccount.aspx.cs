@@ -49,7 +49,7 @@ namespace StartUpWebAPI
         /// <param name="user">Who is the user.</param>
         private void ReloadUserImage(User user)
         {
-            UserImage.ImageUrl = user.UserImageOrDefault;
+            UserImage.ImageUrl = user.UserImageInCommentOrDefault;
         }
 
         /// <summary>

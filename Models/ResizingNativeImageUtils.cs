@@ -22,5 +22,10 @@ namespace StartUpWebAPI.Models
                 return result;
             }
         }
+
+        public static Image ResizeImage(Image image, Size size)
+        {
+            return (Image)(new Bitmap(image, size));
+        }
     }
 }

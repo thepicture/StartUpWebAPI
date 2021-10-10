@@ -24,7 +24,9 @@ namespace StartUpWebAPI.Entities
         {
             get
             {
-                return string.IsNullOrWhiteSpace(Description) ? "Организатор не предоставил описание. Можете подать ему идею!" : Description;
+                return string.IsNullOrWhiteSpace(Description) ? "Организатор " +
+                    "не предоставил описание. " +
+                    "Можете подать ему идею!" : Description;
             }
         }
 
@@ -68,7 +70,9 @@ namespace StartUpWebAPI.Entities
                 }
                 else
                 {
-                    string role = StartUpOfUser.First(u => nullableLogin.Equals(u.User.Login)).RoleType.Name;
+                    string role = StartUpOfUser.First(u => nullableLogin.Equals(u.User.Login))
+                        .RoleType
+                        .Name;
 
                     if (role.Equals("Организатор"))
                     {
@@ -131,18 +135,15 @@ namespace StartUpWebAPI.Entities
             get
             {
                 StartUpImage imagePreview = StartUpImage.ToList().FirstOrDefault();
-                string result = "data:image/jpg;base64,";
 
                 if (imagePreview != null)
                 {
-                    result += Convert.ToBase64String(imagePreview.Image);
+                    return ResizingNativeImageUtils.CropImageAndGiveItAsBase64String(imagePreview.Image, 310, 310);
                 }
                 else
                 {
-                    result = NativeImageUtils.ConvertFromBitmap(Properties.Resources.noPicture);
+                    return NativeImageUtils.ConvertFromBitmap(Properties.Resources.noPicture);
                 }
-
-                return result;
             }
         }
         public string FirstCreator

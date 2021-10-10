@@ -386,6 +386,8 @@
     <Compile Include="Models\PartialTeam.cs" />
     <Compile Include="Models\PartialTeamComment.cs" />
     <Compile Include="Models\PartialUser.cs" />
+    <Compile Include="Models\ProportionalNativeImageUtils.cs" />
+    <Compile Include="Models\RawNativeImageUtils.cs" />
     <Compile Include="Models\RecursiveControlFinder.cs" />
     <Compile Include="Models\ResizingNativeImageUtils.cs" />
     <Compile Include="Models\StreamToBytesConverter.cs" />
