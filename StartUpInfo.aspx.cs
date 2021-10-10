@@ -113,6 +113,8 @@ namespace StartUpWebAPI
                         .Equals(User.Identity.Name))
                             .Select(t => t.Team.Name)
                             .Distinct()
+                            .ToList()
+                            .Except(startUp.StartUpOfTeam.Select(s => s.Team.Name))
                             .ToList();
         }
 
@@ -201,7 +203,7 @@ namespace StartUpWebAPI
                 .FirstOrDefault(u => u.RoleType.Name == "Организатор")?
                 .User.Name;
 
-            Creator.Text = (string.IsNullOrWhiteSpace(creator)) ? "Неизвестен" : creator;
+            Creator.Text = string.IsNullOrWhiteSpace(creator) ? "Неизвестен" : creator;
             IsActual.Text = startUp.IsDoneText;
             DateOfCreation.Text = startUp.CreationDate.ToString();
             Category.Text = startUp.Category.Name;
@@ -378,9 +380,16 @@ namespace StartUpWebAPI
         {
             if (IsUserSubscribingAsTeam())
             {
-                return;
+                SubscribeAsTeam();
             }
+            else
+            {
+                SubscribeAsStandaloneUser();
+            }
+        }
 
+        private void SubscribeAsStandaloneUser()
+        {
             using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
                 string reason;
@@ -411,9 +420,34 @@ namespace StartUpWebAPI
             }
         }
 
-        private void ShowDropdownListForSubscribingAsTeam()
+        private void SubscribeAsTeam()
         {
-            DropDownTeams.Visible = true;
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
+            {
+                string reason;
+
+                StartUpOfTeam startUpOfTeam = new StartUpOfTeam
+                {
+                    StartUpId = startUp.Id,
+                    TeamId = context.Team.First(t => t.Name.Equals(DropDownTeams.SelectedValue)).Id,
+                    RoleTypeId = context.RoleType.First(r => r.Name.Equals("Участник")).Id
+                };
+
+                context.StartUp.Find(startUp.Id).StartUpOfTeam.Add(startUpOfTeam);
+
+                try
+                {
+                    context.SaveChanges();
+                    reason = HttpUtility.UrlEncode("Вы успешно вступили в стартап от имени команды " + DropDownTeams.SelectedValue);
+                    Response.Redirect("~/StartUpInfo?id=" + startUp.Id + "&reason=" + reason, false);
+                }
+                catch (Exception ex)
+                {
+                    reason = HttpUtility.UrlEncode("Не удалось вступить в стартап от имени команды. Попробуйте, пожалуйста, ещё раз.");
+                    Response.Redirect("~/StartUpInfo?id=" + startUp.Id + "&reason=" + reason, false);
+                    System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+                }
+            }
         }
 
         private bool IsUserSubscribingAsTeam()
@@ -571,7 +605,7 @@ namespace StartUpWebAPI
 
                     if (isStartUpOfUserExists)
                     {
-                        context.Entry(nullableStartUp).State = System.Data.Entity.EntityState.Deleted;
+                        context.Entry(nullableStartUp).State = EntityState.Deleted;
                     }
                     else
                     {
