@@ -21,7 +21,18 @@ namespace StartUpWebAPI
         private void HideFooter()
         {
             Control footer = Master.FindControl("FooterIdentity");
+
+            if (IsUsingMobileView(footer))
+            {
+                return;
+            }
+
             footer.Visible = false;
+        }
+
+        private static bool IsUsingMobileView(Control footer)
+        {
+            return footer == null;
         }
 
         protected void BtnRegister_Click(object sender, EventArgs e)

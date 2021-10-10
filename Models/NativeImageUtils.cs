@@ -21,7 +21,6 @@ namespace StartUpWebAPI.Models
         {
             string result = "data:image/jpg;charset=utf-8;base64,";
 
-            ImageConverter converter = new ImageConverter();
             result += Convert.ToBase64String(ConvertImageToBytes(image));
 
             return result;
