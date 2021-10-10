@@ -50,12 +50,29 @@ namespace StartUpWebAPI
                                 TBoxName.Text = ((Team)ViewState["currentTeam"]).Name;
                                 TBoxDescription.Text = ((Team)ViewState["currentTeam"]).Description;
                                 TBoxMaxMembers.Text = ((Team)ViewState["currentTeam"]).MaxMembersCount.ToString();
+                                InsertCurrentRegion();
                             }
                         }
                     }
                 }
+                InsertRegionsBox();
             }
             InsertImageIntoTeam();
+        }
+
+        private void InsertCurrentRegion()
+        {
+            DropDownRegions.Items.FindByValue(((Team)ViewState["currentTeam"]).Region.Name).Selected = true;
+        }
+
+        private void InsertRegionsBox()
+        {
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
+            {
+                var regions = context.Region.Select(c => c.Name).ToList();
+                DropDownRegions.DataSource = regions;
+                DropDownRegions.DataBind();
+            }
         }
 
         /// <summary>
@@ -164,6 +181,10 @@ namespace StartUpWebAPI
                 ((Team)ViewState["currentTeam"]).Name = TBoxName.Text;
                 ((Team)ViewState["currentTeam"]).Description = TBoxDescription.Text;
                 ((Team)ViewState["currentTeam"]).MaxMembersCount = int.Parse(TBoxMaxMembers.Text);
+                ((Team)ViewState["currentTeam"]).RegionId = context
+                   .Region
+                   .First(c => c.Name.Equals(DropDownRegions.SelectedValue))
+                   .Id;
 
                 bool teamIsNew = ((Team)ViewState["currentTeam"]).Id == 0;
                 if (teamIsNew)
