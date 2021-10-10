@@ -51,9 +51,24 @@ namespace StartUpWebAPI
 
         private void DoPrepareActions()
         {
-            LoadBgImage();
             PrepareViewState();
-            InsertCategoriesBox();
+
+            if (!IsPostBack)
+            {
+                LoadBgImage();
+                InsertCategoriesBox();
+                InsertRegionsBox();
+            }
+        }
+
+        private void InsertRegionsBox()
+        {
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
+            {
+                var regions = context.Region.Select(c => c.Name).ToList();
+                DropDownRegions.DataSource = regions;
+                DropDownRegions.DataBind();
+            }
         }
 
         private void CheckIfStartUpIsNewAndPrepareIt(string idString)
@@ -99,7 +114,10 @@ namespace StartUpWebAPI
         {
             ViewState["currentStartUp"] = nullableStartUp;
 
-            FillStartUpAttributes(nullableStartUp);
+            if (!IsPostBack)
+            {
+                FillStartUpAttributes(nullableStartUp);
+            }
 
             InsertObjectsInStartUp();
         }
@@ -117,8 +135,14 @@ namespace StartUpWebAPI
         private void InsertObjectsInStartUp()
         {
             InsertCategory();
+            InsertRegion();
             InsertDocumentsIntoStartUp();
             InsertImagesIntoStartUp();
+        }
+
+        private void InsertRegion()
+        {
+            DropDownRegions.Items.FindByValue(((StartUp)ViewState["currentStartUp"]).Region.Name).Selected = true;
         }
 
         private void PrepareViewState()
@@ -217,6 +241,11 @@ namespace StartUpWebAPI
                 ((StartUp)ViewState["currentStartUp"]).CategoryId = context
                     .Category
                     .First(c => c.Name.Equals(ComboCategories.SelectedValue))
+                    .Id;
+
+                ((StartUp)ViewState["currentStartUp"]).RegionId = context
+                    .Region
+                    .First(c => c.Name.Equals(DropDownRegions.SelectedValue))
                     .Id;
 
                 ((StartUp)ViewState["currentStartUp"]).IsDone = CheckBoxDone.Checked;

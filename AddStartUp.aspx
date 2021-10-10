@@ -23,6 +23,15 @@
             </asp:DropDownList>
             <br />
             <br />
+              <asp:Label runat="server" CssClass="search-label" Text="Регион"></asp:Label>
+            <asp:DropDownList AutoPostBack="true"
+                runat="server"
+                class="form-control category-dropdown"
+                ID="DropDownRegions"
+                Width="200">
+            </asp:DropDownList>
+            <br />
+            <br />
             <asp:Label runat="server" CssClass="search-label" Text="Максимум участников"></asp:Label>
             <asp:TextBox runat="server"
                 ID="TBoxMaxMembers"

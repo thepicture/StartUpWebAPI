@@ -470,11 +470,29 @@ namespace StartUpWebAPI
         {
             using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-                startUp.StartUpImage.ToList().ForEach(o => context.Entry(o).State = EntityState.Deleted);
-                startUp.DocumentOfStartUp.ToList().ForEach(o => context.Entry(o).State = EntityState.Deleted);
-                startUp.StartUpComment.ToList().ForEach(o => context.Entry(o).State = EntityState.Deleted);
+                startUp = context.StartUp.Find(startUp.Id);
+
+                if (startUp.StartUpImage.Count > 0)
+                {
+                    startUp.StartUpImage.ToList().ForEach(o => context.Entry(o).State = EntityState.Deleted);
+                }
+
+                if (startUp.DocumentOfStartUp.Count > 0)
+                {
+                    startUp.DocumentOfStartUp.ToList().ForEach(o => context.Entry(o).State = EntityState.Deleted);
+                }
+
+                if (startUp.StartUpComment.Count > 0)
+                {
+                    startUp.StartUpComment.ToList().ForEach(o => context.Entry(o).State = EntityState.Deleted);
+                }
+
                 startUp.StartUpOfUser.ToList().ForEach(o => context.Entry(o).State = EntityState.Deleted);
-                startUp.StartUpOfTeam.ToList().ForEach(o => context.Entry(o).State = EntityState.Deleted);
+
+                if (startUp.StartUpOfTeam.Count > 0)
+                {
+                    startUp.StartUpOfTeam.ToList().ForEach(o => context.Entry(o).State = EntityState.Deleted);
+                }
 
                 context.StartUp.Remove(startUp);
 
@@ -497,7 +515,7 @@ namespace StartUpWebAPI
         }
 
         /// <summary>
-        /// Commands handling depending on buttons in the listview of startups.
+        /// Commands handling, behaviour depends on a button's type.
         /// </summary>
         protected void LViewStartUpComments_ItemCommand(object sender, System.Web.UI.WebControls.ListViewCommandEventArgs e)
         {
