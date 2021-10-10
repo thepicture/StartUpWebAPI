@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Web.UI;
 
 namespace StartUpWebAPI
 {
-    public partial class StartUpInfo : System.Web.UI.Page
+    public partial class StartUpInfo : Page
     {
         public StartUp startUp;
 
@@ -71,7 +72,48 @@ namespace StartUpWebAPI
                 InsertComments();
                 InsertStartUp();
                 InsertUsersFlow();
+
+                if (UserIsNotInTeamAndValueOfTeamWasChanged())
+                {
+                    InsertTeams();
+                }
             }
+        }
+
+        private bool UserIsNotInTeamAndValueOfTeamWasChanged()
+        {
+            return !IsPostBack && !IsUserInStartUp();
+        }
+
+        private void InsertTeams()
+        {
+            using (StartUpBaseEntities context = new StartUpBaseEntities())
+            {
+                SetTeamsOfUserInDropDownTeams(context);
+                DropDownTeams.DataBind();
+
+                DropDownTeams.Visible = true;
+            }
+        }
+
+        private void SetTeamsOfUserInDropDownTeams(StartUpBaseEntities context)
+        {
+            List<string> teams = new List<string>();
+            teams.Insert(0, "Вступить как пользователь");
+            teams.AddRange(GetTeamsFromContext(context));
+
+            DropDownTeams.DataSource = teams;
+        }
+
+        private List<string> GetTeamsFromContext(StartUpBaseEntities context)
+        {
+            return context.TeamOfUser.Where(t => t
+                        .User
+                        .Login
+                        .Equals(User.Identity.Name))
+                            .Select(t => t.Team.Name)
+                            .Distinct()
+                            .ToList();
         }
 
         private void InsertUsersFlow()
@@ -101,8 +143,7 @@ namespace StartUpWebAPI
         /// </summary>
         private void ShowNeedyButtonsForMember()
         {
-            bool userInStartUp = startUp.StartUpOfUser
-                .Any(u => u.User.Login.ToLower().Equals(User.Identity.Name.ToLower()));
+            bool userInStartUp = IsUserInStartUp();
 
             if (userInStartUp)
             {
@@ -112,6 +153,12 @@ namespace StartUpWebAPI
             {
                 ShowSubscribeButtonIfNotMaxMembersCount();
             }
+        }
+
+        private bool IsUserInStartUp()
+        {
+            return startUp.StartUpOfUser
+                .Any(u => u.User.Login.ToLower().Equals(User.Identity.Name.ToLower()));
         }
 
         /// <summary>
@@ -329,6 +376,11 @@ namespace StartUpWebAPI
         /// </summary>
         protected void BtnSubscribe_Click(object sender, EventArgs e)
         {
+            if (IsUserSubscribingAsTeam())
+            {
+                return;
+            }
+
             using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
                 string reason;
@@ -357,6 +409,16 @@ namespace StartUpWebAPI
                     return;
                 }
             }
+        }
+
+        private void ShowDropdownListForSubscribingAsTeam()
+        {
+            DropDownTeams.Visible = true;
+        }
+
+        private bool IsUserSubscribingAsTeam()
+        {
+            return DropDownTeams.SelectedIndex != 0;
         }
 
         /// <summary>

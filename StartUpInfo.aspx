@@ -7,12 +7,11 @@
     EnableEventValidation="false" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContent" Style="padding-left: 50px; padding-right: 50px;">
-
     <asp:Panel runat="server">
 
         <div class="white-shadow-block radius-like">
 
-            <div class="jumbotron  " style="padding-bottom: 0px !important; margin-bottom: -30px !important;">
+            <div class="jumbotron" style="padding-bottom: 0px !important; margin-bottom: -30px !important;">
                 <h1>
                     <asp:Label runat="server" ID="MainName" Style="color: black;" CssClass="centerized-text"></asp:Label></h1>
                 <p class="lead">
@@ -141,7 +140,12 @@
                                 Style="float: left; width: 170px !important;"
                                 CssClass="button-style-for-page about-like-cloud-button-for-page inline-button"
                                 Text="Вступить в стартап"
-                                Visible="false"></asp:Button>
+                                Visible="false"
+                                ClientIDMode="Static"></asp:Button>
+                            <asp:DropDownList runat="server"
+                                ID="DropDownTeams"
+                                Visible="false">
+                            </asp:DropDownList>
                         </td>
                         <td>
                             <asp:Button ID="BtnUnsubscribe"
