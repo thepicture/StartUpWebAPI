@@ -139,8 +139,16 @@ namespace StartUpWebAPI
             Creator.Text = creator ?? "Неизвестен";
             DateOfCreation.Text = team.CreationDate.ToString();
             UpdateCommentsCount();
+            UpdateUsersCount();
             MainImage.ImageUrl = team.ImagePreview;
             Region.Text = team.RegionText;
+        }
+
+        private void UpdateUsersCount()
+        {
+            UsersCount.Text = "Участники ("
+                + UserDistinctor.GetDistinctUsers(new TeamUserGetter().Get(team))
+                .Count() + "):";
         }
 
         /// <summary>

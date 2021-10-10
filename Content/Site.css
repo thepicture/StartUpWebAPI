@@ -1826,3 +1826,9 @@ input[type="checkbox"] {
 .request-top {
     top: 50px;
 }
+
+.user-paragraph {
+    font-size: large !important;
+    text-align: center;
+    padding-left: 10px;
+}

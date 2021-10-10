@@ -137,7 +137,35 @@
         <br />
 
         <div class="white-shadow-block radius-like">
+            <div class="jumbotron">
+                <p style="margin-left: 10px; color: black;" class="lead">
+                    <asp:Label runat="server" ID="UsersCount"></asp:Label>
+                </p>
+                <%-- User images template. --%>
+                <div class="visible-gallery users-gallery">
+                    <ul class="images users-sliding">
+                        <asp:ListView runat="server"
+                            ID="LViewUsersFlow">
+                            <ItemTemplate>
+                                <li class="image">
+                                    <div class="container-item transparent-container">
+                                        <asp:Image Width="200"
+                                            Height="200"
+                                            runat="server"
+                                            CssClass="startup-image-radius radius-like marginaled image-cover-auto inline-block tag-item not-absolute user-image-padding"
+                                            ImageUrl='<%# Eval("UserImageOrDefault") %>'></asp:Image>
+                                        <h1 runat="server"
+                                            class="tag-item user-paragraph"><%# Eval("Name") %></h1>
+                                    </div>
+                                </li>
+                            </ItemTemplate>
+                        </asp:ListView>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
+        <div class="white-shadow-block radius-like">
 
             <div class="jumbotron ">
                 <p style="margin-left: 10px; color: black;" class="lead">
@@ -163,36 +191,6 @@
             </div>
             <br />
             <br />
-            <div class="white-shadow-block radius-like">
-                <div class="jumbotron">
-                    <p style="margin-left: 10px; color: black;" class="lead">
-                        <asp:Label runat="server" ID="UsersCount"></asp:Label>
-                    </p>
-                    <%-- User images template. --%>
-                    <div class="visible-gallery users-gallery">
-                        <ul class="images users-sliding">
-                            <asp:ListView runat="server"
-                                ID="LViewUsersFlow">
-                                <ItemTemplate>
-                                    <li class="image">
-                                        <div class="container-item transparent-container">
-                                            <asp:Image Width="200"
-                                                Height="200"
-                                                runat="server"
-                                                CssClass="startup-image-radius radius-like marginaled image-cover-auto inline-block tag-item not-absolute user-image-padding"
-                                                ImageUrl='<%# Eval("UserImageOrDefault") %>'></asp:Image>
-                                            <%-- The label is not showing any info. --%>
-                                            <asp:Label runat="server"
-                                                CssClass="tag-item"
-                                                Text='<%# Eval("Name") %>'></asp:Label>
-                                        </div>
-                                    </li>
-                                </ItemTemplate>
-                            </asp:ListView>
-                        </ul>
-                    </div>
-                </div>
-            </div>
             <asp:Panel runat="server" ID="CommentsPanel">
                 <asp:ListView runat="server" ID="LViewTeamComments" OnItemCommand="LViewTeamComments_ItemCommand">
                     <ItemTemplate>
