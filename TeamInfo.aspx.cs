@@ -44,7 +44,7 @@ namespace StartUpWebAPI
 
                 if (userIsHelperOrOrganizer)
                 {
-                    PTeamEdit.Visible = true;
+                    LinkButtonModifyTeam.Visible = true;
                 }
                 else
                 {

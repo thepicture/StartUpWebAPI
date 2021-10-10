@@ -67,60 +67,58 @@
 
 
 
-                    <asp:Panel Style="display: block;" runat="server" ID="PTeamEdit" Visible="false">
-                        <table style="margin-left: 10px; margin-top: -10px;">
-                            <tr>
-                                <td>
+                    <table style="margin-left: 10px; margin-top: -10px;">
+                        <tr>
+                            <td>
 
-                                    <asp:LinkButton runat="server" Text='Изменить информацию'
-                                        ForeColor="White"
-                                        Visible="true"
-                                        CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
-                                        ID="LinkButtonModifyTeam"
-                                        href='<%# "/AddTeam?id=" + Convert.ToInt32(Eval("Id")) %>'
-                                        OnClick="LinkButtonModifyTeam_Click"></asp:LinkButton>
+                                <asp:LinkButton runat="server" Text='Изменить информацию'
+                                    ForeColor="White"
+                                    Visible="false"
+                                    CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
+                                    ID="LinkButtonModifyTeam"
+                                    href='<%# "/AddTeam?id=" + Convert.ToInt32(Eval("Id")) %>'
+                                    OnClick="LinkButtonModifyTeam_Click"></asp:LinkButton>
 
-                                </td>
+                            </td>
 
-                                <td>
+                            <td>
 
-                                    <asp:LinkButton runat="server" Text='Удалить команду'
-                                        CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
-                                        ForeColor="White"
-                                        ID="BtnDeleteTeam"
-                                        Visible="false"
-                                        OnClick="BtnDeleteTeam_Click"
-                                        OnClientClick="return getDeleteItemState(`команду`);"></asp:LinkButton>
-                                </td>
+                                <asp:LinkButton runat="server" Text='Удалить команду'
+                                    CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
+                                    ForeColor="White"
+                                    ID="BtnDeleteTeam"
+                                    Visible="false"
+                                    OnClick="BtnDeleteTeam_Click"
+                                    OnClientClick="return getDeleteItemState(`команду`);"></asp:LinkButton>
+                            </td>
 
-                                <td>
+                            <td>
 
-                                    <asp:Button ID="BtnSubscribe"
-                                        OnClick="BtnSubscribe_Click"
-                                        runat="server"
-                                        Style="float: left; width: 170px !important;"
-                                        CssClass="button-style-for-page about-like-cloud-button-for-page inline-button"
-                                        Text="Вступить в команду"
-                                        Visible="false"></asp:Button>
-                                </td>
-                                <td>
+                                <asp:Button ID="BtnSubscribe"
+                                    OnClick="BtnSubscribe_Click"
+                                    runat="server"
+                                    Style="float: left; width: 170px !important;"
+                                    CssClass="button-style-for-page about-like-cloud-button-for-page inline-button"
+                                    Text="Вступить в команду"
+                                    Visible="false"></asp:Button>
+                            </td>
+                            <td>
 
-                                    <asp:Button ID="BtnUnsubscribe"
-                                        OnClick="BtnUnsubscribe_Click"
-                                        runat="server"
-                                        Style="float: left;"
-                                        CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
-                                        Text="Покинуть команду"
-                                        Visible="false"></asp:Button>
+                                <asp:Button ID="BtnUnsubscribe"
+                                    OnClick="BtnUnsubscribe_Click"
+                                    runat="server"
+                                    Style="float: left;"
+                                    CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
+                                    Text="Покинуть команду"
+                                    Visible="false"></asp:Button>
 
-                                </td>
+                            </td>
 
 
-                            </tr>
+                        </tr>
 
-                        </table>
+                    </table>
 
-                    </asp:Panel>
                 </asp:Panel>
                 <br />
             </div>

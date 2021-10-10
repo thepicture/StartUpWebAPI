@@ -105,15 +105,6 @@ namespace StartUpWebAPI
         protected global::System.Web.UI.WebControls.Label Region;
 
         /// <summary>
-        /// PTeamEdit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PTeamEdit;
-
-        /// <summary>
         /// LinkButtonModifyTeam control.
         /// </summary>
         /// <remarks>
