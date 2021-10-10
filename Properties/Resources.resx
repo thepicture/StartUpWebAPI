@@ -142,6 +142,12 @@
   <data name="Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="LogoStar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LogoStar.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="LogoStarssss" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LogoStarssss.svg;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="myAccountBg" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\myAccountBg.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

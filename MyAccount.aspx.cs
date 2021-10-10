@@ -12,10 +12,7 @@ namespace StartUpWebAPI
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
-            {
-                LoadBackgroundImage();
-            }
+        
 
             bool isAuthenticated = !User.Identity.IsAuthenticated;
 
@@ -38,10 +35,7 @@ namespace StartUpWebAPI
         /// <summary>
         /// Loads the background image.
         /// </summary>
-        private void LoadBackgroundImage()
-        {
-            BgImage.ImageUrl = NativeImageUtils.ConvertFromBitmap(Properties.Resources.myAccountBg);
-        }
+    
 
         /// <summary>
         /// Reloads the user's image.
