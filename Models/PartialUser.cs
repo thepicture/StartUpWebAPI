@@ -14,7 +14,7 @@ namespace StartUpWebAPI.Entities
                 if (isUserHasImage)
                 {
                     Image image = RawNativeImageUtils.ConvertBytesToImage(UserImage);
-                    Image thumbnailImage = ProportionalNativeImageUtils.ResizeImageProportionally(image, 300);
+                    Image thumbnailImage = ProportionalNativeImageUtils.ResizeImageProportionally(image, 400);
 
                     return NativeImageUtils.ConvertFromBitmap(new Bitmap(thumbnailImage));
                 }

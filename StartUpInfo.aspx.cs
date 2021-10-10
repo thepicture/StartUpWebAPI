@@ -112,7 +112,7 @@ namespace StartUpWebAPI
         private static void InsertInfiniteUsers(List<User> users, List<User> result)
         {
             List<User> additonalUsers = new List<User>();
-            int howManyUsersToAdd = 6 / users.Count;
+            int howManyUsersToAdd = 6 / result.Count;
 
             AddRangeOfAdditionalUsers(result, additonalUsers, howManyUsersToAdd);
 
