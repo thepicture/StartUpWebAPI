@@ -462,11 +462,11 @@ namespace StartUpWebAPI
         {
             using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-                context.StartUpImage.RemoveRange(startUp.StartUpImage);
-                context.DocumentOfStartUp.RemoveRange(startUp.DocumentOfStartUp);
-                context.StartUpComment.RemoveRange(startUp.StartUpComment);
-                context.StartUpOfUser.RemoveRange(startUp.StartUpOfUser);
-                context.StartUpOfTeam.RemoveRange(startUp.StartUpOfTeam);
+                startUp.StartUpImage.ToList().ForEach(o => context.Entry(o).State = EntityState.Deleted);
+                startUp.DocumentOfStartUp.ToList().ForEach(o => context.Entry(o).State = EntityState.Deleted);
+                startUp.StartUpComment.ToList().ForEach(o => context.Entry(o).State = EntityState.Deleted);
+                startUp.StartUpOfUser.ToList().ForEach(o => context.Entry(o).State = EntityState.Deleted);
+                startUp.StartUpOfTeam.ToList().ForEach(o => context.Entry(o).State = EntityState.Deleted);
 
                 context.StartUp.Remove(startUp);
 

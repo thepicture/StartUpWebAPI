@@ -2,6 +2,7 @@
 using StartUpWebAPI.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
@@ -316,9 +317,9 @@ namespace StartUpWebAPI
         {
             using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-                context.TeamComment.RemoveRange(team.TeamComment);
-                context.TeamOfUser.RemoveRange(team.TeamOfUser);
-                context.StartUpOfTeam.RemoveRange(team.StartUpOfTeam);
+                team.TeamComment.ToList().ForEach(o => context.Entry(o).State = EntityState.Deleted);
+                team.TeamOfUser.ToList().ForEach(o => context.Entry(o).State = EntityState.Deleted);
+                team.StartUpOfTeam.ToList().ForEach(o => context.Entry(o).State = EntityState.Deleted);
 
                 context.Team.Remove(team);
 
