@@ -113,7 +113,7 @@
                         </tr>
                     </table>
                     <br />
-                    <table style="margin-left: -160px; margin-top: -20px;">
+                    <table style="margin-left: -10px; margin-top: -20px;">
                         <tr>
                             <td>
                                 <asp:LinkButton runat="server" Style="float: left; margin-left: 170px !important;"
