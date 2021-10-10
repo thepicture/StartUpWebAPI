@@ -36,6 +36,11 @@
                                             CssClass="radius-like image-cover-auto image" />
                                     </li>
                                 </ItemTemplate>
+                                <EmptyDataTemplate>
+                                    <asp:Image runat="server"
+                                        ImageUrl="~/Resources/noPicture.png"
+                                        class="radius-like image-cover-auto image"/>
+                                </EmptyDataTemplate>
                             </asp:ListView>
                         </ul>
                     </div>
