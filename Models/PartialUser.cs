@@ -5,6 +5,8 @@ namespace StartUpWebAPI.Entities
 {
     public partial class User
     {
+
+        public User Self => this;
         public string UserImageOrDefault
         {
             get

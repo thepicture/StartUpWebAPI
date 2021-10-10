@@ -133,7 +133,8 @@ namespace StartUpWebAPI
                 IEnumerable<User> usersInput = new StartUpUserGetter().Get(startUp);
 
                 List<User> users = UsersFlowPreparator
-                    .PrepareAndGetInfiniteUsers(usersInput);
+                    .PrepareAndGetInfiniteUsers(usersInput).Where(u => u.UserImage != null)
+                    .ToList();
 
                 LViewUsersFlow.DataSource = users;
                 LViewUsersFlow.DataBind();

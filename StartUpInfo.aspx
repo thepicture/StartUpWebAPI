@@ -39,7 +39,7 @@
                                 <EmptyDataTemplate>
                                     <asp:Image runat="server"
                                         ImageUrl="~/Resources/noPicture.png"
-                                        class="radius-like image-cover-auto image"/>
+                                        class="radius-like image-cover-auto image" />
                                 </EmptyDataTemplate>
                             </asp:ListView>
                         </ul>
@@ -188,8 +188,8 @@
                                         runat="server"
                                         CssClass="startup-image-radius radius-like marginaled image-cover-auto inline-block tag-item not-absolute user-image-padding"
                                         ImageUrl='<%# Eval("UserImageOrDefault") %>'></asp:Image>
-                                    <h1 runat="server"
-                                        class="tag-item user-paragraph"><%# Eval("Name") %></h1>
+                                    <asp:Label runat="server"
+                                        class="tag-item user-paragraph"><%# Eval("Name") %></asp:Label>
                                 </div>
                             </li>
                         </ItemTemplate>
