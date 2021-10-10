@@ -1,6 +1,7 @@
 ﻿using StartUpWebAPI.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 
@@ -12,11 +13,10 @@ namespace StartUpWebAPI.Entities
         {
             get
             {
-                string result = "data:image/jpg;base64,";
+                Image image = RawNativeImageUtils.ConvertBytesToImage(Image);
+                Image thumbnailImage = ProportionalNativeImageUtils.ResizeImageProportionally(image, 300);
 
-                result += Convert.ToBase64String(Image);
-
-                return result;
+                return NativeImageUtils.ConvertFromBitmap(new Bitmap(thumbnailImage));
             }
         }
     }

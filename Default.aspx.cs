@@ -15,11 +15,26 @@ namespace StartUpWebAPI
         {
             bool isAuthenticated = HttpContext.Current.User.Identity.IsAuthenticated;
 
+            if (PageLoadedForTheFirstTime())
+            {
+                ChangeTitle();
+            }
+
             if (isAuthenticated)
             {
                 LoadStartups();
                 LoadTeams();
             }
+        }
+
+        private void ChangeTitle()
+        {
+            Title = User.Identity.IsAuthenticated ? "Домашняя страница" : "О проекте";
+        }
+
+        private bool PageLoadedForTheFirstTime()
+        {
+            return !IsPostBack;
         }
 
         /// <summary>
