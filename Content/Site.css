@@ -1902,3 +1902,9 @@ input[type="checkbox"] {
     margin-top: -10px;
     height: auto;
 }
+
+.dropdownliist{
+    width:auto;
+  
+    font-size:12px;
+}

@@ -123,16 +123,15 @@
                                         Text='Удалить стартап'
                                         CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                                         ForeColor="White"
+                                        Visible="false"
                                         ID="BtnDeleteStartUp"
                                         OnClick="BtnDeleteStartUp_Click"
                                         OnClientClick="return getDeleteItemState(`стартап`);"></asp:LinkButton>
                                 </td>
-                            </tr>
-                        </table>
-                    </asp:Panel>
-                </asp:Panel>
-                <table style="margin-left: 150px; margin-top: -30px;" class="inline-button">
-                    <tr>
+                            
+                     
+                
+                 
                         <td>
                             <asp:Button ID="BtnSubscribe"
                                 OnClick="BtnSubscribe_Click"
@@ -142,8 +141,12 @@
                                 Text="Вступить в стартап"
                                 Visible="false"
                                 ClientIDMode="Static"></asp:Button>
-                            <asp:DropDownList runat="server"
+                        
+                        </td>
+                        <td>
+                                <asp:DropDownList class=" dropdownliist dropdown-button border-radius noselect" runat="server"
                                 ID="DropDownTeams"
+                                    
                                 Visible="false">
                             </asp:DropDownList>
                         </td>
@@ -157,7 +160,10 @@
                                 Visible="false"></asp:Button>
                         </td>
                     </tr>
-                </table>
+
+                  </table>
+                    </asp:Panel>
+                </asp:Panel>
             </div>
         </div>
     </asp:Panel>
