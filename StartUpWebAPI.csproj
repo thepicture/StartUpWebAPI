@@ -395,6 +395,8 @@
     <Compile Include="Models\TupleValueGetter.cs" />
     <Compile Include="Models\UserAuthorizer.cs" />
     <Compile Include="Models\UserBuilder.cs" />
+    <Compile Include="Models\UserDistinctor.cs" />
+    <Compile Include="Models\UsersFlowPreparator.cs" />
     <Compile Include="MyAccount.aspx.cs">
       <DependentUpon>MyAccount.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

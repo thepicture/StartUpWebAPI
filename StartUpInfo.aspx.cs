@@ -78,91 +78,14 @@ namespace StartUpWebAPI
         {
             using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-                List<User> users = PrepareAndGetInfiniteUsers();
+                IEnumerable<User> usersInput = GetUsersOfStartUp();
+
+                List<User> users = UsersFlowPreparator
+                    .PrepareAndGetInfiniteUsers(usersInput);
 
                 LViewUsersFlow.DataSource = users;
                 LViewUsersFlow.DataBind();
             }
-        }
-
-        private List<User> PrepareAndGetInfiniteUsers()
-        {
-            List<User> users = GetUsersOfStartUp();
-            List<User> result;
-            result = GetResultWithInfiniteUsers(users);
-
-            return result;
-        }
-
-        private static List<User> GetResultWithInfiniteUsers(List<User> users)
-        {
-            List<User> result = users.Take(3).ToList();
-            InsertInfiniteUsersIfAtLeastOneExists(users, result);
-            return result;
-        }
-
-        private static void InsertInfiniteUsersIfAtLeastOneExists(List<User> users, List<User> result)
-        {
-            if (IsExistsAtLeastOneUser(users))
-            {
-                InsertInfiniteUsers(users, result);
-            }
-        }
-
-        private static void InsertInfiniteUsers(List<User> users, List<User> result)
-        {
-            List<User> additonalUsers = new List<User>();
-            int howManyUsersToAdd = 6 / result.Count;
-
-            AddRangeOfAdditionalUsers(result, additonalUsers, howManyUsersToAdd);
-
-            result.AddRange(additonalUsers);
-
-            AddResidueUsers(users, result);
-        }
-
-        private static void AddResidueUsers(List<User> users, List<User> result)
-        {
-            if (users.Count < 4)
-            {
-                AddRepeatingUsers(users, result);
-            }
-            else
-            {
-                result.AddRange(users.Take(3));
-            }
-        }
-
-        private static void AddRangeOfAdditionalUsers(List<User> result, List<User> additonalUsers, int howManyUsersToAdd)
-        {
-            for (int i = 0; i < howManyUsersToAdd; i++)
-            {
-                additonalUsers.AddRange(result);
-            }
-        }
-
-        private static void AddRepeatingUsers(List<User> users, List<User> result)
-        {
-            for (int i = 0; i < 4; i++)
-            {
-                result.Add(users.FirstOrDefault());
-            }
-        }
-
-        private static bool IsExistsAtLeastOneUser(List<User> users)
-        {
-            return users.Count != 0;
-        }
-
-        private List<User> GetUsersOfStartUp()
-        {
-            List<User> users = startUp
-                .StartUpOfUser
-                .Select(s => s.User)
-                .Distinct()
-                .ToList();
-
-            return users;
         }
 
         /// <summary>
@@ -249,6 +172,13 @@ namespace StartUpWebAPI
             UsersCount.Text = "Участники ("
                 + GetUsersOfStartUp()
                 .Count() + "):";
+        }
+
+        private IEnumerable<User> GetUsersOfStartUp()
+        {
+            return startUp
+                   .StartUpOfUser
+                   .Select(s => s.User);
         }
 
         /// <summary>
