@@ -16,7 +16,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@100;500&display=swap" rel="stylesheet">
-    <%-- New links for default and about pages. --%>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@600&display=swap" rel="stylesheet">
@@ -27,8 +26,6 @@
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
-                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
-                <%--Framework Scripts--%>
                 <asp:ScriptReference Name="MsAjaxBundle" />
                 <asp:ScriptReference Name="jquery" />
                 <asp:ScriptReference Name="bootstrap" />
@@ -77,8 +74,6 @@
                         <li><a runat="server" href="~/Contact">Контакты</a></li>
                     </ul>
                     <asp:LoginView runat="server">
-                        <%-- Do not show the startups and commands headers
-                            if the user is anonymous. --%>
                         <LoggedInTemplate>
                             <ul class="nav navbar-nav">
                                 <li><a runat="server" href="~/Teams">Команды</a></li>

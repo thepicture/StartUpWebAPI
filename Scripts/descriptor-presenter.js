@@ -35,7 +35,7 @@ function drawDescription(className, descriptionText) {
     description.querySelector('#description-text').innerText = descriptionText;
     description.classList.add('template-live');
     description.style = "display:flex;";
-    description.style.left = startUp.offsetLeft + "px";
-    description.style.top = startUp.offsetTop + "px";
+    description.style.left = startUp.offsetLeft - 5 + "px";
+    description.style.top = startUp.offsetTop - 7 + "px";
     startUp.append(description);
 }

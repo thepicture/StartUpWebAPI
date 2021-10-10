@@ -214,6 +214,7 @@
     <Resource Include="Resources\startupAddBg.jpeg" />
     <Resource Include="Resources\contactImageTwo.jpeg" />
     <Resource Include="Resources\myAccountBg.jpg" />
+    <None Include="Resources\StartUpCompanyLogo.svg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\image-flow-buttons-presenter.js" />

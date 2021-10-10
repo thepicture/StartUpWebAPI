@@ -3,15 +3,22 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <asp:LoginView runat="server">
         <AnonymousTemplate>
-            <div class="jumbotron gradientable" style="height: 200px;">
+            <div class="jumbotron white-shadow-block radius-like" style="background: #FCFCFC; height: max-content;">
 
-                <object type="image/svg+xml" class="bg-image" data="Resources/StarTup.svg">
+
+
+
+                <h1 class="font-family-title fade-in" style="font-size: 80px; float: left; color: black !important; margin-top: 5px !important;">StartUp</h1>
+
+                <object type="image/svg+xml" class="bg-image-logo" style="float: right; width: 150px; height: 150px; margin-top: -20px;" data="Resources/StartUpCompanyLogo.svg">
                     <img class="ImageSetting" src="Resources/StarTup.png" alt="STARTUP" />
                 </object>
 
-                <h1 class="font-family-title fade-in" style="font-size: 80px; margin-top: 5px !important;">StartUp</h1>
-                <p style="font-size: 25px;" class="lead font-family-title fade-in">Компания, объединяющая людей для реализации уникальных проектов</p>
+                <p style="color: black !important; font-size: 25px; float: left;" class=" lead font-family-title fade-in">Компания, объединяющая людей для реализации уникальных проектов</p>
                 &nbsp;
+                <br />
+                <hr />
+
             </div>
 
             <div class="container-fluid fade-in" style="margin-left: -50px;">
@@ -27,9 +34,10 @@
             </div>
 
             <br />
+
             <div class="row" style="margin-left: 2px;">
 
-                <div class="col-md-4 fade-in" style="background-color: #64749E; margin-right: 25px; height: 180px; text-indent: 20px; color: white; text-align: justify; border-radius: 10px;">
+                <div class="col-md-4  white-shadow-block fade-in" style="background-color: #ededed; margin-right: 25px; height: 180px; text-indent: 20px; color: black; text-align: justify; border-radius: 10px;">
                     <h2>Что это?</h2>
                     <br />
                     <p>
@@ -38,14 +46,14 @@
                 Присоединяйтесь!
                     </p>
                 </div>
-                <div class="col-md-4 fade-in" style="background-color: #64689E; width: 331px; margin-right: 25px; height: 180px; text-indent: 20px; color: white; text-align: justify; border-radius: 10px;">
+                <div class="col-md-4  white-shadow-block fade-in" style="background-color: #ededed; width: 331px; margin-right: 25px; height: 180px; text-indent: 20px; color: black; text-align: justify; border-radius: 10px;">
                     <h2>Что здесь есть?</h2>
                     <br />
                     <p>
                         Категории групп, возможность пообщаться с другими стартаперами в реальном времени, участвовать в командах.
                     </p>
                 </div>
-                <div class="col-md-4 fade-in" style="background-color: #6C649E; height: 180px; color: white; text-align: justify; border-radius: 10px;">
+                <div class="col-md-4 white-shadow-block fade-in" style="background-color: #ededed; height: 180px; color: black; text-align: justify; border-radius: 10px;">
                     <h2 style="margin-left: 20px;">Хочу открыть Startup!</h2>
                     <br />
                     <p style="text-indent: 20px;">

@@ -106,12 +106,12 @@
             </div>
 
             <div style="float: left !important; margin-top: 5px;">
-                <asp:Button Text="Искать" Style="width: 120px !important;"
+                <asp:Button Text="Искать" Style="width: 160px !important;"
                     CssClass="button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                     runat="server" ID="BtnSearch" OnClick="BtnSearch_Click" />
             </div>
             <div>
-                <asp:Button Text="Очистить фильтры" Style="margin-left: 2px; margin-top: 5px !important;"
+                <asp:Button Text="Очистить фильтры"  Style="margin-left: 20px; margin-top: 5px !important;"
                     CssClass="button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                     runat="server" ID="BtnClear" OnClick="BtnClear_Click" />
             </div>

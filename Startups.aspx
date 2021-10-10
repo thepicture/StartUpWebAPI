@@ -15,7 +15,7 @@
                     <ContentTemplate>
 
                         <asp:TextBox ID="NameBox"
-                            Style="height: 42px; width: 200px !important; float: left !important; margin-right: 6px;"
+                            Style="height: 42px; width: 245px !important; float: left !important; margin-right: 6px;"
                             TextMode="SingleLine" CssClass="search-box" runat="server"
                             ForeColor="Black" Height="60" BorderColor="#808080" BorderStyle="NotSet"
                             BackColor="Transparent"> </asp:TextBox>
@@ -151,7 +151,7 @@
 
 
                         <div style="margin-left: 2px;" class="mt-3">
-                            <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" class="advanced">Дополнительные параметры <i class="fa fa-angle-down"></i></a>
+                            <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" class="advanced">Дополнительные параметры &#5167; </a>
                             <div class="collapse" id="collapseExample">
                                 <div class="card card-body">
                                     <div class="row">
