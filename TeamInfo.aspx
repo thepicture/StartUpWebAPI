@@ -171,8 +171,9 @@
                     BorderStyle="None"
                     BackColor="Transparent"></asp:TextBox>
 
-                <div style="width: 1000px !important; max-width: -webkit-fill-available;" class="round-div-block about-like-cloud-button-for-page-five button-style-for-page margin-bottom-top-as-usual">
+                <div>
                     <asp:LinkButton runat="server"
+                        Style="width: 1000px !important; max-width: -webkit-fill-available;" class="round-div-block about-like-cloud-button-for-page-five button-style-for-page margin-bottom-top-as-usual"
                         Text='Отправить'
                         ForeColor="White"
                         ID="BtnSendComment"
