@@ -91,7 +91,7 @@
                 OnClick="BtnAddImages_Click" />
 
             <asp:Label runat="server"
-                Text="Документы (до 5Мб)"
+                Text="Документы (до 25Мб)"
                 CssClass="search-label"></asp:Label>
             <br />
             <%-- ListView for demonstrating attached documents if any. --%>

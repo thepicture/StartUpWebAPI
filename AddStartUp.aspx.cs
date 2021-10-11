@@ -497,7 +497,7 @@ namespace StartUpWebAPI
 
             docs.ForEach(p =>
             {
-                bool contentIsGreaterThanFiveMbOrExists = p.ContentLength > 1024 * 1024 * 5
+                bool contentIsGreaterThanFiveMbOrExists = p.ContentLength > 1024 * 1024 * 25
                 || ((List<DocumentOfStartUp>)ViewState["documents"])
                 .Any(i => i.FileName.Equals(p.FileName));
 
