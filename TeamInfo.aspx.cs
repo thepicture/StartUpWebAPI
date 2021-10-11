@@ -216,20 +216,22 @@ namespace StartUpWebAPI
                 {
                     CommentText = CommentBox.Text,
                     CreationDate = DateTime.Now,
-                    User = currentUser,
-                    Team = team,
+                    UserId = currentUser.Id,
+                    TeamId = team.Id,
                 };
 
-                team.TeamComment.Add(comment);
+                context.Team.Find(team.Id).TeamComment.Add(comment);
 
                 try
                 {
                     context.SaveChanges();
 
-                    context.ChangeTracker.Entries().ToList().ForEach(e => e.Reload());
-
                     Response.Redirect("~/TeamInfo.aspx?id=" + team.Id + "&reason="
                         + HttpUtility.UrlEncode("Комментарий успешно добавлен!"), false);
+
+                    context.ChangeTracker.Entries().ToList().ForEach(e => e.Reload());
+
+                    return;
 
                     CommentBox.Text = null;
                     InsertComments();

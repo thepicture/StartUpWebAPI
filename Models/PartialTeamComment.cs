@@ -123,7 +123,7 @@ namespace StartUpWebAPI.Entities
         {
             get
             {
-                return User.UserImageOrDefault;
+                return User?.UserImageOrDefault;
             }
         }
     }
