@@ -68,9 +68,10 @@
             </div>
             <div class="message-input">
                 <div class="wrap">
-                    <input style="max-width: inherit;" type="text" placeholder="Набрать текст..." />
-
-                    <button class="submit"><i class="fa fa-comment" aria-hidden="true"></i></button>
+                    <form>
+                        <asp:TextBox runat="server" ID="textBox" Style="max-width: inherit;" type="text" placeholder="Набрать текст..." />
+                        <button type="submit" name="text" class="submit"><i class="fa fa-comment" aria-hidden="true"></i></button>
+                    </form>
                 </div>
             </div>
         </div>

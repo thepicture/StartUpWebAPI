@@ -2,7 +2,6 @@
 using System;
 using System.Data.Entity;
 using System.Linq;
-using System.Web.Security;
 
 namespace StartUpWebAPI
 {
@@ -30,13 +29,32 @@ namespace StartUpWebAPI
         {
             if (!User.Identity.IsAuthenticated)
             {
-                FormsAuthentication.RedirectToLoginPage();
+                Response.Redirect("~/Account/Register.aspx");
+                return;
             }
-            else
+            if (Page.IsPostBack)
             {
-                LoadContacts();
-                LoadMessages();
+                string text = textBox.Text;
+                int senderId = (int)Session[nameof(Me)];
+                int receiverId = (int)Session[nameof(Receiver)];
+                if (text != null && !string.IsNullOrWhiteSpace(text))
+                {
+                    using (StartUpBaseEntities entities = new StartUpBaseEntities())
+                    {
+                        Message message = new Message
+                        {
+                            ReceiverId = receiverId,
+                            SenderId = senderId,
+                            Text = text
+                        };
+                        entities.Message.Add(message);
+                        entities.SaveChanges();
+                    }
+                }
             }
+            textBox.Text = String.Empty;
+            LoadContacts();
+            LoadMessages();
         }
 
         private void LoadContacts()
@@ -75,6 +93,9 @@ namespace StartUpWebAPI
                 MessagesView.DataBind();
                 Receiver = entities.User.Find(receiverId);
                 ReceiverImage.ImageUrl = Receiver.UserImageInCommentOrDefault;
+
+                Session[nameof(Me)] = Me.Id;
+                Session[nameof(Receiver)] = Receiver.Id;
             }
         }
     }
