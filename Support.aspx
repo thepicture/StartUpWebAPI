@@ -17,24 +17,29 @@
 
             <div id="contacts" style="background-color: #054ba0;">
                 <ul>
-                    <li class="contact active">
-                        <div class="wrap">
-                            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-                            <div class="meta">
-                                <p class="name">Harvey Specter</p>
-                                <p class="preview">Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="contact">
-                        <div class="wrap">
-                            <img src="http://emilcarlsson.se/assets/jonathansidwell.png" alt="" />
-                            <div class="meta">
-                                <p class="name">Jonathan Sidwell</p>
-                                <p class="preview"><span>Вы:</span> That's bullshit. This deal is solid.</p>
-                            </div>
-                        </div>
-                    </li>
+                    <asp:ListView runat="server" ID="ContactsView">
+                        <EmptyDataTemplate>
+                            <p>Контактов нет</p>
+                        </EmptyDataTemplate>
+                        <ItemTemplate>
+                            <asp:HyperLink
+                                runat="server"
+                                NavigateUrl='<%# Eval("Id", "~/Support.aspx?receiverId={0}") %>'
+                                Style="color: white;">
+                                <li class="<%#Request.QueryString != null && Request.QueryString["receiverId"] != null && Request.QueryString["receiverId"] == Session["Receiver"].ToString() ? "contact" : "contact active" %>">
+                                    <div class="wrap">
+                                        <asp:Image runat="server"
+                                            ImageUrl='<%# (int)Eval("Id") == Me.Id ? Eval("UserImageInCommentOrDefault") : Eval("UserImageInCommentOrDefault") %>'
+                                            AlternateText="Фотография получателя"></asp:Image>
+                                        <div class="meta">
+                                            <p class="name"><%# Eval("Name") %></p>
+                                            <p class="preview"><span style='<%# (bool)Eval("IsLastMessageMine") ? "display: visible;": "display: none;" %>'>Вы:</span><%# Eval("LastMessage.Text") %></p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </asp:HyperLink>
+                        </ItemTemplate>
+                    </asp:ListView>
                 </ul>
             </div>
 

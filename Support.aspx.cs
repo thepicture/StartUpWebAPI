@@ -1,5 +1,6 @@
 ﻿using StartUpWebAPI.Entities;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
@@ -52,14 +53,34 @@ namespace StartUpWebAPI
                     }
                 }
             }
-            textBox.Text = String.Empty;
+            textBox.Text = string.Empty;
             LoadContacts();
             LoadMessages();
         }
 
         private void LoadContacts()
         {
+            using (StartUpBaseEntities entities = new StartUpBaseEntities())
+            {
+                IEnumerable<User> contacts;
+                if (Me.TypeOfUser.Name == "Админ")
+                {
+                    contacts = entities.User
+                        .Include(u => u.Message)
+                        .Include(u => u.Message1)
+                        .Where(u => u.Id != Me.Id);
+                }
+                else
+                {
+                    contacts = entities.User
 
+                        .Include(u => u.Message)
+                        .Include(u => u.Message1)
+                        .Where(u => u.TypeOfUser.Name == "Админ");
+                }
+                ContactsView.DataSource = contacts.ToList();
+                ContactsView.DataBind();
+            }
         }
 
         private void LoadMessages()
@@ -84,10 +105,13 @@ namespace StartUpWebAPI
 
 
                 }
-                var messages = entities.Message.Where(m => m.SenderId == Me.Id
-                                                           && m.ReceiverId == receiverId
-                                                           || m.SenderId == receiverId
-                                                           && m.ReceiverId == Me.Id)
+                var messages = entities.Message
+                    .Include(m=>m.User)
+                    .Include(m=>m.User1)
+                    .Where(m => m.SenderId == Me.Id
+                                && m.ReceiverId == receiverId
+                                || m.SenderId == receiverId
+                                && m.ReceiverId == Me.Id)
                     .ToList();
                 MessagesView.DataSource = messages;
                 MessagesView.DataBind();
