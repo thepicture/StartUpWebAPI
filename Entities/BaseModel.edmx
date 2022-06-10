@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="StartUpBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="StartUpBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="Id" />
@@ -22,6 +22,15 @@
           <Property Name="Blob" Type="varbinary(max)" Nullable="false" />
           <Property Name="StartUpId" Type="int" Nullable="false" />
           <Property Name="IsPublic" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SenderId" Type="int" Nullable="false" />
+          <Property Name="ReceiverId" Type="int" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="2048" Nullable="false" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
@@ -88,16 +97,6 @@
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="StartUpId" Type="int" Nullable="false" />
           <Property Name="RoleTypeId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Team">
           <Key>
@@ -182,6 +181,30 @@
             </Principal>
             <Dependent Role="DocumentOfStartUp">
               <PropertyRef Name="StartUpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Message" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="SenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Message" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="ReceiverId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -380,6 +403,7 @@
         <EntityContainer Name="StartUpBaseModelStoreContainer">
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DocumentOfStartUp" EntityType="Self.DocumentOfStartUp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RoleType" EntityType="Self.RoleType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StartUp" EntityType="Self.StartUp" Schema="dbo" store:Type="Tables" />
@@ -387,7 +411,6 @@
           <EntitySet Name="StartUpImage" EntityType="Self.StartUpImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StartUpOfTeam" EntityType="Self.StartUpOfTeam" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StartUpOfUser" EntityType="Self.StartUpOfUser" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Team" EntityType="Self.Team" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeamComment" EntityType="Self.TeamComment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeamOfUser" EntityType="Self.TeamOfUser" Schema="dbo" store:Type="Tables" />
@@ -404,6 +427,14 @@
           <AssociationSet Name="FK_DocumentOfStartUp_StartUp" Association="Self.FK_DocumentOfStartUp_StartUp">
             <End Role="StartUp" EntitySet="StartUp" />
             <End Role="DocumentOfStartUp" EntitySet="DocumentOfStartUp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_User" Association="Self.FK_Message_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_User1" Association="Self.FK_Message_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Message" EntitySet="Message" />
           </AssociationSet>
           <AssociationSet Name="FK_StartUp_Category" Association="Self.FK_StartUp_Category">
             <End Role="Category" EntitySet="Category" />
@@ -470,7 +501,8 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="StartUpBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -494,6 +526,26 @@
           <Property Name="IsPublic" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="StartUp" Relationship="Self.FK_DocumentOfStartUp_StartUp" FromRole="DocumentOfStartUp" ToRole="StartUp" />
         </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SenderId" Type="Int32" Nullable="false" />
+          <Property Name="ReceiverId" Type="Int32" Nullable="false" />
+          <Property Name="Text" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Message_User" FromRole="Message" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_Message_User1" FromRole="Message" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="StartUp" Relationship="Self.FK_StartUp_Region" FromRole="Region" ToRole="StartUp" />
+          <NavigationProperty Name="Team" Relationship="Self.FK_Team_Region" FromRole="Region" ToRole="Team" />
+        </EntityType>
         <EntityType Name="RoleType">
           <Key>
             <PropertyRef Name="Id" />
@@ -515,14 +567,14 @@
           <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsDone" Type="Boolean" Nullable="false" />
           <Property Name="MaxMembersCount" Type="Int32" Nullable="false" />
+          <Property Name="RegionId" Type="Int32" />
           <NavigationProperty Name="Category" Relationship="Self.FK_StartUp_Category" FromRole="StartUp" ToRole="Category" />
           <NavigationProperty Name="DocumentOfStartUp" Relationship="Self.FK_DocumentOfStartUp_StartUp" FromRole="StartUp" ToRole="DocumentOfStartUp" />
+          <NavigationProperty Name="Region" Relationship="Self.FK_StartUp_Region" FromRole="StartUp" ToRole="Region" />
           <NavigationProperty Name="StartUpComment" Relationship="Self.FK_Comment_StartUp" FromRole="StartUp" ToRole="StartUpComment" />
           <NavigationProperty Name="StartUpImage" Relationship="Self.FK_StartUpImage_StartUp" FromRole="StartUp" ToRole="StartUpImage" />
           <NavigationProperty Name="StartUpOfTeam" Relationship="Self.FK_StartUpOfTeam_StartUp" FromRole="StartUp" ToRole="StartUpOfTeam" />
           <NavigationProperty Name="StartUpOfUser" Relationship="Self.FK_StartUpOfUser_StartUp" FromRole="StartUp" ToRole="StartUpOfUser" />
-          <Property Name="RegionId" Type="Int32" />
-          <NavigationProperty Name="Region" Relationship="StartUpBaseModel.FK_StartUp_Region" FromRole="StartUp" ToRole="Region" />
         </EntityType>
         <EntityType Name="StartUpComment">
           <Key>
@@ -572,16 +624,6 @@
           <NavigationProperty Name="StartUp" Relationship="Self.FK_StartUpOfUser_StartUp" FromRole="StartUpOfUser" ToRole="StartUp" />
           <NavigationProperty Name="User" Relationship="Self.FK_StartUpOfUser_User" FromRole="StartUpOfUser" ToRole="User" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="Team">
           <Key>
             <PropertyRef Name="Id" />
@@ -592,11 +634,11 @@
           <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="MaxMembersCount" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RegionId" Type="Int32" />
+          <NavigationProperty Name="Region" Relationship="Self.FK_Team_Region" FromRole="Team" ToRole="Region" />
           <NavigationProperty Name="StartUpOfTeam" Relationship="Self.FK_StartUpOfTeam_Team" FromRole="Team" ToRole="StartUpOfTeam" />
           <NavigationProperty Name="TeamComment" Relationship="Self.FK_TeamComment_Team" FromRole="Team" ToRole="TeamComment" />
           <NavigationProperty Name="TeamOfUser" Relationship="Self.FK_TeamOfUser_Team" FromRole="Team" ToRole="TeamOfUser" />
-          <Property Name="RegionId" Type="Int32" />
-          <NavigationProperty Name="Region" Relationship="StartUpBaseModel.FK_Team_Region" FromRole="Team" ToRole="Region" />
         </EntityType>
         <EntityType Name="TeamComment">
           <Key>
@@ -641,6 +683,8 @@
           <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UserImage" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="TypeOfUserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Message" Relationship="Self.FK_Message_User" FromRole="User" ToRole="Message" />
+          <NavigationProperty Name="Message1" Relationship="Self.FK_Message_User1" FromRole="User" ToRole="Message" />
           <NavigationProperty Name="StartUpComment" Relationship="Self.FK_Comment_User" FromRole="User" ToRole="StartUpComment" />
           <NavigationProperty Name="StartUpOfUser" Relationship="Self.FK_StartUpOfUser_User" FromRole="User" ToRole="StartUpOfUser" />
           <NavigationProperty Name="TeamComment" Relationship="Self.FK_TeamComment_User" FromRole="User" ToRole="TeamComment" />
@@ -668,6 +712,54 @@
             </Principal>
             <Dependent Role="DocumentOfStartUp">
               <PropertyRef Name="StartUpId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Message" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="SenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Message" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="ReceiverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StartUp_Region">
+          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
+          <End Role="StartUp" Type="Self.StartUp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StartUp">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Team_Region">
+          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
+          <End Role="Team" Type="Self.Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Team">
+              <PropertyRef Name="RegionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -854,13 +946,14 @@
         <EntityContainer Name="StartUpBaseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Category" EntityType="Self.Category" />
           <EntitySet Name="DocumentOfStartUp" EntityType="Self.DocumentOfStartUp" />
+          <EntitySet Name="Message" EntityType="Self.Message" />
+          <EntitySet Name="Region" EntityType="Self.Region" />
           <EntitySet Name="RoleType" EntityType="Self.RoleType" />
           <EntitySet Name="StartUp" EntityType="Self.StartUp" />
           <EntitySet Name="StartUpComment" EntityType="Self.StartUpComment" />
           <EntitySet Name="StartUpImage" EntityType="Self.StartUpImage" />
           <EntitySet Name="StartUpOfTeam" EntityType="Self.StartUpOfTeam" />
           <EntitySet Name="StartUpOfUser" EntityType="Self.StartUpOfUser" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Team" EntityType="Self.Team" />
           <EntitySet Name="TeamComment" EntityType="Self.TeamComment" />
           <EntitySet Name="TeamOfUser" EntityType="Self.TeamOfUser" />
@@ -873,6 +966,22 @@
           <AssociationSet Name="FK_DocumentOfStartUp_StartUp" Association="Self.FK_DocumentOfStartUp_StartUp">
             <End Role="StartUp" EntitySet="StartUp" />
             <End Role="DocumentOfStartUp" EntitySet="DocumentOfStartUp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_User" Association="Self.FK_Message_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_User1" Association="Self.FK_Message_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StartUp_Region" Association="Self.FK_StartUp_Region">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="StartUp" EntitySet="StartUp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Team_Region" Association="Self.FK_Team_Region">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Team" EntitySet="Team" />
           </AssociationSet>
           <AssociationSet Name="FK_StartUpOfTeam_RoleType" Association="Self.FK_StartUpOfTeam_RoleType">
             <End Role="RoleType" EntitySet="RoleType" />
@@ -934,49 +1043,7 @@
             <End Role="TypeOfUser" EntitySet="TypeOfUser" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
-          <EntitySet Name="Region" EntityType="StartUpBaseModel.Region" />
-          <AssociationSet Name="FK_StartUp_Region" Association="StartUpBaseModel.FK_StartUp_Region">
-            <End Role="Region" EntitySet="Region" />
-            <End Role="StartUp" EntitySet="StartUp" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Team_Region" Association="StartUpBaseModel.FK_Team_Region">
-            <End Role="Region" EntitySet="Region" />
-            <End Role="Team" EntitySet="Team" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Region">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="StartUp" Relationship="StartUpBaseModel.FK_StartUp_Region" FromRole="Region" ToRole="StartUp" />
-          <NavigationProperty Name="Team" Relationship="StartUpBaseModel.FK_Team_Region" FromRole="Region" ToRole="Team" />
-        </EntityType>
-        <Association Name="FK_StartUp_Region">
-          <End Type="StartUpBaseModel.Region" Role="Region" Multiplicity="0..1" />
-          <End Type="StartUpBaseModel.StartUp" Role="StartUp" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Region">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StartUp">
-              <PropertyRef Name="RegionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Team_Region">
-          <End Type="StartUpBaseModel.Region" Role="Region" Multiplicity="0..1" />
-          <End Type="StartUpBaseModel.Team" Role="Team" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Region">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Team">
-              <PropertyRef Name="RegionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1003,6 +1070,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Message">
+            <EntityTypeMapping TypeName="StartUpBaseModel.Message">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SenderId" ColumnName="SenderId" />
+                <ScalarProperty Name="ReceiverId" ColumnName="ReceiverId" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Region">
+            <EntityTypeMapping TypeName="StartUpBaseModel.Region">
+              <MappingFragment StoreEntitySet="Region">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="RoleType">
             <EntityTypeMapping TypeName="StartUpBaseModel.RoleType">
               <MappingFragment StoreEntitySet="RoleType">
@@ -1014,7 +1099,6 @@
           <EntitySetMapping Name="StartUp">
             <EntityTypeMapping TypeName="StartUpBaseModel.StartUp">
               <MappingFragment StoreEntitySet="StartUp">
-                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -1022,6 +1106,7 @@
                 <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
                 <ScalarProperty Name="IsDone" ColumnName="IsDone" />
                 <ScalarProperty Name="MaxMembersCount" ColumnName="MaxMembersCount" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1064,27 +1149,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="StartUpBaseModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Team">
             <EntityTypeMapping TypeName="StartUpBaseModel.Team">
               <MappingFragment StoreEntitySet="Team">
-                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
                 <ScalarProperty Name="MaxMembersCount" ColumnName="MaxMembersCount" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1125,14 +1199,6 @@
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="UserImage" ColumnName="UserImage" />
                 <ScalarProperty Name="TypeOfUserId" ColumnName="TypeOfUserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Region">
-            <EntityTypeMapping TypeName="StartUpBaseModel.Region">
-              <MappingFragment StoreEntitySet="Region">
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

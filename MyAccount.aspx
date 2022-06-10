@@ -12,7 +12,7 @@
                 <tr>
                     <td class="poster_info td1 hide-for-print">
                         <p>
-                            <asp:Image Width="100" Height="100"
+                            <asp:Image Width="120" Height="120"
                                 ID="UserImage"
                                 runat="server" CssClass="startup-image-radius radius-like marginaled image-cover-auto"
                                 ImageUrl='<%# Eval("GetCommentImage") %>' AlternateText="Фотография"></asp:Image>
@@ -40,8 +40,12 @@
                             CssClass="round-div-block-specified-about-page-account about-like-cloud-button-page-account my-account-button-margin-and-height"
                             Text="Изменить"
                             ID="BtnAddImage"
-                            Style="width: 100px; margin-left: 10px !important;"
+                            Style="width: 120px !important; margin-left: 10px !important;"
                             OnClick="BtnAddImage_Click" />
+                        <a runat="server"
+                            href="~/Support"
+                            class="round-div-block-specified-about-page-account about-like-cloud-button-page-account my-account-button-margin-and-height"
+                            style="width: 120px !important; margin-left: 10px !important;">Поддержка</a>
 
                     </td>
                     <td>

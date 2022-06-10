@@ -117,7 +117,11 @@ namespace StartUpWebAPI
             {
                 var currentStartups = context.StartUp.ToList();
 
-                currentStartups.RemoveAll(s => s.StartUpOfUser.Any(e => e.User.Name.Equals(User.Identity.Name) && e.RoleType.Name.Equals("Забанен")));
+                currentStartups
+                    .RemoveAll(s => 
+                        s.StartUpOfUser.Any(
+                            e => e.User.Name.Equals(User.Identity.Name) 
+                            && e.RoleType.Name.Equals("Забанен")));
 
                 if (ActualBox.Checked && !DoneBox.Checked)
                 {
@@ -133,70 +137,14 @@ namespace StartUpWebAPI
                     currentStartups = currentStartups.Where(s => s.IsDone == false).ToList();
                 }
 
-                #region WorkWithDropDownBoxes
-                List<string> membersSelectedValues = TupleValueGetter.GetValues(
-                                                        TupleToTextAndBoolConverter.ConvertToTextAndBoolTuple(
-                                                            ListViewTupleGetter.Get(MembersView)
-                                                            )
-                                                        )
-                    .ToList();
-
-                List<string> regionsSelectedValues = TupleValueGetter.GetValues(
-                                                        TupleToTextAndBoolConverter.ConvertToTextAndBoolTuple(
-                                                            ListViewTupleGetter.Get(RegionsView)
-                                                            )
-                                                        )
-                  .ToList();
-
-                List<string> categoriesSelectedValues = TupleValueGetter.GetValues(
-                                                      TupleToTextAndBoolConverter.ConvertToTextAndBoolTuple(
-                                                          ListViewTupleGetter.Get(CategoriesView)
-                                                          )
-                                                      )
-                .ToList();
-
-                bool memberSelectedValueIsNonStandard = membersSelectedValues.Count != 0;
-                bool regionSelectedValueIsNonStandard = regionsSelectedValues.Count != 0;
-                bool categorySelectedValueIsNonStandard = categoriesSelectedValues.Count != 0;
-
-                if (memberSelectedValueIsNonStandard)
-                {
-                    List<StartUp> startupsToUnion = new List<StartUp>();
-
-                    foreach (string value in membersSelectedValues)
-                    {
-                        string[] values = value.Split('-');
-                        int from = int.Parse(values[0]);
-                        int to = int.Parse(values[1].Replace("и больше", int.MaxValue.ToString()));
-
-                        startupsToUnion
-                            .AddRange(currentStartups.Where(s => s.MaxMembersCount > from
-                                        && s.MaxMembersCount < to)
-                                        .ToList());
-                    }
-                    currentStartups = startupsToUnion.Distinct().ToList();
-                }
-
-                if (regionSelectedValueIsNonStandard)
-                {
-                    currentStartups = currentStartups
-                        .Where(s => regionsSelectedValues.Contains(s.Region.Name))
-                        .ToList();
-                }
-
-                if (categorySelectedValueIsNonStandard)
-                {
-                    currentStartups = currentStartups
-                        .Where(s => categoriesSelectedValues.Contains(s.Category.Name))
-                        .ToList();
-                }
-                #endregion
-
                 UpdateFiltration.Update();
 
                 if (!string.IsNullOrWhiteSpace(NameBox.Text))
                 {
-                    currentStartups = currentStartups.Where(s => s.Name.ToLower().Contains(NameBox.Text.ToLower())).ToList();
+                    currentStartups = currentStartups
+                        .Where(s => s.Name.ToLower()
+                        .Contains(NameBox.Text.ToLower()))
+                        .ToList();
                 }
 
                 StartupsView.DataSource = currentStartups;

@@ -124,12 +124,20 @@ namespace StartUpWebAPI
 
         private void FillStartUpAttributes(StartUp nullableStartUp)
         {
-            TBoxName.Text = ((StartUp)ViewState["currentStartUp"]).Name;
-            TBoxDescription.Text = ((StartUp)ViewState["currentStartUp"]).Description;
-            TBoxMaxMembers.Text = ((StartUp)ViewState["currentStartUp"]).MaxMembersCount.ToString();
-            CheckBoxDone.Checked = ((StartUp)ViewState["currentStartUp"]).IsDone;
-            ((List<StartUpImage>)ViewState["images"]).AddRange(nullableStartUp.StartUpImage.ToList());
-            ((List<DocumentOfStartUp>)ViewState["documents"]).AddRange(nullableStartUp.DocumentOfStartUp.ToList());
+            TBoxName.Text = 
+                ((StartUp)ViewState["currentStartUp"]).Name;
+            TBoxDescription.Text = 
+                ((StartUp)ViewState["currentStartUp"]).Description;
+            TBoxMaxMembers.Text = 
+                ((StartUp)ViewState["currentStartUp"]).MaxMembersCount.ToString();
+            CheckBoxDone.Checked = 
+                ((StartUp)ViewState["currentStartUp"]).IsDone;
+            ((List<StartUpImage>)ViewState["images"])
+                .AddRange(
+                    nullableStartUp.StartUpImage.ToList());
+            ((List<DocumentOfStartUp>)ViewState["documents"])
+                .AddRange(
+                    nullableStartUp.DocumentOfStartUp.ToList());
         }
 
         private void InsertObjectsInStartUp()
