@@ -102,12 +102,11 @@ namespace StartUpWebAPI
                     {
                         receiverId = entities.User.First(u => u.TypeOfUser.Name == "Админ").Id;
                     }
-
-
+                    Response.Redirect("~/Support.aspx?receiverId=" + receiverId);
                 }
                 var messages = entities.Message
-                    .Include(m=>m.User)
-                    .Include(m=>m.User1)
+                    .Include(m => m.User)
+                    .Include(m => m.User1)
                     .Where(m => m.SenderId == Me.Id
                                 && m.ReceiverId == receiverId
                                 || m.SenderId == receiverId

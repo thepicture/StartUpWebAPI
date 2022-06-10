@@ -26,7 +26,7 @@
                                 runat="server"
                                 NavigateUrl='<%# Eval("Id", "~/Support.aspx?receiverId={0}") %>'
                                 Style="color: white;">
-                                <li class="<%#Request.QueryString != null && Request.QueryString["receiverId"] != null && Request.QueryString["receiverId"] == Session["Receiver"].ToString() ? "contact" : "contact active" %>">
+                                <li class="<%#Request.QueryString["receiverId"] != null && Request.QueryString["receiverId"] == Eval("Id").ToString() ? "contact active" : "contact " %>">
                                     <div class="wrap">
                                         <asp:Image runat="server"
                                             ImageUrl='<%# (int)Eval("Id") == Me.Id ? Eval("UserImageInCommentOrDefault") : Eval("UserImageInCommentOrDefault") %>'
