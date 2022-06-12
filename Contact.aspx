@@ -18,7 +18,7 @@
             <br />
 
             <article class=" fade-in title-page-margin contact-article">
-                Проект создан командой программистов из многопрофильного колледжа ТИУ
+                Для связи у нас есть <a href="mailto:start.up.entertainment.company@gmail.com">наша электронная почта.</a>
             </article>
             <br />
             <address>
