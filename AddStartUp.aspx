@@ -14,6 +14,15 @@
                 Wrap="true"></asp:TextBox>
             <br />
             <br />
+             <asp:Label runat="server" CssClass="search-label" Text="Телеграм"></asp:Label>
+            <asp:TextBox runat="server"
+                ID="ContactBox"
+                CssClass="nice-text-box prevent-selection textbox-style-setting search-startup-text-box"
+                TextMode="SingleLine"
+                Wrap="true"
+                Width="447"></asp:TextBox>
+            <br />
+            <br />
             <asp:Label runat="server" CssClass="search-label" Text="Категория"></asp:Label>
             <asp:DropDownList AutoPostBack="true"
                 runat="server"

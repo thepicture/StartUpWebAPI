@@ -126,6 +126,8 @@ namespace StartUpWebAPI
         {
             TBoxName.Text = 
                 ((StartUp)ViewState["currentStartUp"]).Name;
+            ContactBox.Text =
+              ((StartUp)ViewState["currentStartUp"]).ContactLink;
             TBoxDescription.Text = 
                 ((StartUp)ViewState["currentStartUp"]).Description;
             TBoxMaxMembers.Text = 
@@ -243,6 +245,7 @@ namespace StartUpWebAPI
             using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
                 ((StartUp)ViewState["currentStartUp"]).Name = TBoxName.Text;
+                ((StartUp)ViewState["currentStartUp"]).ContactLink = ContactBox.Text;
                 ((StartUp)ViewState["currentStartUp"]).Description = TBoxDescription.Text;
                 ((StartUp)ViewState["currentStartUp"]).MaxMembersCount = int.Parse(TBoxMaxMembers.Text);
 
