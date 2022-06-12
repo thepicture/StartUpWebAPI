@@ -80,11 +80,15 @@
                                 <label style="display: block; font-size: 17px; color: darkslateblue">Команд:</label>
                                 <asp:Label ID="CountOfTeams" runat="server" ForeColor="Black"></asp:Label>
                             </td>
-
+                            <td scope="col">
+                                <asp:LinkButton runat="server"
+                                    Text="Презентация"
+                                    CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual request-solid-color"
+                                    ID="LinkGoToStartUpFiles"
+                                    OnClick="LinkGoToStartUpFiles_Click" />
+                            </td>
                         </tr>
-
                         <tr>
-
                             <td scope="row">
                                 <label style="display: block; font-size: 17px; color: darkslateblue">Стартапер:</label>
                                 <asp:Label ID="Creator" runat="server" ForeColor="Black"></asp:Label>
@@ -110,6 +114,7 @@
                             </td>
                         </tr>
                         <tr>
+                            <%--Do not delete this row tag, should be for the table consistency.--%>
                         </tr>
                     </table>
                     <br />

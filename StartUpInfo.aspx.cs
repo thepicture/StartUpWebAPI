@@ -667,5 +667,10 @@ namespace StartUpWebAPI
 
             MaintainScrollPositionOnPostBack = true;
         }
+
+        protected void LinkGoToStartUpFiles_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/StartUpDocuments.aspx?startUpId=" + startUp.Id);
+        }
     }
 }

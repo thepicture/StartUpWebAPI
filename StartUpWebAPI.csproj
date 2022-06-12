@@ -274,6 +274,7 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
+    <Content Include="StartUpDocuments.aspx" />
     <Content Include="StartUpInfo.aspx" />
     <Content Include="Startups.aspx" />
     <Content Include="Support.aspx" />
@@ -454,6 +455,13 @@
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="StartUpDocuments.aspx.cs">
+      <DependentUpon>StartUpDocuments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StartUpDocuments.aspx.designer.cs">
+      <DependentUpon>StartUpDocuments.aspx</DependentUpon>
+    </Compile>
     <Compile Include="StartUpInfo.aspx.cs">
       <DependentUpon>StartUpInfo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
