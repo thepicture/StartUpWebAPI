@@ -11,8 +11,8 @@ namespace StartUpWebAPI.Entities
 {
     using System;
     using System.Collections.Generic;
-    [Serializable]
-    public partial class DocumentOfStartUp
+    
+    [System.Serializable] public partial class DocumentOfStartUp
     {
         public int Id { get; set; }
         public string FileName { get; set; }

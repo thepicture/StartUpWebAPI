@@ -11,8 +11,8 @@ namespace StartUpWebAPI.Entities
 {
     using System;
     using System.Collections.Generic;
-    [Serializable]
-    public partial class TeamComment
+    
+    [System.Serializable] public partial class TeamComment
     {
         public int UserId { get; set; }
         public int TeamId { get; set; }

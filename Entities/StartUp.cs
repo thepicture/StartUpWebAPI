@@ -11,8 +11,8 @@ namespace StartUpWebAPI.Entities
 {
     using System;
     using System.Collections.Generic;
-    [Serializable]
-    public partial class StartUp
+    
+    [System.Serializable] public partial class StartUp
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public StartUp()
@@ -32,6 +32,7 @@ namespace StartUpWebAPI.Entities
         public bool IsDone { get; set; }
         public int MaxMembersCount { get; set; }
         public Nullable<int> RegionId { get; set; }
+        public string ContactLink { get; set; }
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

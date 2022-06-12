@@ -6,17 +6,18 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
 namespace StartUpWebAPI.Entities
 {
     using System;
     using System.Collections.Generic;
-    [Serializable]
-    public partial class StartUpOfUser
+    
+    [System.Serializable] public partial class StartUpOfUser
     {
         public int UserId { get; set; }
         public int StartUpId { get; set; }
         public int RoleTypeId { get; set; }
-
+    
         public virtual RoleType RoleType { get; set; }
         public virtual StartUp StartUp { get; set; }
         public virtual User User { get; set; }

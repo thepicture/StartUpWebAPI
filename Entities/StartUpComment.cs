@@ -11,8 +11,8 @@ namespace StartUpWebAPI.Entities
 {
     using System;
     using System.Collections.Generic;
-    [Serializable]
-    public partial class StartUpComment
+    
+    [System.Serializable] public partial class StartUpComment
     {
         public int Id { get; set; }
         public string CommentText { get; set; }

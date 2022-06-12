@@ -11,8 +11,8 @@ namespace StartUpWebAPI.Entities
 {
     using System;
     using System.Collections.Generic;
-    [Serializable]
-    public partial class Message
+    
+    [System.Serializable] public partial class Message
     {
         public int Id { get; set; }
         public int SenderId { get; set; }

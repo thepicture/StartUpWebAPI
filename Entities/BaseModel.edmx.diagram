@@ -5,42 +5,42 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="ec1ceee5fad845acbf36f40e1a507e2c" Name="Diagram1">
-        <EntityTypeShape EntityType="StartUpBaseModel.Category" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="StartUpBaseModel.DocumentOfStartUp" Width="1.5" PointX="5.25" PointY="19.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="StartUpBaseModel.Message" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="StartUpBaseModel.Region" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="StartUpBaseModel.RoleType" Width="1.5" PointX="6" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="StartUpBaseModel.StartUp" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="StartUpBaseModel.StartUpComment" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="StartUpBaseModel.StartUpImage" Width="1.5" PointX="5.25" PointY="22.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="StartUpBaseModel.StartUpOfTeam" Width="1.5" PointX="8.25" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="StartUpBaseModel.StartUpOfUser" Width="1.5" PointX="5.25" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="StartUpBaseModel.Team" Width="1.5" PointX="6" PointY="14.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="StartUpBaseModel.TeamComment" Width="1.5" PointX="8.25" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="StartUpBaseModel.TeamOfUser" Width="1.5" PointX="8.25" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="StartUpBaseModel.TypeOfUser" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="StartUpBaseModel.User" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
-        <AssociationConnector Association="StartUpBaseModel.FK_StartUp_Category" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_DocumentOfStartUp_StartUp" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_Message_User" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_Message_User1" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_StartUp_Region" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_Team_Region" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfTeam_RoleType" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfUser_RoleType" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_TeamOfUser_RoleType" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_Comment_StartUp" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_StartUpImage_StartUp" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfTeam_StartUp" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfUser_StartUp" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_Comment_User" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfTeam_Team" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfUser_User" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_TeamComment_Team" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_TeamOfUser_Team" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_TeamComment_User" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_TeamOfUser_User" ManuallyRouted="false" />
-        <AssociationConnector Association="StartUpBaseModel.FK_User_TypeOfUser" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="StartUpBaseModel.Category" Width="1.5" PointX="0.75" PointY="15.875" />
+        <EntityTypeShape EntityType="StartUpBaseModel.DocumentOfStartUp" Width="1.5" PointX="5.25" PointY="14.125" />
+        <EntityTypeShape EntityType="StartUpBaseModel.Message" Width="1.5" PointX="5.25" PointY="19.625" />
+        <EntityTypeShape EntityType="StartUpBaseModel.Region" Width="1.5" PointX="0.75" PointY="3.375" />
+        <EntityTypeShape EntityType="StartUpBaseModel.RoleType" Width="1.5" PointX="3" PointY="11.625" />
+        <EntityTypeShape EntityType="StartUpBaseModel.StartUp" Width="1.5" PointX="3" PointY="14.625" />
+        <EntityTypeShape EntityType="StartUpBaseModel.StartUpComment" Width="1.5" PointX="5.25" PointY="7.5" />
+        <EntityTypeShape EntityType="StartUpBaseModel.StartUpImage" Width="1.5" PointX="5.25" PointY="23.25" />
+        <EntityTypeShape EntityType="StartUpBaseModel.StartUpOfTeam" Width="1.5" PointX="8.25" PointY="10.625" />
+        <EntityTypeShape EntityType="StartUpBaseModel.StartUpOfUser" Width="1.5" PointX="5.25" PointY="10.625" />
+        <EntityTypeShape EntityType="StartUpBaseModel.Team" Width="1.5" PointX="3" PointY="2.75" />
+        <EntityTypeShape EntityType="StartUpBaseModel.TeamComment" Width="1.5" PointX="8.25" PointY="7.5" />
+        <EntityTypeShape EntityType="StartUpBaseModel.TeamOfUser" Width="1.5" PointX="5.25" PointY="4.625" />
+        <EntityTypeShape EntityType="StartUpBaseModel.TypeOfUser" Width="1.5" PointX="0.75" PointY="7.875" />
+        <EntityTypeShape EntityType="StartUpBaseModel.User" Width="1.5" PointX="3" PointY="6.875" />
+        <AssociationConnector Association="StartUpBaseModel.FK_StartUp_Category" />
+        <AssociationConnector Association="StartUpBaseModel.FK_DocumentOfStartUp_StartUp" />
+        <AssociationConnector Association="StartUpBaseModel.FK_Message_User" />
+        <AssociationConnector Association="StartUpBaseModel.FK_Message_User1" />
+        <AssociationConnector Association="StartUpBaseModel.FK_StartUp_Region" />
+        <AssociationConnector Association="StartUpBaseModel.FK_Team_Region" />
+        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfTeam_RoleType" />
+        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfUser_RoleType" />
+        <AssociationConnector Association="StartUpBaseModel.FK_TeamOfUser_RoleType" />
+        <AssociationConnector Association="StartUpBaseModel.FK_Comment_StartUp" />
+        <AssociationConnector Association="StartUpBaseModel.FK_StartUpImage_StartUp" />
+        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfTeam_StartUp" />
+        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfUser_StartUp" />
+        <AssociationConnector Association="StartUpBaseModel.FK_Comment_User" />
+        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfTeam_Team" />
+        <AssociationConnector Association="StartUpBaseModel.FK_StartUpOfUser_User" />
+        <AssociationConnector Association="StartUpBaseModel.FK_TeamComment_Team" />
+        <AssociationConnector Association="StartUpBaseModel.FK_TeamOfUser_Team" />
+        <AssociationConnector Association="StartUpBaseModel.FK_TeamComment_User" />
+        <AssociationConnector Association="StartUpBaseModel.FK_TeamOfUser_User" />
+        <AssociationConnector Association="StartUpBaseModel.FK_User_TypeOfUser" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
