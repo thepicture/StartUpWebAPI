@@ -159,6 +159,12 @@
                                     CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                                     Text="Покинуть стартап"
                                     Visible="false"></asp:Button>
+                                <asp:LinkButton runat="server"
+                                    Style="float: left; margin-left: 10px !important;"
+                                    Text="Пройти собеседование"
+                                    CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual request-solid-color"
+                                    ID="LinkGoToContact"
+                                    Visible="false"></asp:LinkButton>
                             </td>
                         </tr>
 

@@ -159,6 +159,8 @@ namespace StartUpWebAPI
             if (userInStartUp)
             {
                 BtnUnsubscribe.Visible = true;
+                LinkGoToContact.Visible = true;
+                LinkGoToContact.PostBackUrl = startUp.ContactLink;
             }
             else
             {
