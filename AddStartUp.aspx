@@ -14,13 +14,14 @@
                 Wrap="true"></asp:TextBox>
             <br />
             <br />
-             <asp:Label runat="server" CssClass="search-label" Text="Телеграм"></asp:Label>
-            <asp:TextBox runat="server"
+             <asp:Label runat="server" CssClass="search-label"  Text="Телеграм"></asp:Label>
+            <asp:TextBox runat="server" 
                 ID="ContactBox"
                 CssClass="nice-text-box prevent-selection textbox-style-setting search-startup-text-box"
                 TextMode="SingleLine"
                 Wrap="true"
-                Width="447 !important;"></asp:TextBox>
+                style ="width: 447px !important; "
+                ></asp:TextBox>
             <br />
             <br />
             <asp:Label runat="server" CssClass="search-label" Text="Категория"></asp:Label>
@@ -28,7 +29,7 @@
                 runat="server"
                 class="form-control category-dropdown"
                 ID="ComboCategories"
-                Width="200 !important">
+                style ="width: 447px !important; ">
             </asp:DropDownList>
             <br />
             <br />
@@ -37,7 +38,8 @@
                 runat="server"
                 class="form-control category-dropdown"
                 ID="DropDownRegions"
-                Width="200 !important">
+                style ="width: 200px !important;"
+                >
             </asp:DropDownList>
             <br />
             <br />
@@ -45,7 +47,7 @@
             <asp:TextBox runat="server"
                 ID="TBoxMaxMembers"
                 CssClass="nice-text-box prevent-selection textbox-style-setting max-members-textbox"
-                Width="50 !important"
+                style ="width: 50px !important;"
                 TextMode="Number"
                 MaxLength="10"
                 AutoCompleteType="Disabled"></asp:TextBox>
@@ -58,10 +60,10 @@
                 ID="TBoxDescription"
                 ForeColor="Black"
                 Wrap="true"
-                Width="457 !important"
+                style ="width: 447px !important; height:80px !important;"
                 TextMode="MultiLine"
                 CssClass="nice-text-box prevent-selection textbox-style-setting request-overflow-y"
-                Height="80"></asp:TextBox>
+              ></asp:TextBox>
             <br />
             <br />
 
