@@ -36,7 +36,7 @@
                 runat="server"
                 class="form-control category-dropdown"
                 ID="DropDownRegions"
-                Width="200">
+                 style ="width: 200px !important;">
             </asp:DropDownList>
             <br />
             <br />
@@ -46,7 +46,7 @@
             <asp:TextBox runat="server"
                 ID="TBoxMaxMembers"
                 CssClass="nice-text-box prevent-selection textbox-style-setting add-teams-member-box"
-                Width="50"
+                style ="width: 50px !important;"
                 TextMode="Number"
                 MaxLength="6"
                 AutoCompleteType="Disabled"></asp:TextBox>
@@ -59,9 +59,8 @@
                 ID="TBoxDescription"
                 ForeColor="Black"
                 CssClass="nice-text-box prevent-selection textbox-style-setting request-overflow-y"
-                Width="457"
-                TextMode="MultiLine"
-                Height="80"></asp:TextBox>
+                style ="width: 457px !important; height:80px !important;"
+                TextMode="MultiLine"></asp:TextBox>
             <br />
             <br />
 

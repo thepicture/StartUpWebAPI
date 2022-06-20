@@ -3,8 +3,8 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="top-margin-about">
         <div class="lead">
-            <h1 class="fade-in align-h1 main-about-title">StartUp – это площадка для ваших начинаний</h1>
-            <p class="fade-in align-h1 sub-main-about-title">Начните стартап уже сегодня. Сотни людей ждут вас</p>
+            <h1 class="fade-in align-h1 main-about-title stylecolor">StartUp – это площадка для ваших начинаний</h1>
+            <p class="fade-in align-h1 sub-main-about-title stylecolor">Начните стартап уже сегодня. Сотни людей ждут вас</p>
         </div>
         <asp:LoginView runat="server">
             <AnonymousTemplate>

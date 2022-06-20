@@ -2703,3 +2703,7 @@ li {
 #frame .content .message-input .wrap button:focus {
     outline: none;
 }
+
+.stylecolor{
+    color: white !important;
+}
