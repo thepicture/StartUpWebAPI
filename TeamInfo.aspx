@@ -70,7 +70,6 @@
                     <table style="margin-left: 10px; margin-top: 50px;">
                         <tr>
                             <td>
-
                                 <asp:LinkButton runat="server" Text='Изменить информацию'
                                     ForeColor="White"
                                     Visible="false"
@@ -82,7 +81,6 @@
                             </td>
 
                             <td>
-
                                 <asp:LinkButton runat="server" Text='Удалить команду'
                                     CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                                     ForeColor="White"
@@ -93,7 +91,6 @@
                             </td>
 
                             <td>
-
                                 <asp:Button ID="BtnSubscribe"
                                     OnClick="BtnSubscribe_Click"
                                     runat="server"
@@ -111,7 +108,12 @@
                                     CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual"
                                     Text="Покинуть команду"
                                     Visible="false"></asp:Button>
-
+                                <asp:LinkButton runat="server"
+                                    Style="float: left; margin-left: 10px !important;"
+                                    Text="Пройти собеседование"
+                                    CssClass="round-div-block button-style-for-page about-like-cloud-button-for-page margin-bottom-top-as-usual request-solid-color"
+                                    ID="LinkGoToContact"
+                                    Visible="false"></asp:LinkButton>
                             </td>
 
 

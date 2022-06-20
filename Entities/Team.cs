@@ -29,6 +29,7 @@ namespace StartUpWebAPI.Entities
         public int MaxMembersCount { get; set; }
         public string Description { get; set; }
         public Nullable<int> RegionId { get; set; }
+        public string ContactLink { get; set; }
     
         public virtual Region Region { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

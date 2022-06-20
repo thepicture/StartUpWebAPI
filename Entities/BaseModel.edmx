@@ -110,6 +110,7 @@
           <Property Name="MaxMembersCount" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="RegionId" Type="int" />
+          <Property Name="ContactLink" Type="nvarchar" MaxLength="1024" />
         </EntityType>
         <EntityType Name="TeamComment">
           <Key>
@@ -737,6 +738,7 @@
           <Property Name="MaxMembersCount" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="RegionId" Type="Int32" />
+          <Property Name="ContactLink" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Region" Relationship="StartUpBaseModel.FK_Team_Region" FromRole="Team" ToRole="Region" />
           <NavigationProperty Name="StartUpOfTeam" Relationship="StartUpBaseModel.FK_StartUpOfTeam_Team" FromRole="Team" ToRole="StartUpOfTeam" />
           <NavigationProperty Name="TeamComment" Relationship="StartUpBaseModel.FK_TeamComment_Team" FromRole="Team" ToRole="TeamComment" />
@@ -1154,6 +1156,7 @@
           <EntitySetMapping Name="Team">
             <EntityTypeMapping TypeName="StartUpBaseModel.Team">
               <MappingFragment StoreEntitySet="Team">
+                <ScalarProperty Name="ContactLink" ColumnName="ContactLink" />
                 <ScalarProperty Name="RegionId" ColumnName="RegionId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="MaxMembersCount" ColumnName="MaxMembersCount" />

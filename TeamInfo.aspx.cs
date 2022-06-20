@@ -73,7 +73,7 @@ namespace StartUpWebAPI
 
                 List<User> users = UsersFlowPreparator
                     .PrepareAndGetInfiniteUsers(usersInput).Where(u => u.UserImage != null)
-                    .ToList(); ;
+                    .ToList();
 
                 LViewUsersFlow.DataSource = users;
                 LViewUsersFlow.DataBind();
@@ -98,6 +98,8 @@ namespace StartUpWebAPI
             if (userInTeam)
             {
                 BtnUnsubscribe.Visible = true;
+                LinkGoToContact.Visible = true;
+                LinkGoToContact.PostBackUrl = team.ContactLink;
             }
             else
             {

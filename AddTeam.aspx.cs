@@ -48,6 +48,7 @@ namespace StartUpWebAPI
                                 }
 
                                 TBoxName.Text = ((Team)ViewState["currentTeam"]).Name;
+                                ContactBox.Text = ((Team)ViewState["currentTeam"]).ContactLink;
                                 TBoxDescription.Text = ((Team)ViewState["currentTeam"]).Description;
                                 TBoxMaxMembers.Text = ((Team)ViewState["currentTeam"]).MaxMembersCount.ToString();
                                 InsertCurrentRegion();
@@ -176,14 +177,13 @@ namespace StartUpWebAPI
 
             using (StartUpBaseEntities context = new StartUpBaseEntities())
             {
-
-
                 ((Team)ViewState["currentTeam"]).Name = TBoxName.Text;
+                ((Team)ViewState["currentTeam"]).ContactLink = ContactBox.Text;
                 ((Team)ViewState["currentTeam"]).Description = TBoxDescription.Text;
                 ((Team)ViewState["currentTeam"]).MaxMembersCount = int.Parse(TBoxMaxMembers.Text);
                 ((Team)ViewState["currentTeam"]).RegionId = context
                    .Region
-                   .First(c => c.Name.Equals(DropDownRegions.SelectedValue))
+                   .First(c => c.Name.Trim().Equals(DropDownRegions.SelectedValue.Trim()))
                    .Id;
 
                 bool teamIsNew = ((Team)ViewState["currentTeam"]).Id == 0;
