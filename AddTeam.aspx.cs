@@ -1,7 +1,6 @@
 ﻿using StartUpWebAPI.Entities;
 using StartUpWebAPI.Models;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -23,6 +22,7 @@ namespace StartUpWebAPI
                 ViewState["imageDelete"] = false;
                 ViewState["currentTeam"] = new Team();
                 string idString = Request.QueryString.Get("id");
+                InsertRegionsBox();
 
                 if (idString != null)
                 {
@@ -55,14 +55,14 @@ namespace StartUpWebAPI
                         }
                     }
                 }
-                InsertRegionsBox();
             }
             InsertImageIntoTeam();
         }
 
         private void InsertCurrentRegion()
         {
-            DropDownRegions.Items.FindByValue(((Team)ViewState["currentTeam"]).Region.Name).Selected = true;
+            Team team = (Team)ViewState["currentTeam"];
+            DropDownRegions.Items.FindByValue(team.Region.Name).Selected = true;
         }
 
         private void InsertRegionsBox()
