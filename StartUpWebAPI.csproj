@@ -217,22 +217,23 @@
     <Content Include="Entities\BaseModel.edmx.diagram">
       <DependentUpon>BaseModel.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Resource Include="Resources\AeOf3UMV9WA-removebg-preview.png" />
-    <Resource Include="Resources\Logo.png" />
-    <Resource Include="Resources\Исландия.mp4" />
-    <Resource Include="Resources\noPicture.png" />
-    <Resource Include="Resources\loginRegisterBg.jpg" />
-    <Resource Include="Resources\contactImage.jpg" />
-    <Resource Include="Resources\contactBack.svg" />
-    <Resource Include="Resources\StarTup.svg" />
-    <Resource Include="Resources\latexBlackBg.jpg" />
+    <Content Include="Resources\AeOf3UMV9WA-removebg-preview.png" />
+    <Content Include="Resources\Logo.png" />
+    <Content Include="Resources\Исландия.mp4" />
+    <Content Include="Resources\noPicture.png" />
+    <Content Include="Resources\loginRegisterBg.jpg" />
+    <Content Include="Resources\contactImage.jpg" />
+    <Content Include="Resources\contactBack.svg" />
+    <Content Include="Resources\StarTup.svg" />
+    <Content Include="Resources\latexBlackBg.jpg" />
     <Content Include="MyAccount.aspx" />
-    <Resource Include="Resources\commonBg.jpg" />
-    <Resource Include="Resources\startupAddBg.jpeg" />
-    <Resource Include="Resources\contactImageTwo.jpeg" />
-    <Resource Include="Resources\myAccountBg.jpg" />
-    <None Include="Resources\StartUpCompanyLogo.svg" />
+    <Content Include="Resources\commonBg.jpg" />
+    <Content Include="Resources\startupAddBg.jpeg" />
+    <Content Include="Resources\contactImageTwo.jpeg" />
+    <Content Include="Resources\myAccountBg.jpg" />
+    <Content Include="Resources\StartUpCompanyLogo.svg" />
     <Content Include="Screenshots\HelloPage.png" />
     <Content Include="Screenshots\HomePage.png" />
     <Content Include="Screenshots\MainPage.png" />

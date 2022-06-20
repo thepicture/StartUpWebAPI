@@ -232,10 +232,6 @@ namespace StartUpWebAPI
                     context.ChangeTracker.Entries().ToList().ForEach(e => e.Reload());
 
                     return;
-
-                    CommentBox.Text = null;
-                    InsertComments();
-                    UpdateCommentsCount();
                 }
                 catch (Exception ex)
                 {

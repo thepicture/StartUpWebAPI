@@ -124,15 +124,15 @@ namespace StartUpWebAPI
 
         private void FillStartUpAttributes(StartUp nullableStartUp)
         {
-            TBoxName.Text = 
+            TBoxName.Text =
                 ((StartUp)ViewState["currentStartUp"]).Name;
             ContactBox.Text =
               ((StartUp)ViewState["currentStartUp"]).ContactLink;
-            TBoxDescription.Text = 
+            TBoxDescription.Text =
                 ((StartUp)ViewState["currentStartUp"]).Description;
-            TBoxMaxMembers.Text = 
+            TBoxMaxMembers.Text =
                 ((StartUp)ViewState["currentStartUp"]).MaxMembersCount.ToString();
-            CheckBoxDone.Checked = 
+            CheckBoxDone.Checked =
                 ((StartUp)ViewState["currentStartUp"]).IsDone;
             ((List<StartUpImage>)ViewState["images"])
                 .AddRange(
@@ -251,12 +251,12 @@ namespace StartUpWebAPI
 
                 ((StartUp)ViewState["currentStartUp"]).CategoryId = context
                     .Category
-                    .First(c => c.Name.Equals(ComboCategories.SelectedValue))
+                    .First(c => c.Name.Trim().Contains(ComboCategories.SelectedValue.Trim()))
                     .Id;
 
                 ((StartUp)ViewState["currentStartUp"]).RegionId = context
                     .Region
-                    .First(c => c.Name.Equals(DropDownRegions.SelectedValue))
+                    .First(c => c.Name.Trim().Contains(DropDownRegions.SelectedValue.Trim()))
                     .Id;
 
                 ((StartUp)ViewState["currentStartUp"]).IsDone = CheckBoxDone.Checked;
@@ -269,7 +269,7 @@ namespace StartUpWebAPI
                     ((StartUp)ViewState["currentStartUp"]).StartUpOfUser.Add(new StartUpOfUser
                     {
                         User = context.User.First(u => u.Login.Equals(User.Identity.Name)),
-                        RoleType = context.RoleType.First(r => r.Name.Equals("Организатор"))
+                        RoleType = context.RoleType.First(r => r.Name.Trim().Contains("Организатор"))
                     });
 
                     context.StartUp.Add((StartUp)ViewState["currentStartUp"]);
