@@ -4,6 +4,7 @@ Yet another Web App for a contest
 - Comments moderating and posting
 - Watch and search startups or teams
 - Registration and authorization
+- Chat with admin as an user or with users as an admin
 ## Screenshots
 ### Hello page
 ![Hello page](/Screenshots/HelloPage.png)
